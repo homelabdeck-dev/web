@@ -53,55 +53,55 @@ export default async function AppDetailPage({
   const tagline = isBg ? app.taglineBg : app.taglineEn;
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <Link
           href="/apps"
-          className="text-sm text-zinc-600 underline dark:text-zinc-400"
+          className="text-sm text-zinc-600 underline"
         >
           ← {t("backToApps")}
         </Link>
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
+            <h1 className="text-3xl font-semibold tracking-tight text-black">
               {app.name}
             </h1>
-            <span className="rounded-full bg-black/[.06] px-3 py-1 text-sm text-zinc-700 dark:bg-white/[.08] dark:text-zinc-300">
+            <span className="rounded-full bg-black/[.06] px-3 py-1 text-sm text-zinc-700">
               {categoryLabel}
             </span>
           </div>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="text-lg text-zinc-600">
             {tagline}
           </p>
-          <p className="text-zinc-700 dark:text-zinc-300">{description}</p>
+          <p className="text-zinc-700">{description}</p>
         </div>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6 dark:border-white/[.145] dark:bg-[#111]">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6">
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("license")}
               </dt>
-              <dd className="font-medium text-black dark:text-zinc-50">
+              <dd className="font-medium text-black">
                 {app.license}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("githubStars")}
               </dt>
-              <dd className="font-medium text-black dark:text-zinc-50">
+              <dd className="font-medium text-black">
                 {app.githubStars.toLocaleString(locale)}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("officialWebsite")}
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline dark:text-zinc-50"
+                  className="font-medium text-black underline"
                   href={app.officialWebsiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -111,12 +111,12 @@ export default async function AppDetailPage({
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("officialRepo")}
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline dark:text-zinc-50"
+                  className="font-medium text-black underline"
                   href={app.officialRepoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -128,36 +128,36 @@ export default async function AppDetailPage({
           </div>
         </section>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6 dark:border-white/[.145] dark:bg-[#111]">
-          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6">
+          <h2 className="text-lg font-medium text-black">
             {t("compatibility")}
           </h2>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("architectures")}
               </dt>
-              <dd className="font-medium text-black dark:text-zinc-50">
+              <dd className="font-medium text-black">
                 {app.compatibility.architectures.join(", ")}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("database")}
               </dt>
-              <dd className="font-medium text-black dark:text-zinc-50">
+              <dd className="font-medium text-black">
                 {app.compatibility.database.kind}
               </dd>
             </div>
             <div className="max-w-md">
-              <dt className="text-zinc-500 dark:text-zinc-400">
+              <dt className="text-zinc-500">
                 {t("resourceFootprint")}
               </dt>
-              <dd className="font-medium text-black dark:text-zinc-50">
+              <dd className="font-medium text-black">
                 {app.compatibility.resourceFootprint.ramMb} MB RAM ·{" "}
                 {app.compatibility.resourceFootprint.cpuCores} CPU
               </dd>
-              <dd className="text-zinc-600 dark:text-zinc-400">
+              <dd className="text-zinc-600">
                 {app.compatibility.resourceFootprint.notes}
               </dd>
             </div>
@@ -165,14 +165,14 @@ export default async function AppDetailPage({
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+          <h2 className="text-lg font-medium text-black">
             {t("gallery")}
           </h2>
           <ul className="grid grid-cols-3 gap-3">
             {app.screenshots.map((shot) => (
               <li
                 key={shot.filename}
-                className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] bg-white dark:border-white/[.145] dark:bg-[#111]"
+                className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] bg-white"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -181,7 +181,7 @@ export default async function AppDetailPage({
                   className="h-auto w-full object-contain"
                   loading="lazy"
                 />
-                <span className="px-2 pb-2 text-center text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
+                <span className="px-2 pb-2 text-center text-xs text-zinc-600 sm:text-sm">
                   {shot.label}
                 </span>
               </li>
@@ -190,19 +190,19 @@ export default async function AppDetailPage({
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+          <h2 className="text-lg font-medium text-black">
             {t("deployment")}
           </h2>
-          <pre className="overflow-x-auto rounded-xl bg-black p-4 text-sm text-zinc-100 dark:bg-[#0a0a0a]">
+          <pre className="overflow-x-auto rounded-xl bg-black p-4 text-sm text-zinc-100">
             <code>{app.dockerComposeSnippet}</code>
           </pre>
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+          <h2 className="text-lg font-medium text-black">
             {t("alternativeTo")}
           </h2>
-          <p className="text-zinc-700 dark:text-zinc-300">
+          <p className="text-zinc-700">
             {app.alternativeTo.join(", ")}
           </p>
         </section>
