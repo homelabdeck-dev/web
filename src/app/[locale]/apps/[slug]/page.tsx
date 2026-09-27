@@ -168,13 +168,22 @@ export default async function AppDetailPage({
           <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("gallery")}
           </h2>
-          <ul className="flex flex-wrap gap-3">
+          <ul className="flex flex-wrap gap-4">
             {app.screenshots.map((shot) => (
               <li
                 key={shot.filename}
-                className="rounded-lg border border-dashed border-black/[.15] px-4 py-6 text-center text-sm text-zinc-500 dark:border-white/[.2] dark:text-zinc-400"
+                className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] bg-white dark:border-white/[.145] dark:bg-[#111]"
               >
-                {shot.label}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/screenshots/${app.slug}/${shot.filename}`}
+                  alt={isBg ? shot.altBg : shot.altEn}
+                  className="h-auto w-full max-w-sm object-contain"
+                  loading="lazy"
+                />
+                <span className="px-3 pb-3 text-center text-sm text-zinc-600 dark:text-zinc-400">
+                  {shot.label}
+                </span>
               </li>
             ))}
           </ul>
