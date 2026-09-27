@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllAppSlugs, getAppBySlug } from "@/lib/apps/loader";
 import { getCategoryBySlug } from "@/lib/apps/categories";
+import ScreenshotGallery from "@/components/ScreenshotGallery";
 
 export function generateStaticParams() {
   const slugs = getAllAppSlugs();
@@ -168,25 +169,15 @@ export default async function AppDetailPage({
           <h2 className="text-lg font-medium text-black">
             {t("gallery")}
           </h2>
-          <ul className="grid grid-cols-3 gap-3">
-            {app.screenshots.map((shot) => (
-              <li
-                key={shot.filename}
-                className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] bg-white"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/screenshots/${app.slug}/${shot.filename}`}
-                  alt={isBg ? shot.altBg : shot.altEn}
-                  className="h-auto w-full object-contain"
-                  loading="lazy"
-                />
-                <span className="px-2 pb-2 text-center text-xs text-zinc-600 sm:text-sm">
-                  {shot.label}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <ScreenshotGallery
+            slug={app.slug}
+            closeLabel={t("close")}
+            screenshots={app.screenshots.map((shot) => ({
+              filename: shot.filename,
+              label: shot.label,
+              alt: isBg ? shot.altBg : shot.altEn,
+            }))}
+          />
         </section>
 
         <section className="flex flex-col gap-2">
