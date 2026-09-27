@@ -4,15 +4,15 @@ This file explains what the project is, why it exists, its scope, tech stack, an
 
 ## Project Name
 
-HomeLab Deck Web (`homelabdeck-dev/web`)
+HomelabDeck Web (`homelabdeck-dev/web`)
 
 ## Short Description
 
-Web interface frontend for HomeLab Deck built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, and `next-intl` internationalization.
+Fast, multilingual directory site for self-hosted software and HomeLab/infrastructure apps, live at `homelabdeck.dev`. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, and `next-intl` internationalization.
 
 ## Main Objective
 
-Provide a modern, responsive, and internationalized web dashboard interface for managing HomeLab services and infrastructure.
+Catalog self-hosted applications with real Proof-of-Work evidence (dashboard/settings screenshots, resource footprint, compatibility matrix, ready-to-use `docker-compose.yml`) so HomeLab enthusiasts and self-hosters can evaluate an app before deploying it — not a dashboard for managing infrastructure.
 
 ## Tech Stack & Core Dependencies
 
@@ -21,11 +21,14 @@ Provide a modern, responsive, and internationalized web dashboard interface for 
 - **Styling**: Tailwind CSS `v4` (`@tailwindcss/postcss`)
 - **Localization**: `next-intl` `^4.14.7`
 - **Language**: TypeScript `^5`
+- **Hosting/CI**: GitHub + Vercel (Jamstack, SSG/SSR); domain via Cloudflare (DNS & HSTS)
 
 ## Included in Scope
 
 - Web application pages, layout, and UI components in `src/`
-- Internationalization dictionary and locale messages in `messages/`
+- App catalog entries as JSON in `src/content/apps/` (name, category, license, compatibility, screenshots, docker-compose, alternatives, EN/BG copy)
+- Proof-of-Work screenshots in `public/screenshots/<slug>/` (WebP)
+- Internationalization dictionary and locale messages in `messages/` (English + Bulgarian)
 - Frontend development, build scripts, and linting
 
 ## Excluded from Scope
@@ -35,11 +38,15 @@ Provide a modern, responsive, and internationalized web dashboard interface for 
 
 ## Current State
 
-- Fresh Next.js 16 app structure bootstrapped with TypeScript & Tailwind CSS v4.
-- Configured with `next-intl` for i18n support.
+- Live in production at `homelabdeck.dev` (Vercel), 6+ commits on `main`.
+- App catalog holds 15 entries: freshrss, gitea, grafana, home-assistant, immich, jellyfin, n8n, nextcloud, paperless-ngx, pi-hole, portainer, uptime-kuma, vaultwarden, vikunja, wiki-js.
+- Only **pi-hole** and **immich** have their 3-screenshot Proof-of-Work gallery published; the other 13 apps still need screenshots.
+- Site forced to light theme only (dark mode variants removed 2026-09-27) — see `decisions.md`.
 
 ## Important Locations
 
-- `src/` — Next.js App Router code and components
+- `src/app/[locale]/` — routed pages (home, apps list, app detail)
+- `src/content/apps/*.json` — one file per catalog entry, source of truth for screenshot filenames
+- `public/screenshots/<slug>/` — published Proof-of-Work WebP images
 - `messages/` — Locale strings and translation files
 - `public/` — Static assets
