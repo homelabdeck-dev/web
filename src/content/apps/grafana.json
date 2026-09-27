@@ -1,0 +1,48 @@
+{
+  "name": "Grafana",
+  "slug": "grafana",
+  "category": "monitoring",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/grafana/grafana",
+  "officialWebsiteUrl": "https://grafana.com/oss/grafana",
+  "githubStars": 77000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite by default for dashboards/users; MySQL or PostgreSQL recommended for high-availability or multi-instance setups"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 0.5,
+      "notes": "512 MB RAM / 0.5 core comfortably renders dozens of dashboards for a homelab. Grafana itself only visualizes data — the real resource cost usually comes from the data sources it queries (Prometheus, Loki, InfluxDB) running alongside it."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Grafana dashboard showing multiple time-series panels for system metrics",
+      "altBg": "Табло на Grafana с множество панели с времеви редове за системни метрики"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Grafana data sources settings screen showing configured Prometheus and Loki connections",
+      "altBg": "Екран с настройки на източници на данни в Grafana, показващ конфигурирани връзки към Prometheus и Loki"
+    },
+    {
+      "label": "Alerting",
+      "filename": "alerting.webp",
+      "altEn": "Grafana alerting rules list showing configured alert conditions and notification channels",
+      "altBg": "Списък с правила за аларми в Grafana, показващ конфигурирани условия и канали за известия"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  grafana:\n    image: grafana/grafana-oss:latest\n    container_name: grafana\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      - GF_SECURITY_ADMIN_PASSWORD=change-me\n    volumes:\n      - grafana-data:/var/lib/grafana\n\nvolumes:\n  grafana-data:\n",
+  "alternativeTo": ["Datadog", "New Relic", "Splunk"],
+  "descriptionEn": "Grafana is the industry-standard open-source platform for building dashboards and alerts from virtually any data source — Prometheus, Loki, InfluxDB, PostgreSQL and 100+ more via plugins. Paired with Prometheus and Loki it forms the classic self-hosted observability stack for monitoring homelab infrastructure and applications.",
+  "descriptionBg": "Grafana е индустриалният стандарт за open-source платформа за изграждане на табла и аларми от практически всеки източник на данни — Prometheus, Loki, InfluxDB, PostgreSQL и над 100 други чрез плъгини. В комбинация с Prometheus и Loki образува класическия self-hosted observability stack за мониторинг на homelab инфраструктура и приложения.",
+  "taglineEn": "Open-source dashboards and alerting for any metrics data source.",
+  "taglineBg": "Open-source табла и аларми за всеки източник на метрики."
+}

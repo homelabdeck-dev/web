@@ -1,0 +1,48 @@
+{
+  "name": "Pi-hole",
+  "slug": "pi-hole",
+  "category": "networking",
+  "license": "EUPL-1.2",
+  "officialRepoUrl": "https://github.com/pi-hole/pi-hole",
+  "officialWebsiteUrl": "https://pi-hole.net",
+  "githubStars": 61000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database (pihole-FTL.db) for query logs and long-term statistics, no external database required"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Extremely lightweight — the classic 'runs on a Raspberry Pi' network-wide ad blocker. Footprint mainly scales with total DNS query volume across your network and how large your blocklists are, not with the number of client devices."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Pi-hole web dashboard showing query statistics and percentage of blocked ads over 24 hours",
+      "altBg": "Уеб табло на Pi-hole с статистика на заявки и процент блокирани реклами за последните 24 часа"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Pi-hole settings screen showing DNS upstream servers and blocklist management",
+      "altBg": "Екран с настройки на Pi-hole, показващ upstream DNS сървъри и управление на блок-листи"
+    },
+    {
+      "label": "Query Log",
+      "filename": "query-log.webp",
+      "altEn": "Pi-hole query log showing individual DNS requests with allowed and blocked status",
+      "altBg": "Лог със заявки в Pi-hole, показващ отделни DNS заявки със статус разрешено/блокирано"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  pihole:\n    image: pihole/pihole:latest\n    container_name: pihole\n    restart: unless-stopped\n    ports:\n      - \"53:53/tcp\"\n      - \"53:53/udp\"\n      - \"80:80/tcp\"\n    environment:\n      TZ: 'Europe/Sofia'\n      FTLCONF_webserver_api_password: 'change-me'\n    volumes:\n      - pihole-etc:/etc/pihole\n      - pihole-dnsmasq:/etc/dnsmasq.d\n    cap_add:\n      - NET_ADMIN\n\nvolumes:\n  pihole-etc:\n  pihole-dnsmasq:\n",
+  "alternativeTo": ["NextDNS", "AdGuard DNS (cloud)", "Commercial DNS ad-blocking services"],
+  "descriptionEn": "Pi-hole is a network-wide DNS sinkhole that blocks ads and trackers for every device on your network — phones, smart TVs and apps included — with no client-side software to install. Its web dashboard gives real-time query statistics, per-client insights and easy allow/deny list management, and it can double as your network's DHCP server.",
+  "descriptionBg": "Pi-hole е DNS sinkhole за цялата мрежа, който блокира реклами и тракери за всяко устройство в мрежата ти — телефони, smart телевизори и приложения включително — без нужда от инсталиране на клиентски софтуер. Уеб таблото дава статистика за заявки в реално време, преглед по клиент и лесно управление на разрешаващи/забраняващи листи, а може да служи и като DHCP сървър на мрежата.",
+  "taglineEn": "Network-wide ad and tracker blocking via DNS.",
+  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа чрез DNS."
+}

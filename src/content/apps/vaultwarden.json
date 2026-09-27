@@ -1,0 +1,48 @@
+{
+  "name": "Vaultwarden",
+  "slug": "vaultwarden",
+  "category": "password-management",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/dani-garcia/vaultwarden",
+  "officialWebsiteUrl": "https://github.com/dani-garcia/vaultwarden",
+  "githubStars": 68000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite by default; MySQL/MariaDB and PostgreSQL backends are available via alternate build tags for larger multi-user deployments"
+    },
+    "resourceFootprint": {
+      "ramMb": 128,
+      "cpuCores": 0.5,
+      "notes": "Written in Rust, Vaultwarden is one of the lightest self-hosted apps you can run — well under 100 MB RAM at idle for a family-sized vault. Footprint grows only slightly with more users, organizations and file attachments."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Vaultwarden web vault showing a list of stored logins and secure notes",
+      "altBg": "Уеб трезор на Vaultwarden със списък от запазени пароли и защитени бележки"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Vaultwarden admin panel showing server configuration and user management options",
+      "altBg": "Административен панел на Vaultwarden с настройки на сървъра и управление на потребители"
+    },
+    {
+      "label": "Organizations",
+      "filename": "organizations.webp",
+      "altEn": "Vaultwarden organization view showing shared collections for secure team password sharing",
+      "altBg": "Изглед на организация във Vaultwarden със споделени колекции за сигурно споделяне на пароли в екип"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    container_name: vaultwarden\n    restart: unless-stopped\n    environment:\n      DOMAIN: \"https://vault.example.com\"\n      SIGNUPS_ALLOWED: \"false\"\n      WEBSOCKET_ENABLED: \"true\"\n    volumes:\n      - vw-data:/data\n    ports:\n      - \"8080:80\"\n\nvolumes:\n  vw-data:\n",
+  "alternativeTo": ["Bitwarden Cloud", "LastPass", "1Password"],
+  "descriptionEn": "Vaultwarden is an unofficial, lightweight Bitwarden-compatible server written in Rust, letting you self-host a password manager that works with every official Bitwarden client (browser, mobile, desktop, CLI). It unlocks premium features like TOTP generation, file attachments and emergency access for free, and runs comfortably on tiny hardware like a Raspberry Pi.", 
+  "descriptionBg": "Vaultwarden е неофициален, лек сървър, съвместим с Bitwarden, написан на Rust, който позволява self-hosting на мениджър за пароли, работещ с всички официални Bitwarden клиенти (браузър, мобилни, десктоп, CLI). Отключва безплатно премиум функции като TOTP генериране, прикачени файлове и аварийни контакти, и работи спокойно на съвсем малък хардуер като Raspberry Pi.",
+  "taglineEn": "Lightweight, self-hosted Bitwarden-compatible password vault.",
+  "taglineBg": "Лек, self-hosted трезор за пароли, съвместим с Bitwarden."
+}

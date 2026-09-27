@@ -1,0 +1,48 @@
+{
+  "name": "Nextcloud",
+  "slug": "nextcloud",
+  "category": "cloud-storage-files",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/nextcloud/server",
+  "officialWebsiteUrl": "https://nextcloud.com",
+  "githubStars": 37000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "MariaDB",
+      "label": "MySQL/MariaDB or PostgreSQL recommended for production; SQLite works only for small single-user test setups"
+    },
+    "resourceFootprint": {
+      "ramMb": 1024,
+      "cpuCores": 1,
+      "notes": "1 GB RAM / 1 core handles a small family install with a handful of users. Footprint scales with concurrent users, installed apps (Office/collabora, Talk) and file preview generation; larger deployments benefit from a Redis cache and a separate database container."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Nextcloud Files app showing a folder listing with shared files and sync status",
+      "altBg": "Приложение Files на Nextcloud със списък от папки, споделени файлове и статус на синхронизация"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Nextcloud administration settings screen showing installed apps and storage overview",
+      "altBg": "Екран с административни настройки на Nextcloud, показващ инсталирани приложения и преглед на хранилището"
+    },
+    {
+      "label": "Sharing",
+      "filename": "sharing.webp",
+      "altEn": "Nextcloud file sharing dialog with link and permission options",
+      "altBg": "Диалог за споделяне на файлове в Nextcloud с опции за линкове и права за достъп"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  db:\n    image: mariadb:11\n    container_name: nextcloud-db\n    restart: unless-stopped\n    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW\n    volumes:\n      - db-data:/var/lib/mysql\n    environment:\n      MYSQL_ROOT_PASSWORD: change-me-root\n      MYSQL_PASSWORD: change-me\n      MYSQL_DATABASE: nextcloud\n      MYSQL_USER: nextcloud\n\n  app:\n    image: nextcloud:latest\n    container_name: nextcloud\n    restart: unless-stopped\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - db\n    volumes:\n      - nextcloud-data:/var/www/html\n    environment:\n      MYSQL_PASSWORD: change-me\n      MYSQL_DATABASE: nextcloud\n      MYSQL_USER: nextcloud\n      MYSQL_HOST: db\n\nvolumes:\n  db-data:\n  nextcloud-data:\n",
+  "alternativeTo": ["Google Drive", "Dropbox", "Microsoft OneDrive"],
+  "descriptionEn": "Nextcloud is a full-featured, self-hosted productivity platform for file sync and sharing, calendars, contacts, and real-time document collaboration. With hundreds of official and community apps (Talk video calls, Office, Deck kanban boards), it goes far beyond simple cloud storage while keeping every byte of your data under your own control.",
+  "descriptionBg": "Nextcloud е пълноценна self-hosted платформа за продуктивност за синхронизация и споделяне на файлове, календари, контакти и съвместна работа с документи в реално време. Със стотици официални и общностни приложения (видео разговори Talk, Office, Deck), тя предлага много повече от обикновено облачно съхранение, докато данните ти остават изцяло под твой контрол.",
+  "taglineEn": "Self-hosted file sync, sharing and collaboration platform.",
+  "taglineBg": "Self-hosted платформа за синхронизация, споделяне и съвместна работа с файлове."
+}

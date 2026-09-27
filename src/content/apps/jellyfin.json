@@ -1,0 +1,48 @@
+{
+  "name": "Jellyfin",
+  "slug": "jellyfin",
+  "category": "media",
+  "license": "GPL-2.0",
+  "officialRepoUrl": "https://github.com/jellyfin/jellyfin",
+  "officialWebsiteUrl": "https://jellyfin.org",
+  "githubStars": 57500,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database for the library catalog, no external database required"
+    },
+    "resourceFootprint": {
+      "ramMb": 2048,
+      "cpuCores": 2,
+      "notes": "2 GB RAM / 2 cores is comfortable for direct-play streaming to a couple of clients. Transcoding (especially 4K HDR) is the dominant CPU cost; a hardware transcoding-capable iGPU (Intel Quick Sync, NVENC) drastically reduces CPU load and is highly recommended for multi-user households."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Jellyfin home screen showing continue watching row and library shelves for movies and shows",
+      "altBg": "Начален екран на Jellyfin с ред 'продължи гледането' и рафтове с библиотеки за филми и сериали"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Jellyfin admin dashboard showing server settings, libraries and active playback sessions",
+      "altBg": "Административно табло на Jellyfin с настройки на сървъра, библиотеки и активни сесии на възпроизвеждане"
+    },
+    {
+      "label": "Playback",
+      "filename": "playback.webp",
+      "altEn": "Jellyfin video player showing transcoding stats and subtitle/audio track selection",
+      "altBg": "Видео плейър на Jellyfin с показатели за транскодиране и избор на субтитри/аудио пътечка"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  jellyfin:\n    image: jellyfin/jellyfin:latest\n    container_name: jellyfin\n    restart: unless-stopped\n    user: 1000:1000\n    ports:\n      - \"8096:8096\"\n    volumes:\n      - jellyfin-config:/config\n      - jellyfin-cache:/cache\n      - /path/to/media:/media\n    # Uncomment for Intel/AMD hardware-accelerated transcoding:\n    # devices:\n    #   - /dev/dri:/dev/dri\n\nvolumes:\n  jellyfin-config:\n  jellyfin-cache:\n",
+  "alternativeTo": ["Plex", "Netflix (personal library)", "Emby"],
+  "descriptionEn": "Jellyfin is the leading fully free and open-source media server, letting you organize and stream your own movies, TV shows, music and photos to any device without telemetry or paid tiers. It supports hardware-accelerated transcoding, live TV/DVR, and a huge ecosystem of official and community apps.",
+  "descriptionBg": "Jellyfin е водещият напълно безплатен и open-source медиен сървър, който позволява организиране и стрийминг на собствени филми, сериали, музика и снимки към всяко устройство без телеметрия или платени нива. Поддържа хардуерно ускорено транскодиране, Live TV/DVR и голяма екосистема от официални и общностни приложения.",
+  "taglineEn": "Free, open-source media server for your movies, shows and music.",
+  "taglineBg": "Безплатен, open-source медиен сървър за филмите, сериалите и музиката ти."
+}

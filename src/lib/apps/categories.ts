@@ -18,6 +18,31 @@ export const categories: Category[] = [
     labelBg: "Управление на пароли",
   },
   { slug: "backup", labelEn: "Backup", labelBg: "Архивиране" },
+  {
+    slug: "cloud-storage-files",
+    labelEn: "Cloud Storage & Files",
+    labelBg: "Облачно съхранение и файлове",
+  },
+  {
+    slug: "home-automation",
+    labelEn: "Home Automation",
+    labelBg: "Домашна автоматизация",
+  },
+  {
+    slug: "container-management",
+    labelEn: "Container Management",
+    labelBg: "Управление на контейнери",
+  },
+  {
+    slug: "developer-tools",
+    labelEn: "Developer Tools",
+    labelBg: "Инструменти за разработчици",
+  },
+  {
+    slug: "rss-reading",
+    labelEn: "RSS & Reading",
+    labelBg: "RSS и четене",
+  },
 ];
 
 export function getCategoryBySlug(slug: string): Category | undefined {

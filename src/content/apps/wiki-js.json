@@ -1,0 +1,48 @@
+{
+  "name": "Wiki.js",
+  "slug": "wiki-js",
+  "category": "notes-docs",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/requarks/wiki",
+  "officialWebsiteUrl": "https://js.wiki",
+  "githubStars": 29000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "PostgreSQL",
+      "label": "PostgreSQL recommended and used in official Docker examples; MySQL/MariaDB, MS SQL Server and SQLite are also supported"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "512 MB RAM / 1 core for the Node.js app plus a small PostgreSQL instance comfortably serves a team or family wiki. Footprint grows mainly with concurrent editors and full-text search index size on very large wikis."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Wiki.js page browser showing a tree of wiki pages and folders",
+      "altBg": "Браузър на страници в Wiki.js, показващ дърво от wiki страници и папки"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Wiki.js administration settings screen for authentication providers and site configuration",
+      "altBg": "Екран с административни настройки на Wiki.js за доставчици за автентикация и конфигурация на сайта"
+    },
+    {
+      "label": "Editor",
+      "filename": "editor.webp",
+      "altEn": "Wiki.js markdown editor showing live preview of a documentation page",
+      "altBg": "Markdown редактор на Wiki.js, показващ преглед на страница с документация в реално време"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  db:\n    image: postgres:15-alpine\n    container_name: wikijs-db\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: wiki\n      POSTGRES_PASSWORD: change-me\n      POSTGRES_USER: wikijs\n    volumes:\n      - db-data:/var/lib/postgresql/data\n\n  wiki:\n    image: ghcr.io/requarks/wiki:2\n    container_name: wikijs\n    restart: unless-stopped\n    depends_on:\n      - db\n    environment:\n      DB_TYPE: postgres\n      DB_HOST: db\n      DB_PORT: 5432\n      DB_USER: wikijs\n      DB_PASS: change-me\n      DB_NAME: wiki\n    ports:\n      - \"80:3000\"\n\nvolumes:\n  db-data:\n",
+  "alternativeTo": ["Confluence", "Notion (wiki use case)", "GitBook"],
+  "descriptionEn": "Wiki.js is a modern, extensible wiki engine built on Node.js with a polished markdown editor, fine-grained page permissions, and 50+ integrations for authentication, storage and search. It supports PostgreSQL, MySQL/MariaDB, MS SQL Server or SQLite, making it easy to fit into any existing homelab stack.",
+  "descriptionBg": "Wiki.js е модерен, разширяем wiki engine, изграден на Node.js с изчистен markdown редактор, детайлни права на страници и над 50 интеграции за автентикация, съхранение и търсене. Поддържа PostgreSQL, MySQL/MariaDB, MS SQL Server или SQLite, което улеснява вписването му във всеки съществуващ homelab stack.",
+  "taglineEn": "Modern, self-hosted wiki with a polished markdown editor.",
+  "taglineBg": "Модерна, self-hosted wiki с изчистен markdown редактор."
+}

@@ -1,0 +1,48 @@
+{
+  "name": "FreshRSS",
+  "slug": "freshrss",
+  "category": "rss-reading",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/FreshRSS/FreshRSS",
+  "officialWebsiteUrl": "https://freshrss.org",
+  "githubStars": 16000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "SQLite by default and sufficient for personal use; MySQL/MariaDB and PostgreSQL are supported for larger multi-user instances"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 0.5,
+      "notes": "Very light PHP application — a few hundred MB of RAM comfortably handles thousands of feeds and articles. Footprint scales mainly with feed refresh frequency and total article/feed count (FreshRSS is documented to handle 1M+ articles and 50k+ feeds)."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "FreshRSS reader view showing an article list grouped by feed category",
+      "altBg": "Изглед на четец във FreshRSS, показващ списък със статии, групирани по категория на емисия"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "FreshRSS settings screen showing feed management and update frequency options",
+      "altBg": "Екран с настройки на FreshRSS, показващ управление на емисии и опции за честота на обновяване"
+    },
+    {
+      "label": "Article View",
+      "filename": "article-view.webp",
+      "altEn": "FreshRSS article reading pane showing a full article with save and share actions",
+      "altBg": "Панел за четене на статия във FreshRSS с пълния текст на статията и действия за запазване и споделяне"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  freshrss:\n    image: freshrss/freshrss:latest\n    container_name: freshrss\n    restart: unless-stopped\n    environment:\n      TZ: Europe/Sofia\n    volumes:\n      - freshrss-data:/var/www/FreshRSS/data\n      - freshrss-extensions:/var/www/FreshRSS/extensions\n    ports:\n      - \"8080:80\"\n\nvolumes:\n  freshrss-data:\n  freshrss-extensions:\n",
+  "alternativeTo": ["Feedly", "Inoreader", "The Old Reader"],
+  "descriptionEn": "FreshRSS is a fast, lightweight self-hosted RSS/Atom feed aggregator with a REST API compatible with Google Reader-style mobile apps, web scraping for sites without feeds, and support for tens of thousands of feeds without breaking a sweat. It runs comfortably on a Raspberry Pi and supports multi-user setups out of the box.",
+  "descriptionBg": "FreshRSS е бърз, лек self-hosted агрегатор на RSS/Atom емисии с REST API, съвместим с мобилни приложения в стил Google Reader, уеб скрейпинг за сайтове без емисии и поддръжка на десетки хиляди емисии без затруднение. Работи спокойно на Raspberry Pi и поддържа множество потребители веднага след инсталация.",
+  "taglineEn": "Fast, self-hosted RSS reader for thousands of feeds.",
+  "taglineBg": "Бърз, self-hosted RSS четец за хиляди емисии."
+}

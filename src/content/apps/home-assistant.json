@@ -1,0 +1,48 @@
+{
+  "name": "Home Assistant",
+  "slug": "home-assistant",
+  "category": "home-automation",
+  "license": "Apache-2.0",
+  "officialRepoUrl": "https://github.com/home-assistant/core",
+  "officialWebsiteUrl": "https://www.home-assistant.io",
+  "githubStars": 91000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite for the recorder/history component by default; MariaDB or PostgreSQL recommended for larger installs with many entities"
+    },
+    "resourceFootprint": {
+      "ramMb": 1024,
+      "cpuCores": 1,
+      "notes": "1 GB RAM / 1 core is a reasonable baseline for a home with 100+ entities across 1000+ available integrations. Footprint grows with the number of active integrations, automations, history retention and add-ons (e.g. running a local voice assistant or Zigbee/Z-Wave stacks in the same host)."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Home Assistant Lovelace dashboard showing rooms with lights, climate and sensor cards",
+      "altBg": "Lovelace табло на Home Assistant с стаи, показващи осветление, климат и сензорни карти"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Home Assistant integrations settings screen listing connected devices and services",
+      "altBg": "Екран с настройки за интеграции в Home Assistant, показващ свързани устройства и услуги"
+    },
+    {
+      "label": "Automations",
+      "filename": "automations.webp",
+      "altEn": "Home Assistant automation editor showing a trigger-condition-action flow",
+      "altBg": "Редактор на автоматизации в Home Assistant, показващ поток от тригер-условие-действие"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  homeassistant:\n    image: ghcr.io/home-assistant/home-assistant:stable\n    container_name: homeassistant\n    restart: unless-stopped\n    privileged: true\n    network_mode: host\n    volumes:\n      - ha-config:/config\n      - /etc/localtime:/etc/localtime:ro\n      - /run/dbus:/run/dbus:ro\n\nvolumes:\n  ha-config:\n",
+  "alternativeTo": ["Samsung SmartThings", "Google Home", "Amazon Alexa (hub features)"],
+  "descriptionEn": "Home Assistant is a local-first, privacy-focused home automation platform backed by the Open Home Foundation, supporting over 1,000 integrations across virtually every smart-home brand and protocol (Zigbee, Z-Wave, Matter, Thread). It runs entirely on your own hardware, keeps automations working even without internet access, and never requires a cloud subscription.",
+  "descriptionBg": "Home Assistant е локална, ориентирана към поверителността платформа за домашна автоматизация, подкрепяна от Open Home Foundation, поддържаща над 1000 интеграции с почти всяка марка и протокол за smart home (Zigbee, Z-Wave, Matter, Thread). Работи изцяло на собствения ти хардуер, поддържа автоматизациите активни дори без интернет и никога не изисква облачен абонамент.",
+  "taglineEn": "Local, privacy-first home automation with 1000+ integrations.",
+  "taglineBg": "Локална домашна автоматизация, ориентирана към поверителността, с над 1000 интеграции."
+}

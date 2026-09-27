@@ -1,0 +1,48 @@
+{
+  "name": "Gitea",
+  "slug": "gitea",
+  "category": "developer-tools",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/go-gitea/gitea",
+  "officialWebsiteUrl": "https://gitea.com",
+  "githubStars": 58000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "SQLite works well for small teams; PostgreSQL, MySQL/MariaDB and MSSQL are also supported for larger installs"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "512 MB RAM / 1 core is plenty for a small team or personal Git server. Written in Go with a single static binary, Gitea starts fast and stays light even with CI/CD (Gitea Actions) and package registry features enabled."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Gitea dashboard showing a list of repositories with activity and issue counts",
+      "altBg": "Табло на Gitea със списък от хранилища, активност и брой отворени issue-та"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Gitea site administration settings screen showing users and organization management",
+      "altBg": "Екран с администраторски настройки на Gitea, показващ управление на потребители и организации"
+    },
+    {
+      "label": "Actions",
+      "filename": "actions.webp",
+      "altEn": "Gitea Actions CI/CD pipeline view showing a running workflow with job steps",
+      "altBg": "Изглед на CI/CD pipeline в Gitea Actions, показващ работещ workflow със стъпки на задачата"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  server:\n    image: gitea/gitea:latest\n    container_name: gitea\n    restart: unless-stopped\n    environment:\n      - USER_UID=1000\n      - USER_GID=1000\n      - GITEA__database__DB_TYPE=sqlite3\n    volumes:\n      - gitea-data:/data\n      - /etc/timezone:/etc/timezone:ro\n      - /etc/localtime:/etc/localtime:ro\n    ports:\n      - \"3000:3000\"\n      - \"222:22\"\n\nvolumes:\n  gitea-data:\n",
+  "alternativeTo": ["GitHub", "GitLab SaaS", "Bitbucket Cloud"],
+  "descriptionEn": "Gitea is a lightweight, community-managed Git service you fully own, offering repository hosting, issues, pull requests, a package registry and built-in CI/CD via Gitea Actions (GitHub Actions-compatible syntax). Its single Go binary starts in seconds and stays light enough to run comfortably on a Raspberry Pi.",
+  "descriptionBg": "Gitea е лека, управлявана от общността Git услуга, която притежаваш изцяло — с хостинг на хранилища, issues, pull requests, package registry и вградено CI/CD чрез Gitea Actions (синтаксис, съвместим с GitHub Actions). Единственият Go бинарен файл стартира за секунди и остава достатъчно лек, за да работи спокойно на Raspberry Pi.",
+  "taglineEn": "Self-hosted, lightweight Git service with built-in CI/CD.",
+  "taglineBg": "Self-hosted, лека Git услуга с вградено CI/CD."
+}

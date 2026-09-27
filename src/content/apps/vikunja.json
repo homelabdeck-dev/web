@@ -1,0 +1,48 @@
+{
+  "name": "Vikunja",
+  "slug": "vikunja",
+  "category": "notes-docs",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/go-vikunja/vikunja",
+  "officialWebsiteUrl": "https://vikunja.io",
+  "githubStars": 5500,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "PostgreSQL",
+      "label": "PostgreSQL recommended in official Docker examples; MySQL/MariaDB and SQLite are also supported backends"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "512 MB RAM / 1 core for the Go/Vue app plus a small PostgreSQL instance is plenty for personal or small-team task management. Written in Go, the API binary itself is very light; footprint mostly comes from the database and number of concurrent users."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Vikunja Kanban board view showing task cards organized into columns by status",
+      "altBg": "Kanban изглед на Vikunja, показващ карти със задачи, организирани в колони по статус"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Vikunja project and notification settings screen",
+      "altBg": "Екран с настройки на проекти и известия във Vikunja"
+    },
+    {
+      "label": "Task Detail",
+      "filename": "task-detail.webp",
+      "altEn": "Vikunja task detail view showing due date, labels, assignees and a checklist",
+      "altBg": "Детайлен изглед на задача във Vikunja с краен срок, етикети, отговорници и списък със стъпки"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  db:\n    image: postgres:16\n    container_name: vikunja-db\n    restart: unless-stopped\n    environment:\n      POSTGRES_PASSWORD: change-me\n      POSTGRES_DB: vikunja\n      POSTGRES_USER: vikunja\n    volumes:\n      - db-data:/var/lib/postgresql/data\n\n  vikunja:\n    image: vikunja/vikunja:latest\n    container_name: vikunja\n    restart: unless-stopped\n    depends_on:\n      - db\n    environment:\n      VIKUNJA_DATABASE_HOST: db\n      VIKUNJA_DATABASE_PASSWORD: change-me\n      VIKUNJA_DATABASE_TYPE: postgres\n      VIKUNJA_DATABASE_USER: vikunja\n      VIKUNJA_DATABASE_DATABASE: vikunja\n      VIKUNJA_SERVICE_PUBLICURL: https://vikunja.example.com\n      VIKUNJA_SERVICE_JWTSECRET: change-me-too\n    ports:\n      - \"3456:3456\"\n    volumes:\n      - files-data:/app/vikunja/files\n\nvolumes:\n  db-data:\n  files-data:\n",
+  "alternativeTo": ["Todoist", "Notion (task use case)", "Microsoft To Do"],
+  "descriptionEn": "Vikunja is a self-hosted, open-source to-do and project management app supporting lists, Kanban boards, Gantt charts and table views of the same tasks. It offers recurring tasks, filters, labels, team sharing and a CalDAV interface so you can keep using your favorite calendar/task client while owning your data.",
+  "descriptionBg": "Vikunja е self-hosted, open-source приложение за задачи и управление на проекти, поддържащо списъци, Kanban дъски, Gantt диаграми и табличен изглед на едни и същи задачи. Предлага повтарящи се задачи, филтри, етикети, споделяне в екип и CalDAV интерфейс, така че да продължиш да ползваш любимия си календар/task клиент, докато данните ти остават твои.",
+  "taglineEn": "Self-hosted to-do app with lists, Kanban, Gantt and CalDAV sync.",
+  "taglineBg": "Self-hosted приложение за задачи с списъци, Kanban, Gantt и CalDAV синхронизация."
+}

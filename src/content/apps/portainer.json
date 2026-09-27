@@ -1,0 +1,48 @@
+{
+  "name": "Portainer",
+  "slug": "portainer",
+  "category": "container-management",
+  "license": "Zlib",
+  "officialRepoUrl": "https://github.com/portainer/portainer",
+  "officialWebsiteUrl": "https://www.portainer.io",
+  "githubStars": 38500,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "Stateless",
+      "label": "Embedded BoltDB file bundled inside the container's data volume, no external database required"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 0.5,
+      "notes": "Very light for managing a single Docker host — a few hundred MB of RAM is plenty. Footprint grows when managing many remote endpoints, Kubernetes clusters or Docker Swarm environments from one Portainer instance."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Portainer dashboard showing an overview of containers, images, volumes and networks",
+      "altBg": "Табло на Portainer с общ преглед на контейнери, образи, томове и мрежи"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Portainer environment settings screen for managing connected Docker endpoints",
+      "altBg": "Екран с настройки на среда в Portainer за управление на свързани Docker endpoint-и"
+    },
+    {
+      "label": "Stacks",
+      "filename": "stacks.webp",
+      "altEn": "Portainer stacks view showing a deployed docker-compose stack with its running services",
+      "altBg": "Изглед на stacks в Portainer, показващ разгърнат docker-compose stack с работещите му услуги"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  portainer:\n    image: portainer/portainer-ce:latest\n    container_name: portainer\n    restart: unless-stopped\n    security_opt:\n      - no-new-privileges:true\n    ports:\n      - \"8000:8000\"\n      - \"9443:9443\"\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock\n      - portainer-data:/data\n\nvolumes:\n  portainer-data:\n",
+  "alternativeTo": ["Docker Desktop", "Rancher", "Kubernetes Dashboard"],
+  "descriptionEn": "Portainer Community Edition is a lightweight web UI for managing Docker, Docker Swarm, Kubernetes and Podman environments without touching the CLI. It gives homelab operators and hobbyists an easy way to deploy stacks, inspect logs, and manage containers, images, volumes and networks from a single dashboard.",
+  "descriptionBg": "Portainer Community Edition е лек уеб интерфейс за управление на Docker, Docker Swarm, Kubernetes и Podman среди без нужда от CLI. Дава на homelab потребители и хобисти лесен начин да разгръщат stacks, преглеждат логове и управляват контейнери, образи, томове и мрежи от едно табло.",
+  "taglineEn": "Web UI for managing Docker and Kubernetes without the CLI.",
+  "taglineBg": "Уеб интерфейс за управление на Docker и Kubernetes без CLI."
+}

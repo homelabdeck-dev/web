@@ -1,0 +1,48 @@
+{
+  "name": "n8n",
+  "slug": "n8n",
+  "category": "automation",
+  "license": "Sustainable Use License (fair-code, source-available)",
+  "officialRepoUrl": "https://github.com/n8n-io/n8n",
+  "officialWebsiteUrl": "https://n8n.io",
+  "githubStars": 206000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite by default; PostgreSQL is strongly recommended for production or multi-worker (queue mode) setups"
+    },
+    "resourceFootprint": {
+      "ramMb": 1024,
+      "cpuCores": 1,
+      "notes": "1 GB RAM / 1 core is a solid baseline for a personal automation instance with a moderate number of active workflows. AI-agent nodes, large data transformations and high-frequency triggers increase memory use; scale out with queue mode and extra worker containers for heavier workloads."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "n8n workflow canvas showing connected nodes for an automation pipeline",
+      "altBg": "Работно платно на n8n с свързани блокове за автоматизиран работен процес"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "n8n credentials and settings screen for managing connected services",
+      "altBg": "Екран с credentials и настройки на n8n за управление на свързани услуги"
+    },
+    {
+      "label": "Executions",
+      "filename": "executions.webp",
+      "altEn": "n8n execution history list showing successful and failed workflow runs",
+      "altBg": "Списък с история на изпълненията в n8n, показващ успешни и неуспешни стартирания на работни процеси"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  n8n:\n    image: docker.n8n.io/n8nio/n8n:latest\n    container_name: n8n\n    restart: unless-stopped\n    ports:\n      - \"5678:5678\"\n    environment:\n      - N8N_SECURE_COOKIE=false\n      - GENERIC_TIMEZONE=Europe/Sofia\n    volumes:\n      - n8n_data:/home/node/.n8n\n\nvolumes:\n  n8n_data:\n",
+  "alternativeTo": ["Zapier", "Make (Integromat)", "Microsoft Power Automate"],
+  "descriptionEn": "n8n is a fair-code workflow automation platform that combines a visual, node-based builder with the flexibility to drop in custom JavaScript/Python code where needed. It ships with 400+ integrations, native AI-agent nodes, and can be fully self-hosted with no per-execution pricing, unlike most commercial iPaaS tools.",
+  "descriptionBg": "n8n е fair-code платформа за автоматизация на работни процеси, съчетаваща визуален конструктор с блокове с гъвкавостта да добавиш собствен JavaScript/Python код при нужда. Предлага над 400 интеграции, вградени AI-agent блокове и може да бъде изцяло self-hosted без такси на изпълнение, за разлика от повечето комерсиални iPaaS инструменти.",
+  "taglineEn": "Self-hosted workflow automation with visual building and custom code.",
+  "taglineBg": "Self-hosted автоматизация на работни процеси с визуален конструктор и собствен код."
+}
