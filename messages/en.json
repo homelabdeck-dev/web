@@ -9,9 +9,13 @@
     "apps": "Apps"
   },
   "home": {
-    "heading": "HomelabDeck",
-    "subheading": "Discover the best self-hosted software for your homelab.",
-    "cta": "Browse apps"
+    "eyebrow": "Self-hosted software directory",
+    "heading": "Discover the best self-hosted software for your homelab.",
+    "subheading": "A fast, curated directory of self-hosted apps, homelab tools, and infrastructure software — with real Proof-of-Work screenshots.",
+    "cta": "Browse apps",
+    "statsApps": "Cataloged apps",
+    "statsCategories": "Categories",
+    "statsLanguages": "Languages"
   },
   "apps": {
     "listTitle": "Self-Hosted App Directory",

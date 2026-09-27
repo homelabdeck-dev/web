@@ -1,5 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { getAllApps } from "@/lib/apps/loader";
+import { categories } from "@/lib/apps/categories";
 
 export default async function Home({
   params,
@@ -10,11 +12,16 @@ export default async function Home({
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
+  const appCount = getAllApps().length;
+  const categoryCount = categories.length;
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-center gap-6 py-32 px-16 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight text-black">
+    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+      <section className="flex flex-col items-center justify-center gap-6 px-6 py-24 text-center sm:px-16 sm:py-32">
+        <span className="rounded-full bg-black/[.06] px-4 py-1 text-sm font-medium text-zinc-700">
+          {t("eyebrow")}
+        </span>
+        <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-black sm:text-5xl">
           {t("heading")}
         </h1>
         <p className="max-w-md text-lg leading-8 text-zinc-600">
@@ -26,7 +33,28 @@ export default async function Home({
         >
           {t("cta")}
         </Link>
-      </main>
+
+        <dl className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <div className="flex flex-col items-center">
+            <dt className="text-3xl font-semibold tracking-tight text-black">
+              {appCount}
+            </dt>
+            <dd className="text-sm text-zinc-600">{t("statsApps")}</dd>
+          </div>
+          <div className="flex flex-col items-center">
+            <dt className="text-3xl font-semibold tracking-tight text-black">
+              {categoryCount}
+            </dt>
+            <dd className="text-sm text-zinc-600">{t("statsCategories")}</dd>
+          </div>
+          <div className="flex flex-col items-center">
+            <dt className="text-3xl font-semibold tracking-tight text-black">
+              2
+            </dt>
+            <dd className="text-sm text-zinc-600">{t("statsLanguages")}</dd>
+          </div>
+        </dl>
+      </section>
     </div>
   );
 }

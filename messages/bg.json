@@ -9,9 +9,13 @@
     "apps": "Приложения"
   },
   "home": {
-    "heading": "HomelabDeck",
-    "subheading": "Открий най-добрия self-hosted софтуер за твоя homelab.",
-    "cta": "Разгледай приложенията"
+    "eyebrow": "Директория на self-hosted софтуер",
+    "heading": "Открий най-добрия self-hosted софтуер за твоя homelab.",
+    "subheading": "Бърза, курирана директория на self-hosted приложения, homelab инструменти и инфраструктурен софтуер — с реални Proof-of-Work снимки.",
+    "cta": "Разгледай приложенията",
+    "statsApps": "Каталогизирани приложения",
+    "statsCategories": "Категории",
+    "statsLanguages": "Езици"
   },
   "apps": {
     "listTitle": "Директория на Self-Hosted приложения",
