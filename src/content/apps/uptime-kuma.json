@@ -1,0 +1,48 @@
+{
+  "name": "Uptime Kuma",
+  "slug": "uptime-kuma",
+  "category": "monitoring",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/louislam/uptime-kuma",
+  "officialWebsiteUrl": "https://uptime.kuma.pet",
+  "githubStars": 91500,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database, no external database required"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 1,
+      "notes": "Extremely light for typical home use — a few hundred MB of RAM and a fraction of a CPU core comfortably monitors dozens of endpoints. Footprint grows with the number of monitors and check frequency."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Uptime Kuma dashboard showing a list of monitors with uptime percentages and status",
+      "altBg": "Табло на Uptime Kuma със списък от монитори, процент достъпност и статус"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Uptime Kuma notification settings screen with configured alert channels",
+      "altBg": "Екран с настройки за известия в Uptime Kuma с конфигурирани канали за аларми"
+    },
+    {
+      "label": "Resource Usage",
+      "filename": "resource-usage.webp",
+      "altEn": "Uptime Kuma monitor detail page showing response time history chart",
+      "altBg": "Детайлна страница на монитор в Uptime Kuma с графика на времето за отговор"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:1\n    container_name: uptime-kuma\n    volumes:\n      - uptime-kuma-data:/app/data\n    ports:\n      - \"3001:3001\"\n    restart: unless-stopped\n\nvolumes:\n  uptime-kuma-data:\n",
+  "alternativeTo": ["UptimeRobot", "Pingdom", "StatusCake"],
+  "descriptionEn": "Uptime Kuma is a fancy, self-hosted monitoring tool that watches HTTP(s), TCP, DNS, Docker containers and more, alerting you via 90+ notification services when something goes down. It ships with a clean status-page builder and a lightweight SQLite backend.",
+  "descriptionBg": "Uptime Kuma е лек self-hosted инструмент за мониторинг, който следи HTTP(s), TCP, DNS, Docker контейнери и други, и известява чрез над 90 услуги при проблем. Включва вграден конструктор на статус страници и лека SQLite база данни.",
+  "taglineEn": "Self-hosted uptime monitoring with instant alerts and status pages.",
+  "taglineBg": "Self-hosted мониторинг на достъпност с мигновени известия и статус страници."
+}

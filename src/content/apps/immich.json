@@ -1,0 +1,48 @@
+{
+  "name": "Immich",
+  "slug": "immich",
+  "category": "photos",
+  "license": "AGPL-3.0",
+  "officialRepoUrl": "https://github.com/immich-app/immich",
+  "officialWebsiteUrl": "https://immich.app",
+  "githubStars": 112000,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "PostgreSQL",
+      "label": "PostgreSQL 14+ with the pgvector/pgvecto.rs extension (bundled in the official database image)"
+    },
+    "resourceFootprint": {
+      "ramMb": 4096,
+      "cpuCores": 2,
+      "notes": "4 GB RAM / 2 cores is a comfortable baseline for a small library. The machine-learning container (face recognition, CLIP search) is the biggest RAM/CPU consumer and scales with library size and concurrent uploads; a dedicated GPU is optional but speeds up ML jobs significantly."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Immich photo timeline dashboard showing a grid of recent photos and videos",
+      "altBg": "Табло на Immich с хронологична решетка от последни снимки и видеа"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Immich administration settings screen for server configuration",
+      "altBg": "Екран с настройки за администриране и конфигурация на сървъра Immich"
+    },
+    {
+      "label": "Resource Usage",
+      "filename": "resource-usage.webp",
+      "altEn": "Immich job status panel showing background thumbnail and machine-learning job queues",
+      "altBg": "Панел за статус на задачи в Immich, показващ опашки за миниатюри и машинно обучение"
+    }
+  ],
+  "dockerComposeSnippet": "name: immich\n\nservices:\n  immich-server:\n    container_name: immich_server\n    image: ghcr.io/immich-app/immich-server:release\n    volumes:\n      - ${UPLOAD_LOCATION}:/usr/src/app/upload\n      - /etc/localtime:/etc/localtime:ro\n    env_file:\n      - .env\n    ports:\n      - '2283:2283'\n    depends_on:\n      - redis\n      - database\n    restart: always\n    healthcheck:\n      disable: false\n\n  immich-machine-learning:\n    container_name: immich_machine_learning\n    image: ghcr.io/immich-app/immich-machine-learning:release\n    volumes:\n      - model-cache:/cache\n    env_file:\n      - .env\n    restart: always\n    healthcheck:\n      disable: false\n\n  redis:\n    container_name: immich_redis\n    image: docker.io/valkey/valkey:8-bookworm\n    healthcheck:\n      test: redis-cli ping || exit 1\n    restart: always\n\n  database:\n    container_name: immich_postgres\n    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}\n      POSTGRES_USER: ${DB_USERNAME}\n      POSTGRES_DB: ${DB_DATABASE_NAME}\n      POSTGRES_INITDB_ARGS: '--data-checksums'\n    volumes:\n      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data\n    restart: always\n\nvolumes:\n  model-cache:\n",
+  "alternativeTo": ["Google Photos", "Apple iCloud Photos", "Amazon Photos"],
+  "descriptionEn": "Immich is a high-performance, self-hosted photo and video backup solution with mobile apps for automatic background upload. It offers AI-powered face recognition, CLIP-based semantic search, albums, sharing, and map view, aiming to be a drop-in Google Photos replacement you fully own.",
+  "descriptionBg": "Immich е high-performance self-hosted решение за архивиране на снимки и видео с мобилни приложения за автоматично качване на заден фон. Предлага разпознаване на лица с изкуствен интелект, семантично търсене чрез CLIP, албуми, споделяне и изглед на карта.",
+  "taglineEn": "Self-hosted Google Photos replacement with AI search and mobile backup.",
+  "taglineBg": "Self-hosted алтернатива на Google Photos с AI търсене и мобилен бекъп."
+}

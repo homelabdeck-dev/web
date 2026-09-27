@@ -1,0 +1,33 @@
+{
+  "site": {
+    "title": "HomelabDeck",
+    "tagline": "Discover the best self-hosted software for your homelab.",
+    "description": "A fast, curated directory of self-hosted apps, homelab tools, and infrastructure software."
+  },
+  "nav": {
+    "home": "Home",
+    "apps": "Apps"
+  },
+  "home": {
+    "heading": "HomelabDeck",
+    "subheading": "Discover the best self-hosted software for your homelab.",
+    "cta": "Browse apps"
+  },
+  "apps": {
+    "listTitle": "Self-Hosted App Directory",
+    "listSubtitle": "Browse self-hosted alternatives to popular SaaS products.",
+    "category": "Category",
+    "license": "License",
+    "alternativeTo": "Alternative to",
+    "compatibility": "Compatibility",
+    "architectures": "Architectures",
+    "database": "Database",
+    "resourceFootprint": "Resource footprint",
+    "gallery": "Proof of Work Gallery",
+    "deployment": "Deployment",
+    "githubStars": "GitHub stars",
+    "officialWebsite": "Official website",
+    "officialRepo": "Source code",
+    "backToApps": "Back to all apps"
+  }
+}

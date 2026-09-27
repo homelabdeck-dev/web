@@ -1,0 +1,33 @@
+{
+  "site": {
+    "title": "HomelabDeck",
+    "tagline": "Открий най-добрия self-hosted софтуер за твоя homelab.",
+    "description": "Бърз, курирана директория на self-hosted приложения, homelab инструменти и инфраструктурен софтуер."
+  },
+  "nav": {
+    "home": "Начало",
+    "apps": "Приложения"
+  },
+  "home": {
+    "heading": "HomelabDeck",
+    "subheading": "Открий най-добрия self-hosted софтуер за твоя homelab.",
+    "cta": "Разгледай приложенията"
+  },
+  "apps": {
+    "listTitle": "Директория на Self-Hosted приложения",
+    "listSubtitle": "Разгледай self-hosted алтернативи на популярни SaaS продукти.",
+    "category": "Категория",
+    "license": "Лиценз",
+    "alternativeTo": "Алтернатива на",
+    "compatibility": "Съвместимост",
+    "architectures": "Архитектури",
+    "database": "База данни",
+    "resourceFootprint": "Ресурси",
+    "gallery": "Галерия със снимки",
+    "deployment": "Деплойване",
+    "githubStars": "GitHub звезди",
+    "officialWebsite": "Официален сайт",
+    "officialRepo": "Изходен код",
+    "backToApps": "Обратно към всички приложения"
+  }
+}

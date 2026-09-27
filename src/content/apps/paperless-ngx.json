@@ -1,0 +1,48 @@
+{
+  "name": "Paperless-ngx",
+  "slug": "paperless-ngx",
+  "category": "notes-docs",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/paperless-ngx/paperless-ngx",
+  "officialWebsiteUrl": "https://docs.paperless-ngx.com",
+  "githubStars": 46500,
+  "updatedAt": "2026-09-27T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "PostgreSQL",
+      "label": "PostgreSQL recommended for production (SQLite works for small/single-user setups); Redis is a required broker"
+    },
+    "resourceFootprint": {
+      "ramMb": 2048,
+      "cpuCores": 2,
+      "notes": "2 GB RAM / 2 cores handles typical scan-and-archive workloads. OCR (via Tesseract) is the main CPU cost during document consumption; add Tika + Gotenberg containers if you need Office-document conversion, which increases footprint further."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Paperless-ngx document list dashboard with tags, correspondents and filters",
+      "altBg": "Табло на Paperless-ngx със списък документи, етикети, кореспонденти и филтри"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Paperless-ngx settings screen for workflows, tags and document types",
+      "altBg": "Екран с настройки на Paperless-ngx за работни процеси, етикети и типове документи"
+    },
+    {
+      "label": "Resource Usage",
+      "filename": "resource-usage.webp",
+      "altEn": "Paperless-ngx document consumption queue showing OCR processing status",
+      "altBg": "Опашка за обработка на документи в Paperless-ngx, показваща статус на OCR"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  broker:\n    image: docker.io/library/redis:8\n    restart: unless-stopped\n    volumes:\n      - redisdata:/data\n\n  db:\n    image: docker.io/library/postgres:17\n    restart: unless-stopped\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n    environment:\n      POSTGRES_DB: paperless\n      POSTGRES_USER: paperless\n      POSTGRES_PASSWORD: paperless\n\n  webserver:\n    image: ghcr.io/paperless-ngx/paperless-ngx:latest\n    restart: unless-stopped\n    depends_on:\n      - db\n      - broker\n    ports:\n      - \"8000:8000\"\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-fs\", \"-S\", \"--max-time\", \"2\", \"http://localhost:8000\"]\n      interval: 30s\n      timeout: 10s\n      retries: 5\n    volumes:\n      - data:/usr/src/paperless/data\n      - media:/usr/src/paperless/media\n      - ./export:/usr/src/paperless/export\n      - ./consume:/usr/src/paperless/consume\n    environment:\n      PAPERLESS_REDIS: redis://broker:6379\n      PAPERLESS_DBHOST: db\n      PAPERLESS_URL: https://paperless.example.com\n      PAPERLESS_SECRET_KEY: change-me\n      PAPERLESS_TIME_ZONE: Europe/Sofia\n      PAPERLESS_OCR_LANGUAGE: eng\n\nvolumes:\n  data:\n  media:\n  pgdata:\n  redisdata:\n",
+  "alternativeTo": ["DocuWare", "M-Files", "Google Drive document management"],
+  "descriptionEn": "Paperless-ngx is a community-supported document management system that scans, OCRs, tags and archives all your paper documents so you can go (mostly) paperless. It automatically detects correspondents, tags and document types, and offers full-text search across your entire archive.",
+  "descriptionBg": "Paperless-ngx е поддържана от общността система за управление на документи, която сканира, разпознава текст (OCR), тагва и архивира документите ти. Автоматично разпознава кореспонденти, етикети и типове документи, и предлага пълнотекстово търсене в целия архив.",
+  "taglineEn": "Scan, OCR and archive your paperwork with full-text search.",
+  "taglineBg": "Сканирай, разпознавай и архивирай документите си с пълнотекстово търсене."
+}
