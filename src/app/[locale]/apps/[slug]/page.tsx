@@ -168,7 +168,7 @@ export default async function AppDetailPage({
           <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("gallery")}
           </h2>
-          <ul className="flex flex-wrap gap-4">
+          <ul className="grid grid-cols-3 gap-3">
             {app.screenshots.map((shot) => (
               <li
                 key={shot.filename}
@@ -178,10 +178,10 @@ export default async function AppDetailPage({
                 <img
                   src={`/screenshots/${app.slug}/${shot.filename}`}
                   alt={isBg ? shot.altBg : shot.altEn}
-                  className="h-auto w-full max-w-sm object-contain"
+                  className="h-auto w-full object-contain"
                   loading="lazy"
                 />
-                <span className="px-3 pb-3 text-center text-sm text-zinc-600 dark:text-zinc-400">
+                <span className="px-2 pb-2 text-center text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
                   {shot.label}
                 </span>
               </li>
