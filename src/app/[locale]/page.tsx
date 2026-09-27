@@ -18,7 +18,7 @@ export default async function Home({
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
       <section className="flex flex-col items-center justify-center gap-6 px-6 py-24 text-center sm:px-16 sm:py-32">
-        <span className="rounded-full bg-black/[.06] px-4 py-1 text-sm font-medium text-zinc-700">
+        <span className="rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent-hover">
           {t("eyebrow")}
         </span>
         <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-black sm:text-5xl">
@@ -29,26 +29,26 @@ export default async function Home({
         </p>
         <Link
           href="/apps"
-          className="mt-4 flex h-12 items-center justify-center rounded-full bg-foreground px-6 text-background font-medium transition-colors hover:bg-[#383838]"
+          className="mt-4 flex h-12 items-center justify-center rounded-full bg-accent px-6 text-white font-medium transition-colors hover:bg-accent-hover"
         >
           {t("cta")}
         </Link>
 
         <dl className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
           <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-black">
+            <dt className="text-3xl font-semibold tracking-tight text-accent">
               {appCount}
             </dt>
             <dd className="text-sm text-zinc-600">{t("statsApps")}</dd>
           </div>
           <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-black">
+            <dt className="text-3xl font-semibold tracking-tight text-accent">
               {categoryCount}
             </dt>
             <dd className="text-sm text-zinc-600">{t("statsCategories")}</dd>
           </div>
           <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-black">
+            <dt className="text-3xl font-semibold tracking-tight text-accent">
               2
             </dt>
             <dd className="text-sm text-zinc-600">{t("statsLanguages")}</dd>

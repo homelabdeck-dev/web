@@ -41,13 +41,13 @@ export default async function AppsPage({
               <li key={app.slug}>
                 <Link
                   href={`/apps/${app.slug}`}
-                  className="flex flex-col gap-1 rounded-xl border border-black/[.08] bg-white p-6 transition-colors hover:border-black/[.16]"
+                  className="flex flex-col gap-1 rounded-xl border border-black/[.08] bg-white p-6 transition-colors hover:border-accent/40"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <h2 className="text-xl font-medium text-black">
                       {app.name}
                     </h2>
-                    <span className="rounded-full bg-black/[.06] px-3 py-1 text-sm text-zinc-700">
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">
                       {categoryLabel}
                     </span>
                   </div>

@@ -26,8 +26,8 @@ export default function LocaleSwitcher({ locales }: { locales: readonly string[]
           aria-current={locale === activeLocale}
           className={`rounded-full px-2.5 py-1 font-medium uppercase transition-colors ${
             locale === activeLocale
-              ? "bg-black text-white"
-              : "text-zinc-600 hover:text-black"
+              ? "bg-accent text-white"
+              : "text-zinc-600 hover:text-accent"
           }`}
         >
           {locale}

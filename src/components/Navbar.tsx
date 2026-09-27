@@ -12,20 +12,20 @@ export default async function Navbar({ locale }: { locale: string }) {
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4 sm:px-16">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-black"
+          className="text-lg font-semibold tracking-tight text-black transition-colors hover:text-accent"
         >
           {tSite("title")}
         </Link>
         <nav className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-medium text-zinc-700 transition-colors hover:text-black"
+            className="text-sm font-medium text-zinc-700 transition-colors hover:text-accent"
           >
             {t("home")}
           </Link>
           <Link
             href="/apps"
-            className="text-sm font-medium text-zinc-700 transition-colors hover:text-black"
+            className="text-sm font-medium text-zinc-700 transition-colors hover:text-accent"
           >
             {t("apps")}
           </Link>

@@ -58,7 +58,7 @@ export default async function AppDetailPage({
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <Link
           href="/apps"
-          className="text-sm text-zinc-600 underline"
+          className="text-sm text-zinc-600 underline transition-colors hover:text-accent"
         >
           ← {t("backToApps")}
         </Link>
@@ -68,7 +68,7 @@ export default async function AppDetailPage({
             <h1 className="text-3xl font-semibold tracking-tight text-black">
               {app.name}
             </h1>
-            <span className="rounded-full bg-black/[.06] px-3 py-1 text-sm text-zinc-700">
+            <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">
               {categoryLabel}
             </span>
           </div>
@@ -102,7 +102,7 @@ export default async function AppDetailPage({
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline"
+                  className="font-medium text-black underline transition-colors hover:text-accent"
                   href={app.officialWebsiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -117,7 +117,7 @@ export default async function AppDetailPage({
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline"
+                  className="font-medium text-black underline transition-colors hover:text-accent"
                   href={app.officialRepoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
