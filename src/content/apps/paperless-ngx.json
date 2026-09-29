@@ -23,20 +23,20 @@
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "Paperless-ngx document list dashboard with tags, correspondents and filters",
-      "altBg": "Табло на Paperless-ngx със списък документи, етикети, кореспонденти и филтри"
+      "altEn": "Paperless-ngx dashboard showing document statistics and quick upload panel",
+      "altBg": "Табло на Paperless-ngx със статистика за документите и панел за бързо качване"
     },
     {
       "label": "Settings",
       "filename": "settings.webp",
-      "altEn": "Paperless-ngx settings screen for workflows, tags and document types",
-      "altBg": "Екран с настройки на Paperless-ngx за работни процеси, етикети и типове документи"
+      "altEn": "Paperless-ngx settings screen for appearance, date format, sidebar and global search options",
+      "altBg": "Екран с настройки на Paperless-ngx за визия, формат на дата, странична лента и глобално търсене"
     },
     {
-      "label": "Resource Usage",
+      "label": "Tasks",
       "filename": "resource-usage.webp",
-      "altEn": "Paperless-ngx document consumption queue showing OCR processing status",
-      "altBg": "Опашка за обработка на документи в Paperless-ngx, показваща статус на OCR"
+      "altEn": "Paperless-ngx tasks screen showing recently completed background jobs like mail fetch and classifier training",
+      "altBg": "Екран със задачи в Paperless-ngx, показващ наскоро завършени фонови задачи като извличане на поща и тренировка на класификатора"
     }
   ],
   "dockerComposeSnippet": "services:\n  broker:\n    image: docker.io/library/redis:8\n    restart: unless-stopped\n    volumes:\n      - redisdata:/data\n\n  db:\n    image: docker.io/library/postgres:17\n    restart: unless-stopped\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n    environment:\n      POSTGRES_DB: paperless\n      POSTGRES_USER: paperless\n      POSTGRES_PASSWORD: paperless\n\n  webserver:\n    image: ghcr.io/paperless-ngx/paperless-ngx:latest\n    restart: unless-stopped\n    depends_on:\n      - db\n      - broker\n    ports:\n      - \"8000:8000\"\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-fs\", \"-S\", \"--max-time\", \"2\", \"http://localhost:8000\"]\n      interval: 30s\n      timeout: 10s\n      retries: 5\n    volumes:\n      - data:/usr/src/paperless/data\n      - media:/usr/src/paperless/media\n      - ./export:/usr/src/paperless/export\n      - ./consume:/usr/src/paperless/consume\n    environment:\n      PAPERLESS_REDIS: redis://broker:6379\n      PAPERLESS_DBHOST: db\n      PAPERLESS_URL: https://paperless.example.com\n      PAPERLESS_SECRET_KEY: change-me\n      PAPERLESS_TIME_ZONE: Europe/Sofia\n      PAPERLESS_OCR_LANGUAGE: eng\n\nvolumes:\n  data:\n  media:\n  pgdata:\n  redisdata:\n",
