@@ -23,20 +23,20 @@
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "Wiki.js page browser showing a tree of wiki pages and folders",
-      "altBg": "Браузър на страници в Wiki.js, показващ дърво от wiki страници и папки"
+      "altEn": "Wiki.js admin dashboard showing page, user and group counts along with recent pages and last logins",
+      "altBg": "Административно табло на Wiki.js с брой страници, потребители и групи, заедно с последни страници и влизания"
     },
     {
       "label": "Settings",
       "filename": "settings.webp",
-      "altEn": "Wiki.js administration settings screen for authentication providers and site configuration",
-      "altBg": "Екран с административни настройки на Wiki.js за доставчици за автентикация и конфигурация на сайта"
+      "altEn": "Wiki.js general site settings screen showing site URL, title, logo and feature toggles",
+      "altBg": "Екран с общи настройки на сайта във Wiki.js с URL, заглавие, лого и превключватели на функции"
     },
     {
-      "label": "Editor",
+      "label": "Page View",
       "filename": "editor.webp",
-      "altEn": "Wiki.js markdown editor showing live preview of a documentation page",
-      "altBg": "Markdown редактор на Wiki.js, показващ преглед на страница с документация в реално време"
+      "altEn": "Wiki.js page view showing rendered content, discussion panel and comment section",
+      "altBg": "Изглед на страница във Wiki.js с показано съдържание, панел за дискусия и секция за коментари"
     }
   ],
   "dockerComposeSnippet": "services:\n  db:\n    image: postgres:15-alpine\n    container_name: wikijs-db\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: wiki\n      POSTGRES_PASSWORD: change-me\n      POSTGRES_USER: wikijs\n    volumes:\n      - db-data:/var/lib/postgresql/data\n\n  wiki:\n    image: ghcr.io/requarks/wiki:2\n    container_name: wikijs\n    restart: unless-stopped\n    depends_on:\n      - db\n    environment:\n      DB_TYPE: postgres\n      DB_HOST: db\n      DB_PORT: 5432\n      DB_USER: wikijs\n      DB_PASS: change-me\n      DB_NAME: wiki\n    ports:\n      - \"80:3000\"\n\nvolumes:\n  db-data:\n",
