@@ -27,16 +27,16 @@
       "altBg": "Уеб трезор на Vaultwarden със списък от запазени пароли и защитени бележки"
     },
     {
-      "label": "Settings",
+      "label": "Security Reports",
       "filename": "settings.webp",
-      "altEn": "Vaultwarden admin panel showing server configuration and user management options",
-      "altBg": "Административен панел на Vaultwarden с настройки на сървъра и управление на потребители"
+      "altEn": "Vaultwarden security reports screen highlighting exposed, reused and weak passwords across the vault",
+      "altBg": "Екран с доклади за сигурност във Vaultwarden, показващ компрометирани, повтарящи се и слаби пароли в трезора"
     },
     {
-      "label": "Organizations",
+      "label": "Two-Step Login",
       "filename": "organizations.webp",
-      "altEn": "Vaultwarden organization view showing shared collections for secure team password sharing",
-      "altBg": "Изглед на организация във Vaultwarden със споделени колекции за сигурно споделяне на пароли в екип"
+      "altEn": "Vaultwarden two-step login settings showing authenticator app, passkey and Duo provider options",
+      "altBg": "Настройки за двустъпково влизане във Vaultwarden с authenticator app, passkey и Duo опции"
     }
   ],
   "dockerComposeSnippet": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    container_name: vaultwarden\n    restart: unless-stopped\n    environment:\n      DOMAIN: \"https://vault.example.com\"\n      SIGNUPS_ALLOWED: \"false\"\n      WEBSOCKET_ENABLED: \"true\"\n    volumes:\n      - vw-data:/data\n    ports:\n      - \"8080:80\"\n\nvolumes:\n  vw-data:\n",
