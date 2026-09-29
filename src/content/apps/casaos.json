@@ -1,0 +1,48 @@
+{
+  "name": "CasaOS",
+  "slug": "casaos",
+  "category": "container-management",
+  "license": "Apache-2.0",
+  "officialRepoUrl": "https://github.com/IceWhaleTech/CasaOS",
+  "officialWebsiteUrl": "https://casaos.zimaspace.com",
+  "githubStars": 37300,
+  "updatedAt": "2026-09-29T00:00:00.000Z",
+  "compatibility": {
+    "architectures": ["amd64", "arm64"],
+    "database": {
+      "kind": "Stateless",
+      "label": "No external database required for the core dashboard; individual apps installed through the App Store manage their own storage"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Lightweight host-level personal cloud OS layer on top of Docker — the dashboard itself idles around a couple hundred MB of RAM, with total footprint scaling with however many apps you install through its App Store. Note: the official install script assumes systemd and direct access to the host's storage/USB subsystem, so it typically fails inside unprivileged LXC containers — bare metal, a VM, or a privileged LXC is recommended instead."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "CasaOS dashboard showing system status widgets (CPU, RAM, storage) and installed app icons",
+      "altBg": "Табло на CasaOS с уиджети за системен статус (CPU, RAM, съхранение) и икони на инсталирани приложения"
+    },
+    {
+      "label": "Files",
+      "filename": "files.webp",
+      "altEn": "CasaOS built-in Files app showing the folder structure of a mounted data drive",
+      "altBg": "Вграденото приложение Files в CasaOS, показващо папковата структура на монтиран диск с данни"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "CasaOS settings panel showing WebUI port, wallpaper, update status and system controls",
+      "altBg": "Панел с настройки на CasaOS, показващ WebUI порт, тапет, статус на обновления и системни контроли"
+    }
+  ],
+  "dockerComposeSnippet": "# CasaOS is a host-level personal cloud OS, not a single docker-compose service.\n# Official install (bare metal, VM, or privileged LXC — NOT unprivileged LXC):\n# curl -fsSL https://get.casaos.io | sudo bash\n#\n# This installs CasaOS's own system containers (gateway, app management,\n# local storage, message bus) on top of Docker and exposes the dashboard\n# on port 80 by default. Apps are then installed through the built-in\n# App Store, which generates its own docker-compose.yml per app.\nservices:\n  casaos-example-note:\n    image: alpine:latest\n    container_name: casaos-install-note\n    command: [\"echo\", \"Use the official install script instead of docker-compose for CasaOS itself\"]\n",
+  "alternativeTo": ["Synology DSM", "TrueNAS Scale", "Unraid"],
+  "descriptionEn": "CasaOS is an open-source personal cloud operating system that sits on top of Docker, giving homelab users a clean web dashboard for system monitoring, file management and one-click app installs from its built-in App Store. It targets the same \"friendly NAS OS\" niche as Synology DSM or Unraid but stays fully open source and lightweight enough for a spare mini PC or Raspberry Pi. It is a host-level installer rather than a single container, so it needs a bare-metal host, a VM, or a privileged LXC container — unprivileged LXC setups are not supported.",
+  "descriptionBg": "CasaOS е open-source персонална cloud операционна система върху Docker, която дава на homelab потребителите чисто уеб табло за системен мониторинг, файлов мениджмънт и инсталиране на приложения с един клик през вградения App Store. Заема нишата на \"приятелска NAS OS\" наравно със Synology DSM или Unraid, но остава напълно отворен код и достатъчно лек за резервно mini PC или Raspberry Pi. Представлява инсталатор на ниво хост, а не единичен контейнер, затова изисква bare-metal хост, VM или привилегирован LXC контейнер — не работи в непривилегирован LXC.",
+  "taglineEn": "Open-source personal cloud OS on top of Docker.",
+  "taglineBg": "Open-source персонална cloud OS върху Docker."
+}
