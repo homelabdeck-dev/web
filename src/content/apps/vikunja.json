@@ -23,20 +23,20 @@
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "Vikunja Kanban board view showing task cards organized into columns by status",
-      "altBg": "Kanban изглед на Vikunja, показващ карти със задачи, организирани в колони по статус"
+      "altEn": "Vikunja overview page with quick task add and a friendly empty-state llama mascot",
+      "altBg": "Начална страница на Vikunja с бързо добавяне на задача и маскот лама при липсващи задачи"
     },
     {
       "label": "Settings",
       "filename": "settings.webp",
-      "altEn": "Vikunja project and notification settings screen",
-      "altBg": "Екран с настройки на проекти и известия във Vikunja"
+      "altEn": "Vikunja general account settings screen showing default project, view and notification preferences",
+      "altBg": "Екран с общи настройки на акаунта във Vikunja с предпочитан проект, изглед и настройки за известия"
     },
     {
-      "label": "Task Detail",
+      "label": "Projects",
       "filename": "task-detail.webp",
-      "altEn": "Vikunja task detail view showing due date, labels, assignees and a checklist",
-      "altBg": "Детайлен изглед на задача във Vikunja с краен срок, етикети, отговорници и списък със стъпки"
+      "altEn": "Vikunja projects overview showing My Open Tasks and Inbox project cards",
+      "altBg": "Общ изглед на проекти във Vikunja с карти за My Open Tasks и Inbox"
     }
   ],
   "dockerComposeSnippet": "services:\n  db:\n    image: postgres:16\n    container_name: vikunja-db\n    restart: unless-stopped\n    environment:\n      POSTGRES_PASSWORD: change-me\n      POSTGRES_DB: vikunja\n      POSTGRES_USER: vikunja\n    volumes:\n      - db-data:/var/lib/postgresql/data\n\n  vikunja:\n    image: vikunja/vikunja:latest\n    container_name: vikunja\n    restart: unless-stopped\n    depends_on:\n      - db\n    environment:\n      VIKUNJA_DATABASE_HOST: db\n      VIKUNJA_DATABASE_PASSWORD: change-me\n      VIKUNJA_DATABASE_TYPE: postgres\n      VIKUNJA_DATABASE_USER: vikunja\n      VIKUNJA_DATABASE_DATABASE: vikunja\n      VIKUNJA_SERVICE_PUBLICURL: https://vikunja.example.com\n      VIKUNJA_SERVICE_JWTSECRET: change-me-too\n    ports:\n      - \"3456:3456\"\n    volumes:\n      - files-data:/app/vikunja/files\n\nvolumes:\n  db-data:\n  files-data:\n",
