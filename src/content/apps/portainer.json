@@ -23,20 +23,20 @@
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "Portainer dashboard showing an overview of containers, images, volumes and networks",
-      "altBg": "Табло на Portainer с общ преглед на контейнери, образи, томове и мрежи"
+      "altEn": "Portainer environment dashboard showing stack, container, image, volume and network counts for the local Docker endpoint",
+      "altBg": "Табло на средата в Portainer, показващо брой stack-ове, контейнери, образи, томове и мрежи за локалния Docker endpoint"
     },
     {
       "label": "Settings",
       "filename": "settings.webp",
-      "altEn": "Portainer environment settings screen for managing connected Docker endpoints",
-      "altBg": "Екран с настройки на среда в Portainer за управление на свързани Docker endpoint-и"
+      "altEn": "Portainer application settings screen showing snapshot interval, Edge agent poll frequency and app template configuration",
+      "altBg": "Екран с настройки на приложението в Portainer с интервал на snapshot, честота на Edge agent и конфигурация на app templates"
     },
     {
-      "label": "Stacks",
+      "label": "Environments",
       "filename": "stacks.webp",
-      "altEn": "Portainer stacks view showing a deployed docker-compose stack with its running services",
-      "altBg": "Изглед на stacks в Portainer, показващ разгърнат docker-compose stack с работещите му услуги"
+      "altEn": "Portainer Home screen listing the connected local Docker environment with container and resource counts",
+      "altBg": "Начален екран на Portainer със свързаната локална Docker среда и брой контейнери/ресурси"
     }
   ],
   "dockerComposeSnippet": "services:\n  portainer:\n    image: portainer/portainer-ce:latest\n    container_name: portainer\n    restart: unless-stopped\n    security_opt:\n      - no-new-privileges:true\n    ports:\n      - \"8000:8000\"\n      - \"9443:9443\"\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock\n      - portainer-data:/data\n\nvolumes:\n  portainer-data:\n",
