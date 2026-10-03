@@ -38,9 +38,9 @@ Catalog self-hosted applications with real Proof-of-Work evidence (dashboard/set
 
 ## Current State
 
-- Live in production at `homelabdeck.dev` (Vercel), 6+ commits on `main`.
-- App catalog holds 15 entries: freshrss, gitea, grafana, home-assistant, immich, jellyfin, n8n, nextcloud, paperless-ngx, pi-hole, portainer, uptime-kuma, vaultwarden, vikunja, wiki-js.
-- Only **pi-hole** and **immich** have their 3-screenshot Proof-of-Work gallery published; the other 13 apps still need screenshots.
+- Live in production at `homelabdeck.dev` (Vercel), 24 commits on `main` (as of 2026-10-03).
+- App catalog holds 15 entries: casaos, freshrss, gitea, grafana, home-assistant, immich, jellyfin, n8n, paperless-ngx, pi-hole, portainer, uptime-kuma, vaultwarden, vikunja, wiki-js.
+- All 15 entries have their 3-screenshot Proof-of-Work gallery published in `public/screenshots/<slug>/`.
 - Site forced to light theme only (dark mode variants removed 2026-09-27) — see `decisions.md`.
 
 ## Important Locations
