@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/Navbar";
+import { SITE_URL, ogLocale } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,8 +31,14 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "site" });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
+    openGraph: {
+      type: "website",
+      siteName: t("title"),
+      locale: ogLocale(locale),
+    },
   };
 }
 

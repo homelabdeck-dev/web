@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { getAllAppSlugs, getAppBySlug } from "@/lib/apps/loader";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
   const slugs = getAllAppSlugs();
@@ -23,9 +24,27 @@ export async function generateMetadata({
   const app = getAppBySlug(slug);
   if (!app) return {};
 
+  const title = `${app.name} — HomelabDeck`;
+  const description = locale === "bg" ? app.descriptionBg : app.descriptionEn;
+  const cover = app.screenshots[0];
+
   return {
-    title: `${app.name} — HomelabDeck`,
-    description: locale === "bg" ? app.descriptionBg : app.descriptionEn,
+    title,
+    description,
+    alternates: alternatesFor(locale, `/apps/${slug}`),
+    openGraph: {
+      title,
+      description,
+      url: localeUrl(locale, `/apps/${slug}`),
+      ...(cover && {
+        images: [
+          {
+            url: `/screenshots/${slug}/${cover.filename}`,
+            alt: locale === "bg" ? cover.altBg : cover.altEn,
+          },
+        ],
+      }),
+    },
   };
 }
 
@@ -53,8 +72,29 @@ export default async function AppDetailPage({
   const description = isBg ? app.descriptionBg : app.descriptionEn;
   const tagline = isBg ? app.taglineBg : app.taglineEn;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: app.name,
+    description,
+    url: localeUrl(locale, `/apps/${slug}`),
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Linux",
+    sameAs: [app.officialWebsiteUrl, app.officialRepoUrl],
+    image: app.screenshots.map(
+      (shot) => `${SITE_URL}/screenshots/${slug}/${shot.filename}`,
+    ),
+    offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  };
+
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <Link
           href="/apps"

@@ -2,6 +2,20 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllApps } from "@/lib/apps/loader";
 import { categories } from "@/lib/apps/categories";
+import { alternatesFor, localeUrl } from "@/lib/seo";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: alternatesFor(locale),
+    openGraph: { url: localeUrl(locale) },
+  };
+}
 
 export default async function Home({
   params,

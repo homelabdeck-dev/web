@@ -2,6 +2,27 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllApps } from "@/lib/apps/loader";
 import { getCategoryBySlug } from "@/lib/apps/categories";
+import { alternatesFor, localeUrl } from "@/lib/seo";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "apps" });
+  return {
+    title: t("listTitle"),
+    description: t("listSubtitle"),
+    alternates: alternatesFor(locale, "/apps"),
+    openGraph: {
+      title: t("listTitle"),
+      description: t("listSubtitle"),
+      url: localeUrl(locale, "/apps"),
+    },
+  };
+}
 
 export default async function AppsPage({
   params,
