@@ -1,0 +1,55 @@
+{
+  "name": "Audiobookshelf",
+  "slug": "audiobookshelf",
+  "category": "media",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/advplyr/audiobookshelf",
+  "officialWebsiteUrl": "https://www.audiobookshelf.org",
+  "githubStars": 14572,
+  "updatedAt": "2026-10-07T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database, no external database required"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Light at idle — around 125 MB of RAM with a small library in our test LXC. Scanning large libraries and transcoding for some clients temporarily raise CPU and RAM use; storage needs depend entirely on your audiobook and podcast collection."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Audiobookshelf home page with Recently Added and Discover shelves showing audiobook covers",
+      "altBg": "Начална страница на Audiobookshelf с рафтове „Recently Added“ и „Discover“ с корици на аудиокниги"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Audiobookshelf server settings with scanner, display and web client options",
+      "altBg": "Настройки на сървъра на Audiobookshelf с опции за скенер, изглед и уеб клиент"
+    },
+    {
+      "label": "Stats",
+      "filename": "stats.webp",
+      "altEn": "Audiobookshelf library stats page with item count, total hours, authors, size and longest and largest items",
+      "altBg": "Страница със статистики на библиотеката в Audiobookshelf – брой заглавия, общо часове, автори, размер и най-дълги и най-големи заглавия"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  audiobookshelf:\n    image: ghcr.io/advplyr/audiobookshelf:latest\n    container_name: audiobookshelf\n    restart: unless-stopped\n    ports:\n      - \"13378:80\"\n    environment:\n      TZ: 'Europe/Sofia'\n    volumes:\n      - ./audiobooks:/audiobooks\n      - ./podcasts:/podcasts\n      - ./config:/config\n      - ./metadata:/metadata\n",
+  "alternativeTo": [
+    "Audible",
+    "Plex (audiobooks)",
+    "Jellyfin (audiobooks)"
+  ],
+  "descriptionEn": "Audiobookshelf is a self-hosted audiobook and podcast server with a polished web player and official Android and iOS apps. It scans your folders, pulls in covers and metadata, tracks listening progress per user and syncs it across devices, with support for multiple libraries, series, collections and podcast auto-download. If you own DRM-free audiobooks or listen to public-domain recordings, it gives you an Audible-like experience on your own hardware.",
+  "descriptionBg": "Audiobookshelf е self-hosted сървър за аудиокниги и подкасти с добре изработен уеб плейър и официални приложения за Android и iOS. Сканира папките ти, изтегля корици и метаданни, следи прогреса на слушане за всеки потребител и го синхронизира между устройствата, с поддръжка на няколко библиотеки, серии, колекции и автоматично сваляне на подкасти. Ако имаш аудиокниги без DRM или слушаш записи от обществено достояние, получаваш Audible-подобно изживяване на собствен хардуер.",
+  "taglineEn": "Self-hosted audiobook and podcast server with mobile apps.",
+  "taglineBg": "Self-hosted сървър за аудиокниги и подкасти с мобилни приложения."
+}

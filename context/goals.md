@@ -4,7 +4,7 @@ This file contains active goals, priorities, and success criteria for HomeLab De
 
 ## Active Goals
 
-- Grow the app catalog with new self-hosted entries beyond the current 15.
+- Grow the app catalog with new self-hosted entries beyond the current 18.
 - Keep English and Bulgarian copy (tagline/description) in sync for every catalog entry.
 - Prepare Pinterest-style visual content and EN/BG descriptions for programmatic SEO.
 

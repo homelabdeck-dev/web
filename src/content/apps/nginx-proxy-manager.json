@@ -1,0 +1,55 @@
+{
+  "name": "Nginx Proxy Manager",
+  "slug": "nginx-proxy-manager",
+  "category": "networking",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+  "officialWebsiteUrl": "https://nginxproxymanager.com",
+  "githubStars": 34336,
+  "updatedAt": "2026-10-07T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite by default; MySQL/MariaDB optional for larger setups"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Lightweight — a Node.js backend plus Nginx, idling around 150 MB of RAM on a fresh install in our test LXC. Footprint grows mainly with the number of proxy hosts and traffic. Needs ports 80/443 free on the host and port 81 for the admin UI."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Nginx Proxy Manager dashboard showing counters for proxy hosts, redirection hosts, streams and 404 hosts",
+      "altBg": "Табло на Nginx Proxy Manager със счетчици за proxy хостове, пренасочвания, streams и 404 хостове"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Nginx Proxy Manager settings page with the default site options for unknown hosts",
+      "altBg": "Страница с настройки на Nginx Proxy Manager с опциите за сайта по подразбиране при непознат хост"
+    },
+    {
+      "label": "Logs",
+      "filename": "logs.webp",
+      "altEn": "Nginx Proxy Manager system log viewer with live filtering and download",
+      "altBg": "Преглед на системните логове в Nginx Proxy Manager с филтриране на живо и изтегляне"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  npm:\n    image: jc21/nginx-proxy-manager:latest\n    container_name: nginx-proxy-manager\n    restart: unless-stopped\n    ports:\n      - \"80:80\"\n      - \"81:81\"\n      - \"443:443\"\n    volumes:\n      - ./data:/data\n      - ./letsencrypt:/etc/letsencrypt\n",
+  "alternativeTo": [
+    "Traefik",
+    "Caddy",
+    "Cloudflare Tunnel"
+  ],
+  "descriptionEn": "Nginx Proxy Manager is an open-source reverse proxy with a clean web UI, built so you can expose your homelab services under real domain names without ever editing an Nginx config file. It handles proxy hosts, redirections, TCP/UDP streams and free Let's Encrypt SSL certificates with automatic renewal, plus access lists and basic user management. It is a popular first step for anyone moving from raw IP:port links to https://app.yourdomain.com, and it runs comfortably in a small unprivileged LXC container.",
+  "descriptionBg": "Nginx Proxy Manager е open-source reverse proxy с чист уеб интерфейс, създаден за да публикуваш услугите от homelab-а си под реални домейн имена, без да редактираш Nginx конфигурационни файлове. Управлява proxy хостове, пренасочвания, TCP/UDP streams и безплатни Let's Encrypt SSL сертификати с автоматично подновяване, плюс списъци за достъп и основно управление на потребители. Популярна първа стъпка за всеки, който преминава от голи IP:порт адреси към https://app.yourdomain.com, и работи спокойно в малък непривилегирован LXC контейнер.",
+  "taglineEn": "Reverse proxy with a simple web UI and free SSL certificates.",
+  "taglineBg": "Reverse proxy с прост уеб интерфейс и безплатни SSL сертификати."
+}

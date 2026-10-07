@@ -1,0 +1,55 @@
+{
+  "name": "Memos",
+  "slug": "memos",
+  "category": "notes-docs",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/usememos/memos",
+  "officialWebsiteUrl": "https://usememos.com",
+  "githubStars": 63593,
+  "updatedAt": "2026-10-07T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite by default; PostgreSQL and MySQL also supported"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 1,
+      "notes": "Extremely light — a single Go binary that used only around 60 MB of RAM in our test LXC. Memory use stays small even with thousands of notes; attachments are the main thing that grows storage."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Home",
+      "filename": "dashboard.webp",
+      "altEn": "Memos home feed with a quick-capture box, a calendar sidebar and two saved notes",
+      "altBg": "Начална лента на Memos с поле за бързо записване, календар встрани и две запазени бележки"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Memos account settings page with admin sections for members, system, storage, SSO and webhooks",
+      "altBg": "Страница с настройки на акаунта в Memos и админ секции за потребители, система, съхранение, SSO и webhooks"
+    },
+    {
+      "label": "Calendar",
+      "filename": "calendar.webp",
+      "altEn": "Memos calendar view showing a note attached to its creation date",
+      "altBg": "Календарен изглед в Memos, показващ бележка на датата на създаването ѝ"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  memos:\n    image: neosmemo/memos:stable\n    container_name: memos\n    restart: unless-stopped\n    ports:\n      - \"5230:5230\"\n    volumes:\n      - ./memos-data:/var/opt/memos\n",
+  "alternativeTo": [
+    "Google Keep",
+    "Apple Notes",
+    "Notion"
+  ],
+  "descriptionEn": "Memos is a privacy-first, lightweight note-taking service built for quick capture: type a thought, add tags, and it lands in a timeline you can browse, search or view on a calendar. Notes are plain Markdown, can carry attachments and be shared publicly or kept private, and everything is stored in a single SQLite file by default. It is a minimal self-hosted alternative to Google Keep that runs happily on almost any hardware.",
+  "descriptionBg": "Memos е лека услуга за бележки с приоритет върху поверителността, създадена за бързо записване: пишеш мисъл, добавяш тагове и тя попада във времева лента, която можеш да разглеждаш, търсиш или виждаш в календар. Бележките са обикновен Markdown, могат да имат прикачени файлове и да са публични или лични, а всичко по подразбиране се съхранява в един SQLite файл. Минималистична self-hosted алтернатива на Google Keep, която върви спокойно на почти всякакъв хардуер.",
+  "taglineEn": "Lightweight, privacy-first note-taking with a quick-capture timeline.",
+  "taglineBg": "Лека, поверителна услуга за бележки с времева лента за бързо записване."
+}
