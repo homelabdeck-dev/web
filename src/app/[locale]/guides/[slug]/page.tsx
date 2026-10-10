@@ -97,7 +97,7 @@ export default async function GuideDetailPage({
           <time className="text-sm text-zinc-500 dark:text-zinc-400" dateTime={guide.date}>
             {guide.date}
           </time>
-          <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50 sm:text-4xl">
+          <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50 sm:text-4xl">
             {title}
           </h1>
           {(isBg ? guide.introBg : guide.introEn).map((p, i) => (
@@ -109,7 +109,7 @@ export default async function GuideDetailPage({
 
         {rows.length > 0 && (
         <section className="flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold text-black dark:text-zinc-50">
+          <h2 className="text-2xl text-black dark:text-zinc-50">
             {t("comparison")}
           </h2>
           <div className="overflow-x-auto rounded-xl border border-black/[.08] bg-white dark:border-white/[.12] dark:bg-[#20242a]">
@@ -158,7 +158,7 @@ export default async function GuideDetailPage({
           const ListTag = section.kind === "steps" ? "ol" : "ul";
           return (
             <section key={section.headingEn} className="flex flex-col gap-3">
-              <h2 className="text-2xl font-semibold text-black dark:text-zinc-50">
+              <h2 className="text-2xl text-black dark:text-zinc-50">
                 {isBg ? section.headingBg : section.headingEn}
               </h2>
               {section.kind === "text" ? (

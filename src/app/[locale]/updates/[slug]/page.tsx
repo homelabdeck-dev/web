@@ -90,7 +90,7 @@ export default async function UpdateDetailPage({
           >
             {note.date}
           </time>
-          <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
+          <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50">
             {title}
           </h1>
           {paragraphs.map((p, i) => (
@@ -100,7 +100,7 @@ export default async function UpdateDetailPage({
           ))}
         </article>
         <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold text-black dark:text-zinc-50">
+          <h2 className="text-xl text-black dark:text-zinc-50">
             {t("addedApps")}
           </h2>
           <ul className="grid gap-4 sm:grid-cols-2">

@@ -105,7 +105,7 @@ export default async function AppDetailPage({
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
+            <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50">
               {app.name}
             </h1>
             <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">

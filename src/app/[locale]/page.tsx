@@ -64,7 +64,7 @@ export default async function Home({
 
       <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-24 sm:px-16">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+          <h2 className="text-2xl tracking-tight text-black dark:text-zinc-50">
             {t("latestTitle")}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-300">{t("latestSubtitle")}</p>
@@ -101,7 +101,7 @@ export default async function Home({
 
       <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-24 sm:px-16">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+          <h2 className="text-2xl tracking-tight text-black dark:text-zinc-50">
             {t("guidesTitle")}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-300">{t("guidesSubtitle")}</p>
