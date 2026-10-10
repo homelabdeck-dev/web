@@ -35,7 +35,11 @@ export async function generateMetadata({
       description,
       url: localeUrl(locale, `/guides/${slug}`),
       publishedTime: guide.date,
+      ...(guide.image && {
+        images: [{ url: guide.image, width: 1200, height: 630, alt: isBg ? guide.titleBg : guide.titleEn }],
+      }),
     },
+    ...(guide.image && { twitter: { card: "summary_large_image" as const } }),
   };
 }
 

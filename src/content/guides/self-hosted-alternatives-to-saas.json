@@ -94,5 +94,6 @@
         "Добави reverse proxy, например Nginx Proxy Manager, и настрой бекъпи."
       ]
     }
-  ]
+  ],
+  "image": "/og/self-hosted-alternatives-to-saas.jpg"
 }

@@ -18,6 +18,8 @@ export interface Guide {
   titleBg: string;
   descriptionEn: string;
   descriptionBg: string;
+  /** Optional Open Graph image, path under /public (1200x630). */
+  image?: string;
   introEn: string[];
   introBg: string[];
   /** Comparison rows: the SaaS being replaced and the catalog app slug. */
