@@ -1,0 +1,26 @@
+{
+  "slug": "2026-09-launch-productivity",
+  "date": "2026-09-27",
+  "titleEn": "Launch batch: passwords, documents, wiki and tasks",
+  "titleBg": "Стартова група: пароли, документи, wiki и задачи",
+  "summaryEn": "Vaultwarden, Paperless-ngx, Wiki.js and Vikunja: self-hosted tools to organise your passwords, paperwork, knowledge and to-dos.",
+  "summaryBg": "Vaultwarden, Paperless-ngx, Wiki.js и Vikunja: self-hosted инструменти за пароли, документи, знания и задачи.",
+  "bodyEn": [
+    "Part of the launch batch covers everyday productivity. Each of these apps replaces a popular cloud service with something you fully control, and each has been tested in our homelab with real screenshots.",
+    "Vaultwarden is a lightweight, Bitwarden-compatible password vault that needs about 128 MB of RAM. Paperless-ngx scans, OCRs and archives your paperwork with full-text search, so finding an old invoice takes seconds.",
+    "Wiki.js is a modern wiki with a polished markdown editor, a good fit for documenting your own homelab. Vikunja is a to-do app with lists, Kanban, Gantt and CalDAV sync for people who want task management without a subscription.",
+    "Paperless-ngx, Wiki.js and Vikunja use PostgreSQL, while Vaultwarden gets by with SQLite. Check each entry for the exact requirements before deploying."
+  ],
+  "bodyBg": [
+    "Част от стартовата група покрива ежедневната продуктивност. Всяко от тези приложения заменя популярна облачна услуга с нещо, което контролираш изцяло, и всяко е тествано в нашия homelab с реални снимки.",
+    "Vaultwarden е лек трезор за пароли, съвместим с Bitwarden, и му трябват около 128 MB RAM. Paperless-ngx сканира, разпознава (OCR) и архивира документите ти с пълнотекстово търсене, така че старата фактура се намира за секунди.",
+    "Wiki.js е модерна wiki с изчистен markdown редактор, подходяща за документиране на собствения ти homelab. Vikunja е приложение за задачи със списъци, Kanban, Gantt и CalDAV синхронизация за хора, които искат управление на задачи без абонамент.",
+    "Paperless-ngx, Wiki.js и Vikunja ползват PostgreSQL, а Vaultwarden се справя със SQLite. Провери всеки запис за точните изисквания, преди да инсталираш."
+  ],
+  "apps": [
+    "vaultwarden",
+    "paperless-ngx",
+    "wiki-js",
+    "vikunja"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "2026-09-launch-media-automation",
+  "date": "2026-09-27",
+  "titleEn": "Launch batch: photos, media, smart home and automation",
+  "titleBg": "Стартова група: снимки, медия, умен дом и автоматизация",
+  "summaryEn": "Immich, Jellyfin, Home Assistant and n8n: the apps that make a homelab fun, from photo backup to home automation.",
+  "summaryBg": "Immich, Jellyfin, Home Assistant и n8n: приложенията, които правят homelab-а забавен, от бекъп на снимки до домашна автоматизация.",
+  "bodyEn": [
+    "The third part of the launch batch is about media and automation, the reasons many people start a homelab in the first place.",
+    "Immich is a self-hosted Google Photos replacement with AI search and mobile backup, and it is the hungriest app of the group at about 4 GB of RAM. Jellyfin is a free media server for movies, shows and music with no licence fees or tracking.",
+    "Home Assistant keeps your smart home local and privacy-first with more than 1000 integrations. n8n connects apps and services with visual workflows and custom code; note that its Sustainable Use License is source-available, not classic open source.",
+    "Every entry lists the license, architecture support and a realistic resource footprint so you can plan your hardware."
+  ],
+  "bodyBg": [
+    "Третата част от стартовата група е за медия и автоматизация, причините много хора изобщо да започнат homelab.",
+    "Immich е self-hosted алтернатива на Google Photos с AI търсене и мобилен бекъп и е най-гладното приложение в групата с около 4 GB RAM. Jellyfin е безплатен медиен сървър за филми, сериали и музика без лицензни такси и проследяване.",
+    "Home Assistant държи умния ти дом локален и ориентиран към поверителността, с над 1000 интеграции. n8n свързва приложения и услуги с визуални работни процеси и собствен код; имай предвид, че лицензът му Sustainable Use е source-available, а не класически open source.",
+    "Всеки запис показва лиценза, поддържаните архитектури и реалистично потребление на ресурси, за да планираш хардуера си."
+  ],
+  "apps": [
+    "immich",
+    "jellyfin",
+    "home-assistant",
+    "n8n"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "2026-09-cloud-git-rss",
+  "date": "2026-09-29",
+  "titleEn": "CasaOS, Gitea and FreshRSS join the directory",
+  "titleBg": "CasaOS, Gitea и FreshRSS влизат в директорията",
+  "summaryEn": "A personal cloud OS, a lightweight Git service and a fast RSS reader: three more tested self-hosted apps.",
+  "summaryBg": "Персонална cloud OS, лека Git услуга и бърз RSS четец: още три тествани self-hosted приложения.",
+  "bodyEn": [
+    "Right after launch we added three more apps, each with a full Proof-of-Work gallery from our homelab.",
+    "CasaOS is an open-source personal cloud OS built on top of Docker, a friendly starting point if you want an app-store style home server. Gitea is a lightweight self-hosted Git service with built-in CI/CD that runs comfortably on 512 MB of RAM.",
+    "FreshRSS is a fast, self-hosted RSS reader that handles thousands of feeds with only 256 MB of RAM and a SQLite database.",
+    "All three are easy to deploy with the docker-compose.yml shown on their pages."
+  ],
+  "bodyBg": [
+    "Веднага след старта добавихме още три приложения, всяко с пълна Proof-of-Work галерия от нашия homelab.",
+    "CasaOS е open-source персонална cloud OS върху Docker, удобна отправна точка, ако искаш домашен сървър в стил app store. Gitea е лека self-hosted Git услуга с вградено CI/CD, която върви спокойно с 512 MB RAM.",
+    "FreshRSS е бърз, self-hosted RSS четец, който обработва хиляди емисии само с 256 MB RAM и SQLite база данни.",
+    "И трите се инсталират лесно с docker-compose.yml от страниците им."
+  ],
+  "apps": [
+    "casaos",
+    "gitea",
+    "freshrss"
+  ]
+}

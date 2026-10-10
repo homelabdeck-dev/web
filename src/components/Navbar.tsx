@@ -28,6 +28,12 @@ export default async function Navbar({ locale }: { locale: string }) {
           >
             {t("apps")}
           </Link>
+          <Link
+            href="/updates"
+            className="text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent"
+          >
+            {t("updates")}
+          </Link>
           <ThemeToggle />
         </nav>
       </div>

@@ -1,0 +1,21 @@
+{
+  "slug": "2026-w41",
+  "date": "2026-10-10",
+  "titleEn": "Week 41: reverse proxy, audiobooks, notes and voice conversion",
+  "titleBg": "Седмица 41: reverse proxy, аудиокниги, бележки и гласова конверсия",
+  "summaryEn": "Four new self-hosted apps with real Proof-of-Work screenshots: Nginx Proxy Manager, Audiobookshelf, Memos and Applio.",
+  "summaryBg": "Четири нови self-hosted приложения с реални Proof-of-Work снимки: Nginx Proxy Manager, Audiobookshelf, Memos и Applio.",
+  "bodyEn": [
+    "This week we added four self-hosted apps to the HomelabDeck directory, each tested in our own homelab with dashboard screenshots, a measured resource footprint and a ready-to-use docker-compose.yml.",
+    "Nginx Proxy Manager gives your homelab a friendly web UI for reverse proxying and free Let's Encrypt SSL certificates, so you can reach services by name instead of IP and port. Audiobookshelf is a self-hosted audiobook and podcast server with mobile apps that remembers your progress across devices.",
+    "Memos is a lightweight, privacy-first note-taking tool with a quick-capture timeline that runs comfortably on 256 MB of RAM. Applio is the heavy hitter of the week: train your own RVC voice model and convert audio on your own GPU instead of paying for a cloud service.",
+    "Every entry lists license, architecture support, database requirements and what to expect from the resource footprint, so you can decide whether an app fits your hardware before you deploy it."
+  ],
+  "bodyBg": [
+    "Тази седмица добавихме четири self-hosted приложения в директорията на HomelabDeck. Всяко е тествано в нашия homelab и има снимки от интерфейса, измерено потребление на ресурси и готов docker-compose.yml.",
+    "Nginx Proxy Manager дава на homelab-а ти удобен уеб интерфейс за reverse proxy и безплатни SSL сертификати от Let's Encrypt, така че достъпваш услугите по име, а не по IP и порт. Audiobookshelf е self-hosted сървър за аудиокниги и подкасти с мобилни приложения, който пази прогреса ти между устройствата.",
+    "Memos е лека бележник услуга с акцент върху поверителността и времева лента за бързо записване, която работи спокойно с 256 MB RAM. Applio е тежката категория тази седмица: обучи собствен RVC гласов модел и конвертирай аудио на своя видеокарта, вместо да плащаш за облачна услуга.",
+    "Всеки запис показва лиценз, поддържани архитектури, изисквания към базата данни и очаквано потребление на ресурси, за да прецениш дали приложението пасва на хардуера ти, преди да го инсталираш."
+  ],
+  "apps": ["nginx-proxy-manager", "audiobookshelf", "memos", "applio"]
+}

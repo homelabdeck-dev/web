@@ -7,6 +7,7 @@
   "nav": {
     "home": "Home",
     "apps": "Apps",
+    "updates": "Updates",
     "themeDark": "Switch to dark theme",
     "themeLight": "Switch to light theme"
   },
@@ -19,7 +20,10 @@
     "statsCategories": "Categories",
     "statsLanguages": "Languages",
     "subscribePlaceholder": "Enter your email to subscribe",
-    "subscribeButton": "Subscribe"
+    "subscribeButton": "Subscribe",
+    "latestTitle": "Latest content",
+    "latestSubtitle": "Recently added and updated apps. New picks every week.",
+    "latestReadMore": "Read the full weekly note"
   },
   "apps": {
     "listTitle": "Self-Hosted App Directory",
@@ -38,5 +42,11 @@
     "officialRepo": "Source code",
     "backToApps": "Back to all apps",
     "close": "Close"
+  },
+  "updates": {
+    "listTitle": "Weekly Updates",
+    "listSubtitle": "Every week we add new self-hosted apps with real Proof-of-Work. Here is what is new.",
+    "back": "All updates",
+    "addedApps": "Apps added this week"
   }
 }

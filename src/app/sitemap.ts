@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getAllApps } from "@/lib/apps/loader";
+import { getAllWeeklyNotes } from "@/lib/weekly";
 import { localeUrl } from "@/lib/seo";
 
 function entry(path: string, lastModified?: Date): MetadataRoute.Sitemap {
@@ -23,6 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...entry("", newest),
     ...entry("/apps", newest),
+    ...entry("/updates", newest),
+    ...getAllWeeklyNotes().flatMap((note) =>
+      entry(`/updates/${note.slug}`, new Date(note.date)),
+    ),
     ...apps.flatMap((app) =>
       entry(`/apps/${app.slug}`, new Date(app.updatedAt)),
     ),

@@ -7,6 +7,7 @@
   "nav": {
     "home": "Начало",
     "apps": "Приложения",
+    "updates": "Новини",
     "themeDark": "Тъмна тема",
     "themeLight": "Светла тема"
   },
@@ -19,7 +20,10 @@
     "statsCategories": "Категории",
     "statsLanguages": "Езици",
     "subscribePlaceholder": "Въведи имейл за абонамент",
-    "subscribeButton": "Абонирай се"
+    "subscribeButton": "Абонирай се",
+    "latestTitle": "Последно добавено",
+    "latestSubtitle": "Наскоро добавени и обновени приложения. Нови избрани всяка седмица.",
+    "latestReadMore": "Прочети цялата седмична бележка"
   },
   "apps": {
     "listTitle": "Директория на Self-Hosted приложения",
@@ -38,5 +42,11 @@
     "officialRepo": "Изходен код",
     "backToApps": "Обратно към всички приложения",
     "close": "Затвори"
+  },
+  "updates": {
+    "listTitle": "Седмични новини",
+    "listSubtitle": "Всяка седмица добавяме нови self-hosted приложения с реални Proof-of-Work снимки. Ето какво е новото.",
+    "back": "Всички новини",
+    "addedApps": "Добавени приложения тази седмица"
   }
 }

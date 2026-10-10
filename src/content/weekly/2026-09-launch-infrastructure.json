@@ -1,0 +1,26 @@
+{
+  "slug": "2026-09-launch-infrastructure",
+  "date": "2026-09-27",
+  "titleEn": "Launch batch: network, containers and monitoring",
+  "titleBg": "Стартова група: мрежа, контейнери и мониторинг",
+  "summaryEn": "Pi-hole, Portainer, Uptime Kuma and Grafana: the infrastructure basics every homelab needs, with real Proof-of-Work screenshots.",
+  "summaryBg": "Pi-hole, Portainer, Uptime Kuma и Grafana: инфраструктурната основа на всеки homelab, с реални Proof-of-Work снимки.",
+  "bodyEn": [
+    "HomelabDeck launched with a first batch of apps for the foundation of a homelab. All of them were installed and tested in our own LXC containers, and each entry shows dashboard screenshots, measured resource usage and a ready-to-use docker-compose.yml.",
+    "Pi-hole blocks ads and trackers for the whole network through DNS, so every device at home benefits without installing anything. Portainer is a web UI for managing Docker and Kubernetes without living in the command line, and it runs on only 256 MB of RAM.",
+    "Uptime Kuma watches your services and sends instant alerts when something goes down, and it can publish a public status page. Grafana turns metrics from almost any data source into dashboards and alerts, which makes it the natural companion for a monitoring stack.",
+    "Together these four give you network-wide filtering, container management and visibility into what is running, all self-hosted and free."
+  ],
+  "bodyBg": [
+    "HomelabDeck стартира с първа група приложения за основата на един homelab. Всички са инсталирани и тествани в наши LXC контейнери, а всеки запис показва снимки от интерфейса, измерено потребление на ресурси и готов docker-compose.yml.",
+    "Pi-hole блокира реклами и тракери за цялата мрежа чрез DNS, така че всяко устройство вкъщи печели, без да инсталира нищо. Portainer е уеб интерфейс за управление на Docker и Kubernetes без постоянна работа в командния ред и тръгва само с 256 MB RAM.",
+    "Uptime Kuma следи услугите ти и праща мигновени известия, когато нещо спре, и може да публикува публична статус страница. Grafana превръща метрики от почти всеки източник в табла и аларми и е естествен партньор на мониторинг стека.",
+    "Заедно тези четири ти дават филтриране на цялата мрежа, управление на контейнери и видимост какво работи, всичко self-hosted и безплатно."
+  ],
+  "apps": [
+    "pi-hole",
+    "portainer",
+    "uptime-kuma",
+    "grafana"
+  ]
+}
