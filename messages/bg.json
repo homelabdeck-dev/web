@@ -17,7 +17,9 @@
     "cta": "Разгледай приложенията",
     "statsApps": "Каталогизирани приложения",
     "statsCategories": "Категории",
-    "statsLanguages": "Езици"
+    "statsLanguages": "Езици",
+    "subscribePlaceholder": "Въведи имейл за абонамент",
+    "subscribeButton": "Абонирай се"
   },
   "apps": {
     "listTitle": "Директория на Self-Hosted приложения",

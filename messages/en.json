@@ -17,7 +17,9 @@
     "cta": "Browse apps",
     "statsApps": "Cataloged apps",
     "statsCategories": "Categories",
-    "statsLanguages": "Languages"
+    "statsLanguages": "Languages",
+    "subscribePlaceholder": "Enter your email to subscribe",
+    "subscribeButton": "Subscribe"
   },
   "apps": {
     "listTitle": "Self-Hosted App Directory",

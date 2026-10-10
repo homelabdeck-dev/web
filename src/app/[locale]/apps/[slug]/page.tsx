@@ -118,7 +118,7 @@ export default async function AppDetailPage({
           <p className="text-zinc-700 dark:text-zinc-300">{description}</p>
         </div>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900 p-6">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6">
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div>
               <dt className="text-zinc-500 dark:text-zinc-400">
@@ -169,7 +169,7 @@ export default async function AppDetailPage({
           </div>
         </section>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900 p-6">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6">
           <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("compatibility")}
           </h2>
@@ -224,7 +224,7 @@ export default async function AppDetailPage({
           <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("deployment")}
           </h2>
-          <pre className="overflow-x-auto rounded-xl bg-black dark:bg-zinc-900 p-4 text-sm text-zinc-100">
+          <pre className="overflow-x-auto rounded-xl bg-black dark:bg-[#20242a] p-4 text-sm text-zinc-100">
             <code>{app.dockerComposeSnippet}</code>
           </pre>
         </section>

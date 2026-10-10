@@ -1,7 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getAllApps } from "@/lib/apps/loader";
-import { categories } from "@/lib/apps/categories";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -26,8 +24,6 @@ export default async function Home({
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
-  const appCount = getAllApps().length;
-  const categoryCount = categories.length;
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 font-sans">
@@ -48,26 +44,21 @@ export default async function Home({
           {t("cta")}
         </Link>
 
-        <dl className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-accent">
-              {appCount}
-            </dt>
-            <dd className="text-sm text-zinc-600 dark:text-zinc-300">{t("statsApps")}</dd>
-          </div>
-          <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-accent">
-              {categoryCount}
-            </dt>
-            <dd className="text-sm text-zinc-600 dark:text-zinc-300">{t("statsCategories")}</dd>
-          </div>
-          <div className="flex flex-col items-center">
-            <dt className="text-3xl font-semibold tracking-tight text-accent">
-              2
-            </dt>
-            <dd className="text-sm text-zinc-600 dark:text-zinc-300">{t("statsLanguages")}</dd>
-          </div>
-        </dl>
+        <form className="mt-10 flex w-full max-w-md flex-col gap-3 sm:flex-row">
+          <input
+            type="email"
+            name="email"
+            placeholder={t("subscribePlaceholder")}
+            aria-label={t("subscribePlaceholder")}
+            className="h-12 flex-1 rounded-full border border-black/[.08] bg-white px-5 text-black placeholder:text-zinc-500 focus:border-accent focus:outline-none dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-50 dark:placeholder:text-zinc-400"
+          />
+          <button
+            type="button"
+            className="h-12 rounded-full bg-accent px-6 font-medium text-white transition-colors hover:bg-accent-hover"
+          >
+            {t("subscribeButton")}
+          </button>
+        </form>
       </section>
     </div>
   );

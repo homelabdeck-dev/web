@@ -62,7 +62,7 @@ export default async function AppsPage({
               <li key={app.slug}>
                 <Link
                   href={`/apps/${app.slug}`}
-                  className="flex flex-col gap-1 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900 p-6 transition-colors hover:border-accent/40"
+                  className="flex flex-col gap-1 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6 transition-colors hover:border-accent/40"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <h2 className="text-xl font-medium text-black dark:text-zinc-50">

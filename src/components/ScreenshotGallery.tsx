@@ -36,7 +36,7 @@ export default function ScreenshotGallery({
         {screenshots.map((shot) => (
           <li
             key={shot.filename}
-            className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900"
+            className="flex flex-col gap-2 overflow-hidden rounded-lg border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a]"
           >
             <button
               type="button"
