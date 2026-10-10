@@ -36,7 +36,7 @@ export default async function UpdatesPage({
   const notes = getAllWeeklyNotes();
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 font-sans">
+    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">

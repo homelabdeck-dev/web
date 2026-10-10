@@ -71,7 +71,7 @@ export default async function UpdateDetailPage({
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 font-sans">
+    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

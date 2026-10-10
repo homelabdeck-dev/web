@@ -28,11 +28,10 @@ export default async function Home({
 
   const t = await getTranslations("home");
   const isBg = locale === "bg";
-  const note = getAllWeeklyNotes()[0];
-  const noteApps = note.apps.flatMap((slug) => getAppBySlug(slug) ?? []);
+  const notes = getAllWeeklyNotes();
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 font-sans">
+    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
       <section className="flex flex-col items-center justify-center gap-6 px-6 py-24 text-center sm:px-16 sm:py-32">
         <span className="rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent-hover">
           {t("eyebrow")}
@@ -68,30 +67,34 @@ export default async function Home({
           </h2>
           <p className="text-zinc-600 dark:text-zinc-300">{t("latestSubtitle")}</p>
         </div>
-        <div className="flex flex-col gap-2">
-          <time className="text-sm text-zinc-500 dark:text-zinc-400" dateTime={note.date}>
-            {note.date}
-          </time>
-          <h3 className="text-xl font-medium text-black dark:text-zinc-50">
-            {isBg ? note.titleBg : note.titleEn}
-          </h3>
-          <p className="text-zinc-600 dark:text-zinc-300">
-            {isBg ? note.summaryBg : note.summaryEn}
-          </p>
-        </div>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {noteApps.map((app) => (
-            <li key={app.slug}>
-              <AppCard app={app} locale={locale} />
-            </li>
-          ))}
-        </ul>
-        <Link
-          href={`/updates/${note.slug}`}
-          className="self-start text-sm font-medium text-accent transition-colors hover:text-accent-hover"
-        >
-          {t("latestReadMore")} →
-        </Link>
+        {notes.map((note) => (
+          <article key={note.slug} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <time className="text-sm text-zinc-500 dark:text-zinc-400" dateTime={note.date}>
+                {note.date}
+              </time>
+              <h3 className="text-xl font-medium text-black dark:text-zinc-50">
+                {isBg ? note.titleBg : note.titleEn}
+              </h3>
+              <p className="text-zinc-600 dark:text-zinc-300">
+                {isBg ? note.summaryBg : note.summaryEn}
+              </p>
+            </div>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {note.apps.flatMap((slug) => getAppBySlug(slug) ?? []).map((app) => (
+                <li key={app.slug}>
+                  <AppCard app={app} locale={locale} />
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`/updates/${note.slug}`}
+              className="self-start text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+            >
+              {t("latestReadMore")} →
+            </Link>
+          </article>
+        ))}
       </section>
     </div>
   );
