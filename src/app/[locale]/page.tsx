@@ -32,7 +32,7 @@ export default async function Home({
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
-      <section className="flex flex-col items-center justify-center gap-6 px-6 py-24 text-center sm:px-16 sm:py-32">
+      <section className="flex flex-col items-center justify-center gap-6 px-6 pb-16 pt-10 text-center sm:px-16 sm:pb-20 sm:pt-14">
         <span className="rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent-hover">
           {t("eyebrow")}
         </span>
@@ -49,7 +49,7 @@ export default async function Home({
             name="email"
             placeholder={t("subscribePlaceholder")}
             aria-label={t("subscribePlaceholder")}
-            className="h-12 w-full flex-1 rounded-full border border-black/[.08] bg-white px-5 text-black placeholder:text-zinc-500 focus:border-accent focus:outline-none dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-50 dark:placeholder:text-zinc-400"
+            className="h-12 w-full shrink-0 rounded-full sm:flex-1 border border-black/[.08] bg-white px-5 text-black placeholder:text-zinc-500 focus:border-accent focus:outline-none dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-50 dark:placeholder:text-zinc-400"
           />
           <button
             type="button"
