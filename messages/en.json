@@ -23,7 +23,9 @@
     "subscribeButton": "Subscribe",
     "latestTitle": "Latest content",
     "latestSubtitle": "Every weekly note with the apps we added, newest first.",
-    "latestReadMore": "Read the full weekly note"
+    "latestReadMore": "Read the full weekly note",
+    "guidesTitle": "Guides",
+    "guidesSubtitle": "Longer reads to help you pick and run the right apps."
   },
   "apps": {
     "listTitle": "Self-Hosted App Directory",
@@ -48,5 +50,20 @@
     "listSubtitle": "Every week we add new self-hosted apps with real Proof-of-Work. Here is what is new.",
     "back": "All updates",
     "addedApps": "Apps added this week"
+  },
+  "guides": {
+    "listTitle": "Guides",
+    "listSubtitle": "In-depth guides to self-hosting, with real Proof-of-Work from our homelab.",
+    "back": "All guides",
+    "comparison": "Quick comparison",
+    "colInstead": "Instead of",
+    "colSelfHost": "Self-host",
+    "colRam": "RAM",
+    "colLicense": "License",
+    "ramNote": "RAM figures are catalog estimates from our tests.",
+    "ctaApps": "Browse all apps",
+    "ctaUpdates": "Read the weekly notes",
+    "homeTitle": "Guides",
+    "homeSubtitle": "Longer reads to help you pick and run the right apps."
   }
 }

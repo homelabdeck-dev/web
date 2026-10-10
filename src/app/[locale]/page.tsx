@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllWeeklyNotes } from "@/lib/weekly";
+import { getAllGuides } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -29,6 +30,7 @@ export default async function Home({
   const t = await getTranslations("home");
   const isBg = locale === "bg";
   const notes = getAllWeeklyNotes();
+  const guides = getAllGuides();
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
@@ -95,6 +97,32 @@ export default async function Home({
             </Link>
           </article>
         ))}
+      </section>
+
+      <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-24 sm:px-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+            {t("guidesTitle")}
+          </h2>
+          <p className="text-zinc-600 dark:text-zinc-300">{t("guidesSubtitle")}</p>
+        </div>
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {guides.map((guide) => (
+            <li key={guide.slug}>
+              <Link
+                href={`/guides/${guide.slug}`}
+                className="flex h-full flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-5 transition-colors hover:border-accent/40 dark:border-white/[.12] dark:bg-[#20242a]"
+              >
+                <h3 className="text-lg font-medium text-black dark:text-zinc-50">
+                  {isBg ? guide.titleBg : guide.titleEn}
+                </h3>
+                <p className="text-sm text-zinc-600 dark:text-zinc-300">
+                  {isBg ? guide.descriptionBg : guide.descriptionEn}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

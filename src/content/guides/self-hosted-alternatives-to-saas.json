@@ -1,0 +1,98 @@
+{
+  "slug": "self-hosted-alternatives-to-saas",
+  "date": "2026-10-10",
+  "titleEn": "Self-Hosted Alternatives to Popular SaaS Apps (Tested in a Real Homelab)",
+  "titleBg": "Self-hosted алтернативи на популярни SaaS приложения (тествани в реален homelab)",
+  "descriptionEn": "Replace Google Photos, Plex, Todoist, Feedly and more with free self-hosted apps. Real screenshots, RAM needs and docker-compose for each, tested in a homelab.",
+  "descriptionBg": "Замени Google Photos, Plex, Todoist, Feedly и още с безплатни self-hosted приложения. Реални снимки, нужна RAM и docker-compose за всяко, тествани в homelab.",
+  "introEn": [
+    "Subscriptions add up, and your photos, passwords and documents live on someone else's servers. Self-hosting gives that control back, but most \"best of\" lists copy each other and nobody shows the apps actually running.",
+    "Every app below was installed and tested in our own homelab. Each page on HomelabDeck has dashboard screenshots, a measured RAM footprint and a ready-to-use docker-compose.yml, so you can judge an app before you deploy it."
+  ],
+  "introBg": [
+    "Абонаментите се трупат, а снимките, паролите и документите ти живеят на чужди сървъри. Self-hosting връща контрола, но повечето класации \"най-добри\" се преписват една от друга и никой не показва приложенията реално да работят.",
+    "Всяко приложение по-долу е инсталирано и тествано в нашия собствен homelab. Всяка страница в HomelabDeck има снимки от интерфейса, измерено потребление на RAM и готов docker-compose.yml, за да прецениш приложението, преди да го инсталираш."
+  ],
+  "rows": [
+    {
+      "insteadOf": "Google Photos",
+      "app": "immich"
+    },
+    {
+      "insteadOf": "Plex",
+      "app": "jellyfin"
+    },
+    {
+      "insteadOf": "Bitwarden Cloud",
+      "app": "vaultwarden"
+    },
+    {
+      "insteadOf": "Todoist / Trello",
+      "app": "vikunja"
+    },
+    {
+      "insteadOf": "Feedly",
+      "app": "freshrss"
+    },
+    {
+      "insteadOf": "GitHub (private repos, CI)",
+      "app": "gitea"
+    },
+    {
+      "insteadOf": "UptimeRobot / StatusCake",
+      "app": "uptime-kuma"
+    },
+    {
+      "insteadOf": "Zapier / IFTTT",
+      "app": "n8n"
+    },
+    {
+      "insteadOf": "Notion / Confluence (wiki)",
+      "app": "wiki-js"
+    },
+    {
+      "insteadOf": "Google Keep",
+      "app": "memos"
+    },
+    {
+      "insteadOf": "Audible (your own files)",
+      "app": "audiobookshelf"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "list",
+      "headingEn": "Honest caveats",
+      "headingBg": "Честни уговорки",
+      "en": [
+        "RAM numbers are catalog estimates from our tests. Real usage grows with library size and number of users.",
+        "Immich's machine-learning container is the heaviest part, and Jellyfin transcoding needs a capable CPU or GPU.",
+        "n8n uses the Sustainable Use License: it is source-available, not classic open source.",
+        "Self-hosting means you own the backups and the updates."
+      ],
+      "bg": [
+        "Числата за RAM са приблизителни оценки от нашите тестове. Реалното потребление расте с размера на библиотеката и броя потребители.",
+        "Контейнерът за машинно обучение на Immich е най-тежката част, а транскодирането в Jellyfin изисква силен процесор или видеокарта.",
+        "n8n ползва Sustainable Use License: кодът е достъпен, но не е класически open source.",
+        "Self-hosting означава, че ти отговаряш за бекъпите и за обновяванията."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "How to start",
+      "headingBg": "Как да започнеш",
+      "en": [
+        "Pick one app that replaces something you pay for today.",
+        "Run it in a small LXC container or on a Docker host.",
+        "Copy the docker-compose.yml from its HomelabDeck page.",
+        "Add a reverse proxy such as Nginx Proxy Manager, and set up backups."
+      ],
+      "bg": [
+        "Избери едно приложение, което заменя нещо, за което плащаш днес.",
+        "Пусни го в малък LXC контейнер или на Docker хост.",
+        "Копирай docker-compose.yml от страницата му в HomelabDeck.",
+        "Добави reverse proxy, например Nginx Proxy Manager, и настрой бекъпи."
+      ]
+    }
+  ]
+}
