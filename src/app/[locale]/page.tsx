@@ -38,7 +38,7 @@ export default async function Home({
         <span className="rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent-hover">
           {t("eyebrow")}
         </span>
-        <h1 className="max-w-[1080px] text-4xl tracking-tight text-black dark:text-zinc-50 sm:text-[72px] sm:leading-[1.1]">
+        <h1 className="max-w-[1080px] font-medium tracking-tight text-balance text-black dark:text-zinc-50 text-3xl sm:text-4xl md:text-5xl md:font-normal lg:text-6xl xl:text-7xl">
           {t("heading")}
         </h1>
         <p className="max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
