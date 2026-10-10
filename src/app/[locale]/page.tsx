@@ -34,11 +34,11 @@ export default async function Home({
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
-      <section className="flex flex-col items-center justify-center gap-6 px-6 pb-16 pt-10 text-center sm:px-16 sm:pb-20 sm:pt-14">
+      <section className="mx-auto flex w-full max-w-[1080px] flex-col items-center justify-center gap-6 px-6 pb-16 pt-10 text-center sm:px-16 sm:pb-20 sm:pt-14">
         <span className="rounded-full bg-accent/10 px-4 py-1 text-sm font-medium text-accent-hover">
           {t("eyebrow")}
         </span>
-        <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-black dark:text-zinc-50 sm:text-5xl">
+        <h1 className="max-w-[1080px] text-4xl font-semibold tracking-tight text-black dark:text-zinc-50 sm:text-[72px] sm:leading-[1.1]">
           {t("heading")}
         </h1>
         <p className="max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
