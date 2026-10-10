@@ -6,7 +6,9 @@
   },
   "nav": {
     "home": "Начало",
-    "apps": "Приложения"
+    "apps": "Приложения",
+    "themeDark": "Тъмна тема",
+    "themeLight": "Светла тема"
   },
   "home": {
     "eyebrow": "Директория на self-hosted софтуер",

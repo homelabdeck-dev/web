@@ -88,7 +88,7 @@ export default async function AppDetailPage({
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-zinc-950 font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -98,51 +98,51 @@ export default async function AppDetailPage({
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <Link
           href="/apps"
-          className="text-sm text-zinc-600 underline transition-colors hover:text-accent"
+          className="text-sm text-zinc-600 dark:text-zinc-300 underline transition-colors hover:text-accent"
         >
           ← {t("backToApps")}
         </Link>
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight text-black">
+            <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
               {app.name}
             </h1>
             <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">
               {categoryLabel}
             </span>
           </div>
-          <p className="text-lg text-zinc-600">
+          <p className="text-lg text-zinc-600 dark:text-zinc-300">
             {tagline}
           </p>
-          <p className="text-zinc-700">{description}</p>
+          <p className="text-zinc-700 dark:text-zinc-300">{description}</p>
         </div>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900 p-6">
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("license")}
               </dt>
-              <dd className="font-medium text-black">
+              <dd className="font-medium text-black dark:text-zinc-50">
                 {app.license}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("githubStars")}
               </dt>
-              <dd className="font-medium text-black">
+              <dd className="font-medium text-black dark:text-zinc-50">
                 {app.githubStars.toLocaleString(locale)}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("officialWebsite")}
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline transition-colors hover:text-accent"
+                  className="font-medium text-black dark:text-zinc-50 underline transition-colors hover:text-accent"
                   href={app.officialWebsiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -152,12 +152,12 @@ export default async function AppDetailPage({
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("officialRepo")}
               </dt>
               <dd>
                 <a
-                  className="font-medium text-black underline transition-colors hover:text-accent"
+                  className="font-medium text-black dark:text-zinc-50 underline transition-colors hover:text-accent"
                   href={app.officialRepoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -169,36 +169,36 @@ export default async function AppDetailPage({
           </div>
         </section>
 
-        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6">
-          <h2 className="text-lg font-medium text-black">
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-zinc-900 p-6">
+          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("compatibility")}
           </h2>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("architectures")}
               </dt>
-              <dd className="font-medium text-black">
+              <dd className="font-medium text-black dark:text-zinc-50">
                 {app.compatibility.architectures.join(", ")}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("database")}
               </dt>
-              <dd className="font-medium text-black">
+              <dd className="font-medium text-black dark:text-zinc-50">
                 {app.compatibility.database.kind}
               </dd>
             </div>
             <div className="max-w-md">
-              <dt className="text-zinc-500">
+              <dt className="text-zinc-500 dark:text-zinc-400">
                 {t("resourceFootprint")}
               </dt>
-              <dd className="font-medium text-black">
+              <dd className="font-medium text-black dark:text-zinc-50">
                 {app.compatibility.resourceFootprint.ramMb} MB RAM ·{" "}
                 {app.compatibility.resourceFootprint.cpuCores} CPU
               </dd>
-              <dd className="text-zinc-600">
+              <dd className="text-zinc-600 dark:text-zinc-300">
                 {app.compatibility.resourceFootprint.notes}
               </dd>
             </div>
@@ -206,7 +206,7 @@ export default async function AppDetailPage({
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black">
+          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("gallery")}
           </h2>
           <ScreenshotGallery
@@ -221,19 +221,19 @@ export default async function AppDetailPage({
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black">
+          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("deployment")}
           </h2>
-          <pre className="overflow-x-auto rounded-xl bg-black p-4 text-sm text-zinc-100">
+          <pre className="overflow-x-auto rounded-xl bg-black dark:bg-zinc-900 p-4 text-sm text-zinc-100">
             <code>{app.dockerComposeSnippet}</code>
           </pre>
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-medium text-black">
+          <h2 className="text-lg font-medium text-black dark:text-zinc-50">
             {t("alternativeTo")}
           </h2>
-          <p className="text-zinc-700">
+          <p className="text-zinc-700 dark:text-zinc-300">
             {app.alternativeTo.join(", ")}
           </p>
         </section>

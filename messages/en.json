@@ -6,7 +6,9 @@
   },
   "nav": {
     "home": "Home",
-    "apps": "Apps"
+    "apps": "Apps",
+    "themeDark": "Switch to dark theme",
+    "themeLight": "Switch to light theme"
   },
   "home": {
     "eyebrow": "Self-hosted software directory",
