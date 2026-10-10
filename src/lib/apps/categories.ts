@@ -43,6 +43,11 @@ export const categories: Category[] = [
     labelEn: "RSS & Reading",
     labelBg: "RSS и четене",
   },
+  {
+    slug: "ai-audio",
+    labelEn: "AI & Audio",
+    labelBg: "ИИ и аудио",
+  },
 ];
 
 export function getCategoryBySlug(slug: string): Category | undefined {

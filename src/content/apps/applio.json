@@ -1,0 +1,54 @@
+{
+  "name": "Applio",
+  "slug": "applio",
+  "category": "ai-audio",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/IAHispano/Applio",
+  "officialWebsiteUrl": "https://applio.org",
+  "githubStars": 3814,
+  "updatedAt": "2026-10-10T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64"
+    ],
+    "database": {
+      "kind": "Stateless",
+      "label": "No database; voice models, datasets and training logs are stored as plain files in mounted volumes"
+    },
+    "resourceFootprint": {
+      "ramMb": 6144,
+      "cpuCores": 4,
+      "notes": "Needs an NVIDIA GPU for practical training. In our test LXC it idled at about 0.7 GB of RAM, and training a voice model on 7 minutes of audio (200 epochs, 40 kHz) finished in roughly 25 minutes on an RTX 3090 inside a 6 GB memory limit. Converting a 15-second clip takes a few seconds. The Docker image is about 17 GB, so plan for 40 GB or more of disk."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Inference",
+      "filename": "dashboard.webp",
+      "altEn": "Applio Inference tab with a trained voice model and index file selected and an empty area to drop in the audio to convert",
+      "altBg": "Раздел Inference на Applio с избран обучен гласов модел и индексен файл и празна зона за качване на аудиото за конвертиране"
+    },
+    {
+      "label": "Conversion",
+      "filename": "conversion.webp",
+      "altEn": "Applio after a conversion, showing the uploaded audio waveform, the Convert button and the converted audio ready to play",
+      "altBg": "Applio след конвертиране с вълновата форма на качения запис, бутона Convert и готовия конвертиран запис за възпроизвеждане"
+    },
+    {
+      "label": "Training",
+      "filename": "training.webp",
+      "altEn": "Applio Training tab with model name, 40000 Hz sampling rate, HiFi-GAN vocoder, batch size 8 and 200 total epochs",
+      "altBg": "Раздел Training на Applio с име на модел, честота 40000 Hz, вокодер HiFi-GAN, batch size 8 и общо 200 епохи"
+    }
+  ],
+  "dockerComposeSnippet": "# Needs an NVIDIA GPU, the NVIDIA driver and nvidia-container-toolkit on the host.\n# The first build downloads PyTorch with CUDA and takes several minutes (image is ~17 GB).\nservices:\n  applio:\n    build:\n      context: .\n      dockerfile_inline: |\n        FROM python:3.12-trixie\n        RUN apt-get update \\\n         && apt-get install -y --no-install-recommends git ffmpeg libportaudio2 \\\n         && rm -rf /var/lib/apt/lists/*\n        RUN git clone --depth 1 https://github.com/IAHispano/Applio.git /app\n        WORKDIR /app\n        RUN python -m venv .venv \\\n         && .venv/bin/pip install --no-cache-dir --upgrade pip python-ffmpeg \\\n         && .venv/bin/pip install --no-cache-dir -r requirements.txt \\\n         && .venv/bin/pip install --no-cache-dir --no-deps torchvision==0.26.0 pedalboard==0.9.16\n        ENV PATH=\"/app/.venv/bin:$PATH\" \\\n            LD_LIBRARY_PATH=\"/app/.venv/lib/python3.12/site-packages/nvidia/cu13/lib\"\n        EXPOSE 6969\n        ENTRYPOINT [\"python3\"]\n        CMD [\"app.py\", \"--server-name\", \"0.0.0.0\", \"--port\", \"6969\"]\n    container_name: applio\n    restart: unless-stopped\n    runtime: nvidia\n    environment:\n      - NVIDIA_VISIBLE_DEVICES=all\n      - NVIDIA_DRIVER_CAPABILITIES=compute,utility\n    shm_size: 2gb\n    ports:\n      - \"6969:6969\"\n    volumes:\n      - ./applio-logs:/app/logs\n      - ./applio-models:/app/rvc/models\n",
+  "alternativeTo": [
+    "ElevenLabs",
+    "Respeecher",
+    "Voicemod"
+  ],
+  "descriptionEn": "Applio is a voice conversion tool built on RVC (Retrieval-based Voice Conversion). You can train a voice model from a few minutes of clean speech, then re-voice any recording so it sounds like that model, entirely on your own GPU and without sending audio to a cloud service. The web interface covers training, single and batch conversion, text-to-speech with voice conversion, model blending and real-time conversion. Use it with your own voice or with the clear permission of the person whose voice you are modelling. It is a self-hosted alternative to paid voice-changer and voice-cloning services.",
+  "descriptionBg": "Applio е инструмент за преобразуване на глас, базиран на RVC (Retrieval-based Voice Conversion). Можеш да обучиш гласов модел от няколко минути чиста реч и после да преозвучиш всеки запис така, че да звучи като този модел, изцяло на твоя видеокарта и без да пращаш аудио в облака. Уеб интерфейсът включва обучение, конвертиране на единичен и пакетен запис, синтез на реч с конверсия на гласа, смесване на модели и конвертиране в реално време. Ползвай го със собствения си глас или с изричното съгласие на човека, чийто глас моделираш. Това е самостоятелно хоствана алтернатива на платените услуги за промяна и клониране на глас.",
+  "taglineEn": "Train your own voice model and convert audio on your own GPU.",
+  "taglineBg": "Обучи собствен гласов модел и конвертирай аудио на своя видеокарта."
+}
