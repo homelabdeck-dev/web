@@ -107,6 +107,7 @@ export default async function GuideDetailPage({
           ))}
         </article>
 
+        {rows.length > 0 && (
         <section className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold text-black dark:text-zinc-50">
             {t("comparison")}
@@ -150,6 +151,7 @@ export default async function GuideDetailPage({
           </div>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("ramNote")}</p>
         </section>
+        )}
 
         {guide.sections.map((section) => {
           const items = isBg ? section.bg : section.en;
@@ -159,15 +161,23 @@ export default async function GuideDetailPage({
               <h2 className="text-2xl font-semibold text-black dark:text-zinc-50">
                 {isBg ? section.headingBg : section.headingEn}
               </h2>
-              <ListTag
-                className={`flex flex-col gap-2 pl-6 text-lg leading-8 text-zinc-600 dark:text-zinc-300 ${
-                  section.kind === "steps" ? "list-decimal" : "list-disc"
-                }`}
-              >
-                {items.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ListTag>
+              {section.kind === "text" ? (
+                items.map((item, i) => (
+                  <p key={i} className="text-lg leading-8 text-zinc-600 dark:text-zinc-300">
+                    {item}
+                  </p>
+                ))
+              ) : (
+                <ListTag
+                  className={`flex flex-col gap-2 pl-6 text-lg leading-8 text-zinc-600 dark:text-zinc-300 ${
+                    section.kind === "steps" ? "list-decimal" : "list-disc"
+                  }`}
+                >
+                  {items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ListTag>
+              )}
             </section>
           );
         })}

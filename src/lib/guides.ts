@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 export interface GuideSection {
-  kind: "list" | "steps";
+  kind: "list" | "steps" | "text";
   headingEn: string;
   headingBg: string;
   en: string[];
@@ -23,7 +23,7 @@ export interface Guide {
   introEn: string[];
   introBg: string[];
   /** Comparison rows: the SaaS being replaced and the catalog app slug. */
-  rows: { insteadOf: string; app: string }[];
+  rows: { insteadOf: string; app: string }[]; // may be empty (no table)
   sections: GuideSection[];
 }
 

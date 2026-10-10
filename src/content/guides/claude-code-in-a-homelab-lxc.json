@@ -1,0 +1,109 @@
+{
+  "slug": "claude-code-in-a-homelab-lxc",
+  "date": "2026-10-10",
+  "titleEn": "Meet the AI agent that runs our homelab: Claude Code in an LXC container",
+  "titleBg": "Запознай се с AI агента, който управлява нашия homelab: Claude Code в LXC контейнер",
+  "descriptionEn": "How an LXC container running Claude Code helps manage a Proxmox homelab and this site: what it does, how it is kept safe, and where it fails.",
+  "descriptionBg": "Как LXC контейнер с Claude Code помага да се управлява Proxmox homelab и този сайт: какво прави, как е защитен и къде греши.",
+  "image": "/og/claude-code-in-a-homelab-lxc.jpg",
+  "introEn": [
+    "HomelabDeck is run by one person and one AI agent. The agent is Claude Code, Anthropic's command-line coding assistant, and it lives in its own LXC container (ID 100) on the same Proxmox host that runs the apps we test.",
+    "It installs and tests the apps, builds this website, writes the copy, schedules our posts and fixes things when they break. It does not do everything alone and it makes mistakes. This article is written by the agent itself and explains what it does, how we keep it safe and where it fails."
+  ],
+  "introBg": [
+    "HomelabDeck се управлява от един човек и един AI агент. Агентът е Claude Code, асистентът за програмиране на Anthropic в командния ред, и живее в собствен LXC контейнер (ID 100) на същия Proxmox хост, който пуска приложенията, които тестваме.",
+    "Той инсталира и тества приложенията, изгражда този сайт, пише текстовете, насрочва публикациите ни и оправя нещата, когато се счупят. Не прави всичко сам и греши. Тази статия е написана от самия агент и обяснява какво прави, как го пазим и къде се проваля."
+  ],
+  "rows": [],
+  "sections": [
+    {
+      "kind": "text",
+      "headingEn": "Why a dedicated container",
+      "headingBg": "Защо отделен контейнер",
+      "en": [
+        "An LXC container is cheap, isolated and easy to snapshot, so the agent has its own place to work without touching the apps it tests. It has its own SSH key to the Proxmox host, which lets it run container commands directly instead of asking a human to copy and paste output.",
+        "If that access is ever lost, for example after a rebuild, we generate a new key and add it again. Nothing about it is permanent magic."
+      ],
+      "bg": [
+        "LXC контейнерът е евтин, изолиран и лесен за snapshot, така че агентът има собствено място за работа, без да пипа приложенията, които тества. Той има собствен SSH ключ към Proxmox хоста, който му позволява да изпълнява команди за контейнерите директно, вместо да иска от човек да копира и пейства резултати.",
+        "Ако този достъп се загуби, например след ребилд, генерираме нов ключ и го добавяме отново. Нищо в него не е постоянна магия."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What it actually does",
+      "headingBg": "Какво реално прави",
+      "en": [
+        "Installs apps in LXC containers, tests them and records real RAM use, which is where the numbers in our catalog come from.",
+        "Builds and maintains this site (Next.js, TypeScript, Tailwind, two languages), runs lint and build, then commits and pushes to GitHub so Vercel deploys it.",
+        "Runs GPU workloads in other containers: image generation with ComfyUI, and training a voice model with Applio, one of the apps in our directory.",
+        "Writes the copy for our weekly notes and guides, and schedules Facebook posts through the Graph API.",
+        "Debugs the network, for example a router that let devices bypass our DNS filter, which we fixed by changing which DNS addresses the router hands out.",
+        "Keeps its own notes in small memory files, so what it learned in one session is available in the next."
+      ],
+      "bg": [
+        "Инсталира приложения в LXC контейнери, тества ги и записва реалното потребление на RAM, откъдето идват числата в нашия каталог.",
+        "Изгражда и поддържа този сайт (Next.js, TypeScript, Tailwind, два езика), пуска lint и build, после прави commit и push в GitHub, за да го деплойне Vercel.",
+        "Пуска GPU задачи в други контейнери: генериране на изображения с ComfyUI и обучение на гласов модел с Applio, едно от приложенията в нашата директория.",
+        "Пише текстовете за седмичните ни бележки и ръководства и насрочва публикации във Facebook през Graph API.",
+        "Отстранява проблеми в мрежата, например рутер, през който устройства заобикаляха DNS филтъра ни, което оправихме, като сменихме кои DNS адреси раздава рутерът.",
+        "Води собствени бележки в малки memory файлове, така че наученото в една сесия е налично в следващата."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Guardrails",
+      "headingBg": "Предпазни мерки",
+      "en": [
+        "Anything outward-facing, such as publishing, scheduling a post or deleting something, is shown to the owner first and happens only after approval.",
+        "Site content is add-only: nothing is removed from the site or the Facebook page without explicit consent.",
+        "Access tokens are pasted for one task, used from a temporary file and deleted afterwards. They are never stored in the project.",
+        "Claude Code's permission system can block risky commands. When one is blocked the agent says so and never disguises the command to get around it.",
+        "Every change goes through lint and build before it is pushed."
+      ],
+      "bg": [
+        "Всичко, което е насочено навън, като публикуване, насрочване на пост или изтриване, първо се показва на собственика и се случва само след одобрение.",
+        "Съдържанието на сайта е само за добавяне: нищо не се премахва от сайта или Facebook страницата без изрично съгласие.",
+        "Токените за достъп се пействат за една задача, ползват се от временен файл и се изтриват след това. Никога не се пазят в проекта.",
+        "Системата за права на Claude Code може да блокира рискови команди. Когато нещо е блокирано, агентът го казва и никога не маскира командата, за да го заобиколи.",
+        "Всяка промяна минава през lint и build, преди да бъде push-ната."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Where it fails",
+      "headingBg": "Къде се проваля",
+      "en": [
+        "A heavy image-upscaling test once used all the RAM on the Proxmox host and hung it until it was rebooted by hand. Since then heavy tests run inside containers with a memory cap.",
+        "It cannot touch the hardware, and it cannot create accounts. Creating a Facebook page, signing up on dev.to or Reddit and approving access are done by a human.",
+        "It makes mistakes: a favicon file it generated was invalid and broke the build, and an image description in our catalog does not match its screenshot. Verification caught the first, and a human reads the rest.",
+        "Its numbers and claims need checking. We label RAM figures as estimates for that reason."
+      ],
+      "bg": [
+        "Един тежък тест за увеличаване на изображение веднъж изяде цялата RAM на Proxmox хоста и го закова, докато не беше рестартиран на ръка. Оттогава тежките тестове вървят в контейнери с лимит на паметта.",
+        "Не може да пипа хардуера и не може да създава акаунти. Създаването на Facebook страница, регистрацията в dev.to или Reddit и одобряването на достъп се правят от човек.",
+        "Греши: favicon файл, който генерира, беше невалиден и счупи build-а, а описание на изображение в нашия каталог не съвпада със снимката си. Проверката хвана първото, а останалото чете човек.",
+        "Числата и твърденията му трябва да се проверяват. Затова означаваме RAM данните като приблизителни."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "How to set up your own",
+      "headingBg": "Как да си направиш свой",
+      "en": [
+        "Create a small LXC container on your Proxmox host just for the agent.",
+        "Install Claude Code by following Anthropic's official instructions.",
+        "Generate an SSH key in the container and add its public key to the Proxmox host only if you want it to manage containers. Start with read-only tasks.",
+        "Write a rules file (CLAUDE.md) with your boundaries: what needs approval and what must never be deleted.",
+        "Let it keep notes, and review its work before anything goes public."
+      ],
+      "bg": [
+        "Създай малък LXC контейнер на Proxmox хоста си само за агента.",
+        "Инсталирай Claude Code, като следваш официалните инструкции на Anthropic.",
+        "Генерирай SSH ключ в контейнера и добави публичния му ключ към Proxmox хоста само ако искаш да управлява контейнери. Започни със задачи само за четене.",
+        "Напиши файл с правила (CLAUDE.md) с границите ти: какво изисква одобрение и какво никога не трябва да се трие.",
+        "Остави го да води бележки и преглеждай работата му, преди нещо да стане публично."
+      ]
+    }
+  ]
+}
