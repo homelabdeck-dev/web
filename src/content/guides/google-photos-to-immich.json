@@ -1,0 +1,94 @@
+{
+  "slug": "google-photos-to-immich",
+  "date": "2026-10-13",
+  "titleEn": "How to move from Google Photos to Immich: a practical migration guide",
+  "titleBg": "Как да мигрираш от Google Photos към Immich: практическо ръководство",
+  "descriptionEn": "Step by step: export your library with Google Takeout, import it into self-hosted Immich with immich-go, and keep your photos safe with real backups. Honest caveats included.",
+  "descriptionBg": "Стъпка по стъпка: експортирай библиотеката си с Google Takeout, импортирай я в self-hosted Immich с immich-go и запази снимките си с реални бекъпи. С честни ограничения.",
+  "image": "/og/google-photos-to-immich.jpg",
+  "introEn": [
+    "Immich is a self-hosted photo and video backup with mobile apps, face recognition and AI search. It is the closest free replacement for Google Photos, and you keep full ownership of your library.",
+    "This guide covers the migration only: what to prepare, how to export from Google, how to import, and what to check before you cancel anything. RAM figures are catalog estimates and the official requirements are higher, see the caveats. We have not benchmarked Immich with a GPU yet, so this guide makes no speed claims."
+  ],
+  "introBg": [
+    "Immich е self-hosted решение за архив на снимки и видео с мобилни приложения, разпознаване на лица и AI търсене. Това е най-близката безплатна замяна на Google Photos, а библиотеката остава изцяло твоя.",
+    "Това ръководство покрива само миграцията: какво да подготвиш, как да експортираш от Google, как да импортираш и какво да провериш, преди да откажеш каквото и да е. Стойностите за RAM са каталожни оценки, а официалните изисквания са по-високи, виж ограниченията. Още не сме тествали Immich с GPU, затова не твърдим нищо за скорост."
+  ],
+  "rows": [{ "insteadOf": "Google Photos", "app": "immich" }],
+  "sections": [
+    {
+      "kind": "list",
+      "headingEn": "Before you start",
+      "headingBg": "Преди да започнеш",
+      "en": [
+        "Check the official requirements: Immich currently recommends 8 GB RAM and 4 CPU cores (6 GB and 2 cores minimum). It can run on 4 GB only with machine learning disabled.",
+        "Plan storage: your Takeout export plus 10-20% for thumbnails and transcoded video. The database (usually 1-3 GB) must be on a local SSD, not a network share.",
+        "Immich recommends Docker on a normal Linux host or a full VM. Docker inside an LXC container is not recommended by the project, so a VM is the safer choice on Proxmox.",
+        "Do not cancel Google storage or delete anything from Google Photos until the checks at the end are done."
+      ],
+      "bg": [
+        "Провери официалните изисквания: Immich в момента препоръчва 8 GB RAM и 4 CPU ядра (минимум 6 GB и 2 ядра). Може да работи с 4 GB само с изключено machine learning.",
+        "Планирай мястото: твоят Takeout експорт плюс 10-20% за миниатюри и транскодирано видео. Базата данни (обикновено 1-3 GB) трябва да е на локален SSD, не на мрежов дял.",
+        "Immich препоръчва Docker на обикновен Linux хост или на пълна виртуална машина. Docker в LXC контейнер не се препоръчва от проекта, затова на Proxmox по-сигурният избор е VM.",
+        "Не отказвай Google хранилището и не трий нищо от Google Photos, докато не минеш проверките в края."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Migration steps",
+      "headingBg": "Стъпки за миграцията",
+      "en": [
+        "Install Immich with the official docker-compose.yml and .env from the Immich documentation, or use the compose file on our Immich page as a starting point. Create the admin account.",
+        "Open Google Takeout, select only Google Photos and export. Choose ZIP files and a larger archive size, then download every part.",
+        "In Immich, go to your account settings and create an API key.",
+        "Download the immich-go tool from its official releases page and follow its README for the from-google-photos command. It matches each photo with its JSON metadata so dates, locations, descriptions and albums are kept.",
+        "Import in smaller batches if your library is large, and keep the original Takeout files until the end.",
+        "Install the Immich mobile app, log in, and turn on automatic backup for the camera folders you want."
+      ],
+      "bg": [
+        "Инсталирай Immich с официалния docker-compose.yml и .env от документацията на Immich или ползвай compose файла от нашата страница за Immich като начало. Създай админ акаунта.",
+        "Отвори Google Takeout, избери само Google Photos и експортирай. Избери ZIP файлове и по-голям размер на архива, после свали всички части.",
+        "В Immich отиди в настройките на акаунта и създай API ключ.",
+        "Свали инструмента immich-go от официалната му страница с версии и следвай README за командата from-google-photos. Той свързва всяка снимка с нейния JSON с метаданни, така че датите, локациите, описанията и албумите се запазват.",
+        "Импортирай на по-малки части, ако библиотеката е голяма, и пази оригиналните Takeout файлове до края.",
+        "Инсталирай мобилното приложение на Immich, влез и включи автоматичния бекъп за папките с камера, които искаш."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What to check before you cancel Google",
+      "headingBg": "Какво да провериш, преди да откажеш Google",
+      "en": [
+        "Compare the number of photos and videos in Immich with Google Photos.",
+        "Spot-check dates, locations and a few albums, including old photos and screenshots.",
+        "Open some videos and live photos on both web and phone.",
+        "Wait for Immich background jobs (thumbnails, face recognition, search indexing) to finish before judging search quality."
+      ],
+      "bg": [
+        "Сравни броя снимки и видеа в Immich с този в Google Photos.",
+        "Провери на случаен принцип дати, локации и няколко албума, включително стари снимки и скрийншоти.",
+        "Отвори няколко видеа и live photos и в уеб, и на телефона.",
+        "Изчакай да приключат фоновите задачи на Immich (миниатюри, разпознаване на лица, индексиране за търсене), преди да оцениш качеството на търсенето."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Honest caveats",
+      "headingBg": "Честни ограничения",
+      "en": [
+        "Self-hosting means you own the backups. Immich is not a backup by itself: keep the database dump and the upload folder on a second disk and a copy somewhere else (the 3-2-1 idea).",
+        "Our catalog lists about 4 GB RAM as a comfortable baseline, but the official documentation now recommends 8 GB. Treat our figure as an estimate for a small library and plan for more.",
+        "Takeout is not perfect. Some metadata can be missing or mismatched, which is why we keep the originals and verify first.",
+        "Google Photos features such as some editing tools and shared-album behavior differ in Immich.",
+        "We have not benchmarked Immich with a GPU. A dedicated GPU is optional and can speed up machine learning jobs, but we are not publishing numbers we have not measured."
+      ],
+      "bg": [
+        "Self-hosting означава, че ти отговаряш за бекъпите. Immich сам по себе си не е бекъп: пази дъмп на базата и папката с качванията на втори диск и копие на друго място (идеята 3-2-1).",
+        "Нашият каталог показва около 4 GB RAM като комфортна база, но официалната документация вече препоръчва 8 GB. Приеми нашата стойност за оценка при малка библиотека и планирай повече.",
+        "Takeout не е перфектен. Част от метаданните може да липсват или да не съвпадат, затова пазим оригиналите и проверяваме първо.",
+        "Някои функции на Google Photos, като част от инструментите за редакция и поведението на споделените албуми, са различни в Immich.",
+        "Не сме тествали Immich с GPU. Отделна видеокарта не е задължителна и може да ускори задачите за machine learning, но не публикуваме числа, които не сме измерили."
+      ]
+    }
+  ]
+}
