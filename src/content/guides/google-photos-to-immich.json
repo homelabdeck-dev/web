@@ -8,11 +8,11 @@
   "image": "/og/google-photos-to-immich.jpg",
   "introEn": [
     "Immich is a self-hosted photo and video backup with mobile apps, face recognition and AI search. It is the closest free replacement for Google Photos, and you keep full ownership of your library.",
-    "This guide covers the migration only: what to prepare, how to export from Google, how to import, and what to check before you cancel anything. RAM figures are catalog estimates and the official requirements are higher, see the caveats. We have not benchmarked Immich with a GPU yet, so this guide makes no speed claims."
+    "This guide covers the migration only: what to prepare, how to export from Google, how to import, and what to check before you cancel anything. RAM figures follow the official requirements, not our own measurements, see the caveats. We have not benchmarked Immich with a GPU yet, so this guide makes no speed claims."
   ],
   "introBg": [
     "Immich е self-hosted решение за архив на снимки и видео с мобилни приложения, разпознаване на лица и AI търсене. Това е най-близката безплатна замяна на Google Photos, а библиотеката остава изцяло твоя.",
-    "Това ръководство покрива само миграцията: какво да подготвиш, как да експортираш от Google, как да импортираш и какво да провериш, преди да откажеш каквото и да е. Стойностите за RAM са каталожни оценки, а официалните изисквания са по-високи, виж ограниченията. Още не сме тествали Immich с GPU, затова не твърдим нищо за скорост."
+    "Това ръководство покрива само миграцията: какво да подготвиш, как да експортираш от Google, как да импортираш и какво да провериш, преди да откажеш каквото и да е. Стойностите за RAM следват официалните изисквания, а не наши измервания, виж ограниченията. Още не сме тествали Immich с GPU, затова не твърдим нищо за скорост."
   ],
   "rows": [{ "insteadOf": "Google Photos", "app": "immich" }],
   "sections": [
@@ -77,14 +77,14 @@
       "headingBg": "Честни ограничения",
       "en": [
         "Self-hosting means you own the backups. Immich is not a backup by itself: keep the database dump and the upload folder on a second disk and a copy somewhere else (the 3-2-1 idea).",
-        "Our catalog lists about 4 GB RAM as a comfortable baseline, but the official documentation now recommends 8 GB. Treat our figure as an estimate for a small library and plan for more.",
+        "Our catalog figure follows the official recommendation of 8 GB RAM. It is not our own measurement, and real usage grows with library size, so plan for more if yours is large.",
         "Takeout is not perfect. Some metadata can be missing or mismatched, which is why we keep the originals and verify first.",
         "Google Photos features such as some editing tools and shared-album behavior differ in Immich.",
         "We have not benchmarked Immich with a GPU. A dedicated GPU is optional and can speed up machine learning jobs, but we are not publishing numbers we have not measured."
       ],
       "bg": [
         "Self-hosting означава, че ти отговаряш за бекъпите. Immich сам по себе си не е бекъп: пази дъмп на базата и папката с качванията на втори диск и копие на друго място (идеята 3-2-1).",
-        "Нашият каталог показва около 4 GB RAM като комфортна база, но официалната документация вече препоръчва 8 GB. Приеми нашата стойност за оценка при малка библиотека и планирай повече.",
+        "Стойността в нашия каталог следва официалната препоръка от 8 GB RAM. Това не е наше измерване, а реалното ползване расте с размера на библиотеката, така че планирай повече при голяма.",
         "Takeout не е перфектен. Част от метаданните може да липсват или да не съвпадат, затова пазим оригиналите и проверяваме първо.",
         "Някои функции на Google Photos, като част от инструментите за редакция и поведението на споделените албуми, са различни в Immich.",
         "Не сме тествали Immich с GPU. Отделна видеокарта не е задължителна и може да ускори задачите за machine learning, но не публикуваме числа, които не сме измерили."

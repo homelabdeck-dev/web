@@ -14,9 +14,9 @@
       "label": "PostgreSQL 14+ with the pgvector/pgvecto.rs extension (bundled in the official database image)"
     },
     "resourceFootprint": {
-      "ramMb": 4096,
-      "cpuCores": 2,
-      "notes": "4 GB RAM / 2 cores is a comfortable baseline for a small library. The machine-learning container (face recognition, CLIP search) is the biggest RAM/CPU consumer and scales with library size and concurrent uploads; a dedicated GPU is optional but speeds up ML jobs significantly."
+      "ramMb": 8192,
+      "cpuCores": 4,
+      "notes": "The official documentation recommends 8 GB RAM and 4 cores (6 GB / 2 cores minimum; 4 GB only with machine learning disabled). The machine-learning container (face recognition, CLIP search) is the biggest RAM/CPU consumer and scales with library size and concurrent uploads; a dedicated GPU is optional but speeds up ML jobs significantly."
     }
   },
   "screenshots": [
