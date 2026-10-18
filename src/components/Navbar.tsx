@@ -1,20 +1,35 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
+import SidePanel from "./SidePanel";
+import { getAllApps } from "@/lib/apps/loader";
+import { categories } from "@/lib/apps/categories";
 
 export default async function Navbar({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "nav" });
   const tSite = await getTranslations({ locale, namespace: "site" });
 
+  const apps = getAllApps();
+  const panelCategories = categories
+    .map((c) => ({
+      slug: c.slug,
+      label: locale === "bg" ? c.labelBg : c.labelEn,
+      count: apps.filter((a) => a.category === c.slug).length,
+    }))
+    .filter((c) => c.count > 0);
+
   return (
     <header className="sticky top-0 z-40 border-b border-black/[.08] dark:border-white/[.12] bg-zinc-50/90 dark:bg-[#1a1a1a]/90 backdrop-blur-sm">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-6 py-4 sm:px-16">
+        <div className="flex items-center gap-3">
+        <SidePanel categories={panelCategories} />
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-black dark:text-zinc-50 transition-colors hover:text-accent"
         >
           {tSite("title")}
         </Link>
+        </div>
         <nav className="flex items-center gap-6">
           <Link
             href="/"

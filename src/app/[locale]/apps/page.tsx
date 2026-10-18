@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { Suspense } from "react";
+import AppsList, { type AppRow } from "@/components/AppsList";
 import { getAllApps } from "@/lib/apps/loader";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import { alternatesFor, localeUrl } from "@/lib/seo";
@@ -35,6 +36,16 @@ export default async function AppsPage({
   const t = await getTranslations("apps");
   const apps = getAllApps();
   const isBg = locale === "bg";
+  const rows: AppRow[] = apps.map((app) => {
+    const category = getCategoryBySlug(app.category);
+    return {
+      slug: app.slug,
+      name: app.name,
+      tagline: isBg ? app.taglineBg : app.taglineEn,
+      category: app.category,
+      categoryLabel: category ? (isBg ? category.labelBg : category.labelEn) : app.category,
+    };
+  });
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
@@ -48,38 +59,9 @@ export default async function AppsPage({
           </p>
         </div>
 
-        <ul className="flex flex-col gap-4">
-          {apps.map((app) => {
-            const category = getCategoryBySlug(app.category);
-            const tagline = isBg ? app.taglineBg : app.taglineEn;
-            const categoryLabel = category
-              ? isBg
-                ? category.labelBg
-                : category.labelEn
-              : app.category;
-
-            return (
-              <li key={app.slug}>
-                <Link
-                  href={`/apps/${app.slug}`}
-                  className="flex flex-col gap-1 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6 transition-colors hover:border-accent/40"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <h2 className="text-xl font-medium text-black dark:text-zinc-50">
-                      {app.name}
-                    </h2>
-                    <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">
-                      {categoryLabel}
-                    </span>
-                  </div>
-                  <p className="text-zinc-600 dark:text-zinc-300">
-                    {tagline}
-                  </p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <Suspense>
+          <AppsList apps={rows} />
+        </Suspense>
       </main>
     </div>
   );

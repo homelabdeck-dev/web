@@ -85,5 +85,18 @@
     "guides": "Guides",
     "updates": "Updates",
     "newsletter": "Newsletter"
+  },
+  "panel": {
+    "title": "Menu",
+    "open": "Open menu",
+    "close": "Close menu",
+    "home": "Home",
+    "apps": "Apps",
+    "guides": "Guides",
+    "updates": "Updates",
+    "newsletter": "Newsletter",
+    "categories": "Categories",
+    "filter": "Category: {category}",
+    "clear": "Show all"
   }
 }
