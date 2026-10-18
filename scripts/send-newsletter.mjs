@@ -1,4 +1,4 @@
-// Usage: node --env-file=.env.local scripts/send-newsletter.mjs <issue-id> "<subject>" <body.html> [--send] [--limit=90]
+// Usage: node --env-file=.env.local scripts/send-newsletter.mjs <issue-id> "<subject>" <body.html> [--send] [--limit=90] [--locale=en|bg]
 // Dry run by default. Skips addresses already sent for this issue, so re-run next day if over the daily cap.
 import Redis from "ioredis";
 import { readFileSync } from "node:fs";
@@ -9,6 +9,7 @@ if (!issue || !subject || !file) {
   console.error("Usage: send-newsletter.mjs <issue-id> <subject> <body.html> [--send] [--limit=90]");
   process.exit(1);
 }
+const locale = (flags.find((f) => f.startsWith("--locale=")) ?? "").split("=")[1];
 const send = flags.includes("--send");
 const limit = Number((flags.find((f) => f.startsWith("--limit=")) ?? "--limit=90").split("=")[1]);
 const SITE = "https://www.homelabdeck.dev";
@@ -24,7 +25,7 @@ for (const email of emails) {
   if (await db.sismember(sentKey, email)) continue;
   const raw = await db.get(`sub:${email}`);
   const sub = raw ? JSON.parse(raw) : null;
-  if (sub?.status === "confirmed") todo.push(sub);
+  if (sub?.status === "confirmed" && (!locale || sub.locale === locale)) todo.push(sub);
 }
 const batch = todo.slice(0, limit);
 console.log(`${emails.length} subscribers, ${todo.length} not yet sent, sending ${batch.length}${send ? "" : " (DRY RUN)"}`);
