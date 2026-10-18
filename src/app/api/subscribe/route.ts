@@ -1,8 +1,10 @@
+import { confirmMail, newToken, redis, sendMail, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
-  const key = process.env.BUTTONDOWN_API_KEY;
-  if (!key) {
+  const db = redis();
+  if (!db || !process.env.RESEND_API_KEY) {
     return Response.json({ error: "unavailable" }, { status: 503 });
   }
 
@@ -18,33 +20,38 @@ export async function POST(request: Request) {
     return Response.json({ ok: true });
   }
 
-  const email = typeof body.email === "string" ? body.email.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
   if (email.length > 254 || !EMAIL_RE.test(email)) {
     return Response.json({ error: "invalid" }, { status: 400 });
   }
   const locale = body.locale === "bg" ? "bg" : "en";
 
-  const res = await fetch("https://api.buttondown.com/v1/subscribers", {
-    method: "POST",
-    headers: {
-      Authorization: `Token ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email_address: email,
-      tags: [`lang-${locale}`],
-      referrer_url: "https://www.homelabdeck.dev",
-    }),
-  });
+  // Rate limit per IP: 5 requests per hour.
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  const rlKey = `rl:${ip}`;
+  const count = await db.incr(rlKey);
+  if (count === 1) await db.expire(rlKey, 3600);
+  if (count > 5) return Response.json({ error: "unavailable" }, { status: 429 });
 
-  if (res.ok) return Response.json({ ok: true });
+  // Same response whether or not the address is already known (no enumeration).
+  const existing = await db.get<Subscriber>(subKey(email));
+  if (existing?.status === "confirmed") return Response.json({ ok: true });
 
-  const data = await res.json().catch(() => ({}));
-  if (data?.code === "email_already_exists") {
-    return Response.json({ ok: true });
+  const token = existing?.token ?? newToken();
+  const sub: Subscriber = {
+    email,
+    locale,
+    status: "pending",
+    token,
+    createdAt: existing?.createdAt ?? new Date().toISOString(),
+  };
+  await db.set(subKey(email), sub);
+  await db.set(tokKey(token), email);
+
+  try {
+    await sendMail({ to: email, ...confirmMail(locale, token) });
+  } catch {
+    return Response.json({ error: "unavailable" }, { status: 502 });
   }
-  if (res.status === 400) {
-    return Response.json({ error: "invalid" }, { status: 400 });
-  }
-  return Response.json({ error: "unavailable" }, { status: 502 });
+  return Response.json({ ok: true });
 }

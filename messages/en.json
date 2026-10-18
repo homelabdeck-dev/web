@@ -68,5 +68,14 @@
     "ctaUpdates": "Read the weekly notes",
     "homeTitle": "Guides",
     "homeSubtitle": "Longer reads to help you pick and run the right apps."
+  },
+  "newsletter": {
+    "confirmedTitle": "Subscription confirmed",
+    "confirmedBody": "Thanks! You will get the HomelabDeck newsletter from now on. You can unsubscribe from any email.",
+    "unsubscribedTitle": "You are unsubscribed",
+    "unsubscribedBody": "Your address was removed and you will not receive more emails.",
+    "invalidTitle": "Link not valid",
+    "invalidBody": "This link is invalid or has already been used.",
+    "home": "Back to homepage"
   }
 }
