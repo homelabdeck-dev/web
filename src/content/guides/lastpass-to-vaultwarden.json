@@ -1,0 +1,122 @@
+{
+  "slug": "lastpass-to-vaultwarden",
+  "date": "2026-10-18",
+  "titleEn": "How to move from LastPass to Vaultwarden: a practical migration guide",
+  "titleBg": "Как да мигрираш от LastPass към Vaultwarden: практическо ръководство",
+  "descriptionEn": "Step by step: export your LastPass vault, import it into self-hosted Vaultwarden with the Bitwarden apps, lock the server down and back it up. Honest caveats included.",
+  "descriptionBg": "Стъпка по стъпка: експортирай трезора си от LastPass, импортирай го във self-hosted Vaultwarden чрез приложенията на Bitwarden, защити сървъра и го архивирай. С честни ограничения.",
+  "image": "/og/lastpass-to-vaultwarden.jpg",
+  "introEn": [
+    "Vaultwarden is a small, Bitwarden-compatible password server written in Rust. You run it yourself and use the official Bitwarden browser extension, desktop and mobile apps against it.",
+    "This guide covers the migration only: what to prepare, how to export from LastPass, how to import, and how to secure and back up the server. We did not re-measure Vaultwarden for this guide, so the resource figures come from the project and our catalog estimate, see the caveats."
+  ],
+  "introBg": [
+    "Vaultwarden е малък сървър за пароли, съвместим с Bitwarden, написан на Rust. Пускаш го сам и ползваш официалните Bitwarden разширения за браузър, десктоп и мобилни приложения срещу него.",
+    "Това ръководство покрива само миграцията: какво да подготвиш, как да експортираш от LastPass, как да импортираш и как да защитиш и архивираш сървъра. Не сме измервали Vaultwarden наново за това ръководство, затова числата за ресурси идват от проекта и от нашата оценка в каталога, виж ограниченията."
+  ],
+  "rows": [
+    {
+      "insteadOf": "LastPass",
+      "app": "vaultwarden"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "list",
+      "headingEn": "Before you start",
+      "headingBg": "Преди да започнеш",
+      "en": [
+        "Vaultwarden is very light and runs fine in a small LXC container or in Docker. Our catalog lists about 128 MB RAM as an estimate for a family-sized vault.",
+        "You need a domain name and HTTPS. The Bitwarden web vault and apps rely on browser cryptography that only works over a secure connection, so plain http on a local IP is only good for a quick test. A reverse proxy such as Nginx Proxy Manager with a Let's Encrypt certificate is the usual setup.",
+        "Decide how you will reach it from outside your home: a public reverse proxy, or a VPN such as Tailscale. The VPN keeps the server off the internet entirely.",
+        "Do not cancel LastPass or delete anything from it until the checks at the end are done."
+      ],
+      "bg": [
+        "Vaultwarden е много лек и работи спокойно в малък LXC контейнер или в Docker. В нашия каталог е записан около 128 MB RAM като оценка за семеен трезор.",
+        "Нужни са ти име на домейн и HTTPS. Уеб трезорът и приложенията на Bitwarden ползват криптография на браузъра, която работи само през защитена връзка, така че обикновен http към локален IP става само за бърз тест. Обичайната схема е reverse proxy, например Nginx Proxy Manager, със сертификат от Let's Encrypt.",
+        "Реши как ще достъпваш сървъра отвън: публичен reverse proxy или VPN като Tailscale. VPN държи сървъра изцяло извън интернет.",
+        "Не отказвай LastPass и не трий нищо от него, докато не минеш проверките в края."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Migration steps",
+      "headingBg": "Стъпки за миграцията",
+      "en": [
+        "Install Vaultwarden with the compose file on our Vaultwarden page as a starting point. Set DOMAIN to your real https address and put the reverse proxy in front of it.",
+        "Open the web vault and create your account with a long, unique master password. Then set SIGNUPS_ALLOWED to false and restart, so nobody else can register.",
+        "Enable two-step login on your account (an authenticator app, or a passkey or hardware key) and save the recovery code offline.",
+        "In LastPass, open the web vault and use Advanced Options, then Export, to download your data as a CSV file. Do this on a computer you trust.",
+        "In the Vaultwarden web vault go to Tools, then Import data, choose the LastPass (csv) format and select the file. Vaultwarden has no importer of its own, it uses the one built into the Bitwarden web vault.",
+        "Delete the CSV file right away, including from your trash folder. It contains all your passwords in plain text.",
+        "Install the Bitwarden browser extension and mobile app, and before logging in choose the self-hosted option and enter your server address."
+      ],
+      "bg": [
+        "Инсталирай Vaultwarden, като ползваш compose файла от нашата страница за Vaultwarden като начало. Задай DOMAIN с истинския си https адрес и сложи reverse proxy пред него.",
+        "Отвори уеб трезора и създай акаунта си с дълга, уникална главна парола. После задай SIGNUPS_ALLOWED на false и рестартирай, за да не може никой друг да се регистрира.",
+        "Включи двустъпково влизане за акаунта си (authenticator приложение, passkey или хардуерен ключ) и запази кода за възстановяване офлайн.",
+        "В LastPass отвори уеб трезора и избери Advanced Options, после Export, за да свалиш данните като CSV файл. Направи го на компютър, на който имаш доверие.",
+        "В уеб трезора на Vaultwarden отиди на Tools, после Import data, избери формат LastPass (csv) и посочи файла. Vaultwarden няма собствен импортер, ползва вградения в уеб трезора на Bitwarden.",
+        "Изтрий CSV файла веднага, включително от кошчето. Той съдържа всичките ти пароли в чист текст.",
+        "Инсталирай разширението на Bitwarden за браузъра и мобилното приложение и преди да влезеш, избери опцията за self-hosted и въведи адреса на сървъра си."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Lock it down and back it up",
+      "headingBg": "Защити го и го архивирай",
+      "en": [
+        "Keep the admin page off unless you need it. If you enable it, set ADMIN_TOKEN to a hashed value as the Vaultwarden documentation describes, not a plain password.",
+        "Keep the server updated. Vaultwarden follows Bitwarden's API, so old versions can stop working with new clients.",
+        "Back up the whole data folder, not only the database: it also holds the RSA keys, attachments and Sends. For the SQLite database use the sqlite3 .backup command or stop the container first, instead of copying a file that is being written.",
+        "Keep the backup on a second disk and a copy somewhere else, encrypted. Test a restore once.",
+        "Export an encrypted JSON copy of your vault from time to time and store it offline."
+      ],
+      "bg": [
+        "Дръж админ страницата изключена, освен когато ти трябва. Ако я включиш, задай ADMIN_TOKEN като хеширана стойност, както описва документацията на Vaultwarden, а не като обикновена парола.",
+        "Поддържай сървъра обновен. Vaultwarden следва API-то на Bitwarden, така че стари версии може да спрат да работят с нови клиенти.",
+        "Архивирай цялата папка с данни, не само базата: в нея са и RSA ключовете, прикачените файлове и Sends. За SQLite базата ползвай командата sqlite3 .backup или първо спри контейнера, вместо да копираш файл, който се записва.",
+        "Пази бекъпа на втори диск и копие на друго място, криптирано. Тествай възстановяване поне веднъж.",
+        "От време на време експортирай криптирано JSON копие на трезора и го пази офлайн."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What to check before you cancel LastPass",
+      "headingBg": "Какво да провериш, преди да откажеш LastPass",
+      "en": [
+        "Compare the number of logins, notes and cards in Vaultwarden with LastPass.",
+        "Log in to a few important sites using autofill on your computer and on your phone.",
+        "Check that folders, notes and any attachments came across. Some LastPass fields, such as custom items, may arrive as plain notes.",
+        "Make sure your authenticator codes are not stored only in LastPass, and move them first.",
+        "Because you are leaving a service that has had a breach, consider changing the passwords of your most important accounts after the move."
+      ],
+      "bg": [
+        "Сравни броя на паролите, бележките и картите във Vaultwarden с LastPass.",
+        "Влез в няколко важни сайта с автоматично попълване на компютъра и на телефона.",
+        "Провери дали папките, бележките и евентуалните прикачени файлове са пренесени. Някои полета от LastPass, като персонализираните елементи, може да дойдат като обикновени бележки.",
+        "Увери се, че кодовете ти за автентикация не са запазени само в LastPass, и ги премести първо.",
+        "Тъй като напускаш услуга, която е имала пробив, помисли дали да смениш паролите на най-важните си акаунти след преместването."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Honest caveats",
+      "headingBg": "Честни ограничения",
+      "en": [
+        "Self-hosting a password manager means you are the sysadmin. If the server is down, the apps still work from their cached copy, but you cannot sync, and a lost backup can mean lost passwords.",
+        "Vaultwarden is an unofficial, community project and is not the same as Bitwarden's own server. It has not had the formal security audits Bitwarden's official software has, so judge that risk for yourself. The paid Bitwarden cloud is a reasonable alternative if you do not want to run this yourself.",
+        "If you expose it to the internet, you are responsible for updates, HTTPS and brute-force protection.",
+        "Our catalog resource figure is an estimate, not our own measurement, and we did not re-benchmark Vaultwarden for this guide.",
+        "Export formats and menu names in LastPass and Bitwarden change over time. If a screen does not match this guide, follow the current official documentation."
+      ],
+      "bg": [
+        "Self-host на мениджър за пароли означава, че ти си системният администратор. Ако сървърът е изключен, приложенията още работят от кеширано копие, но няма синхронизация, а изгубен бекъп може да значи изгубени пароли.",
+        "Vaultwarden е неофициален проект на общността и не е същото като собствения сървър на Bitwarden. Той не е минавал през формалните одити за сигурност, които има официалният софтуер на Bitwarden, затова оцени този риск сам. Платеното облачно Bitwarden е разумна алтернатива, ако не искаш да поддържаш това сам.",
+        "Ако го изнесеш в интернет, ти отговаряш за обновленията, HTTPS и защитата от brute-force.",
+        "Числото за ресурси в нашия каталог е оценка, не наше измерване, и не сме тествали наново Vaultwarden за това ръководство.",
+        "Форматите за експорт и имената на менютата в LastPass и Bitwarden се променят с времето. Ако даден екран не съвпада с ръководството, следвай актуалната официална документация."
+      ]
+    }
+  ]
+}
