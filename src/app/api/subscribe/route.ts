@@ -1,4 +1,4 @@
-import { confirmMail, newToken, redis, sendMail, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
+import { confirmMail, getJson, newToken, redis, sendMail, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   if (count > 5) return Response.json({ error: "unavailable" }, { status: 429 });
 
   // Same response whether or not the address is already known (no enumeration).
-  const existing = await db.get<Subscriber>(subKey(email));
+  const existing = await getJson<Subscriber>(db, subKey(email));
   if (existing?.status === "confirmed") return Response.json({ ok: true });
 
   const token = existing?.token ?? newToken();
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     token,
     createdAt: existing?.createdAt ?? new Date().toISOString(),
   };
-  await db.set(subKey(email), sub);
+  await db.set(subKey(email), JSON.stringify(sub));
   await db.set(tokKey(token), email);
 
   try {

@@ -1,10 +1,10 @@
-import { pageRedirect, redis, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
+import { getJson, pageRedirect, redis, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
 
 async function unsubscribe(request: Request) {
   const token = new URL(request.url).searchParams.get("t") ?? "";
   const db = redis();
-  const email = db && token ? await db.get<string>(tokKey(token)) : null;
-  const sub = db && email ? await db.get<Subscriber>(subKey(email)) : null;
+  const email = db && token ? await db.get(tokKey(token)) : null;
+  const sub = db && email ? await getJson<Subscriber>(db, subKey(email)) : null;
   if (!db || !sub) return null;
 
   await db.srem("subscribers", sub.email);

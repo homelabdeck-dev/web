@@ -1,4 +1,4 @@
-import { Redis } from "@upstash/redis";
+import Redis from "ioredis";
 import { randomBytes } from "node:crypto";
 
 export const SITE = "https://www.homelabdeck.dev";
@@ -12,11 +12,18 @@ export type Subscriber = {
   createdAt: string;
 };
 
+let client: Redis | null = null;
+
 export function redis() {
-  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  return new Redis({ url, token });
+  const url = process.env.REDIS_URL;
+  if (!url) return null;
+  client ??= new Redis(url, { maxRetriesPerRequest: 2, connectTimeout: 5000 });
+  return client;
+}
+
+export async function getJson<T>(db: Redis, key: string): Promise<T | null> {
+  const raw = await db.get(key);
+  return raw ? (JSON.parse(raw) as T) : null;
 }
 
 export const newToken = () => randomBytes(24).toString("base64url");
