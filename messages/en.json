@@ -79,5 +79,11 @@
     "invalidTitle": "Link not valid",
     "invalidBody": "This link is invalid or has already been used.",
     "home": "Back to homepage"
+  },
+  "footer": {
+    "apps": "Apps",
+    "guides": "Guides",
+    "updates": "Updates",
+    "newsletter": "Newsletter"
   }
 }

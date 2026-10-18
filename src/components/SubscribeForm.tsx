@@ -37,7 +37,7 @@ export default function SubscribeForm() {
   }
 
   return (
-    <div className="mt-6 flex w-full max-w-md flex-col gap-3">
+    <div id="subscribe" className="mt-6 flex w-full max-w-md scroll-mt-24 flex-col gap-3">
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-3 sm:flex-row">
         <input
           type="email"
