@@ -1,4 +1,5 @@
-// Usage: node --env-file=.env.local scripts/send-newsletter.mjs <issue-id> "<subject>" <body.html> [--send] [--limit=90] [--locale=en|bg]
+// Usage: node --env-file=.env.local scripts/send-newsletter.mjs <issue-id> "<subject>" <body.html> [--send] [--limit=90] [--locale=en|bg] [--to=address]
+// --to sends a single test copy to that address and needs only RESEND_API_KEY (no Redis, no unsubscribe link).
 // Dry run by default. Skips addresses already sent for this issue, so re-run next day if over the daily cap.
 import Redis from "ioredis";
 import { readFileSync } from "node:fs";
@@ -12,11 +13,21 @@ if (!issue || !subject || !file) {
 const locale = (flags.find((f) => f.startsWith("--locale=")) ?? "").split("=")[1];
 const send = flags.includes("--send");
 const limit = Number((flags.find((f) => f.startsWith("--limit=")) ?? "--limit=90").split("=")[1]);
+const to = (flags.find((f) => f.startsWith("--to=")) ?? "").split("=")[1];
 const SITE = "https://www.homelabdeck.dev";
 const FROM = process.env.NEWSLETTER_FROM ?? "HomelabDeck <news@homelabdeck.dev>";
 
-const db = new Redis(process.env.REDIS_URL);
 const body = readFileSync(file, "utf8");
+if (to) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: FROM, to, subject: `[TEST] ${subject}`, html: body }),
+  });
+  console.log(res.status, await res.text());
+  process.exit(res.ok ? 0 : 1);
+}
+const db = new Redis(process.env.REDIS_URL);
 
 const emails = await db.smembers("subscribers");
 const sentKey = `sent:${issue}`;
