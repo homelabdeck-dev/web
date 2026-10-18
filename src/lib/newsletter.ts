@@ -69,3 +69,67 @@ export function confirmMail(locale: "en" | "bg", token: string) {
 export function pageRedirect(locale: string, status: "confirmed" | "unsubscribed" | "invalid") {
   return Response.redirect(`${SITE}/${locale === "bg" ? "bg" : "en"}/newsletter/${status}`, 303);
 }
+
+export type Issue = {
+  id: string;
+  sendAt: string; // YYYY-MM-DD, sent by the daily cron on or after this date
+  minSubscribers?: number; // hold the issue until the list is at least this big
+  subjectEn: string;
+  subjectBg: string;
+  bodyEn: string;
+  bodyBg: string;
+};
+
+const DAILY_LIMIT = 80; // Resend free plan: 100/day, leave room for confirmation emails
+
+/** Sends due issues to confirmed subscribers who have not got them yet. Returns a log. */
+export async function sendDueIssues(issues: Issue[], today: string) {
+  const db = redis();
+  const key = process.env.RESEND_API_KEY;
+  if (!db || !key) throw new Error("not configured");
+  const log: string[] = [];
+  let quota = DAILY_LIMIT;
+
+  for (const issue of [...issues].sort((a, b) => a.sendAt.localeCompare(b.sendAt))) {
+    if (issue.sendAt > today || quota <= 0) continue;
+    const sentKey = `sent:${issue.id}`;
+    const emails = await db.smembers("subscribers");
+    if (issue.minSubscribers && emails.length < issue.minSubscribers) {
+      log.push(`${issue.id}: held (${emails.length}/${issue.minSubscribers} subscribers)`);
+      continue;
+    }
+
+    const todo: Subscriber[] = [];
+    for (const email of emails) {
+      if (await db.sismember(sentKey, email)) continue;
+      const sub = await getJson<Subscriber>(db, subKey(email));
+      if (sub?.status === "confirmed") todo.push(sub);
+    }
+    const batch = todo.slice(0, quota);
+    for (let i = 0; i < batch.length; i += 100) {
+      const chunk = batch.slice(i, i + 100);
+      const messages = chunk.map((s) => {
+        const bg = s.locale === "bg";
+        const unsub = unsubscribeUrl(s.token);
+        const footer = `<p style="font-size:12px;color:#666;margin:32px auto 0;max-width:560px;padding:0 24px"><a href="${unsub}">${bg ? "Отписване" : "Unsubscribe"}</a></p>`;
+        return {
+          from: FROM,
+          to: s.email,
+          subject: bg ? issue.subjectBg : issue.subjectEn,
+          html: (bg ? issue.bodyBg : issue.bodyEn) + footer,
+          headers: { "List-Unsubscribe": `<${unsub}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+        };
+      });
+      const res = await fetch("https://api.resend.com/emails/batch", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify(messages),
+      });
+      if (!res.ok) throw new Error(`Resend ${res.status}`);
+      await db.sadd(sentKey, ...chunk.map((s) => s.email));
+    }
+    quota -= batch.length;
+    log.push(`${issue.id}: sent ${batch.length}, remaining ${todo.length - batch.length}`);
+  }
+  return log;
+}
