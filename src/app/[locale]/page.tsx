@@ -4,6 +4,7 @@ import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllWeeklyNotes } from "@/lib/weekly";
 import { getAllGuides } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
+import SubscribeForm from "@/components/SubscribeForm";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -45,21 +46,7 @@ export default async function Home({
           {t("subheading")}
         </p>
 
-        <form className="mt-6 flex w-full max-w-md flex-col gap-3 sm:flex-row">
-          <input
-            type="email"
-            name="email"
-            placeholder={t("subscribePlaceholder")}
-            aria-label={t("subscribePlaceholder")}
-            className="h-12 w-full shrink-0 rounded-full sm:flex-1 border border-black/[.08] bg-white px-5 text-black placeholder:text-zinc-500 focus:border-accent focus:outline-none dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-50 dark:placeholder:text-zinc-400"
-          />
-          <button
-            type="button"
-            className="h-12 w-full rounded-full bg-accent sm:w-auto px-6 font-medium text-white transition-colors hover:bg-accent-hover"
-          >
-            {t("subscribeButton")}
-          </button>
-        </form>
+        <SubscribeForm />
       </section>
 
       <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-24 sm:px-16">
