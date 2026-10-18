@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import SubscribeForm from "@/components/SubscribeForm";
 import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllGuides, getGuide } from "@/lib/guides";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
@@ -181,6 +182,12 @@ export default async function GuideDetailPage({
             </section>
           );
         })}
+
+        <section className="flex flex-col gap-2 rounded-2xl border border-black/[.08] bg-white p-6 dark:border-white/[.12] dark:bg-[#20242a]">
+          <h2 className="text-xl font-medium text-black dark:text-zinc-50">{t("subscribeTitle")}</h2>
+          <p className="text-zinc-600 dark:text-zinc-300">{t("subscribeText")}</p>
+          <SubscribeForm />
+        </section>
 
         <section className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
           <Link href="/apps" className="text-accent transition-colors hover:text-accent-hover">

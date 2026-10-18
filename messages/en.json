@@ -67,7 +67,9 @@
     "ctaApps": "Browse all apps",
     "ctaUpdates": "Read the weekly notes",
     "homeTitle": "Guides",
-    "homeSubtitle": "Longer reads to help you pick and run the right apps."
+    "homeSubtitle": "Longer reads to help you pick and run the right apps.",
+    "subscribeTitle": "Get new guides by email",
+    "subscribeText": "One short email when we publish a new guide or add apps. No spam, unsubscribe any time."
   },
   "newsletter": {
     "confirmedTitle": "Subscription confirmed",
