@@ -39,9 +39,9 @@ Catalog self-hosted applications with real Proof-of-Work evidence (dashboard/set
 ## Current State
 
 - Live in production at `homelabdeck.dev` (Vercel), live as of 2026-10-07.
-- App catalog holds 19 entries: applio, audiobookshelf, casaos, freshrss, gitea, grafana, home-assistant, immich, jellyfin, memos, n8n, nginx-proxy-manager, paperless-ngx, pi-hole, portainer, uptime-kuma, vaultwarden, vikunja, wiki-js.
-- All 19 entries have their 3-screenshot Proof-of-Work gallery published in `public/screenshots/<slug>/`.
-- 4 guides (EN/BG) in `src/content/guides/`; newsletter backend live (see `decisions.md` 2026-10-18); footer + left side panel.
+- App catalog holds 20 entries: applio, audiobookshelf, casaos, freshrss, gitea, grafana, home-assistant, immich, jellyfin, memos, n8n, nginx-proxy-manager, open-webui, paperless-ngx, pi-hole, portainer, uptime-kuma, vaultwarden, vikunja, wiki-js.
+- All 20 entries have their Proof-of-Work Proof-of-Work gallery published in `public/screenshots/<slug>/`.
+- 5 guides (EN/BG; newest `ollama-open-webui-private-chatgpt`, 2026-10-20, with own RTX 3090 measurements) in `src/content/guides/`; newsletter backend live (see `decisions.md` 2026-10-18); footer + left side panel.
 - Light/dark theme toggle in navbar (2026-10-10, replaced the language switcher; EN/BG still reachable via /en, /bg URLs) — see `decisions.md`.
 
 ## Important Locations
