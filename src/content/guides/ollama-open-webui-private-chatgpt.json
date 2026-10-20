@@ -1,0 +1,126 @@
+{
+  "slug": "ollama-open-webui-private-chatgpt",
+  "date": "2026-10-20",
+  "titleEn": "Run a private ChatGPT-style assistant at home with Ollama and Open WebUI",
+  "titleBg": "Частен асистент в стил ChatGPT вкъщи с Ollama и Open WebUI",
+  "descriptionEn": "Install Ollama and Open WebUI, pull a model and chat in your browser without sending prompts to the cloud. With real numbers from an RTX 3090 and honest limits.",
+  "descriptionBg": "Инсталирай Ollama и Open WebUI, свали модел и чети в браузъра, без да пращаш заявки в облака. С реални измервания от RTX 3090 и честни ограничения.",
+  "image": "/og/ollama-open-webui-private-chatgpt.jpg",
+  "introEn": [
+    "Ollama downloads and runs open language models on your own machine. Open WebUI puts a ChatGPT-style web interface on top of it, with history, multiple users and document upload. Together they give you a private assistant on your own hardware.",
+    "We run this in a Proxmox LXC container with an RTX 3090, so the numbers below are our own measurements from 2026-10-20 (Ollama 0.34.2). Your hardware will differ."
+  ],
+  "introBg": [
+    "Ollama сваля и изпълнява отворени езикови модели на твоя собствена машина. Open WebUI слага върху него уеб интерфейс в стил ChatGPT с история, няколко потребители и качване на документи. Заедно те ти дават частен асистент на твой хардуер.",
+    "Ние го пускаме в LXC контейнер на Proxmox с RTX 3090, така че числата по-долу са наши собствени измервания от 20.10.2026 (Ollama 0.34.2). Твоят хардуер ще е различен."
+  ],
+  "rows": [
+    {
+      "insteadOf": "ChatGPT",
+      "app": "open-webui"
+    }
+  ],
+  "sections": [
+    {
+      "kind": "list",
+      "headingEn": "What we measured",
+      "headingBg": "Какво измерихме",
+      "en": [
+        "gpt-oss:20b (a 13 GB download) ran 100% on the GPU and used about 16.5 GB of the RTX 3090's 24 GB of VRAM at Ollama's default 32k context.",
+        "Generation speed was about 122 to 125 tokens per second on a 300-token answer. The very first request took about 47 seconds because the model had to load; after that the answer started right away.",
+        "llama3.2:1b, a tiny test model, generated about 285 tokens per second and used about 3 GB of VRAM in total.",
+        "The LXC (6 vCPU, 6 GB RAM) sat at about 0.7 GB of RAM idle and about 2.9 GB with the 20B model loaded, because the weights live in VRAM. The Open WebUI container itself used 0.5 to 0.7 GB.",
+        "Disk: the Open WebUI image is about 6.5 GB and our two models take 15 GB, so a 40 GB disk is the realistic minimum.",
+        "These are short single-user tests, not a full benchmark. Long prompts, long conversations and several users at once will be slower and use more VRAM."
+      ],
+      "bg": [
+        "gpt-oss:20b (13 GB за сваляне) работи 100% на видеокартата и ползваше около 16,5 GB от 24-те GB VRAM на RTX 3090 при контекст по подразбиране 32k на Ollama.",
+        "Скоростта на генериране беше около 122 до 125 токена в секунда при отговор от 300 токена. Първата заявка отне около 47 секунди, защото моделът трябваше да се зареди; след това отговорът започваше веднага.",
+        "llama3.2:1b, малък тестов модел, генерираше около 285 токена в секунда и ползваше общо около 3 GB VRAM.",
+        "LXC контейнерът (6 vCPU, 6 GB RAM) беше на около 0,7 GB RAM в покой и около 2,9 GB със заредения 20B модел, защото теглата стоят във VRAM. Самият контейнер на Open WebUI ползваше 0,5 до 0,7 GB.",
+        "Диск: образът на Open WebUI е около 6,5 GB, а двата ни модела заемат 15 GB, така че реалистичният минимум е диск от 40 GB.",
+        "Това са кратки тестове с един потребител, не пълен бенчмарк. Дълги заявки, дълги разговори и няколко потребителя едновременно ще са по-бавни и ще ползват повече VRAM."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Before you start",
+      "headingBg": "Преди да започнеш",
+      "en": [
+        "A GPU makes the difference. As a rough rule, the model file should fit in VRAM with a few GB to spare. Without a GPU, small models still run, but slowly.",
+        "For an NVIDIA GPU you need the NVIDIA driver on the Proxmox host. If you run this in an LXC container, the GPU has to be passed through to it, which is a separate guide of its own.",
+        "Open WebUI runs in Docker. Inside an LXC container, Docker needs the nesting feature enabled.",
+        "Pick a model that fits your VRAM. We use gpt-oss:20b on 24 GB. Smaller cards should start with a model of 7 to 8 billion parameters."
+      ],
+      "bg": [
+        "Видеокартата прави разликата. Грубо правило: файлът на модела трябва да се побира във VRAM с няколко GB в запас. Без GPU малките модели пак работят, но бавно.",
+        "За NVIDIA видеокарта ти трябва драйверът на NVIDIA на хоста с Proxmox. Ако го пускаш в LXC контейнер, видеокартата трябва да е предадена към него, а това е тема за отделно ръководство.",
+        "Open WebUI работи в Docker. Вътре в LXC контейнер Docker изисква включена функция nesting.",
+        "Избери модел, който се побира във VRAM. Ние ползваме gpt-oss:20b на 24 GB. По-малките карти да започнат с модел от 7 до 8 милиарда параметъра."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Setup steps",
+      "headingBg": "Стъпки за инсталация",
+      "en": [
+        "Install Ollama by following the official instructions at ollama.com/download. In our fresh Debian LXC the installer needed the zstd and pciutils packages first.",
+        "Check that it works: run ollama --version, then ollama pull for the model you picked, for example ollama pull gpt-oss:20b.",
+        "Test the model from the API before adding any interface: send a request to http://127.0.0.1:11434/api/generate with curl. We found this more reliable than ollama run when the shell is not a real terminal.",
+        "Install Docker, then start Open WebUI with the compose file on our Open WebUI page. It uses host networking, so the container reaches Ollama on 127.0.0.1:11434.",
+        "Open http://your-server-ip:8080. The first account you create becomes the administrator, so create it right away, with a strong password.",
+        "In the admin settings turn off new sign-ups, or set them to require approval, unless you want other people to register.",
+        "Choose your model from the drop-down and start chatting. Check ollama ps and nvidia-smi once to confirm the model really runs 100% on the GPU.",
+        "For access from outside your home, use a VPN such as Tailscale rather than opening the port to the internet."
+      ],
+      "bg": [
+        "Инсталирай Ollama по официалните инструкции на ollama.com/download. В нашия чист Debian LXC инсталаторът поиска първо пакетите zstd и pciutils.",
+        "Провери, че работи: изпълни ollama --version, после ollama pull за избрания модел, например ollama pull gpt-oss:20b.",
+        "Тествай модела през API-то, преди да добавиш интерфейс: прати заявка към http://127.0.0.1:11434/api/generate с curl. Това се оказа по-надеждно от ollama run, когато шелът не е истински терминал.",
+        "Инсталирай Docker, после стартирай Open WebUI с compose файла от нашата страница за Open WebUI. Той ползва host мрежа, така че контейнерът стига до Ollama на 127.0.0.1:11434.",
+        "Отвори http://ip-на-сървъра:8080. Първият акаунт, който създадеш, става администратор, затова го направи веднага и със силна парола.",
+        "В настройките за администратор изключи регистрацията на нови потребители или я задай да изисква одобрение, освен ако не искаш други хора да се регистрират.",
+        "Избери модела от падащото меню и започни да чатиш. Провери веднъж ollama ps и nvidia-smi, за да се увериш, че моделът наистина работи 100% на видеокартата.",
+        "За достъп отвън ползвай VPN като Tailscale, вместо да отваряш порта към интернет."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Running it day to day",
+      "headingBg": "Ежедневна работа",
+      "en": [
+        "Ollama unloads a model after a few minutes of idle time and frees the VRAM. That is useful if the GPU is shared with other jobs, but the next request pays the load time again.",
+        "If several GPU tools share one card, run one heavy job at a time. Two big models together can run out of VRAM or RAM.",
+        "Update both parts from time to time: pull the newer Open WebUI image and re-create the container, and update Ollama with its installer.",
+        "Back up the Open WebUI data volume. It holds users, chats and settings. The models themselves can always be downloaded again."
+      ],
+      "bg": [
+        "Ollama разтоварва модела след няколко минути бездействие и освобождава VRAM. Това е полезно, ако видеокартата се дели с други задачи, но следващата заявка плаща отново времето за зареждане.",
+        "Ако няколко GPU инструмента делят една карта, пускай по една тежка задача наведнъж. Два големи модела заедно може да изчерпат VRAM или RAM.",
+        "Обновявай и двете части от време на време: свали по-новия образ на Open WebUI и пресъздай контейнера, а Ollama обнови с неговия инсталатор.",
+        "Архивирай data томa на Open WebUI. В него са потребителите, разговорите и настройките. Самите модели винаги могат да се свалят отново."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Honest caveats",
+      "headingBg": "Честни ограничения",
+      "en": [
+        "Open models are good, but a 20B model is not the same as the newest paid cloud models. Expect weaker results on hard reasoning, long documents and very recent facts. Judge by your own tasks.",
+        "Ollama listens on all interfaces in our setup, and its API has no login. Keep it on a trusted network or behind a VPN, never on the open internet.",
+        "Open WebUI's licence is not a standard open-source one: it is BSD-3-Clause based with a clause that forbids removing the Open WebUI branding once you have more than 50 users. For a home or family setup this does not matter, but read it for anything bigger.",
+        "Models have their own licences, and some limit commercial use. Check the licence of each model you download.",
+        "A big model keeps a GPU busy and draws power. In our short test the card drew about 162 W while generating.",
+        "Our figures come from one machine and short prompts. Menu names and defaults change between versions; if something does not match, follow the current official documentation."
+      ],
+      "bg": [
+        "Отворените модели са добри, но модел с 20 милиарда параметъра не е същото като най-новите платени облачни модели. Очаквай по-слаби резултати при трудни разсъждения, дълги документи и съвсем нови факти. Оценявай по собствените си задачи.",
+        "В нашата настройка Ollama слуша на всички интерфейси, а API-то му няма вход с парола. Дръж го в доверена мрежа или зад VPN, никога директно в интернет.",
+        "Лицензът на Open WebUI не е стандартен open-source: основава се на BSD-3-Clause, но има клауза, която забранява премахване на брандинга на Open WebUI при над 50 потребители. За домашна или семейна употреба това няма значение, но прочети го за нещо по-голямо.",
+        "Моделите имат собствени лицензи и някои ограничават търговската употреба. Провери лиценза на всеки модел, който сваляш.",
+        "Големият модел държи видеокартата заета и консумира ток. В краткия ни тест картата теглеше около 162 W при генериране.",
+        "Числата ни са от една машина и кратки заявки. Имената на менютата и стойностите по подразбиране се менят между версиите; ако нещо не съвпада, следвай актуалната официална документация."
+      ]
+    }
+  ]
+}

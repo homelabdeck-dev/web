@@ -1,0 +1,61 @@
+{
+  "name": "Open WebUI",
+  "slug": "open-webui",
+  "category": "ai-audio",
+  "license": "Open WebUI License (BSD-3-Clause based, with a branding clause)",
+  "officialRepoUrl": "https://github.com/open-webui/open-webui",
+  "officialWebsiteUrl": "https://openwebui.com",
+  "githubStars": 156262,
+  "updatedAt": "2026-10-20T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Built-in SQLite database and vector store in the data volume; PostgreSQL optional for larger setups"
+    },
+    "resourceFootprint": {
+      "ramMb": 4096,
+      "cpuCores": 4,
+      "notes": "Measured in our LXC (6 vCPU, 6 GB RAM, RTX 3090) with Ollama 0.34.2: the Open WebUI container uses about 0.5 to 0.7 GB of RAM, and the container lives in an LXC that sat at 0.7 GB idle and about 2.9 GB with a 20B model loaded, because the model weights go to the GPU. gpt-oss:20b (13 GB download) took about 16.5 GB of VRAM at the default 32k context and generated around 122 to 125 tokens per second; the first load took about 47 seconds. The Docker image is about 6.5 GB. Without a GPU, expect much slower answers and stick to small models."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Chat",
+      "filename": "chat.webp",
+      "altEn": "Open WebUI chat with gpt-oss:20b answering a question with a formatted table of five ideas",
+      "altBg": "Чат в Open WebUI, в който gpt-oss:20b отговаря на въпрос с форматирана таблица от пет идеи"
+    },
+    {
+      "label": "New chat",
+      "filename": "new-chat.webp",
+      "altEn": "Open WebUI new chat screen with the gpt-oss:20b model selected and the attach menu open (upload files, capture, webpage, notes, knowledge)",
+      "altBg": "Нов чат в Open WebUI с избран модел gpt-oss:20b и отворено меню за прикачване (файлове, снимка, уеб страница, бележки, знания)"
+    },
+    {
+      "label": "Sign-in",
+      "filename": "signin.webp",
+      "altEn": "Open WebUI sign-in page running in a home lab",
+      "altBg": "Страница за вход на Open WebUI в домашна лаборатория"
+    },
+    {
+      "label": "Resource usage",
+      "filename": "resources.webp",
+      "altEn": "Terminal output from our test: Ollama running gpt-oss:20b fully on the RTX 3090 with 16.5 GB of VRAM used and about 125 tokens per second",
+      "altBg": "Терминален изход от нашия тест: Ollama изпълнява gpt-oss:20b изцяло на RTX 3090 с 16,5 GB заета VRAM и около 125 токена в секунда"
+    }
+  ],
+  "dockerComposeSnippet": "# Ollama runs on the host (or in the same LXC) and listens on 127.0.0.1:11434.\n# Install it first with the official instructions at https://ollama.com/download\n# For an NVIDIA GPU you also need the NVIDIA driver on the host.\n# host networking lets the container reach Ollama on 127.0.0.1; the UI is then on port 8080.\nservices:\n  open-webui:\n    image: ghcr.io/open-webui/open-webui:main\n    container_name: open-webui\n    restart: unless-stopped\n    network_mode: host\n    environment:\n      - OLLAMA_BASE_URL=http://127.0.0.1:11434\n    volumes:\n      - open-webui:/app/backend/data\n\nvolumes:\n  open-webui:\n",
+  "alternativeTo": [
+    "ChatGPT",
+    "Claude.ai",
+    "Google Gemini"
+  ],
+  "descriptionEn": "Open WebUI is a self-hosted chat interface for large language models. It works with Ollama, which runs the models on your own hardware, and with any OpenAI-compatible API. You get conversation history, multiple users, document upload with retrieval, web search, voice input and model management in a browser, and your prompts never have to leave your network. On a GPU such as an RTX 3090, a 20B model answers at over 100 tokens per second. It is a self-hosted alternative to ChatGPT-style subscriptions, as long as you are fine with the quality of open models.",
+  "descriptionBg": "Open WebUI е самостоятелно хоствана чат платформа за големи езикови модели. Работи с Ollama, който изпълнява моделите на твоя хардуер, и с всяко OpenAI-съвместимо API. Получаваш история на разговорите, няколко потребители, качване на документи с търсене в тях, търсене в мрежата, гласов вход и управление на модели в браузъра, а заявките ти не е нужно да напускат мрежата ти. На видеокарта като RTX 3090 модел с 20 милиарда параметъра отговаря с над 100 токена в секунда. Това е самостоятелно хоствана алтернатива на абонаментите от типа ChatGPT, стига да ти харесва качеството на отворените модели.",
+  "taglineEn": "A private ChatGPT-style interface for models running on your own GPU.",
+  "taglineBg": "Частен интерфейс в стил ChatGPT за модели, които работят на твоя видеокарта."
+}
