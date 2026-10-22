@@ -58,8 +58,8 @@ export interface Screenshot {
   filename: string;
   /** English alt text. */
   altEn: string;
-  /** Bulgarian alt text. */
-  altBg: string;
+  /** Bulgarian alt text; falls back to English when absent. */
+  altBg?: string;
 }
 
 /** Full app directory entry. */
@@ -91,9 +91,9 @@ export interface AppEntry {
 
   // --- Localized content ---
   descriptionEn: string;
-  descriptionBg: string;
+  descriptionBg?: string;
   taglineEn: string;
-  taglineBg: string;
+  taglineBg?: string;
 
   // --- Optional SEO overrides (fall back to name / description) ---
   seoTitleEn?: string;

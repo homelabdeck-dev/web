@@ -41,7 +41,7 @@ export default async function AppsPage({
     return {
       slug: app.slug,
       name: app.name,
-      tagline: isBg ? app.taglineBg : app.taglineEn,
+      tagline: (isBg && app.taglineBg) || app.taglineEn,
       category: app.category,
       categoryLabel: category ? (isBg ? category.labelBg : category.labelEn) : app.category,
     };

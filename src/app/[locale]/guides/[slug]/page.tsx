@@ -138,7 +138,7 @@ export default async function GuideDetailPage({
                         {app.name}
                       </Link>
                       <div className="text-zinc-500 dark:text-zinc-400">
-                        {isBg ? app.taglineBg : app.taglineEn}
+                        {(isBg && app.taglineBg) || app.taglineEn}
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-4 py-3 text-zinc-700 dark:text-zinc-300">

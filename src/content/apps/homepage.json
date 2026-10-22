@@ -1,0 +1,52 @@
+{
+  "name": "Homepage",
+  "slug": "homepage",
+  "category": "monitoring",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/gethomepage/homepage",
+  "officialWebsiteUrl": "https://gethomepage.dev",
+  "githubStars": 33290,
+  "updatedAt": "2026-10-22T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "Stateless",
+      "label": "No database; everything lives in plain YAML files in the config folder"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 1,
+      "notes": "Very light. In our test LXC (1 core, 512 MB) the container used about 140 MB of RAM and idled at 0% CPU while showing 14 services with status checks, system resources and a search box. The image is about 255 MB. Config changes to services.yaml and widgets.yaml apply without a restart."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "Homepage dashboard in dark theme with services grouped into Infrastructure, AI & Creative and Home & Productivity, CPU, memory and disk widgets and a search box"
+    },
+    {
+      "label": "Light theme",
+      "filename": "light-theme.webp",
+      "altEn": "The same Homepage dashboard in light theme with a soft blue and lilac gradient background"
+    },
+    {
+      "label": "Mobile",
+      "filename": "mobile.webp",
+      "altEn": "Homepage dashboard on a phone-sized screen with the service groups stacked in a single column"
+    }
+  ],
+  "dockerComposeSnippet": "services:\n  homepage:\n    image: ghcr.io/gethomepage/homepage:latest\n    container_name: homepage\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      # Hostnames you open the dashboard from, otherwise you get a host validation error.\n      HOMEPAGE_ALLOWED_HOSTS: \"localhost:3000,192.168.1.40:3000\"\n    volumes:\n      - ./config:/app/config\n      - ./images:/app/public/images\n",
+  "alternativeTo": [
+    "Heimdall",
+    "Dashy",
+    "Homarr"
+  ],
+  "descriptionEn": "Homepage is a fast, highly customisable start page for your homelab. You describe your services, widgets and bookmarks in a few YAML files and it renders a clean dashboard with icons, live status checks, system resource widgets, a search box and light and dark themes. More than a hundred service integrations (Proxmox, Jellyfin, Pi-hole, Docker and many more) can show live stats, and the config reloads without a restart. It stores no data in a database, so backing it up is just copying the config folder.",
+  "taglineEn": "A clean, YAML-configured start page for all your homelab services.",
+  "seoTitleEn": "Homepage: self-hosted homelab dashboard with Docker Compose — HomelabDeck",
+  "seoDescriptionEn": "Homepage (gethomepage) is a lightweight YAML-configured homelab dashboard with status checks, widgets and dark/light themes. Ready docker-compose.yml, ~140 MB RAM and screenshots from our own test."
+}

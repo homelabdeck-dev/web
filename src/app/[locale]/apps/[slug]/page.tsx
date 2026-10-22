@@ -26,10 +26,14 @@ export async function generateMetadata({
 
   const isBg = locale === "bg";
   const title =
-    (isBg ? app.seoTitleBg : app.seoTitleEn) ?? `${app.name} — HomelabDeck`;
+    (isBg && app.seoTitleBg) ||
+    app.seoTitleEn ||
+    `${app.name} — HomelabDeck`;
   const description =
-    (isBg ? app.seoDescriptionBg : app.seoDescriptionEn) ??
-    (isBg ? app.descriptionBg : app.descriptionEn);
+    (isBg && app.seoDescriptionBg) ||
+    app.seoDescriptionEn ||
+    (isBg && app.descriptionBg) ||
+    app.descriptionEn;
   const cover = app.screenshots[0];
 
   return {
@@ -44,7 +48,7 @@ export async function generateMetadata({
         images: [
           {
             url: `/screenshots/${slug}/${cover.filename}`,
-            alt: locale === "bg" ? cover.altBg : cover.altEn,
+            alt: (locale === "bg" && cover.altBg) || cover.altEn,
           },
         ],
       }),
@@ -73,8 +77,8 @@ export default async function AppDetailPage({
       ? category.labelBg
       : category.labelEn
     : app.category;
-  const description = isBg ? app.descriptionBg : app.descriptionEn;
-  const tagline = isBg ? app.taglineBg : app.taglineEn;
+  const description = (isBg && app.descriptionBg) || app.descriptionEn;
+  const tagline = (isBg && app.taglineBg) || app.taglineEn;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -219,7 +223,7 @@ export default async function AppDetailPage({
             screenshots={app.screenshots.map((shot) => ({
               filename: shot.filename,
               label: shot.label,
-              alt: isBg ? shot.altBg : shot.altEn,
+              alt: (isBg && shot.altBg) || shot.altEn,
             }))}
           />
         </section>
