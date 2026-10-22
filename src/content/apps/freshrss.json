@@ -44,5 +44,9 @@
   "descriptionEn": "FreshRSS is a fast, lightweight self-hosted RSS/Atom feed aggregator with a REST API compatible with Google Reader-style mobile apps, web scraping for sites without feeds, and support for tens of thousands of feeds without breaking a sweat. It runs comfortably on a Raspberry Pi and supports multi-user setups out of the box.",
   "descriptionBg": "FreshRSS е бърз, лек self-hosted агрегатор на RSS/Atom емисии с REST API, съвместим с мобилни приложения в стил Google Reader, уеб скрейпинг за сайтове без емисии и поддръжка на десетки хиляди емисии без затруднение. Работи спокойно на Raspberry Pi и поддържа множество потребители веднага след инсталация.",
   "taglineEn": "Fast, self-hosted RSS reader for thousands of feeds.",
-  "taglineBg": "Бърз, self-hosted RSS четец за хиляди емисии."
+  "taglineBg": "Бърз, self-hosted RSS четец за хиляди емисии.",
+  "seoTitleEn": "FreshRSS: self-hosted RSS reader with Docker Compose — HomelabDeck",
+  "seoTitleBg": "FreshRSS: self-hosted RSS четец с Docker Compose — HomelabDeck",
+  "seoDescriptionEn": "FreshRSS is a fast, lightweight self-hosted RSS reader (Feedly alternative). Ready docker-compose.yml, ~256 MB RAM footprint, SQLite or PostgreSQL, and screenshots of the real UI.",
+  "seoDescriptionBg": "FreshRSS е бърз и лек self-hosted RSS четец (алтернатива на Feedly). Готов docker-compose.yml, ~256 MB RAM, SQLite или PostgreSQL и скрийншотове на реалния интерфейс."
 }

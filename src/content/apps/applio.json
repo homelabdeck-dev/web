@@ -50,5 +50,9 @@
   "descriptionEn": "Applio is a voice conversion tool built on RVC (Retrieval-based Voice Conversion). You can train a voice model from a few minutes of clean speech, then re-voice any recording so it sounds like that model, entirely on your own GPU and without sending audio to a cloud service. The web interface covers training, single and batch conversion, text-to-speech with voice conversion, model blending and real-time conversion. Use it with your own voice or with the clear permission of the person whose voice you are modelling. It is a self-hosted alternative to paid voice-changer and voice-cloning services.",
   "descriptionBg": "Applio е инструмент за преобразуване на глас, базиран на RVC (Retrieval-based Voice Conversion). Можеш да обучиш гласов модел от няколко минути чиста реч и после да преозвучиш всеки запис така, че да звучи като този модел, изцяло на твоя видеокарта и без да пращаш аудио в облака. Уеб интерфейсът включва обучение, конвертиране на единичен и пакетен запис, синтез на реч с конверсия на гласа, смесване на модели и конвертиране в реално време. Ползвай го със собствения си глас или с изричното съгласие на човека, чийто глас моделираш. Това е самостоятелно хоствана алтернатива на платените услуги за промяна и клониране на глас.",
   "taglineEn": "Train your own voice model and convert audio on your own GPU.",
-  "taglineBg": "Обучи собствен гласов модел и конвертирай аудио на своя видеокарта."
+  "taglineBg": "Обучи собствен гласов модел и конвертирай аудио на своя видеокарта.",
+  "seoTitleEn": "Applio: self-hosted RVC voice cloning & real-time voice changer — HomelabDeck",
+  "seoTitleBg": "Applio: self-hosted RVC клониране на глас и voice changer в реално време — HomelabDeck",
+  "seoDescriptionEn": "Run Applio (RVC) on your own GPU: train a voice model in ~25 min on an RTX 3090, convert audio, use real-time conversion. Docker Compose, resource footprint and screenshots from our own test.",
+  "seoDescriptionBg": "Пусни Applio (RVC) на своя видеокарта: обучение на гласов модел за ~25 мин на RTX 3090, конвертиране на аудио и реално време. Docker Compose, ресурси и скрийншотове от наш тест."
 }

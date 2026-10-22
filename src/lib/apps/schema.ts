@@ -94,4 +94,10 @@ export interface AppEntry {
   descriptionBg: string;
   taglineEn: string;
   taglineBg: string;
+
+  // --- Optional SEO overrides (fall back to name / description) ---
+  seoTitleEn?: string;
+  seoTitleBg?: string;
+  seoDescriptionEn?: string;
+  seoDescriptionBg?: string;
 }

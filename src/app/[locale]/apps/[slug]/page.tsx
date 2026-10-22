@@ -24,8 +24,12 @@ export async function generateMetadata({
   const app = getAppBySlug(slug);
   if (!app) return {};
 
-  const title = `${app.name} — HomelabDeck`;
-  const description = locale === "bg" ? app.descriptionBg : app.descriptionEn;
+  const isBg = locale === "bg";
+  const title =
+    (isBg ? app.seoTitleBg : app.seoTitleEn) ?? `${app.name} — HomelabDeck`;
+  const description =
+    (isBg ? app.seoDescriptionBg : app.seoDescriptionEn) ??
+    (isBg ? app.descriptionBg : app.descriptionEn);
   const cover = app.screenshots[0];
 
   return {
