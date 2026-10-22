@@ -1,0 +1,52 @@
+{
+  "name": "Ollama",
+  "slug": "ollama",
+  "category": "ai-audio",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/ollama/ollama",
+  "officialWebsiteUrl": "https://ollama.com",
+  "githubStars": 184300,
+  "updatedAt": "2026-10-22T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "Stateless",
+      "label": "No database; downloaded models are stored as files in ~/.ollama"
+    },
+    "resourceFootprint": {
+      "ramMb": 4096,
+      "cpuCores": 4,
+      "notes": "Measured on 2026-10-22 on Ollama 0.34.2 in a Proxmox LXC (6 vCPU, 6 GB RAM) with an RTX 3090 passed through. The service idles at about 0.7 GB of RAM, because the model weights live in VRAM. gpt-oss:20b (a 13 GB download) loaded 100% onto the GPU and used about 13.7 GB of VRAM after a short prompt, up to roughly 16.5 GB in our longer guide tests. It generated about 118 tokens per second on a 146-token answer; the first request took about 48 seconds to load the model. Small models such as llama3.2:1b need only a few GB of VRAM, and Ollama can also run on CPU, much more slowly. Plan for 40 GB of disk or more once you pull a few models."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Models",
+      "filename": "models.webp",
+      "altEn": "Terminal showing ollama version 0.34.2 and the ollama list command with two downloaded models, gpt-oss:20b at 13 GB and llama3.2:1b at 1.3 GB"
+    },
+    {
+      "label": "Running on GPU",
+      "filename": "running.webp",
+      "altEn": "Terminal showing ollama ps with gpt-oss:20b loaded 100% on the GPU with a 32768 context, and nvidia-smi showing an RTX 3090 with about 13.7 GB of VRAM used by the Ollama llama-server process"
+    },
+    {
+      "label": "API",
+      "filename": "api.webp",
+      "altEn": "Terminal showing a curl request to the Ollama generate API on port 11434 and the JSON answer with load and evaluation timings (some fields omitted)"
+    }
+  ],
+  "dockerComposeSnippet": "# Official Docker method with an NVIDIA GPU. Needs the NVIDIA driver and\n# nvidia-container-toolkit on the host. We run Ollama as a native install\n# inside an LXC (see the guide), so we have not tested this exact snippet.\nservices:\n  ollama:\n    image: ollama/ollama:latest\n    container_name: ollama\n    restart: unless-stopped\n    ports:\n      - \"11434:11434\"\n    volumes:\n      - ./ollama:/root/.ollama\n    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia\n              count: all\n              capabilities: [gpu]\n",
+  "alternativeTo": [
+    "ChatGPT API",
+    "Claude API",
+    "Google Gemini API"
+  ],
+  "descriptionEn": "Ollama downloads and runs open large language models on your own machine with a single command. It exposes a local HTTP API on port 11434 that tools like Open WebUI, editors and scripts can talk to, so your prompts and documents never leave your network. It uses an NVIDIA GPU when one is available and falls back to the CPU otherwise. Models such as gpt-oss, Llama, Gemma and Qwen are pulled from its library with ollama pull. It is the engine; for a chat interface in the browser, pair it with Open WebUI.",
+  "taglineEn": "Run open language models locally with one command and a simple API.",
+  "seoTitleEn": "Ollama: run local LLMs on your own GPU, self-hosted — HomelabDeck",
+  "seoDescriptionEn": "Ollama runs open LLMs like gpt-oss and Llama on your own hardware with a local API. Real RTX 3090 numbers (about 118 tokens/s, 13.7 GB VRAM), Docker Compose and screenshots from our own LXC."
+}
