@@ -1,0 +1,52 @@
+{
+  "name": "AdGuard Home",
+  "slug": "adguard-home",
+  "category": "networking",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/AdguardTeam/AdGuardHome",
+  "officialWebsiteUrl": "https://adguard.com/adguard-home.html",
+  "githubStars": 37612,
+  "updatedAt": "2026-10-22T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "Stateless",
+      "label": "No external database; configuration is a YAML file and query logs and statistics are stored in local files"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 1,
+      "notes": "Measured on 2026-10-22 on v0.107.79 in a Proxmox LXC (1 vCPU, 512 MB RAM). With the default AdGuard DNS filter loaded (about 190,000 rules) one instance used about 80 to 90 MB of RAM and the whole container sat at about 180 MB. In a fresh test instance, 201 DNS queries from one client were answered in about 3 ms on average and 28% of our mixed list of normal and ad or tracker domains were blocked. The install folder is about 235 MB. It is very light and fine for a Raspberry Pi."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Dashboard",
+      "filename": "dashboard.webp",
+      "altEn": "AdGuard Home dashboard showing 201 DNS queries, 56 blocked by filters (28%), general statistics, top clients, top queried domains and top blocked domains"
+    },
+    {
+      "label": "Query Log",
+      "filename": "query-log.webp",
+      "altEn": "AdGuard Home query log listing DNS requests with time, domain, response and client, where ad and tracker domains are marked as blocked by the AdGuard DNS filter"
+    },
+    {
+      "label": "Blocklists",
+      "filename": "filters.webp",
+      "altEn": "AdGuard Home DNS blocklists page showing the AdGuard DNS filter enabled with 190,801 rules and an AdAway list available, with add blocklist and check for updates buttons"
+    }
+  ],
+  "dockerComposeSnippet": "# Official Docker image. We run AdGuard Home natively in an LXC (installed with\n# the community-scripts Proxmox helper), so we have not tested this exact snippet.\n# Port 53 must be free on the host (stop systemd-resolved's stub listener if needed).\n# Open http://<host>:3000 once for the setup wizard, then use port 80.\nservices:\n  adguardhome:\n    image: adguard/adguardhome:latest\n    container_name: adguardhome\n    restart: unless-stopped\n    ports:\n      - \"53:53/tcp\"\n      - \"53:53/udp\"\n      - \"3000:3000/tcp\"\n      - \"80:80/tcp\"\n    volumes:\n      - ./work:/opt/adguardhome/work\n      - ./conf:/opt/adguardhome/conf\n",
+  "alternativeTo": [
+    "NextDNS",
+    "ControlD",
+    "AdGuard DNS"
+  ],
+  "descriptionEn": "AdGuard Home is a network-wide DNS server that blocks ads, trackers and malicious domains for every device on your network, without installing anything on them. You point your router or devices at it, and it answers DNS queries, filtering them with blocklists you choose. It has a clean web interface with statistics, a searchable query log, per-client settings, parental control and safe search options, custom filtering rules, and support for encrypted DNS such as DNS-over-HTTPS. It is a popular alternative to Pi-hole and to paid filtered-DNS services.",
+  "taglineEn": "Network-wide ad and tracker blocking with a clean web interface.",
+  "seoTitleEn": "AdGuard Home: self-hosted network-wide ad blocker (Pi-hole alternative) — HomelabDeck",
+  "seoDescriptionEn": "AdGuard Home blocks ads and trackers for your whole network at the DNS level. Tested in a 1 vCPU, 512 MB LXC at about 80 MB RAM, with Docker Compose, query log and blocklist screenshots from our own homelab."
+}
