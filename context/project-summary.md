@@ -41,7 +41,7 @@ Catalog self-hosted applications with real Proof-of-Work evidence (dashboard/set
 - Live in production at `homelabdeck.dev` (Vercel), live as of 2026-10-07.
 - App catalog holds 25 entries: adguard-home, applio, audiobookshelf, casaos, comfyui, freshrss, gitea, grafana, home-assistant, homepage, immich, jellyfin, memos, n8n, nginx-proxy-manager, ollama, open-webui, paperless-ngx, pi-hole, portainer, tts-webui, uptime-kuma, vaultwarden, vikunja, wiki-js.
 - All 25 entries have their Proof-of-Work Proof-of-Work gallery published in `public/screenshots/<slug>/`.
-- 5 guides (EN/BG; newest `ollama-open-webui-private-chatgpt`, 2026-10-20, with own RTX 3090 measurements) in `src/content/guides/`; newsletter backend live (see `decisions.md` 2026-10-18); footer + left side panel.
+- 6 guides (newest `comfyui-ai-images-at-home`, 2026-10-23, EN-only, own RTX 3090 measurements; before it `ollama-open-webui-private-chatgpt`, EN/BG) in `src/content/guides/`; newsletter backend live (see `decisions.md` 2026-10-18); footer + left side panel.
 - Light/dark theme toggle in navbar (2026-10-10, replaced the language switcher; EN/BG still reachable via /en, /bg URLs) — see `decisions.md`.
 
 ## Important Locations
