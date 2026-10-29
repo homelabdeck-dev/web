@@ -44,5 +44,18 @@
   "descriptionEn": "Wiki.js is a modern, extensible wiki engine built on Node.js with a polished markdown editor, fine-grained page permissions, and 50+ integrations for authentication, storage and search. It supports PostgreSQL, MySQL/MariaDB, MS SQL Server or SQLite, making it easy to fit into any existing homelab stack.",
   "descriptionBg": "Wiki.js е модерен, разширяем wiki engine, изграден на Node.js с изчистен markdown редактор, детайлни права на страници и над 50 интеграции за автентикация, съхранение и търсене. Поддържа PostgreSQL, MySQL/MariaDB, MS SQL Server или SQLite, което улеснява вписването му във всеки съществуващ homelab stack.",
   "taglineEn": "Modern, self-hosted wiki with a polished markdown editor.",
-  "taglineBg": "Модерна, self-hosted wiki с изчистен markdown редактор."
+  "taglineBg": "Модерна, self-hosted wiki с изчистен markdown редактор.",
+  "useCasesEn": [
+    "Documenting your homelab: IP plans, recovery steps and how each service is set up.",
+    "Running a family or team knowledge base with page permissions per group.",
+    "Writing in Markdown and syncing pages to a Git repository as a backup.",
+    "Signing in with an existing identity provider through LDAP, OAuth2 or SAML."
+  ],
+  "caveatsEn": [
+    "Version 2 is the stable release. Version 3 has been in development for a long time, so plan around 2.x.",
+    "Use PostgreSQL. It is the recommended database, and the built-in PostgreSQL search engine only works with it.",
+    "Keep your homelab documentation available when the homelab is down, for example by syncing it to Git or exporting it.",
+    "Set the site URL correctly in the admin area, or links and logins can break behind a reverse proxy."
+  ],
+  "relatedApps": ["memos", "gitea", "paperless-ngx"]
 }

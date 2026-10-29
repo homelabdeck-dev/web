@@ -44,5 +44,18 @@
   "descriptionEn": "Immich is a high-performance, self-hosted photo and video backup solution with mobile apps for automatic background upload. It offers AI-powered face recognition, CLIP-based semantic search, albums, sharing, and map view, aiming to be a drop-in Google Photos replacement you fully own.",
   "descriptionBg": "Immich е high-performance self-hosted решение за архивиране на снимки и видео с мобилни приложения за автоматично качване на заден фон. Предлага разпознаване на лица с изкуствен интелект, семантично търсене чрез CLIP, албуми, споделяне и изглед на карта.",
   "taglineEn": "Self-hosted Google Photos replacement with AI search and mobile backup.",
-  "taglineBg": "Self-hosted алтернатива на Google Photos с AI търсене и мобилен бекъп."
+  "taglineBg": "Self-hosted алтернатива на Google Photos с AI търсене и мобилен бекъп.",
+  "useCasesEn": [
+    "Backing up photos and videos from family phones automatically in the background.",
+    "Finding photos by searching for things like \"beach\" or \"dog\" with CLIP-based search.",
+    "Grouping photos by person with face recognition, all processed on your own server.",
+    "Moving a library out of Google Photos with Google Takeout and the immich-go tool."
+  ],
+  "caveatsEn": [
+    "Immich is not a backup by itself. Keep a separate copy of the photo library and database dumps, ideally off-site.",
+    "Releases can include breaking changes. Read the release notes and keep the compose file in sync with the official one.",
+    "Machine learning needs RAM and CPU. With less than 6 GB of RAM, disable it or run it on another machine.",
+    "Store the library on reliable disks with enough space for years of growth, because moving it later takes time."
+  ],
+  "relatedApps": ["paperless-ngx", "jellyfin", "audiobookshelf"]
 }

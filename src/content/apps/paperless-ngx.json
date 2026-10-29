@@ -44,5 +44,18 @@
   "descriptionEn": "Paperless-ngx is a community-supported document management system that scans, OCRs, tags and archives all your paper documents so you can go (mostly) paperless. It automatically detects correspondents, tags and document types, and offers full-text search across your entire archive.",
   "descriptionBg": "Paperless-ngx е поддържана от общността система за управление на документи, която сканира, разпознава текст (OCR), тагва и архивира документите ти. Автоматично разпознава кореспонденти, етикети и типове документи, и предлага пълнотекстово търсене в целия архив.",
   "taglineEn": "Scan, OCR and archive your paperwork with full-text search.",
-  "taglineBg": "Сканирай, разпознавай и архивирай документите си с пълнотекстово търсене."
+  "taglineBg": "Сканирай, разпознавай и архивирай документите си с пълнотекстово търсене.",
+  "useCasesEn": [
+    "Scanning paper bills, contracts and letters and finding them later with full-text search.",
+    "Letting a scanner or email inbox drop documents into a folder that Paperless picks up automatically.",
+    "Tagging documents automatically by correspondent and type once it has learned from a few examples.",
+    "Keeping a searchable PDF/A archive with the original files preserved."
+  ],
+  "caveatsEn": [
+    "It needs Redis and ideally PostgreSQL, so use the official compose file rather than a single container.",
+    "Set the OCR language to match your documents, for example English plus Bulgarian, or text recognition will suffer.",
+    "These are important personal documents. Back up the media and data folders and use the document exporter regularly.",
+    "Office files such as Word documents need the extra Tika and Gotenberg containers."
+  ],
+  "relatedApps": ["immich", "memos", "wiki-js"]
 }

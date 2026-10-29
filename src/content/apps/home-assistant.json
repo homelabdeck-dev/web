@@ -44,5 +44,18 @@
   "descriptionEn": "Home Assistant is a local-first, privacy-focused home automation platform backed by the Open Home Foundation, supporting over 1,000 integrations across virtually every smart-home brand and protocol (Zigbee, Z-Wave, Matter, Thread). It runs entirely on your own hardware, keeps automations working even without internet access, and never requires a cloud subscription.",
   "descriptionBg": "Home Assistant е локална, ориентирана към поверителността платформа за домашна автоматизация, подкрепяна от Open Home Foundation, поддържаща над 1000 интеграции с почти всяка марка и протокол за smart home (Zigbee, Z-Wave, Matter, Thread). Работи изцяло на собствения ти хардуер, поддържа автоматизациите активни дори без интернет и никога не изисква облачен абонамент.",
   "taglineEn": "Local, privacy-first home automation with 1000+ integrations.",
-  "taglineBg": "Локална домашна автоматизация, ориентирана към поверителността, с над 1000 интеграции."
+  "taglineBg": "Локална домашна автоматизация, ориентирана към поверителността, с над 1000 интеграции.",
+  "useCasesEn": [
+    "Controlling lights, plugs, sensors and climate devices from many brands in one app.",
+    "Writing automations that run locally, such as turning on lights at sunset or when motion is detected.",
+    "Using Zigbee, Z-Wave, Thread or Matter devices without vendor clouds, through a USB coordinator.",
+    "Tracking energy use with smart meters and plugs on the built-in energy dashboard."
+  ],
+  "caveatsEn": [
+    "The Docker install does not include add-ons. If you want the add-on store, use Home Assistant OS in a VM instead.",
+    "Zigbee and Z-Wave sticks must be passed through to the container or VM, which takes extra setup in Proxmox and LXC.",
+    "Monthly releases sometimes include breaking changes. Read the release notes and take a backup before updating.",
+    "For remote access use a VPN, a reverse proxy with HTTPS, or the paid Nabu Casa cloud, rather than an open port."
+  ],
+  "relatedApps": ["n8n", "uptime-kuma", "grafana"]
 }

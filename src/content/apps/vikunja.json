@@ -44,5 +44,18 @@
   "descriptionEn": "Vikunja is a self-hosted, open-source to-do and project management app supporting lists, Kanban boards, Gantt charts and table views of the same tasks. It offers recurring tasks, filters, labels, team sharing and a CalDAV interface so you can keep using your favorite calendar/task client while owning your data.",
   "descriptionBg": "Vikunja е self-hosted, open-source приложение за задачи и управление на проекти, поддържащо списъци, Kanban дъски, Gantt диаграми и табличен изглед на едни и същи задачи. Предлага повтарящи се задачи, филтри, етикети, споделяне в екип и CalDAV интерфейс, така че да продължиш да ползваш любимия си календар/task клиент, докато данните ти остават твои.",
   "taglineEn": "Self-hosted to-do app with lists, Kanban, Gantt and CalDAV sync.",
-  "taglineBg": "Self-hosted приложение за задачи с списъци, Kanban, Gantt и CalDAV синхронизация."
+  "taglineBg": "Self-hosted приложение за задачи с списъци, Kanban, Gantt и CalDAV синхронизация.",
+  "useCasesEn": [
+    "Managing personal to-dos with lists, due dates, reminders and recurring tasks.",
+    "Planning small projects with Kanban boards and Gantt charts on the same tasks.",
+    "Sharing projects with family or a small team.",
+    "Syncing tasks to phone apps through CalDAV."
+  ],
+  "caveatsEn": [
+    "Set the public URL setting correctly, or links, the frontend and CalDAV may not work behind a reverse proxy.",
+    "Email reminders need SMTP settings in the config.",
+    "CalDAV support covers tasks but not every client feature, so test with the app you plan to use.",
+    "Importing from Todoist or Trello is available, but check labels and attachments after the import."
+  ],
+  "relatedApps": ["memos", "wiki-js", "n8n"]
 }

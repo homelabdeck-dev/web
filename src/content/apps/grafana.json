@@ -44,5 +44,18 @@
   "descriptionEn": "Grafana is the industry-standard open-source platform for building dashboards and alerts from virtually any data source — Prometheus, Loki, InfluxDB, PostgreSQL and 100+ more via plugins. Paired with Prometheus and Loki it forms the classic self-hosted observability stack for monitoring homelab infrastructure and applications.",
   "descriptionBg": "Grafana е индустриалният стандарт за open-source платформа за изграждане на табла и аларми от практически всеки източник на данни — Prometheus, Loki, InfluxDB, PostgreSQL и над 100 други чрез плъгини. В комбинация с Prometheus и Loki образува класическия self-hosted observability stack за мониторинг на homelab инфраструктура и приложения.",
   "taglineEn": "Open-source dashboards and alerting for any metrics data source.",
-  "taglineBg": "Open-source табла и аларми за всеки източник на метрики."
+  "taglineBg": "Open-source табла и аларми за всеки източник на метрики.",
+  "useCasesEn": [
+    "Building dashboards for CPU, memory, disk and network usage of your servers from Prometheus or InfluxDB data.",
+    "Viewing logs next to metrics when paired with Loki.",
+    "Setting alerts that send a message to email, Telegram, Discord or other channels when a value crosses a threshold.",
+    "Importing ready-made community dashboards for Proxmox, Docker, routers and many other systems."
+  ],
+  "caveatsEn": [
+    "Grafana only shows data. You also need a data source such as Prometheus with exporters, which takes most of the setup time.",
+    "Change the default admin password on first login and do not expose Grafana to the internet without authentication in front.",
+    "Community dashboards often expect specific exporter versions or labels, so some panels may need small edits.",
+    "Long metric retention in the data source can use a lot of disk. Set retention limits in Prometheus or InfluxDB early."
+  ],
+  "relatedApps": ["uptime-kuma", "homepage", "portainer"]
 }

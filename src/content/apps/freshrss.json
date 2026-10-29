@@ -48,5 +48,18 @@
   "seoTitleEn": "FreshRSS: self-hosted RSS reader with Docker Compose — HomelabDeck",
   "seoTitleBg": "FreshRSS: self-hosted RSS четец с Docker Compose — HomelabDeck",
   "seoDescriptionEn": "FreshRSS is a fast, lightweight self-hosted RSS reader (Feedly alternative). Ready docker-compose.yml, ~256 MB RAM footprint, SQLite or PostgreSQL, and screenshots of the real UI.",
-  "seoDescriptionBg": "FreshRSS е бърз и лек self-hosted RSS четец (алтернатива на Feedly). Готов docker-compose.yml, ~256 MB RAM, SQLite или PostgreSQL и скрийншотове на реалния интерфейс."
+  "seoDescriptionBg": "FreshRSS е бърз и лек self-hosted RSS четец (алтернатива на Feedly). Готов docker-compose.yml, ~256 MB RAM, SQLite или PostgreSQL и скрийншотове на реалния интерфейс.",
+  "useCasesEn": [
+    "Following blogs, news sites, YouTube channels and release feeds in one place without algorithmic sorting.",
+    "Reading on the phone with a mobile app that talks to FreshRSS through its Google Reader or Fever compatible API.",
+    "Creating feeds for sites that do not offer one, using its web scraping options.",
+    "Running one instance for the whole household, with separate users and subscriptions."
+  ],
+  "caveatsEn": [
+    "Feeds refresh on a schedule, so make sure the cron job or the built-in refresh in the Docker image is running.",
+    "Mobile apps need the API enabled and an API password set in each user's profile, separate from the login password.",
+    "With thousands of feeds the default SQLite database still works, but PostgreSQL or MySQL handle large multi-user instances better.",
+    "Some sites rate-limit or block feed fetchers, so very frequent refresh intervals can get your server blocked."
+  ],
+  "relatedApps": ["audiobookshelf", "memos", "wiki-js"]
 }

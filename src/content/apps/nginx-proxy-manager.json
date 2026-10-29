@@ -51,5 +51,18 @@
   "descriptionEn": "Nginx Proxy Manager is an open-source reverse proxy with a clean web UI, built so you can expose your homelab services under real domain names without ever editing an Nginx config file. It handles proxy hosts, redirections, TCP/UDP streams and free Let's Encrypt SSL certificates with automatic renewal, plus access lists and basic user management. It is a popular first step for anyone moving from raw IP:port links to https://app.yourdomain.com, and it runs comfortably in a small unprivileged LXC container.",
   "descriptionBg": "Nginx Proxy Manager е open-source reverse proxy с чист уеб интерфейс, създаден за да публикуваш услугите от homelab-а си под реални домейн имена, без да редактираш Nginx конфигурационни файлове. Управлява proxy хостове, пренасочвания, TCP/UDP streams и безплатни Let's Encrypt SSL сертификати с автоматично подновяване, плюс списъци за достъп и основно управление на потребители. Популярна първа стъпка за всеки, който преминава от голи IP:порт адреси към https://app.yourdomain.com, и работи спокойно в малък непривилегирован LXC контейнер.",
   "taglineEn": "Reverse proxy with a simple web UI and free SSL certificates.",
-  "taglineBg": "Reverse proxy с прост уеб интерфейс и безплатни SSL сертификати."
+  "taglineBg": "Reverse proxy с прост уеб интерфейс и безплатни SSL сертификати.",
+  "useCasesEn": [
+    "Reaching homelab services by name, such as https://photos.example.com, instead of IP addresses and ports.",
+    "Getting free Let's Encrypt certificates that renew automatically.",
+    "Adding basic access lists or password protection in front of services that have no login.",
+    "Forwarding TCP or UDP streams, for example for a game server."
+  ],
+  "caveatsEn": [
+    "Ports 80 and 443 must be free on the host, and port 81 serves the admin UI. Do not expose port 81 to the internet.",
+    "Change the default admin login straight after the first start.",
+    "For wildcard certificates or services that are not reachable from the internet, use the DNS challenge with your DNS provider's API token.",
+    "Advanced Nginx options are possible but hidden in custom config fields. If you need a lot of them, Caddy or Traefik may fit better."
+  ],
+  "relatedApps": ["adguard-home", "pi-hole", "uptime-kuma"]
 }

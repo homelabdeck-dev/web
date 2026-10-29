@@ -15,6 +15,7 @@
     "We run it in a Proxmox LXC container with an RTX 3090 passed through, so the numbers below are our own measurements from 2026-10-22 (ComfyUI 0.38.0). Your hardware will differ."
   ],
   "rows": [],
+  "apps": ["comfyui"],
   "sections": [
     {
       "kind": "list",

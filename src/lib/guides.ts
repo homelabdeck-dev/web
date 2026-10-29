@@ -24,7 +24,21 @@ export interface Guide {
   introBg: string[];
   /** Comparison rows: the SaaS being replaced and the catalog app slug. */
   rows: { insteadOf: string; app: string }[]; // may be empty (no table)
+  /** Extra catalog slugs the guide covers, beyond the comparison rows. */
+  apps?: string[];
   sections: GuideSection[];
+}
+
+/** Catalog slugs a guide covers: comparison rows first, then `apps`. */
+export function guideAppSlugs(guide: Guide): string[] {
+  return [
+    ...new Set([...guide.rows.map((row) => row.app), ...(guide.apps ?? [])]),
+  ];
+}
+
+/** Guides that cover the given app slug, newest first. */
+export function getGuidesForApp(slug: string): Guide[] {
+  return getAllGuides().filter((guide) => guideAppSlugs(guide).includes(slug));
 }
 
 const DIR = path.join(process.cwd(), "src/content/guides");

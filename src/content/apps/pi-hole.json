@@ -44,5 +44,18 @@
   "descriptionEn": "Pi-hole is a network-wide DNS sinkhole that blocks ads and trackers for every device on your network — phones, smart TVs and apps included — with no client-side software to install. Its web dashboard gives real-time query statistics, per-client insights and easy allow/deny list management, and it can double as your network's DHCP server.",
   "descriptionBg": "Pi-hole е DNS sinkhole за цялата мрежа, който блокира реклами и тракери за всяко устройство в мрежата ти — телефони, smart телевизори и приложения включително — без нужда от инсталиране на клиентски софтуер. Уеб таблото дава статистика за заявки в реално време, преглед по клиент и лесно управление на разрешаващи/забраняващи листи, а може да служи и като DHCP сървър на мрежата.",
   "taglineEn": "Network-wide ad and tracker blocking via DNS.",
-  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа чрез DNS."
+  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа чрез DNS.",
+  "useCasesEn": [
+    "Blocking ads and trackers for every device on the network, including smart TVs and phone apps.",
+    "Seeing which devices make the most DNS queries and which domains they contact.",
+    "Running DHCP for the network when the router's own DHCP is limited.",
+    "Setting local DNS names for homelab services, such as nas.lan."
+  ],
+  "caveatsEn": [
+    "All devices depend on it for DNS. Keep a second instance or a fallback so the internet does not go down with it.",
+    "Port 53 must be free on the host, which often means disabling the systemd-resolved stub listener.",
+    "Encrypted upstream DNS (DNS-over-HTTPS) is not built in and needs an extra tool such as cloudflared or Unbound.",
+    "Some apps hardcode their own DNS servers and will bypass Pi-hole unless you redirect DNS traffic on the router."
+  ],
+  "relatedApps": ["adguard-home", "nginx-proxy-manager", "uptime-kuma"]
 }

@@ -44,5 +44,18 @@
   "descriptionEn": "n8n is a fair-code workflow automation platform that combines a visual, node-based builder with the flexibility to drop in custom JavaScript/Python code where needed. It ships with 400+ integrations, native AI-agent nodes, and can be fully self-hosted with no per-execution pricing, unlike most commercial iPaaS tools.",
   "descriptionBg": "n8n е fair-code платформа за автоматизация на работни процеси, съчетаваща визуален конструктор с блокове с гъвкавостта да добавиш собствен JavaScript/Python код при нужда. Предлага над 400 интеграции, вградени AI-agent блокове и може да бъде изцяло self-hosted без такси на изпълнение, за разлика от повечето комерсиални iPaaS инструменти.",
   "taglineEn": "Self-hosted workflow automation with visual building and custom code.",
-  "taglineBg": "Self-hosted автоматизация на работни процеси с визуален конструктор и собствен код."
+  "taglineBg": "Self-hosted автоматизация на работни процеси с визуален конструктор и собствен код.",
+  "useCasesEn": [
+    "Connecting web services, for example saving form submissions to a spreadsheet and sending a chat message.",
+    "Running scheduled jobs such as daily reports, backup checks or price monitoring.",
+    "Receiving webhooks from other apps and reacting to them with multi-step workflows.",
+    "Building AI agents and chains that call local models through Ollama or cloud APIs."
+  ],
+  "caveatsEn": [
+    "The Sustainable Use License allows internal and personal use, but not offering n8n itself as a service to others.",
+    "Some features, such as SSO and advanced permissions, are only in the paid editions.",
+    "Webhooks from outside services need a public HTTPS URL, so plan for a reverse proxy or tunnel.",
+    "Set a persistent encryption key and back up the database, or stored credentials cannot be decrypted after a reinstall."
+  ],
+  "relatedApps": ["home-assistant", "gitea", "ollama"]
 }

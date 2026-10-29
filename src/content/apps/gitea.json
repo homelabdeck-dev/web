@@ -44,5 +44,18 @@
   "descriptionEn": "Gitea is a lightweight, community-managed Git service you fully own, offering repository hosting, issues, pull requests, a package registry and built-in CI/CD via Gitea Actions (GitHub Actions-compatible syntax). Its single Go binary starts in seconds and stays light enough to run comfortably on a Raspberry Pi.",
   "descriptionBg": "Gitea е лека, управлявана от общността Git услуга, която притежаваш изцяло — с хостинг на хранилища, issues, pull requests, package registry и вградено CI/CD чрез Gitea Actions (синтаксис, съвместим с GitHub Actions). Единственият Go бинарен файл стартира за секунди и остава достатъчно лек, за да работи спокойно на Raspberry Pi.",
   "taglineEn": "Self-hosted, lightweight Git service with built-in CI/CD.",
-  "taglineBg": "Self-hosted, лека Git услуга с вградено CI/CD."
+  "taglineBg": "Self-hosted, лека Git услуга с вградено CI/CD.",
+  "useCasesEn": [
+    "Keeping private repositories, dotfiles and infrastructure code on your own server.",
+    "Mirroring GitHub or GitLab repositories as a local backup.",
+    "Running CI pipelines with Gitea Actions, using workflow files close to GitHub Actions syntax.",
+    "Hosting container images and packages for your homelab in the built-in package registry."
+  ],
+  "caveatsEn": [
+    "Gitea Actions needs a separate runner (act_runner) with access to Docker before workflows can run.",
+    "SSH clone access needs a free port. If port 22 is taken by the host, map Gitea's SSH to another port such as 2222.",
+    "Back up both the data volume and the database. The built-in gitea dump command creates a full archive.",
+    "Forgejo is a community fork of Gitea with similar features. Both work, but switching later takes some migration effort."
+  ],
+  "relatedApps": ["portainer", "wiki-js", "n8n"]
 }

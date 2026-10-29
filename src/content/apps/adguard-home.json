@@ -48,5 +48,18 @@
   "descriptionEn": "AdGuard Home is a network-wide DNS server that blocks ads, trackers and malicious domains for every device on your network, without installing anything on them. You point your router or devices at it, and it answers DNS queries, filtering them with blocklists you choose. It has a clean web interface with statistics, a searchable query log, per-client settings, parental control and safe search options, custom filtering rules, and support for encrypted DNS such as DNS-over-HTTPS. It is a popular alternative to Pi-hole and to paid filtered-DNS services.",
   "taglineEn": "Network-wide ad and tracker blocking with a clean web interface.",
   "seoTitleEn": "AdGuard Home: self-hosted network-wide ad blocker (Pi-hole alternative) — HomelabDeck",
-  "seoDescriptionEn": "AdGuard Home blocks ads and trackers for your whole network at the DNS level. Tested in a 1 vCPU, 512 MB LXC at about 80 MB RAM, with Docker Compose, query log and blocklist screenshots from our own homelab."
+  "seoDescriptionEn": "AdGuard Home blocks ads and trackers for your whole network at the DNS level. Tested in a 1 vCPU, 512 MB LXC at about 80 MB RAM, with Docker Compose, query log and blocklist screenshots from our own homelab.",
+  "useCasesEn": [
+    "Blocking ads and trackers on devices where you cannot install an ad blocker, such as smart TVs, game consoles and phone apps.",
+    "Giving different devices different rules, for example stricter filtering and safe search for the kids' tablets.",
+    "Sending all DNS from the house upstream over DNS-over-HTTPS or DNS-over-TLS, so your ISP cannot read it.",
+    "Seeing which devices on the network talk to which domains, through the query log and per-client statistics."
+  ],
+  "caveatsEn": [
+    "Every device depends on it for DNS, so if the container stops, name resolution stops. Run a second instance or keep a fallback DNS server in your router.",
+    "Port 53 must be free on the host. On many Linux systems systemd-resolved already listens there and has to be reconfigured first.",
+    "Some apps and smart devices ignore the DNS server your network hands out, or use their own DNS-over-HTTPS, which bypasses the filter.",
+    "Aggressive blocklists can break shopping links, sign-ins or streaming apps, so expect to allowlist a few domains in the first weeks."
+  ],
+  "relatedApps": ["pi-hole", "nginx-proxy-manager", "uptime-kuma"]
 }

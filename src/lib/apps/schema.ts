@@ -95,6 +95,18 @@ export interface AppEntry {
   taglineEn: string;
   taglineBg?: string;
 
+  // --- Longer copy (optional; BG falls back to nothing, not to English) ---
+  /** What the app is good for, one sentence per item. */
+  useCasesEn?: string[];
+  useCasesBg?: string[];
+  /** Things to know before deploying, one sentence per item. */
+  caveatsEn?: string[];
+  caveatsBg?: string[];
+
+  // --- Internal linking ---
+  /** Hand-picked catalog slugs shown as "Related apps". */
+  relatedApps?: string[];
+
   // --- Optional SEO overrides (fall back to name / description) ---
   seoTitleEn?: string;
   seoTitleBg?: string;

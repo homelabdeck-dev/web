@@ -44,5 +44,18 @@
   "descriptionEn": "Portainer Community Edition is a lightweight web UI for managing Docker, Docker Swarm, Kubernetes and Podman environments without touching the CLI. It gives homelab operators and hobbyists an easy way to deploy stacks, inspect logs, and manage containers, images, volumes and networks from a single dashboard.",
   "descriptionBg": "Portainer Community Edition е лек уеб интерфейс за управление на Docker, Docker Swarm, Kubernetes и Podman среди без нужда от CLI. Дава на homelab потребители и хобисти лесен начин да разгръщат stacks, преглеждат логове и управляват контейнери, образи, томове и мрежи от едно табло.",
   "taglineEn": "Web UI for managing Docker and Kubernetes without the CLI.",
-  "taglineBg": "Уеб интерфейс за управление на Docker и Kubernetes без CLI."
+  "taglineBg": "Уеб интерфейс за управление на Docker и Kubernetes без CLI.",
+  "useCasesEn": [
+    "Seeing all containers, images, volumes and networks on a Docker host in a web interface.",
+    "Deploying and updating docker compose stacks from the browser.",
+    "Reading container logs and opening a console without SSH.",
+    "Managing several Docker hosts from one place with the Portainer agent."
+  ],
+  "caveatsEn": [
+    "Portainer needs access to the Docker socket, which is effectively root on the host, so protect its login well.",
+    "Create the admin user right after the first start. If you wait too long, the setup screen times out and Portainer has to be restarted.",
+    "Some features, such as role-based access control and registry management extras, are only in the paid Business Edition.",
+    "Stacks created in Portainer are stored in its data volume, so back it up or keep the compose files in Git as well."
+  ],
+  "relatedApps": ["casaos", "homepage", "gitea"]
 }

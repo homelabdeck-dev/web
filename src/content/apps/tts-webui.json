@@ -47,5 +47,18 @@
   "descriptionEn": "TTS-WebUI is one web interface for many open text-to-speech and audio models. You can pick Kokoro for fast, light English speech, Chatterbox or XTTS for voice cloning, Bark for expressive audio and more, then generate speech from your own text entirely on your own GPU. It has a simple React interface and a larger Gradio interface with extensions, a pipeline builder, speech-to-text, audio and music tools and an outputs browser. Everything runs locally, so your text and any reference voices stay on your network. Use voice cloning only with your own voice or with clear permission.",
   "taglineEn": "One local web interface for many text-to-speech and voice models.",
   "seoTitleEn": "TTS-WebUI: self-hosted text-to-speech with Kokoro, XTTS and more — HomelabDeck",
-  "seoDescriptionEn": "TTS-WebUI is a local web UI for many open TTS models such as Kokoro, Chatterbox and Bark. Real RTX 3090 numbers (about 1.7 s for an 8 s clip, 1.2 GB VRAM), a systemd unit and screenshots from our own LXC."
+  "seoDescriptionEn": "TTS-WebUI is a local web UI for many open TTS models such as Kokoro, Chatterbox and Bark. Real RTX 3090 numbers (about 1.7 s for an 8 s clip, 1.2 GB VRAM), a systemd unit and screenshots from our own LXC.",
+  "useCasesEn": [
+    "Turning articles or notes into spoken audio with fast models such as Kokoro.",
+    "Comparing several open text-to-speech models side by side in one interface.",
+    "Cloning your own voice with models such as XTTS or Chatterbox for narration.",
+    "Generating short sound effects or music with the included audio models."
+  ],
+  "caveatsEn": [
+    "An NVIDIA GPU is strongly recommended. Many models are very slow or do not run at all on CPU.",
+    "The install with extensions is large, so plan for tens of gigabytes of disk.",
+    "Each model has its own license. Check it before using the output commercially.",
+    "Only clone voices you have permission to use."
+  ],
+  "relatedApps": ["applio", "ollama", "open-webui"]
 }

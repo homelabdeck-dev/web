@@ -57,5 +57,18 @@
   "descriptionEn": "Open WebUI is a self-hosted chat interface for large language models. It works with Ollama, which runs the models on your own hardware, and with any OpenAI-compatible API. You get conversation history, multiple users, document upload with retrieval, web search, voice input and model management in a browser, and your prompts never have to leave your network. On a GPU such as an RTX 3090, a 20B model answers at over 100 tokens per second. It is a self-hosted alternative to ChatGPT-style subscriptions, as long as you are fine with the quality of open models.",
   "descriptionBg": "Open WebUI е самостоятелно хоствана чат платформа за големи езикови модели. Работи с Ollama, който изпълнява моделите на твоя хардуер, и с всяко OpenAI-съвместимо API. Получаваш история на разговорите, няколко потребители, качване на документи с търсене в тях, търсене в мрежата, гласов вход и управление на модели в браузъра, а заявките ти не е нужно да напускат мрежата ти. На видеокарта като RTX 3090 модел с 20 милиарда параметъра отговаря с над 100 токена в секунда. Това е самостоятелно хоствана алтернатива на абонаментите от типа ChatGPT, стига да ти харесва качеството на отворените модели.",
   "taglineEn": "A private ChatGPT-style interface for models running on your own GPU.",
-  "taglineBg": "Частен интерфейс в стил ChatGPT за модели, които работят на твоя видеокарта."
+  "taglineBg": "Частен интерфейс в стил ChatGPT за модели, които работят на твоя видеокарта.",
+  "useCasesEn": [
+    "A private ChatGPT-style chat for the household or a small team, with separate accounts.",
+    "Asking questions about your own documents with the built-in document upload and retrieval.",
+    "Switching between local models from Ollama and cloud APIs in the same interface.",
+    "Using voice input and web search inside chats."
+  ],
+  "caveatsEn": [
+    "It is only the interface. You still need Ollama or another OpenAI-compatible API to run the models.",
+    "The first account created becomes the admin, so create it straight after deployment.",
+    "The Docker image is large, and features such as document retrieval add more RAM and disk use.",
+    "The license includes a branding clause, so check it before you rebrand or offer it to others."
+  ],
+  "relatedApps": ["ollama", "comfyui", "tts-webui"]
 }

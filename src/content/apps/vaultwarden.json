@@ -44,5 +44,18 @@
   "descriptionEn": "Vaultwarden is an unofficial, lightweight Bitwarden-compatible server written in Rust, letting you self-host a password manager that works with every official Bitwarden client (browser, mobile, desktop, CLI). It unlocks premium features like TOTP generation, file attachments and emergency access for free, and runs comfortably on tiny hardware like a Raspberry Pi.", 
   "descriptionBg": "Vaultwarden е неофициален, лек сървър, съвместим с Bitwarden, написан на Rust, който позволява self-hosting на мениджър за пароли, работещ с всички официални Bitwarden клиенти (браузър, мобилни, десктоп, CLI). Отключва безплатно премиум функции като TOTP генериране, прикачени файлове и аварийни контакти, и работи спокойно на съвсем малък хардуер като Raspberry Pi.",
   "taglineEn": "Lightweight, self-hosted Bitwarden-compatible password vault.",
-  "taglineBg": "Лек, self-hosted трезор за пароли, съвместим с Bitwarden."
+  "taglineBg": "Лек, self-hosted трезор за пароли, съвместим с Bitwarden.",
+  "useCasesEn": [
+    "Running a password manager for the family with the official Bitwarden apps and browser extensions.",
+    "Sharing passwords between family members through organizations.",
+    "Storing TOTP codes, secure notes and file attachments without a paid plan.",
+    "Moving away from LastPass or 1Password while keeping the data on your own server."
+  ],
+  "caveatsEn": [
+    "Bitwarden clients only work over HTTPS, so you need a reverse proxy with a valid certificate.",
+    "Protect or disable the /admin page and set a strong ADMIN_TOKEN, ideally hashed with Argon2.",
+    "Back up the data folder regularly and test restoring it. Losing it means losing every password.",
+    "Vaultwarden is not an official Bitwarden product and has not had the same third-party audits."
+  ],
+  "relatedApps": ["nginx-proxy-manager", "uptime-kuma", "paperless-ngx"]
 }

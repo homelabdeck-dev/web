@@ -44,5 +44,18 @@
   "descriptionEn": "Jellyfin is the leading fully free and open-source media server, letting you organize and stream your own movies, TV shows, music and photos to any device without telemetry or paid tiers. It supports hardware-accelerated transcoding, live TV/DVR, and a huge ecosystem of official and community apps.",
   "descriptionBg": "Jellyfin е водещият напълно безплатен и open-source медиен сървър, който позволява организиране и стрийминг на собствени филми, сериали, музика и снимки към всяко устройство без телеметрия или платени нива. Поддържа хардуерно ускорено транскодиране, Live TV/DVR и голяма екосистема от официални и общностни приложения.",
   "taglineEn": "Free, open-source media server for your movies, shows and music.",
-  "taglineBg": "Безплатен, open-source медиен сървър за филмите, сериалите и музиката ти."
+  "taglineBg": "Безплатен, open-source медиен сървър за филмите, сериалите и музиката ти.",
+  "useCasesEn": [
+    "Streaming your own movies, shows and music to TVs, phones and browsers at home or on the road.",
+    "Replacing Plex without accounts, telemetry or a paid pass for features such as hardware transcoding.",
+    "Watching live TV and recording shows with a TV tuner and the built-in DVR.",
+    "Giving family members separate profiles with their own watch progress and parental controls."
+  ],
+  "caveatsEn": [
+    "Transcoding 4K or HDR on CPU is slow. Pass an Intel iGPU or NVIDIA GPU to the container for hardware transcoding.",
+    "Name files and folders the way Jellyfin expects (Movie Name (Year)), or metadata matching will be poor.",
+    "Some TV apps are less polished than Plex's, so test the clients your household uses before switching fully.",
+    "For remote streaming use a reverse proxy with HTTPS or a VPN, and keep upload bandwidth in mind."
+  ],
+  "relatedApps": ["audiobookshelf", "immich", "nginx-proxy-manager"]
 }

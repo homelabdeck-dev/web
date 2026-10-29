@@ -48,5 +48,18 @@
   "descriptionEn": "ComfyUI is a node-based interface for running image and video generation models on your own GPU. You build a workflow by connecting nodes for loading a model, writing prompts, sampling and saving, so every step is visible and reusable. It supports Stable Diffusion and SDXL, newer image models, video models such as Wan, upscalers, ControlNet and a large ecosystem of custom nodes with a built-in manager. Workflows are saved as JSON and everything runs locally, so prompts and images stay on your network. It is a self-hosted alternative to paid image-generation services.",
   "taglineEn": "Node-based image and video generation that runs on your own GPU.",
   "seoTitleEn": "ComfyUI: self-hosted AI image generation on your own GPU — HomelabDeck",
-  "seoDescriptionEn": "ComfyUI is a node-based Stable Diffusion and video generator for your homelab. Real RTX 3090 numbers (about 8 s per SDXL image, 7 GB VRAM), a systemd unit with a RAM guard and screenshots from our own LXC."
+  "seoDescriptionEn": "ComfyUI is a node-based Stable Diffusion and video generator for your homelab. Real RTX 3090 numbers (about 8 s per SDXL image, 7 GB VRAM), a systemd unit with a RAM guard and screenshots from our own LXC.",
+  "useCasesEn": [
+    "Generating images from text prompts locally with Stable Diffusion, SDXL or newer open models.",
+    "Building repeatable pipelines, such as generate, upscale and save, and reusing them by loading a JSON workflow.",
+    "Guiding composition with ControlNet, image-to-image or inpainting instead of relying on prompts alone.",
+    "Trying open video generation models on your own GPU without a monthly subscription."
+  ],
+  "caveatsEn": [
+    "You need a capable GPU. An NVIDIA card with 8 GB of VRAM is a practical minimum for SDXL, and video models want much more.",
+    "Checkpoints are several gigabytes each, so disk usage grows fast. Plan for 100 GB or more.",
+    "Custom nodes run arbitrary Python code. Install only well-known ones and review what the node manager pulls in.",
+    "The node graph has a learning curve. Start from the built-in templates or a shared workflow rather than an empty canvas."
+  ],
+  "relatedApps": ["ollama", "applio", "tts-webui"]
 }

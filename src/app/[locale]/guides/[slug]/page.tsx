@@ -5,7 +5,8 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import SubscribeForm from "@/components/SubscribeForm";
 import { getAppBySlug } from "@/lib/apps/loader";
-import { getAllGuides, getGuide } from "@/lib/guides";
+import { getAllGuides, getGuide, guideAppSlugs } from "@/lib/guides";
+import AppCard from "@/components/AppCard";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -68,6 +69,10 @@ export default async function GuideDetailPage({
   const rows = guide.rows.flatMap((row) => {
     const app = getAppBySlug(row.app);
     return app ? [{ ...row, app }] : [];
+  });
+  const guideApps = guideAppSlugs(guide).flatMap((appSlug) => {
+    const app = getAppBySlug(appSlug);
+    return app ? [app] : [];
   });
 
   const jsonLd = {
@@ -182,6 +187,21 @@ export default async function GuideDetailPage({
             </section>
           );
         })}
+
+        {guideApps.length > 0 && (
+          <section className="flex flex-col gap-4">
+            <h2 className="text-2xl text-black dark:text-zinc-50">
+              {t("appsInGuide")}
+            </h2>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {guideApps.map((app) => (
+                <li key={app.slug}>
+                  <AppCard app={app} locale={locale} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="flex flex-col gap-2 rounded-2xl border border-black/[.08] bg-white p-6 dark:border-white/[.12] dark:bg-[#20242a]">
           <h2 className="text-xl font-medium text-black dark:text-zinc-50">{t("subscribeTitle")}</h2>

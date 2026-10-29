@@ -51,5 +51,18 @@
   "descriptionEn": "Memos is a privacy-first, lightweight note-taking service built for quick capture: type a thought, add tags, and it lands in a timeline you can browse, search or view on a calendar. Notes are plain Markdown, can carry attachments and be shared publicly or kept private, and everything is stored in a single SQLite file by default. It is a minimal self-hosted alternative to Google Keep that runs happily on almost any hardware.",
   "descriptionBg": "Memos е лека услуга за бележки с приоритет върху поверителността, създадена за бързо записване: пишеш мисъл, добавяш тагове и тя попада във времева лента, която можеш да разглеждаш, търсиш или виждаш в календар. Бележките са обикновен Markdown, могат да имат прикачени файлове и да са публични или лични, а всичко по подразбиране се съхранява в един SQLite файл. Минималистична self-hosted алтернатива на Google Keep, която върви спокойно на почти всякакъв хардуер.",
   "taglineEn": "Lightweight, privacy-first note-taking with a quick-capture timeline.",
-  "taglineBg": "Лека, поверителна услуга за бележки с времева лента за бързо записване."
+  "taglineBg": "Лека, поверителна услуга за бележки с времева лента за бързо записване.",
+  "useCasesEn": [
+    "Capturing quick thoughts, links and snippets from the browser or phone in seconds.",
+    "Keeping a private journal or work log on a timeline with tags.",
+    "Sharing selected notes publicly through a link while keeping the rest private.",
+    "Replacing Google Keep with something that stores everything in one small database you control."
+  ],
+  "caveatsEn": [
+    "It is built for short notes, not long structured documents. For a knowledge base use a wiki such as Wiki.js.",
+    "The project changes quickly and major versions have changed the API, so third-party apps may lag behind.",
+    "Back up the data folder regularly. With the default SQLite setup that one folder holds all notes and attachments.",
+    "There is no end-to-end encryption, so anyone with access to the server can read the notes."
+  ],
+  "relatedApps": ["wiki-js", "vikunja", "paperless-ngx"]
 }

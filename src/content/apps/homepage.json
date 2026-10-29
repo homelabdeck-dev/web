@@ -48,5 +48,18 @@
   "descriptionEn": "Homepage is a fast, highly customisable start page for your homelab. You describe your services, widgets and bookmarks in a few YAML files and it renders a clean dashboard with icons, live status checks, system resource widgets, a search box and light and dark themes. More than a hundred service integrations (Proxmox, Jellyfin, Pi-hole, Docker and many more) can show live stats, and the config reloads without a restart. It stores no data in a database, so backing it up is just copying the config folder.",
   "taglineEn": "A clean, YAML-configured start page for all your homelab services.",
   "seoTitleEn": "Homepage: self-hosted homelab dashboard with Docker Compose — HomelabDeck",
-  "seoDescriptionEn": "Homepage (gethomepage) is a lightweight YAML-configured homelab dashboard with status checks, widgets and dark/light themes. Ready docker-compose.yml, ~140 MB RAM and screenshots from our own test."
+  "seoDescriptionEn": "Homepage (gethomepage) is a lightweight YAML-configured homelab dashboard with status checks, widgets and dark/light themes. Ready docker-compose.yml, ~140 MB RAM and screenshots from our own test.",
+  "useCasesEn": [
+    "A single start page with links to every service in your homelab.",
+    "Seeing live status and stats from services such as Proxmox, Jellyfin, Pi-hole and Docker on one screen.",
+    "Using it as the browser home page on all your devices, with a search box and bookmarks.",
+    "Keeping the dashboard in version control, because the whole configuration is a few YAML files."
+  ],
+  "caveatsEn": [
+    "There is no editor in the UI. Every change is made in the YAML files, so you need to be comfortable editing them.",
+    "Widgets that show live stats need API keys for each service, so keep the config folder private.",
+    "Since version 1.0 you must list the hostnames it is served on in HOMEPAGE_ALLOWED_HOSTS, or the page will not load.",
+    "It has no login of its own. Keep it on your local network or put authentication in front of it."
+  ],
+  "relatedApps": ["uptime-kuma", "grafana", "portainer"]
 }

@@ -44,5 +44,18 @@
   "descriptionEn": "CasaOS is an open-source personal cloud operating system that sits on top of Docker, giving homelab users a clean web dashboard for system monitoring, file management and one-click app installs from its built-in App Store. It targets the same \"friendly NAS OS\" niche as Synology DSM or Unraid but stays fully open source and lightweight enough for a spare mini PC or Raspberry Pi. It is a host-level installer rather than a single container, so it needs a bare-metal host, a VM, or a privileged LXC container — unprivileged LXC setups are not supported.",
   "descriptionBg": "CasaOS е open-source персонална cloud операционна система върху Docker, която дава на homelab потребителите чисто уеб табло за системен мониторинг, файлов мениджмънт и инсталиране на приложения с един клик през вградения App Store. Заема нишата на \"приятелска NAS OS\" наравно със Synology DSM или Unraid, но остава напълно отворен код и достатъчно лек за резервно mini PC или Raspberry Pi. Представлява инсталатор на ниво хост, а не единичен контейнер, затова изисква bare-metal хост, VM или привилегирован LXC контейнер — не работи в непривилегирован LXC.",
   "taglineEn": "Open-source personal cloud OS on top of Docker.",
-  "taglineBg": "Open-source персонална cloud OS върху Docker."
+  "taglineBg": "Open-source персонална cloud OS върху Docker.",
+  "useCasesEn": [
+    "Turning a spare mini PC, old laptop or Raspberry Pi into a simple home server without learning Docker first.",
+    "Installing common self-hosted apps with one click from the built-in App Store.",
+    "Browsing and sharing files on attached drives from a web interface.",
+    "Giving less technical family members a friendly dashboard for the home server."
+  ],
+  "caveatsEn": [
+    "It installs on the host itself, so it does not run inside an unprivileged LXC container. Use bare metal, a VM or a privileged LXC.",
+    "One-click apps hide the compose files, which makes custom settings, backups and later migrations harder than with plain Docker.",
+    "It is not a full NAS operating system: there is no built-in RAID management, snapshots or replication like TrueNAS offers.",
+    "Do not expose the dashboard directly to the internet. Use a VPN or a reverse proxy with authentication for remote access."
+  ],
+  "relatedApps": ["portainer", "homepage", "nginx-proxy-manager"]
 }

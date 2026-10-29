@@ -54,5 +54,18 @@
   "seoTitleEn": "Applio: self-hosted RVC voice cloning & real-time voice changer — HomelabDeck",
   "seoTitleBg": "Applio: self-hosted RVC клониране на глас и voice changer в реално време — HomelabDeck",
   "seoDescriptionEn": "Run Applio (RVC) on your own GPU: train a voice model in ~25 min on an RTX 3090, convert audio, use real-time conversion. Docker Compose, resource footprint and screenshots from our own test.",
-  "seoDescriptionBg": "Пусни Applio (RVC) на своя видеокарта: обучение на гласов модел за ~25 мин на RTX 3090, конвертиране на аудио и реално време. Docker Compose, ресурси и скрийншотове от наш тест."
+  "seoDescriptionBg": "Пусни Applio (RVC) на своя видеокарта: обучение на гласов модел за ~25 мин на RTX 3090, конвертиране на аудио и реално време. Docker Compose, ресурси и скрийншотове от наш тест.",
+  "useCasesEn": [
+    "Re-voicing narration, podcasts or video voice-overs with a model trained on your own voice.",
+    "Experimenting with voice conversion without paying per minute or uploading recordings to a cloud service.",
+    "Building a small, clean dataset once and reusing the trained model for batch conversion of many files.",
+    "Combining text-to-speech with voice conversion to produce speech in a voice you have the rights to use."
+  ],
+  "caveatsEn": [
+    "Training is only practical on an NVIDIA GPU. On CPU it is far too slow, and AMD support is limited.",
+    "The Docker image is large and models add up quickly, so reserve plenty of disk before you start.",
+    "Results depend mostly on the training audio: a few minutes of clean, dry speech with no music or reverb works far better than a long noisy recording.",
+    "Cloning someone else's voice without consent can be illegal and is against the spirit of the project. Only model voices you have permission to use."
+  ],
+  "relatedApps": ["tts-webui", "comfyui", "ollama"]
 }

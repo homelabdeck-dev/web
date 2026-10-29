@@ -48,5 +48,18 @@
   "descriptionEn": "Ollama downloads and runs open large language models on your own machine with a single command. It exposes a local HTTP API on port 11434 that tools like Open WebUI, editors and scripts can talk to, so your prompts and documents never leave your network. It uses an NVIDIA GPU when one is available and falls back to the CPU otherwise. Models such as gpt-oss, Llama, Gemma and Qwen are pulled from its library with ollama pull. It is the engine; for a chat interface in the browser, pair it with Open WebUI.",
   "taglineEn": "Run open language models locally with one command and a simple API.",
   "seoTitleEn": "Ollama: run local LLMs on your own GPU, self-hosted — HomelabDeck",
-  "seoDescriptionEn": "Ollama runs open LLMs like gpt-oss and Llama on your own hardware with a local API. Real RTX 3090 numbers (about 118 tokens/s, 13.7 GB VRAM), Docker Compose and screenshots from our own LXC."
+  "seoDescriptionEn": "Ollama runs open LLMs like gpt-oss and Llama on your own hardware with a local API. Real RTX 3090 numbers (about 118 tokens/s, 13.7 GB VRAM), Docker Compose and screenshots from our own LXC.",
+  "useCasesEn": [
+    "Running open language models such as Llama, Gemma, Qwen or gpt-oss privately on your own hardware.",
+    "Giving local tools an OpenAI-style API, for example editors, scripts or n8n workflows.",
+    "Powering a ChatGPT-like web chat together with Open WebUI.",
+    "Testing different models and sizes quickly with ollama pull and ollama run."
+  ],
+  "caveatsEn": [
+    "Speed depends on VRAM. A model that does not fit in GPU memory spills to the CPU and becomes much slower.",
+    "The API has no authentication. Keep port 11434 on your local network or put a proxy with authentication in front.",
+    "Models take a lot of disk, from about 1 GB for small ones to tens of GB for large ones.",
+    "Open models are good but not equal to the best cloud models, so test them on your own tasks before relying on them."
+  ],
+  "relatedApps": ["open-webui", "comfyui", "tts-webui"]
 }
