@@ -51,11 +51,23 @@
     "Writing in Markdown and syncing pages to a Git repository as a backup.",
     "Signing in with an existing identity provider through LDAP, OAuth2 or SAML."
   ],
+  "useCasesBg": [
+    "Документиране на homelab-а: IP план, стъпки за възстановяване и как е настроена всяка услуга.",
+    "База знания за семейството или екипа с права за страниците по групи.",
+    "Писане в Markdown и синхронизиране на страниците с Git хранилище като бекъп.",
+    "Вход със съществуващ доставчик на идентичност чрез LDAP, OAuth2 или SAML."
+  ],
   "caveatsEn": [
     "Version 2 is the stable release. Version 3 has been in development for a long time, so plan around 2.x.",
     "Use PostgreSQL. It is the recommended database, and the built-in PostgreSQL search engine only works with it.",
     "Keep your homelab documentation available when the homelab is down, for example by syncing it to Git or exporting it.",
     "Set the site URL correctly in the admin area, or links and logins can break behind a reverse proxy."
+  ],
+  "caveatsBg": [
+    "Версия 2 е стабилната. Версия 3 е в разработка от дълго време, така че планирай с 2.x.",
+    "Използвай PostgreSQL. Това е препоръчаната база, а вграденото търсене с PostgreSQL работи само с нея.",
+    "Документацията за homelab-а трябва да е достъпна и когато homelab-ът не работи, например чрез синхронизация с Git или експорт.",
+    "Задай правилно адреса на сайта в администрацията, иначе линковете и входът може да се счупят зад reverse proxy."
   ],
   "relatedApps": ["memos", "gitea", "paperless-ngx"]
 }

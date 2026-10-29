@@ -64,11 +64,23 @@
     "Switching between local models from Ollama and cloud APIs in the same interface.",
     "Using voice input and web search inside chats."
   ],
+  "useCasesBg": [
+    "Поверителен чат в стил ChatGPT за домакинството или малък екип, с отделни акаунти.",
+    "Въпроси към собствените ти документи чрез вграденото качване на документи и търсене в тях.",
+    "Превключване между локални модели от Ollama и облачни API в един и същ интерфейс.",
+    "Гласов вход и търсене в мрежата в рамките на чата."
+  ],
   "caveatsEn": [
     "It is only the interface. You still need Ollama or another OpenAI-compatible API to run the models.",
     "The first account created becomes the admin, so create it straight after deployment.",
     "The Docker image is large, and features such as document retrieval add more RAM and disk use.",
     "The license includes a branding clause, so check it before you rebrand or offer it to others."
+  ],
+  "caveatsBg": [
+    "Това е само интерфейсът. Пак ти трябва Ollama или друго OpenAI-съвместимо API, което да изпълнява моделите.",
+    "Първият създаден акаунт става администратор, затова го създай веднага след инсталирането.",
+    "Docker образът е голям, а функции като търсенето в документи добавят още RAM и диск.",
+    "Лицензът съдържа клауза за марката, затова го провери, преди да смениш брандирането или да го предлагаш на други."
   ],
   "relatedApps": ["ollama", "comfyui", "tts-webui"]
 }

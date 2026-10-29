@@ -51,11 +51,23 @@
     "Browsing and sharing files on attached drives from a web interface.",
     "Giving less technical family members a friendly dashboard for the home server."
   ],
+  "useCasesBg": [
+    "Превръщане на резервно mini PC, стар лаптоп или Raspberry Pi в прост домашен сървър, без първо да учиш Docker.",
+    "Инсталиране на популярни self-hosted приложения с един клик от вградения App Store.",
+    "Разглеждане и споделяне на файлове от закачените дискове през уеб интерфейс.",
+    "Приятелско табло за домашния сървър за по-малко технически членове на семейството."
+  ],
   "caveatsEn": [
     "It installs on the host itself, so it does not run inside an unprivileged LXC container. Use bare metal, a VM or a privileged LXC.",
     "One-click apps hide the compose files, which makes custom settings, backups and later migrations harder than with plain Docker.",
     "It is not a full NAS operating system: there is no built-in RAID management, snapshots or replication like TrueNAS offers.",
     "Do not expose the dashboard directly to the internet. Use a VPN or a reverse proxy with authentication for remote access."
+  ],
+  "caveatsBg": [
+    "Инсталира се директно на хоста, затова не работи в непривилегирован LXC контейнер. Използвай bare metal, VM или привилегирован LXC.",
+    "Приложенията с един клик крият compose файловете, което прави собствените настройки, бекъпите и по-късните миграции по-трудни, отколкото с чист Docker.",
+    "Не е пълна NAS операционна система: няма вградено управление на RAID, snapshots или репликация като в TrueNAS.",
+    "Не отваряй таблото директно към интернет. За отдалечен достъп използвай VPN или reverse proxy с автентикация."
   ],
   "relatedApps": ["portainer", "homepage", "nginx-proxy-manager"]
 }

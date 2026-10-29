@@ -51,11 +51,23 @@
     "Running CI pipelines with Gitea Actions, using workflow files close to GitHub Actions syntax.",
     "Hosting container images and packages for your homelab in the built-in package registry."
   ],
+  "useCasesBg": [
+    "Частни хранилища, dotfiles и код за инфраструктурата на собствения ти сървър.",
+    "Огледални копия на хранилища от GitHub или GitLab като локален бекъп.",
+    "CI процеси с Gitea Actions, с workflow файлове, близки до синтаксиса на GitHub Actions.",
+    "Хостване на container образи и пакети за homelab-а ти във вградения package registry."
+  ],
   "caveatsEn": [
     "Gitea Actions needs a separate runner (act_runner) with access to Docker before workflows can run.",
     "SSH clone access needs a free port. If port 22 is taken by the host, map Gitea's SSH to another port such as 2222.",
     "Back up both the data volume and the database. The built-in gitea dump command creates a full archive.",
     "Forgejo is a community fork of Gitea with similar features. Both work, but switching later takes some migration effort."
+  ],
+  "caveatsBg": [
+    "Gitea Actions изисква отделен runner (act_runner) с достъп до Docker, преди workflow-ите да тръгнат.",
+    "Клонирането през SSH изисква свободен порт. Ако порт 22 е зает от хоста, насочи SSH на Gitea към друг порт, например 2222.",
+    "Прави бекъп както на папката с данни, така и на базата. Вградената команда gitea dump създава пълен архив.",
+    "Forgejo е общностен fork на Gitea с подобни функции. И двата работят, но смяната по-късно изисква известна миграция."
   ],
   "relatedApps": ["portainer", "wiki-js", "n8n"]
 }

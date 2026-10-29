@@ -55,11 +55,23 @@
     "Creating feeds for sites that do not offer one, using its web scraping options.",
     "Running one instance for the whole household, with separate users and subscriptions."
   ],
+  "useCasesBg": [
+    "Следене на блогове, новинарски сайтове, YouTube канали и емисии за нови версии на едно място, без алгоритмично подреждане.",
+    "Четене на телефона с мобилно приложение, което се свързва с FreshRSS през API, съвместимо с Google Reader или Fever.",
+    "Създаване на емисии за сайтове, които нямат такива, чрез опциите за уеб скрейпинг.",
+    "Една инстанция за цялото домакинство, с отделни потребители и абонаменти."
+  ],
   "caveatsEn": [
     "Feeds refresh on a schedule, so make sure the cron job or the built-in refresh in the Docker image is running.",
     "Mobile apps need the API enabled and an API password set in each user's profile, separate from the login password.",
     "With thousands of feeds the default SQLite database still works, but PostgreSQL or MySQL handle large multi-user instances better.",
     "Some sites rate-limit or block feed fetchers, so very frequent refresh intervals can get your server blocked."
+  ],
+  "caveatsBg": [
+    "Емисиите се обновяват по график, затова провери, че cron задачата или вграденото обновяване в Docker образа работи.",
+    "Мобилните приложения изискват включено API и API парола в профила на всеки потребител, отделна от паролата за вход.",
+    "С хиляди емисии стандартната SQLite база пак работи, но PostgreSQL или MySQL се справят по-добре с големи инстанции с много потребители.",
+    "Някои сайтове ограничават или блокират четците на емисии, така че прекалено честото обновяване може да блокира сървъра ти."
   ],
   "relatedApps": ["audiobookshelf", "memos", "wiki-js"]
 }

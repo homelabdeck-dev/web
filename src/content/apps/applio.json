@@ -61,11 +61,23 @@
     "Building a small, clean dataset once and reusing the trained model for batch conversion of many files.",
     "Combining text-to-speech with voice conversion to produce speech in a voice you have the rights to use."
   ],
+  "useCasesBg": [
+    "Преозвучаване на разказ, подкаст или глас зад кадър с модел, обучен на собствения ти глас.",
+    "Експерименти с конверсия на глас, без да плащаш на минута и без да качваш записи в облачна услуга.",
+    "Еднократно подготвяне на малък, чист набор от данни и използване на обучения модел за пакетно конвертиране на много файлове.",
+    "Комбиниране на синтез на реч с конверсия на глас, за да получиш реч с глас, който имаш право да ползваш."
+  ],
   "caveatsEn": [
     "Training is only practical on an NVIDIA GPU. On CPU it is far too slow, and AMD support is limited.",
     "The Docker image is large and models add up quickly, so reserve plenty of disk before you start.",
     "Results depend mostly on the training audio: a few minutes of clean, dry speech with no music or reverb works far better than a long noisy recording.",
     "Cloning someone else's voice without consent can be illegal and is against the spirit of the project. Only model voices you have permission to use."
+  ],
+  "caveatsBg": [
+    "Обучението е практично само на NVIDIA видеокарта. На процесор е твърде бавно, а поддръжката за AMD е ограничена.",
+    "Docker образът е голям, а моделите бързо се трупат, затова предвиди много дисково пространство, преди да започнеш.",
+    "Резултатът зависи най-вече от аудиото за обучение: няколко минути чиста реч без музика и ехо дават много по-добър модел от дълъг шумен запис.",
+    "Клонирането на чужд глас без съгласие може да е незаконно и противоречи на духа на проекта. Моделирай само гласове, които имаш разрешение да ползваш."
   ],
   "relatedApps": ["tts-webui", "comfyui", "ollama"]
 }

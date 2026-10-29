@@ -58,11 +58,23 @@
     "Adding basic access lists or password protection in front of services that have no login.",
     "Forwarding TCP or UDP streams, for example for a game server."
   ],
+  "useCasesBg": [
+    "Достъп до услугите в homelab-а по име, например https://photos.example.com, вместо по IP адрес и порт.",
+    "Безплатни Let's Encrypt сертификати, които се подновяват автоматично.",
+    "Прости списъци за достъп или защита с парола пред услуги, които нямат собствен вход.",
+    "Пренасочване на TCP или UDP потоци, например за игрален сървър."
+  ],
   "caveatsEn": [
     "Ports 80 and 443 must be free on the host, and port 81 serves the admin UI. Do not expose port 81 to the internet.",
     "Change the default admin login straight after the first start.",
     "For wildcard certificates or services that are not reachable from the internet, use the DNS challenge with your DNS provider's API token.",
     "Advanced Nginx options are possible but hidden in custom config fields. If you need a lot of them, Caddy or Traefik may fit better."
+  ],
+  "caveatsBg": [
+    "Портове 80 и 443 трябва да са свободни на хоста, а порт 81 е за административния интерфейс. Не отваряй порт 81 към интернет.",
+    "Смени стандартния администраторски вход веднага след първото стартиране.",
+    "За wildcard сертификати или услуги, недостъпни от интернет, използвай DNS проверката с API токен от DNS доставчика си.",
+    "Разширените Nginx настройки са възможни, но скрити в полета за собствена конфигурация. Ако ти трябват много от тях, Caddy или Traefik може да са по-подходящи."
   ],
   "relatedApps": ["adguard-home", "pi-hole", "uptime-kuma"]
 }

@@ -26,17 +26,20 @@
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "AdGuard Home dashboard showing 201 DNS queries, 56 blocked by filters (28%), general statistics, top clients, top queried domains and top blocked domains"
+      "altEn": "AdGuard Home dashboard showing 201 DNS queries, 56 blocked by filters (28%), general statistics, top clients, top queried domains and top blocked domains",
+      "altBg": "Табло на AdGuard Home с 201 DNS заявки, 56 блокирани от филтрите (28%), обща статистика, най-активни клиенти, най-търсени и най-често блокирани домейни"
     },
     {
       "label": "Query Log",
       "filename": "query-log.webp",
-      "altEn": "AdGuard Home query log listing DNS requests with time, domain, response and client, where ad and tracker domains are marked as blocked by the AdGuard DNS filter"
+      "altEn": "AdGuard Home query log listing DNS requests with time, domain, response and client, where ad and tracker domains are marked as blocked by the AdGuard DNS filter",
+      "altBg": "Дневник на заявките в AdGuard Home с DNS заявки, час, домейн, отговор и клиент, като рекламните и проследяващите домейни са отбелязани като блокирани от AdGuard DNS filter"
     },
     {
       "label": "Blocklists",
       "filename": "filters.webp",
-      "altEn": "AdGuard Home DNS blocklists page showing the AdGuard DNS filter enabled with 190,801 rules and an AdAway list available, with add blocklist and check for updates buttons"
+      "altEn": "AdGuard Home DNS blocklists page showing the AdGuard DNS filter enabled with 190,801 rules and an AdAway list available, with add blocklist and check for updates buttons",
+      "altBg": "Страница със списъци за блокиране в AdGuard Home с включен AdGuard DNS filter със 190 801 правила, наличен списък AdAway и бутони за добавяне на списък и проверка за обновления"
     }
   ],
   "dockerComposeSnippet": "# Official Docker image. We run AdGuard Home natively in an LXC (installed with\n# the community-scripts Proxmox helper), so we have not tested this exact snippet.\n# Port 53 must be free on the host (stop systemd-resolved's stub listener if needed).\n# Open http://<host>:3000 once for the setup wizard, then use port 80.\nservices:\n  adguardhome:\n    image: adguard/adguardhome:latest\n    container_name: adguardhome\n    restart: unless-stopped\n    ports:\n      - \"53:53/tcp\"\n      - \"53:53/udp\"\n      - \"3000:3000/tcp\"\n      - \"80:80/tcp\"\n    volumes:\n      - ./work:/opt/adguardhome/work\n      - ./conf:/opt/adguardhome/conf\n",
@@ -46,20 +49,36 @@
     "AdGuard DNS"
   ],
   "descriptionEn": "AdGuard Home is a network-wide DNS server that blocks ads, trackers and malicious domains for every device on your network, without installing anything on them. You point your router or devices at it, and it answers DNS queries, filtering them with blocklists you choose. It has a clean web interface with statistics, a searchable query log, per-client settings, parental control and safe search options, custom filtering rules, and support for encrypted DNS such as DNS-over-HTTPS. It is a popular alternative to Pi-hole and to paid filtered-DNS services.",
+  "descriptionBg": "AdGuard Home е DNS сървър за цялата мрежа, който блокира реклами, тракери и зловредни домейни за всяко устройство у дома, без да инсталираш нищо на самите устройства. Насочваш рутера или устройствата към него, а той отговаря на DNS заявките и ги филтрира по списъци за блокиране, които избираш. Има изчистен уеб интерфейс със статистика, дневник на заявките с търсене, настройки за всеки клиент, родителски контрол и безопасно търсене, собствени правила за филтриране и поддръжка на криптиран DNS като DNS-over-HTTPS. Популярна алтернатива на Pi-hole и на платените услуги за филтриран DNS.",
   "taglineEn": "Network-wide ad and tracker blocking with a clean web interface.",
+  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа с изчистен уеб интерфейс.",
   "seoTitleEn": "AdGuard Home: self-hosted network-wide ad blocker (Pi-hole alternative) — HomelabDeck",
+  "seoTitleBg": "AdGuard Home: self-hosted блокер на реклами за цялата мрежа (алтернатива на Pi-hole) — HomelabDeck",
   "seoDescriptionEn": "AdGuard Home blocks ads and trackers for your whole network at the DNS level. Tested in a 1 vCPU, 512 MB LXC at about 80 MB RAM, with Docker Compose, query log and blocklist screenshots from our own homelab.",
+  "seoDescriptionBg": "AdGuard Home блокира реклами и тракери за цялата мрежа на ниво DNS. Тестван в LXC с 1 vCPU и 512 MB при около 80 MB RAM, с Docker Compose и снимки на дневника и списъците за блокиране от нашия homelab.",
   "useCasesEn": [
     "Blocking ads and trackers on devices where you cannot install an ad blocker, such as smart TVs, game consoles and phone apps.",
     "Giving different devices different rules, for example stricter filtering and safe search for the kids' tablets.",
     "Sending all DNS from the house upstream over DNS-over-HTTPS or DNS-over-TLS, so your ISP cannot read it.",
     "Seeing which devices on the network talk to which domains, through the query log and per-client statistics."
   ],
+  "useCasesBg": [
+    "Блокиране на реклами и тракери на устройства, на които не можеш да сложиш блокер, като smart телевизори, конзоли и приложения на телефона.",
+    "Различни правила за различните устройства, например по-строг филтър и безопасно търсене за таблетите на децата.",
+    "Изпращане на целия DNS трафик от дома през DNS-over-HTTPS или DNS-over-TLS, така че доставчикът ти да не може да го чете.",
+    "Преглед кои устройства в мрежата с кои домейни комуникират, чрез дневника на заявките и статистиката по клиент."
+  ],
   "caveatsEn": [
     "Every device depends on it for DNS, so if the container stops, name resolution stops. Run a second instance or keep a fallback DNS server in your router.",
     "Port 53 must be free on the host. On many Linux systems systemd-resolved already listens there and has to be reconfigured first.",
     "Some apps and smart devices ignore the DNS server your network hands out, or use their own DNS-over-HTTPS, which bypasses the filter.",
     "Aggressive blocklists can break shopping links, sign-ins or streaming apps, so expect to allowlist a few domains in the first weeks."
+  ],
+  "caveatsBg": [
+    "Всяко устройство зависи от него за DNS, така че ако контейнерът спре, спира и разпознаването на имена. Пусни втора инстанция или остави резервен DNS сървър в рутера.",
+    "Порт 53 трябва да е свободен на хоста. На много Linux системи systemd-resolved вече слуша там и трябва първо да се преконфигурира.",
+    "Някои приложения и smart устройства игнорират DNS сървъра, който мрежата им дава, или ползват собствен DNS-over-HTTPS и така заобикалят филтъра.",
+    "Агресивните списъци за блокиране могат да счупят линкове от магазини, входове в акаунти или стрийминг приложения, така че през първите седмици очаквай да разрешиш ръчно няколко домейна."
   ],
   "relatedApps": ["pi-hole", "nginx-proxy-manager", "uptime-kuma"]
 }

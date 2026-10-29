@@ -51,11 +51,23 @@
     "Watching live TV and recording shows with a TV tuner and the built-in DVR.",
     "Giving family members separate profiles with their own watch progress and parental controls."
   ],
+  "useCasesBg": [
+    "Стрийминг на собствените ти филми, сериали и музика към телевизори, телефони и браузъри у дома и навън.",
+    "Замяна на Plex без акаунти, телеметрия и платен абонамент за функции като хардуерно транскодиране.",
+    "Гледане на телевизия на живо и записване на предавания с тунер и вградения DVR.",
+    "Отделни профили за членовете на семейството със собствен прогрес на гледане и родителски контрол."
+  ],
   "caveatsEn": [
     "Transcoding 4K or HDR on CPU is slow. Pass an Intel iGPU or NVIDIA GPU to the container for hardware transcoding.",
     "Name files and folders the way Jellyfin expects (Movie Name (Year)), or metadata matching will be poor.",
     "Some TV apps are less polished than Plex's, so test the clients your household uses before switching fully.",
     "For remote streaming use a reverse proxy with HTTPS or a VPN, and keep upload bandwidth in mind."
+  ],
+  "caveatsBg": [
+    "Транскодирането на 4K или HDR на процесора е бавно. Прехвърли Intel iGPU или NVIDIA видеокарта към контейнера за хардуерно транскодиране.",
+    "Именувай файловете и папките така, както Jellyfin очаква (Име на филма (Година)), иначе разпознаването на метаданните ще е слабо.",
+    "Някои приложения за телевизори са по-малко изпипани от тези на Plex, затова тествай клиентите, които ползва домакинството, преди да преминеш напълно.",
+    "За стрийминг отвън използвай reverse proxy с HTTPS или VPN и мисли за скоростта на качване на интернета си."
   ],
   "relatedApps": ["audiobookshelf", "immich", "nginx-proxy-manager"]
 }

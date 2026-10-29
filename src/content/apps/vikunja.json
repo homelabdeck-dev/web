@@ -51,11 +51,23 @@
     "Sharing projects with family or a small team.",
     "Syncing tasks to phone apps through CalDAV."
   ],
+  "useCasesBg": [
+    "Лични задачи със списъци, срокове, напомняния и повтарящи се задачи.",
+    "Планиране на малки проекти с Kanban дъски и Gantt диаграми върху едни и същи задачи.",
+    "Споделяне на проекти със семейството или малък екип.",
+    "Синхронизиране на задачите с приложения на телефона чрез CalDAV."
+  ],
   "caveatsEn": [
     "Set the public URL setting correctly, or links, the frontend and CalDAV may not work behind a reverse proxy.",
     "Email reminders need SMTP settings in the config.",
     "CalDAV support covers tasks but not every client feature, so test with the app you plan to use.",
     "Importing from Todoist or Trello is available, but check labels and attachments after the import."
+  ],
+  "caveatsBg": [
+    "Задай правилно публичния адрес в настройките, иначе линковете, интерфейсът и CalDAV може да не работят зад reverse proxy.",
+    "Напомнянията по имейл изискват SMTP настройки в конфигурацията.",
+    "Поддръжката на CalDAV покрива задачите, но не всяка функция на клиентите, затова тествай с приложението, което смяташ да ползваш.",
+    "Има импорт от Todoist и Trello, но провери етикетите и прикачените файлове след импорта."
   ],
   "relatedApps": ["memos", "wiki-js", "n8n"]
 }

@@ -51,11 +51,23 @@
     "Tagging documents automatically by correspondent and type once it has learned from a few examples.",
     "Keeping a searchable PDF/A archive with the original files preserved."
   ],
+  "useCasesBg": [
+    "Сканиране на хартиени сметки, договори и писма и намирането им по-късно с пълнотекстово търсене.",
+    "Скенер или имейл кутия, които пускат документи в папка, откъдето Paperless ги взима автоматично.",
+    "Автоматично тагване на документите по кореспондент и тип, след като се научи от няколко примера.",
+    "Архив от PDF/A с възможност за търсене, като оригиналните файлове се запазват."
+  ],
   "caveatsEn": [
     "It needs Redis and ideally PostgreSQL, so use the official compose file rather than a single container.",
     "Set the OCR language to match your documents, for example English plus Bulgarian, or text recognition will suffer.",
     "These are important personal documents. Back up the media and data folders and use the document exporter regularly.",
     "Office files such as Word documents need the extra Tika and Gotenberg containers."
+  ],
+  "caveatsBg": [
+    "Изисква Redis и в идеалния случай PostgreSQL, затова използвай официалния compose файл, а не единичен контейнер.",
+    "Задай езика за OCR според документите си, например английски и български, иначе разпознаването на текст ще страда.",
+    "Това са важни лични документи. Прави бекъп на папките с медия и данни и използвай редовно експорта на документи.",
+    "Офис файлове като Word документи изискват допълнителните контейнери Tika и Gotenberg."
   ],
   "relatedApps": ["immich", "memos", "wiki-js"]
 }

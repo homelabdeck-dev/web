@@ -26,17 +26,20 @@
     {
       "label": "Models",
       "filename": "models.webp",
-      "altEn": "Terminal showing ollama version 0.34.2 and the ollama list command with two downloaded models, gpt-oss:20b at 13 GB and llama3.2:1b at 1.3 GB"
+      "altEn": "Terminal showing ollama version 0.34.2 and the ollama list command with two downloaded models, gpt-oss:20b at 13 GB and llama3.2:1b at 1.3 GB",
+      "altBg": "Терминал с ollama version 0.34.2 и командата ollama list с два изтеглени модела: gpt-oss:20b с 13 GB и llama3.2:1b с 1,3 GB"
     },
     {
       "label": "Running on GPU",
       "filename": "running.webp",
-      "altEn": "Terminal showing ollama ps with gpt-oss:20b loaded 100% on the GPU with a 32768 context, and nvidia-smi showing an RTX 3090 with about 13.7 GB of VRAM used by the Ollama llama-server process"
+      "altEn": "Terminal showing ollama ps with gpt-oss:20b loaded 100% on the GPU with a 32768 context, and nvidia-smi showing an RTX 3090 with about 13.7 GB of VRAM used by the Ollama llama-server process",
+      "altBg": "Терминал с ollama ps, където gpt-oss:20b е зареден 100% на видеокартата с контекст 32768, и nvidia-smi с RTX 3090 и около 13,7 GB VRAM, заети от процеса llama-server на Ollama"
     },
     {
       "label": "API",
       "filename": "api.webp",
-      "altEn": "Terminal showing a curl request to the Ollama generate API on port 11434 and the JSON answer with load and evaluation timings (some fields omitted)"
+      "altEn": "Terminal showing a curl request to the Ollama generate API on port 11434 and the JSON answer with load and evaluation timings (some fields omitted)",
+      "altBg": "Терминал със заявка с curl към generate API на Ollama на порт 11434 и JSON отговор с времена за зареждане и изпълнение (някои полета са пропуснати)"
     }
   ],
   "dockerComposeSnippet": "# Official Docker method with an NVIDIA GPU. Needs the NVIDIA driver and\n# nvidia-container-toolkit on the host. We run Ollama as a native install\n# inside an LXC (see the guide), so we have not tested this exact snippet.\nservices:\n  ollama:\n    image: ollama/ollama:latest\n    container_name: ollama\n    restart: unless-stopped\n    ports:\n      - \"11434:11434\"\n    volumes:\n      - ./ollama:/root/.ollama\n    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia\n              count: all\n              capabilities: [gpu]\n",
@@ -46,20 +49,36 @@
     "Google Gemini API"
   ],
   "descriptionEn": "Ollama downloads and runs open large language models on your own machine with a single command. It exposes a local HTTP API on port 11434 that tools like Open WebUI, editors and scripts can talk to, so your prompts and documents never leave your network. It uses an NVIDIA GPU when one is available and falls back to the CPU otherwise. Models such as gpt-oss, Llama, Gemma and Qwen are pulled from its library with ollama pull. It is the engine; for a chat interface in the browser, pair it with Open WebUI.",
+  "descriptionBg": "Ollama изтегля и пуска отворени големи езикови модели на собствения ти компютър с една команда. Предоставя локално HTTP API на порт 11434, с което могат да работят инструменти като Open WebUI, редактори и скриптове, така че промптовете и документите ти не напускат мрежата. Използва NVIDIA видеокарта, когато има такава, а иначе работи на процесора. Модели като gpt-oss, Llama, Gemma и Qwen се изтеглят от библиотеката му с ollama pull. Ollama е двигателят; за чат интерфейс в браузъра го комбинирай с Open WebUI.",
   "taglineEn": "Run open language models locally with one command and a simple API.",
+  "taglineBg": "Пускай отворени езикови модели локално с една команда и просто API.",
   "seoTitleEn": "Ollama: run local LLMs on your own GPU, self-hosted — HomelabDeck",
+  "seoTitleBg": "Ollama: локални LLM модели на собствена видеокарта, self-hosted — HomelabDeck",
   "seoDescriptionEn": "Ollama runs open LLMs like gpt-oss and Llama on your own hardware with a local API. Real RTX 3090 numbers (about 118 tokens/s, 13.7 GB VRAM), Docker Compose and screenshots from our own LXC.",
+  "seoDescriptionBg": "Ollama пуска отворени LLM модели като gpt-oss и Llama на твоя хардуер с локално API. Реални числа от RTX 3090 (около 118 токена/s, 13,7 GB VRAM), Docker Compose и снимки от нашия LXC.",
   "useCasesEn": [
     "Running open language models such as Llama, Gemma, Qwen or gpt-oss privately on your own hardware.",
     "Giving local tools an OpenAI-style API, for example editors, scripts or n8n workflows.",
     "Powering a ChatGPT-like web chat together with Open WebUI.",
     "Testing different models and sizes quickly with ollama pull and ollama run."
   ],
+  "useCasesBg": [
+    "Пускане на отворени езикови модели като Llama, Gemma, Qwen или gpt-oss поверително на собствен хардуер.",
+    "API в стил OpenAI за локални инструменти, например редактори, скриптове или работни процеси в n8n.",
+    "Чат в браузъра в стил ChatGPT заедно с Open WebUI.",
+    "Бързо изпробване на различни модели и размери с ollama pull и ollama run."
+  ],
   "caveatsEn": [
     "Speed depends on VRAM. A model that does not fit in GPU memory spills to the CPU and becomes much slower.",
     "The API has no authentication. Keep port 11434 on your local network or put a proxy with authentication in front.",
     "Models take a lot of disk, from about 1 GB for small ones to tens of GB for large ones.",
     "Open models are good but not equal to the best cloud models, so test them on your own tasks before relying on them."
+  ],
+  "caveatsBg": [
+    "Скоростта зависи от VRAM. Модел, който не се побира в паметта на видеокартата, преминава частично на процесора и става много по-бавен.",
+    "API-то няма автентикация. Дръж порт 11434 в локалната мрежа или сложи proxy с автентикация пред него.",
+    "Моделите заемат много диск, от около 1 GB за малките до десетки GB за големите.",
+    "Отворените модели са добри, но не са равни на най-добрите облачни модели, затова ги тествай на собствените си задачи, преди да разчиташ на тях."
   ],
   "relatedApps": ["open-webui", "comfyui", "tts-webui"]
 }

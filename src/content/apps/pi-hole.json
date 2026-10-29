@@ -51,11 +51,23 @@
     "Running DHCP for the network when the router's own DHCP is limited.",
     "Setting local DNS names for homelab services, such as nas.lan."
   ],
+  "useCasesBg": [
+    "Блокиране на реклами и тракери за всяко устройство в мрежата, включително smart телевизори и приложения на телефона.",
+    "Преглед кои устройства правят най-много DNS заявки и с кои домейни се свързват.",
+    "DHCP сървър за мрежата, когато вграденият DHCP на рутера е ограничен.",
+    "Локални DNS имена за услугите в homelab-а, например nas.lan."
+  ],
   "caveatsEn": [
     "All devices depend on it for DNS. Keep a second instance or a fallback so the internet does not go down with it.",
     "Port 53 must be free on the host, which often means disabling the systemd-resolved stub listener.",
     "Encrypted upstream DNS (DNS-over-HTTPS) is not built in and needs an extra tool such as cloudflared or Unbound.",
     "Some apps hardcode their own DNS servers and will bypass Pi-hole unless you redirect DNS traffic on the router."
+  ],
+  "caveatsBg": [
+    "Всички устройства зависят от него за DNS. Дръж втора инстанция или резервен вариант, за да не спира интернетът заедно с него.",
+    "Порт 53 трябва да е свободен на хоста, което често означава изключване на stub listener-а на systemd-resolved.",
+    "Криптиран DNS към външните сървъри (DNS-over-HTTPS) не е вграден и изисква допълнителен инструмент като cloudflared или Unbound.",
+    "Някои приложения имат собствени DNS сървъри, зададени в кода, и ще заобиколят Pi-hole, ако не пренасочиш DNS трафика в рутера."
   ],
   "relatedApps": ["adguard-home", "nginx-proxy-manager", "uptime-kuma"]
 }

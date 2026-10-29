@@ -51,11 +51,23 @@
     "Using Zigbee, Z-Wave, Thread or Matter devices without vendor clouds, through a USB coordinator.",
     "Tracking energy use with smart meters and plugs on the built-in energy dashboard."
   ],
+  "useCasesBg": [
+    "Управление на лампи, контакти, сензори и климатични устройства от много марки в едно приложение.",
+    "Автоматизации, които работят локално, например включване на осветлението при залез или при засечено движение.",
+    "Използване на Zigbee, Z-Wave, Thread или Matter устройства без облака на производителя, чрез USB координатор.",
+    "Следене на консумацията на енергия със smart измерватели и контакти във вграденото енергийно табло."
+  ],
   "caveatsEn": [
     "The Docker install does not include add-ons. If you want the add-on store, use Home Assistant OS in a VM instead.",
     "Zigbee and Z-Wave sticks must be passed through to the container or VM, which takes extra setup in Proxmox and LXC.",
     "Monthly releases sometimes include breaking changes. Read the release notes and take a backup before updating.",
     "For remote access use a VPN, a reverse proxy with HTTPS, or the paid Nabu Casa cloud, rather than an open port."
+  ],
+  "caveatsBg": [
+    "Инсталацията с Docker не включва добавки (add-ons). Ако искаш магазина за добавки, използвай Home Assistant OS във виртуална машина.",
+    "Zigbee и Z-Wave стиковете трябва да се прехвърлят към контейнера или VM, което изисква допълнителна настройка в Proxmox и LXC.",
+    "Месечните версии понякога носят несъвместими промени. Чети бележките към версията и прави бекъп преди обновяване.",
+    "За отдалечен достъп използвай VPN, reverse proxy с HTTPS или платения облак Nabu Casa, а не отворен порт."
   ],
   "relatedApps": ["n8n", "uptime-kuma", "grafana"]
 }

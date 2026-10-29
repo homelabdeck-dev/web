@@ -51,11 +51,23 @@
     "Publishing a simple public status page for your services.",
     "Watching Docker containers, ping targets, DNS records and TCP ports from one place."
   ],
+  "useCasesBg": [
+    "Проверка, че сайтовете и услугите в homelab-а работят, и известие, когато някоя падне.",
+    "Следене на сертификатите, за да разбереш за изтичането им преди посетителите.",
+    "Публикуване на проста публична статус страница за услугите ти.",
+    "Наблюдение на Docker контейнери, ping цели, DNS записи и TCP портове от едно място."
+  ],
   "caveatsEn": [
     "A monitor running on the same server as your services cannot alert you when that server goes down. Run it on separate hardware or a small VPS too.",
     "Very short check intervals on many monitors increase load and database size.",
     "Store the data folder on local disk. SQLite on network shares such as NFS can get corrupted.",
     "Set up at least two notification channels, so one failing does not leave you without alerts."
+  ],
+  "caveatsBg": [
+    "Мониторинг, който работи на същия сървър като услугите ти, не може да те предупреди, когато самият сървър падне. Пусни го и на отделен хардуер или малък VPS.",
+    "Много кратки интервали на проверка при много монитори увеличават натоварването и размера на базата.",
+    "Дръж папката с данни на локален диск. SQLite върху мрежови дялове като NFS може да се повреди.",
+    "Настрой поне два канала за известия, за да не останеш без аларми, ако единият спре да работи."
   ],
   "relatedApps": ["grafana", "homepage", "nginx-proxy-manager"]
 }
