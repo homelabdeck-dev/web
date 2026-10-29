@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 4096,
       "cpuCores": 4,
-      "notes": "Measured in our LXC (6 vCPU, 6 GB RAM, RTX 3090) with Ollama 0.34.2: the Open WebUI container uses about 0.5 to 0.7 GB of RAM, and the container lives in an LXC that sat at 0.7 GB idle and about 2.9 GB with a 20B model loaded, because the model weights go to the GPU. gpt-oss:20b (13 GB download) took about 16.5 GB of VRAM at the default 32k context and generated around 122 to 125 tokens per second; the first load took about 47 seconds. The Docker image is about 6.5 GB. Without a GPU, expect much slower answers and stick to small models."
+      "notes": "Measured in our LXC (6 vCPU, 6 GB RAM, RTX 3090) with Ollama 0.34.2: the Open WebUI container uses about 0.5 to 0.7 GB of RAM, and the container lives in an LXC that sat at 0.7 GB idle and about 2.9 GB with a 20B model loaded, because the model weights go to the GPU. gpt-oss:20b (13 GB download) took about 16.5 GB of VRAM at the default 32k context and generated around 122 to 125 tokens per second; the first load took about 47 seconds. The Docker image is about 6.5 GB. Without a GPU, expect much slower answers and stick to small models.",
+      "notesBg": "Измерено в нашия LXC (6 vCPU, 6 GB RAM, RTX 3090) с Ollama 0.34.2: контейнерът на Open WebUI използва около 0,5 до 0,7 GB RAM, а LXC-то, в което работи, беше на 0,7 GB в покой и около 2,9 GB със зареден 20B модел, защото теглата на модела отиват във видеокартата. gpt-oss:20b (изтегляне от 13 GB) зае около 16,5 GB VRAM при стандартния контекст от 32k и генерираше около 122 до 125 токена в секунда; първото зареждане отне около 47 секунди. Docker образът е около 6,5 GB. Без видеокарта очаквай много по-бавни отговори и се придържай към малки модели."
     }
   },
   "screenshots": [
@@ -57,5 +58,30 @@
   "descriptionEn": "Open WebUI is a self-hosted chat interface for large language models. It works with Ollama, which runs the models on your own hardware, and with any OpenAI-compatible API. You get conversation history, multiple users, document upload with retrieval, web search, voice input and model management in a browser, and your prompts never have to leave your network. On a GPU such as an RTX 3090, a 20B model answers at over 100 tokens per second. It is a self-hosted alternative to ChatGPT-style subscriptions, as long as you are fine with the quality of open models.",
   "descriptionBg": "Open WebUI е самостоятелно хоствана чат платформа за големи езикови модели. Работи с Ollama, който изпълнява моделите на твоя хардуер, и с всяко OpenAI-съвместимо API. Получаваш история на разговорите, няколко потребители, качване на документи с търсене в тях, търсене в мрежата, гласов вход и управление на модели в браузъра, а заявките ти не е нужно да напускат мрежата ти. На видеокарта като RTX 3090 модел с 20 милиарда параметъра отговаря с над 100 токена в секунда. Това е самостоятелно хоствана алтернатива на абонаментите от типа ChatGPT, стига да ти харесва качеството на отворените модели.",
   "taglineEn": "A private ChatGPT-style interface for models running on your own GPU.",
-  "taglineBg": "Частен интерфейс в стил ChatGPT за модели, които работят на твоя видеокарта."
+  "taglineBg": "Частен интерфейс в стил ChatGPT за модели, които работят на твоя видеокарта.",
+  "useCasesEn": [
+    "A private ChatGPT-style chat for the household or a small team, with separate accounts.",
+    "Asking questions about your own documents with the built-in document upload and retrieval.",
+    "Switching between local models from Ollama and cloud APIs in the same interface.",
+    "Using voice input and web search inside chats."
+  ],
+  "useCasesBg": [
+    "Поверителен чат в стил ChatGPT за домакинството или малък екип, с отделни акаунти.",
+    "Въпроси към собствените ти документи чрез вграденото качване на документи и търсене в тях.",
+    "Превключване между локални модели от Ollama и облачни API в един и същ интерфейс.",
+    "Гласов вход и търсене в мрежата в рамките на чата."
+  ],
+  "caveatsEn": [
+    "It is only the interface. You still need Ollama or another OpenAI-compatible API to run the models.",
+    "The first account created becomes the admin, so create it straight after deployment.",
+    "The Docker image is large, and features such as document retrieval add more RAM and disk use.",
+    "The license includes a branding clause, so check it before you rebrand or offer it to others."
+  ],
+  "caveatsBg": [
+    "Това е само интерфейсът. Пак ти трябва Ollama или друго OpenAI-съвместимо API, което да изпълнява моделите.",
+    "Първият създаден акаунт става администратор, затова го създай веднага след инсталирането.",
+    "Docker образът е голям, а функции като търсенето в документи добавят още RAM и диск.",
+    "Лицензът съдържа клауза за марката, затова го провери, преди да смениш брандирането или да го предлагаш на други."
+  ],
+  "relatedApps": ["ollama", "comfyui", "tts-webui"]
 }

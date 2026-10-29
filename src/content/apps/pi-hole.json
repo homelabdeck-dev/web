@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Extremely lightweight — the classic 'runs on a Raspberry Pi' network-wide ad blocker. Footprint mainly scales with total DNS query volume across your network and how large your blocklists are, not with the number of client devices."
+      "notes": "Extremely lightweight — the classic 'runs on a Raspberry Pi' network-wide ad blocker. Footprint mainly scales with total DNS query volume across your network and how large your blocklists are, not with the number of client devices.",
+      "notesBg": "Изключително лек: класическият блокер на реклами за цялата мрежа, който „върви на Raspberry Pi“. Натоварването зависи основно от общия обем DNS заявки в мрежата и размера на списъците за блокиране, а не от броя устройства."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Pi-hole is a network-wide DNS sinkhole that blocks ads and trackers for every device on your network — phones, smart TVs and apps included — with no client-side software to install. Its web dashboard gives real-time query statistics, per-client insights and easy allow/deny list management, and it can double as your network's DHCP server.",
   "descriptionBg": "Pi-hole е DNS sinkhole за цялата мрежа, който блокира реклами и тракери за всяко устройство в мрежата ти — телефони, smart телевизори и приложения включително — без нужда от инсталиране на клиентски софтуер. Уеб таблото дава статистика за заявки в реално време, преглед по клиент и лесно управление на разрешаващи/забраняващи листи, а може да служи и като DHCP сървър на мрежата.",
   "taglineEn": "Network-wide ad and tracker blocking via DNS.",
-  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа чрез DNS."
+  "taglineBg": "Блокиране на реклами и тракери за цялата мрежа чрез DNS.",
+  "useCasesEn": [
+    "Blocking ads and trackers for every device on the network, including smart TVs and phone apps.",
+    "Seeing which devices make the most DNS queries and which domains they contact.",
+    "Running DHCP for the network when the router's own DHCP is limited.",
+    "Setting local DNS names for homelab services, such as nas.lan."
+  ],
+  "useCasesBg": [
+    "Блокиране на реклами и тракери за всяко устройство в мрежата, включително smart телевизори и приложения на телефона.",
+    "Преглед кои устройства правят най-много DNS заявки и с кои домейни се свързват.",
+    "DHCP сървър за мрежата, когато вграденият DHCP на рутера е ограничен.",
+    "Локални DNS имена за услугите в homelab-а, например nas.lan."
+  ],
+  "caveatsEn": [
+    "All devices depend on it for DNS. Keep a second instance or a fallback so the internet does not go down with it.",
+    "Port 53 must be free on the host, which often means disabling the systemd-resolved stub listener.",
+    "Encrypted upstream DNS (DNS-over-HTTPS) is not built in and needs an extra tool such as cloudflared or Unbound.",
+    "Some apps hardcode their own DNS servers and will bypass Pi-hole unless you redirect DNS traffic on the router."
+  ],
+  "caveatsBg": [
+    "Всички устройства зависят от него за DNS. Дръж втора инстанция или резервен вариант, за да не спира интернетът заедно с него.",
+    "Порт 53 трябва да е свободен на хоста, което често означава изключване на stub listener-а на systemd-resolved.",
+    "Криптиран DNS към външните сървъри (DNS-over-HTTPS) не е вграден и изисква допълнителен инструмент като cloudflared или Unbound.",
+    "Някои приложения имат собствени DNS сървъри, зададени в кода, и ще заобиколят Pi-hole, ако не пренасочиш DNS трафика в рутера."
+  ],
+  "relatedApps": ["adguard-home", "nginx-proxy-manager", "uptime-kuma"]
 }

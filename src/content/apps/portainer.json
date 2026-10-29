@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 0.5,
-      "notes": "Very light for managing a single Docker host — a few hundred MB of RAM is plenty. Footprint grows when managing many remote endpoints, Kubernetes clusters or Docker Swarm environments from one Portainer instance."
+      "notes": "Very light for managing a single Docker host — a few hundred MB of RAM is plenty. Footprint grows when managing many remote endpoints, Kubernetes clusters or Docker Swarm environments from one Portainer instance.",
+      "notesBg": "Много лек при управление на един Docker хост: няколкостотин MB RAM са напълно достатъчни. Натоварването расте при управление на много отдалечени хостове, Kubernetes клъстери или Docker Swarm среди от една инстанция на Portainer."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Portainer Community Edition is a lightweight web UI for managing Docker, Docker Swarm, Kubernetes and Podman environments without touching the CLI. It gives homelab operators and hobbyists an easy way to deploy stacks, inspect logs, and manage containers, images, volumes and networks from a single dashboard.",
   "descriptionBg": "Portainer Community Edition е лек уеб интерфейс за управление на Docker, Docker Swarm, Kubernetes и Podman среди без нужда от CLI. Дава на homelab потребители и хобисти лесен начин да разгръщат stacks, преглеждат логове и управляват контейнери, образи, томове и мрежи от едно табло.",
   "taglineEn": "Web UI for managing Docker and Kubernetes without the CLI.",
-  "taglineBg": "Уеб интерфейс за управление на Docker и Kubernetes без CLI."
+  "taglineBg": "Уеб интерфейс за управление на Docker и Kubernetes без CLI.",
+  "useCasesEn": [
+    "Seeing all containers, images, volumes and networks on a Docker host in a web interface.",
+    "Deploying and updating docker compose stacks from the browser.",
+    "Reading container logs and opening a console without SSH.",
+    "Managing several Docker hosts from one place with the Portainer agent."
+  ],
+  "useCasesBg": [
+    "Преглед на всички контейнери, образи, томове и мрежи на Docker хост в уеб интерфейс.",
+    "Разгръщане и обновяване на docker compose stacks от браузъра.",
+    "Четене на логове на контейнери и отваряне на конзола без SSH.",
+    "Управление на няколко Docker хоста от едно място с Portainer agent."
+  ],
+  "caveatsEn": [
+    "Portainer needs access to the Docker socket, which is effectively root on the host, so protect its login well.",
+    "Create the admin user right after the first start. If you wait too long, the setup screen times out and Portainer has to be restarted.",
+    "Some features, such as role-based access control and registry management extras, are only in the paid Business Edition.",
+    "Stacks created in Portainer are stored in its data volume, so back it up or keep the compose files in Git as well."
+  ],
+  "caveatsBg": [
+    "Portainer изисква достъп до Docker socket, което на практика е root достъп до хоста, така че защити добре входа му.",
+    "Създай администратора веднага след първото стартиране. Ако чакаш твърде дълго, екранът за настройка изтича и Portainer трябва да се рестартира.",
+    "Някои функции, като контрол на достъпа по роли и допълнителното управление на регистри, са само в платеното Business Edition.",
+    "Stacks, създадени в Portainer, се пазят в неговата папка с данни, затова прави ѝ бекъп или дръж compose файловете и в Git."
+  ],
+  "relatedApps": ["casaos", "homepage", "gitea"]
 }

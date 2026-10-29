@@ -20,6 +20,7 @@
       "app": "open-webui"
     }
   ],
+  "apps": ["ollama"],
   "sections": [
     {
       "kind": "list",

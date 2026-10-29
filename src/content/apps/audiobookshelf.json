@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Light at idle — around 125 MB of RAM with a small library in our test LXC. Scanning large libraries and transcoding for some clients temporarily raise CPU and RAM use; storage needs depend entirely on your audiobook and podcast collection."
+      "notes": "Light at idle — around 125 MB of RAM with a small library in our test LXC. Scanning large libraries and transcoding for some clients temporarily raise CPU and RAM use; storage needs depend entirely on your audiobook and podcast collection.",
+      "notesBg": "Лек в покой: около 125 MB RAM с малка библиотека в тестовия ни LXC. Сканирането на големи библиотеки и транскодирането за някои клиенти временно вдигат натоварването на процесора и RAM; нуждата от диск зависи изцяло от колекцията ти от аудиокниги и подкасти."
     }
   },
   "screenshots": [
@@ -51,5 +52,30 @@
   "descriptionEn": "Audiobookshelf is a self-hosted audiobook and podcast server with a polished web player and official Android and iOS apps. It scans your folders, pulls in covers and metadata, tracks listening progress per user and syncs it across devices, with support for multiple libraries, series, collections and podcast auto-download. If you own DRM-free audiobooks or listen to public-domain recordings, it gives you an Audible-like experience on your own hardware.",
   "descriptionBg": "Audiobookshelf е self-hosted сървър за аудиокниги и подкасти с добре изработен уеб плейър и официални приложения за Android и iOS. Сканира папките ти, изтегля корици и метаданни, следи прогреса на слушане за всеки потребител и го синхронизира между устройствата, с поддръжка на няколко библиотеки, серии, колекции и автоматично сваляне на подкасти. Ако имаш аудиокниги без DRM или слушаш записи от обществено достояние, получаваш Audible-подобно изживяване на собствен хардуер.",
   "taglineEn": "Self-hosted audiobook and podcast server with mobile apps.",
-  "taglineBg": "Self-hosted сървър за аудиокниги и подкасти с мобилни приложения."
+  "taglineBg": "Self-hosted сървър за аудиокниги и подкасти с мобилни приложения.",
+  "useCasesEn": [
+    "Listening to your own DRM-free audiobook collection on the phone with progress synced across devices.",
+    "Subscribing to podcasts on the server so episodes download automatically and stay available offline.",
+    "Sharing one library with family members, each with their own accounts and listening history.",
+    "Replacing a general media server for spoken-word content, where chapters, bookmarks and playback speed matter."
+  ],
+  "useCasesBg": [
+    "Слушане на собствената ти колекция от аудиокниги без DRM на телефона, с прогрес, синхронизиран между устройствата.",
+    "Абонамент за подкасти на сървъра, така че епизодите да се свалят автоматично и да са налични офлайн.",
+    "Споделяне на една библиотека със семейството, като всеки има собствен акаунт и история на слушане.",
+    "Замяна на общ медиен сървър за говоримо съдържание, където глави, отметки и скорост на възпроизвеждане са важни."
+  ],
+  "caveatsEn": [
+    "It does not remove DRM. Books bought on Audible or similar stores need to be DRM-free before Audiobookshelf can play them.",
+    "Folder structure matters: one folder per book (Author/Series/Title) gives the best metadata matching.",
+    "For listening outside your home network you need a reverse proxy with HTTPS or a VPN such as WireGuard or Tailscale.",
+    "Back up the config and metadata folders as well as the media, because progress and user data live there."
+  ],
+  "caveatsBg": [
+    "Не премахва DRM. Книгите, купени от Audible или подобни магазини, трябва да са без DRM, за да ги пуска Audiobookshelf.",
+    "Структурата на папките е важна: по една папка на книга (Автор/Поредица/Заглавие) дава най-добро разпознаване на метаданните.",
+    "За слушане извън домашната мрежа ти трябва reverse proxy с HTTPS или VPN като WireGuard или Tailscale.",
+    "Прави бекъп на папките с конфигурация и метаданни, а не само на медията, защото там са прогресът и потребителските данни."
+  ],
+  "relatedApps": ["jellyfin", "freshrss", "immich"]
 }

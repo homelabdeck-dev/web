@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Extremely light — a single Go binary that used only around 60 MB of RAM in our test LXC. Memory use stays small even with thousands of notes; attachments are the main thing that grows storage."
+      "notes": "Extremely light — a single Go binary that used only around 60 MB of RAM in our test LXC. Memory use stays small even with thousands of notes; attachments are the main thing that grows storage.",
+      "notesBg": "Изключително лек: един Go бинарен файл, който използваше само около 60 MB RAM в тестовия ни LXC. Паметта остава малка дори с хиляди бележки; основно прикачените файлове увеличават нуждата от диск."
     }
   },
   "screenshots": [
@@ -51,5 +52,30 @@
   "descriptionEn": "Memos is a privacy-first, lightweight note-taking service built for quick capture: type a thought, add tags, and it lands in a timeline you can browse, search or view on a calendar. Notes are plain Markdown, can carry attachments and be shared publicly or kept private, and everything is stored in a single SQLite file by default. It is a minimal self-hosted alternative to Google Keep that runs happily on almost any hardware.",
   "descriptionBg": "Memos е лека услуга за бележки с приоритет върху поверителността, създадена за бързо записване: пишеш мисъл, добавяш тагове и тя попада във времева лента, която можеш да разглеждаш, търсиш или виждаш в календар. Бележките са обикновен Markdown, могат да имат прикачени файлове и да са публични или лични, а всичко по подразбиране се съхранява в един SQLite файл. Минималистична self-hosted алтернатива на Google Keep, която върви спокойно на почти всякакъв хардуер.",
   "taglineEn": "Lightweight, privacy-first note-taking with a quick-capture timeline.",
-  "taglineBg": "Лека, поверителна услуга за бележки с времева лента за бързо записване."
+  "taglineBg": "Лека, поверителна услуга за бележки с времева лента за бързо записване.",
+  "useCasesEn": [
+    "Capturing quick thoughts, links and snippets from the browser or phone in seconds.",
+    "Keeping a private journal or work log on a timeline with tags.",
+    "Sharing selected notes publicly through a link while keeping the rest private.",
+    "Replacing Google Keep with something that stores everything in one small database you control."
+  ],
+  "useCasesBg": [
+    "Бързо записване на мисли, линкове и откъси от браузъра или телефона за секунди.",
+    "Личен дневник или работен лог във времева лента с тагове.",
+    "Публично споделяне на избрани бележки с линк, докато останалите остават лични.",
+    "Замяна на Google Keep с нещо, което пази всичко в една малка база под твой контрол."
+  ],
+  "caveatsEn": [
+    "It is built for short notes, not long structured documents. For a knowledge base use a wiki such as Wiki.js.",
+    "The project changes quickly and major versions have changed the API, so third-party apps may lag behind.",
+    "Back up the data folder regularly. With the default SQLite setup that one folder holds all notes and attachments.",
+    "There is no end-to-end encryption, so anyone with access to the server can read the notes."
+  ],
+  "caveatsBg": [
+    "Създаден е за кратки бележки, не за дълги структурирани документи. За база знания използвай wiki като Wiki.js.",
+    "Проектът се променя бързо и големите версии са сменяли API-то, така че приложенията от трети страни може да изостават.",
+    "Прави редовно бекъп на папката с данни. При стандартната SQLite настройка тази една папка съдържа всички бележки и прикачени файлове.",
+    "Няма криптиране от край до край, така че всеки с достъп до сървъра може да чете бележките."
+  ],
+  "relatedApps": ["wiki-js", "vikunja", "paperless-ngx"]
 }

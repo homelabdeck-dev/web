@@ -14,7 +14,7 @@
   "home": {
     "eyebrow": "Self-hosted software directory",
     "heading": "Discover the best self-hosted software for your homelab.",
-    "subheading": "A fast, curated directory of self-hosted apps, homelab tools, and infrastructure software — with real Proof-of-Work screenshots.",
+    "subheading": "Hand-picked homelab apps and tools – tested live, with real screenshots from our own setup.",
     "cta": "Browse apps",
     "statsApps": "Cataloged apps",
     "statsCategories": "Categories",
@@ -46,7 +46,11 @@
     "officialWebsite": "Official website",
     "officialRepo": "Source code",
     "backToApps": "Back to all apps",
-    "close": "Close"
+    "close": "Close",
+    "useCases": "What {name} is good for",
+    "caveats": "Before you deploy",
+    "guides": "Guides featuring {name}",
+    "relatedApps": "Related apps"
   },
   "updates": {
     "listTitle": "Weekly Updates",
@@ -69,7 +73,8 @@
     "homeTitle": "Guides",
     "homeSubtitle": "Longer reads to help you pick and run the right apps.",
     "subscribeTitle": "Get new guides by email",
-    "subscribeText": "One short email when we publish a new guide or add apps. No spam, unsubscribe any time."
+    "subscribeText": "One short email when we publish a new guide or add apps. No spam, unsubscribe any time.",
+    "appsInGuide": "Apps in this guide"
   },
   "newsletter": {
     "confirmedTitle": "Subscription confirmed",

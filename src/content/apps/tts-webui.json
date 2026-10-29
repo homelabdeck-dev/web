@@ -18,24 +18,28 @@
     "resourceFootprint": {
       "ramMb": 4096,
       "cpuCores": 4,
-      "notes": "Measured on 2026-10-22 (version v1.5.2 plus a few commits) in a Proxmox LXC (6 vCPU, 12 GB RAM) with an RTX 3090 passed through. The web UI idles at about 0.5 GB of RAM and about 2.2 GB after loading the Kokoro model. Generating an 8-second English sentence with Kokoro-82M took about 1.7 seconds and used about 1.2 GB of VRAM. Larger models (Bark, XTTS, Chatterbox) need more VRAM and RAM. The installation with its extensions is large: about 22 GB for the project folder in our LXC, so plan for 60 GB of disk or more. The first Kokoro run also downloaded a small language package automatically."
+      "notes": "Measured on 2026-10-22 (version v1.5.2 plus a few commits) in a Proxmox LXC (6 vCPU, 12 GB RAM) with an RTX 3090 passed through. The web UI idles at about 0.5 GB of RAM and about 2.2 GB after loading the Kokoro model. Generating an 8-second English sentence with Kokoro-82M took about 1.7 seconds and used about 1.2 GB of VRAM. Larger models (Bark, XTTS, Chatterbox) need more VRAM and RAM. The installation with its extensions is large: about 22 GB for the project folder in our LXC, so plan for 60 GB of disk or more. The first Kokoro run also downloaded a small language package automatically.",
+      "notesBg": "Измерено на 22.10.2026 (версия v1.5.2 плюс няколко комита) в Proxmox LXC (6 vCPU, 12 GB RAM) с прехвърлена RTX 3090. Уеб интерфейсът в покой използва около 0,5 GB RAM и около 2,2 GB след зареждане на модела Kokoro. Генерирането на 8-секундно английско изречение с Kokoro-82M отне около 1,7 секунди и използваше около 1,2 GB VRAM. По-големите модели (Bark, XTTS, Chatterbox) искат повече VRAM и RAM. Инсталацията с разширенията е голяма: около 22 GB за папката на проекта в нашия LXC, така че планирай 60 GB диск или повече. Първото пускане на Kokoro също изтегли автоматично малък езиков пакет."
     }
   },
   "screenshots": [
     {
       "label": "Models",
       "filename": "models.webp",
-      "altEn": "TTS-WebUI React home page with a navigation bar and a list of text-to-speech models including Kokoro, Chatterbox, Bark, Tortoise, Maha TTS, MMS and VALL-E X, each with Run and Github buttons"
+      "altEn": "TTS-WebUI React home page with a navigation bar and a list of text-to-speech models including Kokoro, Chatterbox, Bark, Tortoise, Maha TTS, MMS and VALL-E X, each with Run and Github buttons",
+      "altBg": "Началната React страница на TTS-WebUI с навигация и списък с модели за синтез на реч, сред които Kokoro, Chatterbox, Bark, Tortoise, Maha TTS, MMS и VALL-E X, всеки с бутони Run и Github"
     },
     {
       "label": "Generate speech",
       "filename": "generate.webp",
-      "altEn": "TTS-WebUI Gradio interface on the Kokoro tab after generating audio, showing the entered text, the generated waveform of about 8 seconds, the Heart voice and the Kokoro-82M model"
+      "altEn": "TTS-WebUI Gradio interface on the Kokoro tab after generating audio, showing the entered text, the generated waveform of about 8 seconds, the Heart voice and the Kokoro-82M model",
+      "altBg": "Gradio интерфейсът на TTS-WebUI в раздела Kokoro след генериране, с въведения текст, вълновата форма на около 8 секунди аудио, гласа Heart и модела Kokoro-82M"
     },
     {
       "label": "Resource usage",
       "filename": "resource-usage.webp",
-      "altEn": "Terminal showing nvidia-smi with an RTX 3090 using about 1.5 GB of VRAM for the TTS-WebUI Python process and free -m with about 2.2 GB of RAM used in a 12 GB container"
+      "altEn": "Terminal showing nvidia-smi with an RTX 3090 using about 1.5 GB of VRAM for the TTS-WebUI Python process and free -m with about 2.2 GB of RAM used in a 12 GB container",
+      "altBg": "Терминал с nvidia-smi, където RTX 3090 използва около 1,5 GB VRAM за Python процеса на TTS-WebUI, и free -m с около 2,2 GB заета RAM в контейнер с 12 GB"
     }
   ],
   "dockerComposeSnippet": "# TTS-WebUI is installed with its own one-click installer (see the repo README),\n# not Docker. We run it natively in an LXC as a systemd service (our real unit).\n# /etc/systemd/system/tts-webui.service\n[Unit]\nDescription=TTS-WebUI\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=simple\nWorkingDirectory=/root/TTS-WebUI\n# A tmpfs /tmp is too small for model installs, so point TMPDIR at disk.\nEnvironment=TMPDIR=/root/tmpdir\nExecStart=/root/TTS-WebUI/installer_files/mamba/micromamba run -p /root/TTS-WebUI/installer_files/env python server.py --docker\nRestart=on-failure\nRestartSec=10\n\n[Install]\nWantedBy=multi-user.target\n",
@@ -45,7 +49,36 @@
     "Amazon Polly"
   ],
   "descriptionEn": "TTS-WebUI is one web interface for many open text-to-speech and audio models. You can pick Kokoro for fast, light English speech, Chatterbox or XTTS for voice cloning, Bark for expressive audio and more, then generate speech from your own text entirely on your own GPU. It has a simple React interface and a larger Gradio interface with extensions, a pipeline builder, speech-to-text, audio and music tools and an outputs browser. Everything runs locally, so your text and any reference voices stay on your network. Use voice cloning only with your own voice or with clear permission.",
+  "descriptionBg": "TTS-WebUI е един уеб интерфейс за много отворени модели за синтез на реч и аудио. Можеш да избереш Kokoro за бърза и лека английска реч, Chatterbox или XTTS за клониране на глас, Bark за изразително аудио и други, и да генерираш реч от собствен текст изцяло на своята видеокарта. Има прост React интерфейс и по-голям Gradio интерфейс с разширения, конструктор на процеси, разпознаване на реч, инструменти за аудио и музика и преглед на генерираните файлове. Всичко работи локално, така че текстът ти и гласовите образци остават в мрежата ти. Клонирай глас само със собствения си глас или с изрично разрешение.",
   "taglineEn": "One local web interface for many text-to-speech and voice models.",
+  "taglineBg": "Един локален уеб интерфейс за много модели за синтез на реч и глас.",
   "seoTitleEn": "TTS-WebUI: self-hosted text-to-speech with Kokoro, XTTS and more — HomelabDeck",
-  "seoDescriptionEn": "TTS-WebUI is a local web UI for many open TTS models such as Kokoro, Chatterbox and Bark. Real RTX 3090 numbers (about 1.7 s for an 8 s clip, 1.2 GB VRAM), a systemd unit and screenshots from our own LXC."
+  "seoTitleBg": "TTS-WebUI: self-hosted синтез на реч с Kokoro, XTTS и други — HomelabDeck",
+  "seoDescriptionEn": "TTS-WebUI is a local web UI for many open TTS models such as Kokoro, Chatterbox and Bark. Real RTX 3090 numbers (about 1.7 s for an 8 s clip, 1.2 GB VRAM), a systemd unit and screenshots from our own LXC.",
+  "seoDescriptionBg": "TTS-WebUI е локален уеб интерфейс за много отворени TTS модели като Kokoro, Chatterbox и Bark. Реални числа от RTX 3090 (около 1,7 s за 8-секунден клип, 1,2 GB VRAM), systemd unit и снимки от нашия LXC.",
+  "useCasesEn": [
+    "Turning articles or notes into spoken audio with fast models such as Kokoro.",
+    "Comparing several open text-to-speech models side by side in one interface.",
+    "Cloning your own voice with models such as XTTS or Chatterbox for narration.",
+    "Generating short sound effects or music with the included audio models."
+  ],
+  "useCasesBg": [
+    "Превръщане на статии или бележки в говорено аудио с бързи модели като Kokoro.",
+    "Сравняване на няколко отворени модела за синтез на реч един до друг в един интерфейс.",
+    "Клониране на собствения ти глас с модели като XTTS или Chatterbox за озвучаване.",
+    "Генериране на кратки звукови ефекти или музика с включените аудио модели."
+  ],
+  "caveatsEn": [
+    "An NVIDIA GPU is strongly recommended. Many models are very slow or do not run at all on CPU.",
+    "The install with extensions is large, so plan for tens of gigabytes of disk.",
+    "Each model has its own license. Check it before using the output commercially.",
+    "Only clone voices you have permission to use."
+  ],
+  "caveatsBg": [
+    "NVIDIA видеокарта е силно препоръчителна. Много модели са много бавни или изобщо не работят на процесор.",
+    "Инсталацията с разширенията е голяма, затова планирай десетки гигабайти диск.",
+    "Всеки модел има собствен лиценз. Провери го, преди да използваш резултата с търговска цел.",
+    "Клонирай само гласове, които имаш разрешение да ползваш."
+  ],
+  "relatedApps": ["applio", "ollama", "open-webui"]
 }

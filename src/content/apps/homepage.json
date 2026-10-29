@@ -19,24 +19,28 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Very light. In our test LXC (1 core, 512 MB) the container used about 140 MB of RAM and idled at 0% CPU while showing 14 services with status checks, system resources and a search box. The image is about 255 MB. Config changes to services.yaml and widgets.yaml apply without a restart."
+      "notes": "Very light. In our test LXC (1 core, 512 MB) the container used about 140 MB of RAM and idled at 0% CPU while showing 14 services with status checks, system resources and a search box. The image is about 255 MB. Config changes to services.yaml and widgets.yaml apply without a restart.",
+      "notesBg": "Много лек. В тестовия ни LXC (1 ядро, 512 MB) контейнерът използваше около 140 MB RAM и 0% процесор в покой, докато показваше 14 услуги с проверки на състоянието, системни ресурси и поле за търсене. Образът е около 255 MB. Промените в services.yaml и widgets.yaml се прилагат без рестарт."
     }
   },
   "screenshots": [
     {
       "label": "Dashboard",
       "filename": "dashboard.webp",
-      "altEn": "Homepage dashboard in dark theme with services grouped into Infrastructure, AI & Creative and Home & Productivity, CPU, memory and disk widgets and a search box"
+      "altEn": "Homepage dashboard in dark theme with services grouped into Infrastructure, AI & Creative and Home & Productivity, CPU, memory and disk widgets and a search box",
+      "altBg": "Табло на Homepage в тъмна тема с услуги, групирани в Infrastructure, AI & Creative и Home & Productivity, уиджети за процесор, памет и диск и поле за търсене"
     },
     {
       "label": "Light theme",
       "filename": "light-theme.webp",
-      "altEn": "The same Homepage dashboard in light theme with a soft blue and lilac gradient background"
+      "altEn": "The same Homepage dashboard in light theme with a soft blue and lilac gradient background",
+      "altBg": "Същото табло на Homepage в светла тема с мек синьо-лилав градиентен фон"
     },
     {
       "label": "Mobile",
       "filename": "mobile.webp",
-      "altEn": "Homepage dashboard on a phone-sized screen with the service groups stacked in a single column"
+      "altEn": "Homepage dashboard on a phone-sized screen with the service groups stacked in a single column",
+      "altBg": "Табло на Homepage на екран с размер на телефон, с групите услуги подредени в една колона"
     }
   ],
   "dockerComposeSnippet": "services:\n  homepage:\n    image: ghcr.io/gethomepage/homepage:latest\n    container_name: homepage\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      # Hostnames you open the dashboard from, otherwise you get a host validation error.\n      HOMEPAGE_ALLOWED_HOSTS: \"localhost:3000,192.168.1.40:3000\"\n    volumes:\n      - ./config:/app/config\n      - ./images:/app/public/images\n",
@@ -46,7 +50,36 @@
     "Homarr"
   ],
   "descriptionEn": "Homepage is a fast, highly customisable start page for your homelab. You describe your services, widgets and bookmarks in a few YAML files and it renders a clean dashboard with icons, live status checks, system resource widgets, a search box and light and dark themes. More than a hundred service integrations (Proxmox, Jellyfin, Pi-hole, Docker and many more) can show live stats, and the config reloads without a restart. It stores no data in a database, so backing it up is just copying the config folder.",
+  "descriptionBg": "Homepage е бърза начална страница за твоя homelab с много възможности за настройка. Описваш услугите, уиджетите и отметките си в няколко YAML файла, а тя показва изчистено табло с икони, проверки на състоянието в реално време, уиджети за системните ресурси, поле за търсене и светла и тъмна тема. Над сто интеграции с услуги (Proxmox, Jellyfin, Pi-hole, Docker и много други) могат да показват статистика на живо, а конфигурацията се презарежда без рестарт. Не пази данни в база, така че бекъпът е просто копие на папката с конфигурацията.",
   "taglineEn": "A clean, YAML-configured start page for all your homelab services.",
+  "taglineBg": "Изчистена начална страница с YAML конфигурация за всички услуги в homelab-а ти.",
   "seoTitleEn": "Homepage: self-hosted homelab dashboard with Docker Compose — HomelabDeck",
-  "seoDescriptionEn": "Homepage (gethomepage) is a lightweight YAML-configured homelab dashboard with status checks, widgets and dark/light themes. Ready docker-compose.yml, ~140 MB RAM and screenshots from our own test."
+  "seoTitleBg": "Homepage: self-hosted табло за homelab с Docker Compose — HomelabDeck",
+  "seoDescriptionEn": "Homepage (gethomepage) is a lightweight YAML-configured homelab dashboard with status checks, widgets and dark/light themes. Ready docker-compose.yml, ~140 MB RAM and screenshots from our own test.",
+  "seoDescriptionBg": "Homepage (gethomepage) е леко табло за homelab с YAML конфигурация, проверки на състоянието, уиджети и тъмна/светла тема. Готов docker-compose.yml, около 140 MB RAM и снимки от нашия тест.",
+  "useCasesEn": [
+    "A single start page with links to every service in your homelab.",
+    "Seeing live status and stats from services such as Proxmox, Jellyfin, Pi-hole and Docker on one screen.",
+    "Using it as the browser home page on all your devices, with a search box and bookmarks.",
+    "Keeping the dashboard in version control, because the whole configuration is a few YAML files."
+  ],
+  "useCasesBg": [
+    "Една начална страница с линкове към всяка услуга в homelab-а ти.",
+    "Състояние и статистика на живо от услуги като Proxmox, Jellyfin, Pi-hole и Docker на един екран.",
+    "Начална страница на браузъра на всички устройства, с поле за търсене и отметки.",
+    "Таблото може да се пази във version control, защото цялата конфигурация е няколко YAML файла."
+  ],
+  "caveatsEn": [
+    "There is no editor in the UI. Every change is made in the YAML files, so you need to be comfortable editing them.",
+    "Widgets that show live stats need API keys for each service, so keep the config folder private.",
+    "Since version 1.0 you must list the hostnames it is served on in HOMEPAGE_ALLOWED_HOSTS, or the page will not load.",
+    "It has no login of its own. Keep it on your local network or put authentication in front of it."
+  ],
+  "caveatsBg": [
+    "В интерфейса няма редактор. Всяка промяна се прави в YAML файловете, така че трябва да ти е удобно да ги редактираш.",
+    "Уиджетите със статистика на живо изискват API ключове за всяка услуга, затова пази папката с конфигурацията лична.",
+    "От версия 1.0 трябва да изброиш адресите, на които се отваря, в HOMEPAGE_ALLOWED_HOSTS, иначе страницата няма да се зареди.",
+    "Няма собствен вход с парола. Дръж я в локалната мрежа или сложи автентикация пред нея."
+  ],
+  "relatedApps": ["uptime-kuma", "grafana", "portainer"]
 }

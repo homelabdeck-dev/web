@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 128,
       "cpuCores": 0.5,
-      "notes": "Written in Rust, Vaultwarden is one of the lightest self-hosted apps you can run — well under 100 MB RAM at idle for a family-sized vault. Footprint grows only slightly with more users, organizations and file attachments."
+      "notes": "Written in Rust, Vaultwarden is one of the lightest self-hosted apps you can run — well under 100 MB RAM at idle for a family-sized vault. Footprint grows only slightly with more users, organizations and file attachments.",
+      "notesBg": "Написан на Rust, Vaultwarden е едно от най-леките self-hosted приложения: доста под 100 MB RAM в покой за трезор с размер за семейство. Натоварването расте съвсем малко с повече потребители, организации и прикачени файлове."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Vaultwarden is an unofficial, lightweight Bitwarden-compatible server written in Rust, letting you self-host a password manager that works with every official Bitwarden client (browser, mobile, desktop, CLI). It unlocks premium features like TOTP generation, file attachments and emergency access for free, and runs comfortably on tiny hardware like a Raspberry Pi.", 
   "descriptionBg": "Vaultwarden е неофициален, лек сървър, съвместим с Bitwarden, написан на Rust, който позволява self-hosting на мениджър за пароли, работещ с всички официални Bitwarden клиенти (браузър, мобилни, десктоп, CLI). Отключва безплатно премиум функции като TOTP генериране, прикачени файлове и аварийни контакти, и работи спокойно на съвсем малък хардуер като Raspberry Pi.",
   "taglineEn": "Lightweight, self-hosted Bitwarden-compatible password vault.",
-  "taglineBg": "Лек, self-hosted трезор за пароли, съвместим с Bitwarden."
+  "taglineBg": "Лек, self-hosted трезор за пароли, съвместим с Bitwarden.",
+  "useCasesEn": [
+    "Running a password manager for the family with the official Bitwarden apps and browser extensions.",
+    "Sharing passwords between family members through organizations.",
+    "Storing TOTP codes, secure notes and file attachments without a paid plan.",
+    "Moving away from LastPass or 1Password while keeping the data on your own server."
+  ],
+  "useCasesBg": [
+    "Мениджър на пароли за семейството с официалните Bitwarden приложения и разширения за браузъра.",
+    "Споделяне на пароли между членовете на семейството чрез организации.",
+    "Пазене на TOTP кодове, защитени бележки и прикачени файлове без платен план.",
+    "Преминаване от LastPass или 1Password, като данните остават на собствения ти сървър."
+  ],
+  "caveatsEn": [
+    "Bitwarden clients only work over HTTPS, so you need a reverse proxy with a valid certificate.",
+    "Protect or disable the /admin page and set a strong ADMIN_TOKEN, ideally hashed with Argon2.",
+    "Back up the data folder regularly and test restoring it. Losing it means losing every password.",
+    "Vaultwarden is not an official Bitwarden product and has not had the same third-party audits."
+  ],
+  "caveatsBg": [
+    "Клиентите на Bitwarden работят само през HTTPS, така че ти трябва reverse proxy с валиден сертификат.",
+    "Защити или изключи страницата /admin и задай силен ADMIN_TOKEN, най-добре хеширан с Argon2.",
+    "Прави редовно бекъп на папката с данни и тествай възстановяването. Загубата ѝ означава загуба на всички пароли.",
+    "Vaultwarden не е официален продукт на Bitwarden и не е минавал същите независими одити."
+  ],
+  "relatedApps": ["nginx-proxy-manager", "uptime-kuma", "paperless-ngx"]
 }

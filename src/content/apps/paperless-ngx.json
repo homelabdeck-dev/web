@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 2048,
       "cpuCores": 2,
-      "notes": "2 GB RAM / 2 cores handles typical scan-and-archive workloads. OCR (via Tesseract) is the main CPU cost during document consumption; add Tika + Gotenberg containers if you need Office-document conversion, which increases footprint further."
+      "notes": "2 GB RAM / 2 cores handles typical scan-and-archive workloads. OCR (via Tesseract) is the main CPU cost during document consumption; add Tika + Gotenberg containers if you need Office-document conversion, which increases footprint further.",
+      "notesBg": "2 GB RAM и 2 ядра се справят с типично сканиране и архивиране. OCR (чрез Tesseract) е основният разход на процесора при обработката на документи; добави контейнерите Tika и Gotenberg, ако ти трябва конвертиране на офис документи, което допълнително увеличава натоварването."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Paperless-ngx is a community-supported document management system that scans, OCRs, tags and archives all your paper documents so you can go (mostly) paperless. It automatically detects correspondents, tags and document types, and offers full-text search across your entire archive.",
   "descriptionBg": "Paperless-ngx е поддържана от общността система за управление на документи, която сканира, разпознава текст (OCR), тагва и архивира документите ти. Автоматично разпознава кореспонденти, етикети и типове документи, и предлага пълнотекстово търсене в целия архив.",
   "taglineEn": "Scan, OCR and archive your paperwork with full-text search.",
-  "taglineBg": "Сканирай, разпознавай и архивирай документите си с пълнотекстово търсене."
+  "taglineBg": "Сканирай, разпознавай и архивирай документите си с пълнотекстово търсене.",
+  "useCasesEn": [
+    "Scanning paper bills, contracts and letters and finding them later with full-text search.",
+    "Letting a scanner or email inbox drop documents into a folder that Paperless picks up automatically.",
+    "Tagging documents automatically by correspondent and type once it has learned from a few examples.",
+    "Keeping a searchable PDF/A archive with the original files preserved."
+  ],
+  "useCasesBg": [
+    "Сканиране на хартиени сметки, договори и писма и намирането им по-късно с пълнотекстово търсене.",
+    "Скенер или имейл кутия, които пускат документи в папка, откъдето Paperless ги взима автоматично.",
+    "Автоматично тагване на документите по кореспондент и тип, след като се научи от няколко примера.",
+    "Архив от PDF/A с възможност за търсене, като оригиналните файлове се запазват."
+  ],
+  "caveatsEn": [
+    "It needs Redis and ideally PostgreSQL, so use the official compose file rather than a single container.",
+    "Set the OCR language to match your documents, for example English plus Bulgarian, or text recognition will suffer.",
+    "These are important personal documents. Back up the media and data folders and use the document exporter regularly.",
+    "Office files such as Word documents need the extra Tika and Gotenberg containers."
+  ],
+  "caveatsBg": [
+    "Изисква Redis и в идеалния случай PostgreSQL, затова използвай официалния compose файл, а не единичен контейнер.",
+    "Задай езика за OCR според документите си, например английски и български, иначе разпознаването на текст ще страда.",
+    "Това са важни лични документи. Прави бекъп на папките с медия и данни и използвай редовно експорта на документи.",
+    "Офис файлове като Word документи изискват допълнителните контейнери Tika и Gotenberg."
+  ],
+  "relatedApps": ["immich", "memos", "wiki-js"]
 }

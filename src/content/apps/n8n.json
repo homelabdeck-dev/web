@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 1024,
       "cpuCores": 1,
-      "notes": "1 GB RAM / 1 core is a solid baseline for a personal automation instance with a moderate number of active workflows. AI-agent nodes, large data transformations and high-frequency triggers increase memory use; scale out with queue mode and extra worker containers for heavier workloads."
+      "notes": "1 GB RAM / 1 core is a solid baseline for a personal automation instance with a moderate number of active workflows. AI-agent nodes, large data transformations and high-frequency triggers increase memory use; scale out with queue mode and extra worker containers for heavier workloads.",
+      "notesBg": "1 GB RAM и 1 ядро са солидна база за лична инстанция с умерен брой активни работни процеси. Блоковете за ИИ агенти, големите трансформации на данни и честите тригери увеличават паметта; за по-тежки натоварвания мащабирай с queue mode и допълнителни worker контейнери."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "n8n is a fair-code workflow automation platform that combines a visual, node-based builder with the flexibility to drop in custom JavaScript/Python code where needed. It ships with 400+ integrations, native AI-agent nodes, and can be fully self-hosted with no per-execution pricing, unlike most commercial iPaaS tools.",
   "descriptionBg": "n8n е fair-code платформа за автоматизация на работни процеси, съчетаваща визуален конструктор с блокове с гъвкавостта да добавиш собствен JavaScript/Python код при нужда. Предлага над 400 интеграции, вградени AI-agent блокове и може да бъде изцяло self-hosted без такси на изпълнение, за разлика от повечето комерсиални iPaaS инструменти.",
   "taglineEn": "Self-hosted workflow automation with visual building and custom code.",
-  "taglineBg": "Self-hosted автоматизация на работни процеси с визуален конструктор и собствен код."
+  "taglineBg": "Self-hosted автоматизация на работни процеси с визуален конструктор и собствен код.",
+  "useCasesEn": [
+    "Connecting web services, for example saving form submissions to a spreadsheet and sending a chat message.",
+    "Running scheduled jobs such as daily reports, backup checks or price monitoring.",
+    "Receiving webhooks from other apps and reacting to them with multi-step workflows.",
+    "Building AI agents and chains that call local models through Ollama or cloud APIs."
+  ],
+  "useCasesBg": [
+    "Свързване на уеб услуги, например записване на попълнени формуляри в таблица и изпращане на съобщение в чат.",
+    "Задачи по график като ежедневни отчети, проверки на бекъпи или следене на цени.",
+    "Получаване на webhooks от други приложения и реакция с многостъпкови работни процеси.",
+    "Изграждане на ИИ агенти и вериги, които викат локални модели през Ollama или облачни API."
+  ],
+  "caveatsEn": [
+    "The Sustainable Use License allows internal and personal use, but not offering n8n itself as a service to others.",
+    "Some features, such as SSO and advanced permissions, are only in the paid editions.",
+    "Webhooks from outside services need a public HTTPS URL, so plan for a reverse proxy or tunnel.",
+    "Set a persistent encryption key and back up the database, or stored credentials cannot be decrypted after a reinstall."
+  ],
+  "caveatsBg": [
+    "Лицензът Sustainable Use License позволява вътрешна и лична употреба, но не и предлагане на самия n8n като услуга на други.",
+    "Някои функции, като SSO и по-подробни права, са само в платените издания.",
+    "Webhooks от външни услуги изискват публичен HTTPS адрес, така че планирай reverse proxy или тунел.",
+    "Задай постоянен ключ за криптиране и прави бекъп на базата, иначе запазените данни за достъп не могат да се разчетат след преинсталация."
+  ],
+  "relatedApps": ["home-assistant", "gitea", "ollama"]
 }

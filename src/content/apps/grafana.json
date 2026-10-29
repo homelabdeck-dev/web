@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 0.5,
-      "notes": "512 MB RAM / 0.5 core comfortably renders dozens of dashboards for a homelab. Grafana itself only visualizes data — the real resource cost usually comes from the data sources it queries (Prometheus, Loki, InfluxDB) running alongside it."
+      "notes": "512 MB RAM / 0.5 core comfortably renders dozens of dashboards for a homelab. Grafana itself only visualizes data — the real resource cost usually comes from the data sources it queries (Prometheus, Loki, InfluxDB) running alongside it.",
+      "notesBg": "512 MB RAM и 0,5 ядро спокойно рендират десетки табла за homelab. Самата Grafana само визуализира данни; истинският разход на ресурси обикновено идва от източниците на данни, които пита (Prometheus, Loki, InfluxDB) и които работят до нея."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Grafana is the industry-standard open-source platform for building dashboards and alerts from virtually any data source — Prometheus, Loki, InfluxDB, PostgreSQL and 100+ more via plugins. Paired with Prometheus and Loki it forms the classic self-hosted observability stack for monitoring homelab infrastructure and applications.",
   "descriptionBg": "Grafana е индустриалният стандарт за open-source платформа за изграждане на табла и аларми от практически всеки източник на данни — Prometheus, Loki, InfluxDB, PostgreSQL и над 100 други чрез плъгини. В комбинация с Prometheus и Loki образува класическия self-hosted observability stack за мониторинг на homelab инфраструктура и приложения.",
   "taglineEn": "Open-source dashboards and alerting for any metrics data source.",
-  "taglineBg": "Open-source табла и аларми за всеки източник на метрики."
+  "taglineBg": "Open-source табла и аларми за всеки източник на метрики.",
+  "useCasesEn": [
+    "Building dashboards for CPU, memory, disk and network usage of your servers from Prometheus or InfluxDB data.",
+    "Viewing logs next to metrics when paired with Loki.",
+    "Setting alerts that send a message to email, Telegram, Discord or other channels when a value crosses a threshold.",
+    "Importing ready-made community dashboards for Proxmox, Docker, routers and many other systems."
+  ],
+  "useCasesBg": [
+    "Табла за натоварването на процесора, паметта, диска и мрежата на сървърите ти от данни в Prometheus или InfluxDB.",
+    "Преглед на логове до метриките, когато се комбинира с Loki.",
+    "Аларми, които пращат съобщение по имейл, Telegram, Discord или други канали, когато стойност премине праг.",
+    "Импортиране на готови табла от общността за Proxmox, Docker, рутери и много други системи."
+  ],
+  "caveatsEn": [
+    "Grafana only shows data. You also need a data source such as Prometheus with exporters, which takes most of the setup time.",
+    "Change the default admin password on first login and do not expose Grafana to the internet without authentication in front.",
+    "Community dashboards often expect specific exporter versions or labels, so some panels may need small edits.",
+    "Long metric retention in the data source can use a lot of disk. Set retention limits in Prometheus or InfluxDB early."
+  ],
+  "caveatsBg": [
+    "Grafana само показва данни. Трябва ти и източник на данни като Prometheus с exporter-и, а там отива най-много време за настройка.",
+    "Смени паролата на администратора при първия вход и не отваряй Grafana към интернет без автентикация пред нея.",
+    "Таблата от общността често очакват конкретни версии на exporter-ите или етикети, така че някои панели може да искат дребни корекции.",
+    "Дългото пазене на метрики в източника на данни може да заеме много диск. Задай ограничения за съхранение в Prometheus или InfluxDB рано."
+  ],
+  "relatedApps": ["uptime-kuma", "homepage", "portainer"]
 }

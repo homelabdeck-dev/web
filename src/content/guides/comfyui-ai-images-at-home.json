@@ -2,24 +2,25 @@
   "slug": "comfyui-ai-images-at-home",
   "date": "2026-10-23",
   "titleEn": "Generate AI images at home with ComfyUI on your own GPU",
-  "titleBg": "Generate AI images at home with ComfyUI on your own GPU",
+  "titleBg": "Генерирай ИИ изображения у дома с ComfyUI на собствената си видеокарта",
   "descriptionEn": "Run ComfyUI in a Proxmox LXC with an NVIDIA GPU, generate SDXL images in about 9 seconds and keep your prompts and pictures on your own hardware.",
-  "descriptionBg": "Run ComfyUI in a Proxmox LXC with an NVIDIA GPU, generate SDXL images in about 9 seconds and keep your prompts and pictures on your own hardware.",
+  "descriptionBg": "Пусни ComfyUI в Proxmox LXC с NVIDIA видеокарта, генерирай SDXL изображения за около 9 секунди и запази промптовете и снимките си на собствен хардуер.",
   "image": "/og/comfyui-ai-images-at-home.jpg",
   "introEn": [
     "ComfyUI is a node-based tool for generating images and video with open models such as Stable Diffusion XL. You build a workflow from boxes and wires, run it in the browser, and everything stays on your own machine: no subscription, no credits, no upload.",
     "We run it in a Proxmox LXC container with an RTX 3090 passed through, so the numbers below are our own measurements from 2026-10-22 (ComfyUI 0.38.0). Your hardware will differ."
   ],
   "introBg": [
-    "ComfyUI is a node-based tool for generating images and video with open models such as Stable Diffusion XL. You build a workflow from boxes and wires, run it in the browser, and everything stays on your own machine: no subscription, no credits, no upload.",
-    "We run it in a Proxmox LXC container with an RTX 3090 passed through, so the numbers below are our own measurements from 2026-10-22 (ComfyUI 0.38.0). Your hardware will differ."
+    "ComfyUI е инструмент с възли (nodes) за генериране на изображения и видео с отворени модели като Stable Diffusion XL. Изграждаш работен процес от кутийки и връзки, пускаш го в браузъра и всичко остава на твоята машина: без абонамент, без кредити, без качване.",
+    "Пускаме го в Proxmox LXC контейнер с прехвърлена RTX 3090, така че числата по-долу са наши измервания от 22.10.2026 (ComfyUI 0.38.0). При твоя хардуер ще са различни."
   ],
   "rows": [],
+  "apps": ["comfyui"],
   "sections": [
     {
       "kind": "list",
       "headingEn": "What we measured",
-      "headingBg": "What we measured",
+      "headingBg": "Какво измерихме",
       "en": [
         "Our test was a 1024x1024 text-to-image run with RealVisXL V5 (an SDXL model), 25 steps.",
         "The first image took about 29 seconds, because the 6 GB checkpoint had to load from disk. The following images took about 8 to 9 seconds each.",
@@ -30,19 +31,19 @@
         "These are short single-user tests, not a full benchmark. Other models, resolutions and custom nodes will change the numbers."
       ],
       "bg": [
-        "Our test was a 1024x1024 text-to-image run with RealVisXL V5 (an SDXL model), 25 steps.",
-        "The first image took about 29 seconds, because the 6 GB checkpoint had to load from disk. The following images took about 8 to 9 seconds each.",
-        "VRAM use was about 7 GB of the RTX 3090's 24 GB, so SDXL also fits comfortably on 12 GB cards.",
-        "The container used about 8 GB of RAM during the run, including file cache, and about 1.7 GB when idle.",
-        "Video models and upscalers are much heavier. After an uncapped heavy test froze our host, we limit the service to 13 GB of RAM, and we run one heavy job at a time.",
-        "Disk fills quickly: checkpoints are 6 GB and up, so plan for 100 GB or more.",
-        "These are short single-user tests, not a full benchmark. Other models, resolutions and custom nodes will change the numbers."
+        "Тестът ни беше генериране от текст към изображение 1024x1024 с RealVisXL V5 (SDXL модел), 25 стъпки.",
+        "Първото изображение отне около 29 секунди, защото checkpoint файлът от 6 GB трябваше да се зареди от диска. Следващите отнемаха по около 8 до 9 секунди.",
+        "Използваната VRAM беше около 7 GB от 24-те GB на RTX 3090, така че SDXL се побира спокойно и на карти с 12 GB.",
+        "Контейнерът използваше около 8 GB RAM по време на генерирането, включително файловия кеш, и около 1,7 GB в покой.",
+        "Видео моделите и upscaler-ите са много по-тежки. След като тежък тест без ограничение блокира хоста ни, ограничаваме услугата до 13 GB RAM и пускаме само една тежка задача наведнъж.",
+        "Дискът се пълни бързо: checkpoint файловете са от 6 GB нагоре, така че планирай 100 GB или повече.",
+        "Това са кратки тестове с един потребител, а не пълен бенчмарк. Други модели, резолюции и допълнителни възли ще променят числата."
       ]
     },
     {
       "kind": "list",
       "headingEn": "Before you start",
-      "headingBg": "Before you start",
+      "headingBg": "Преди да започнеш",
       "en": [
         "An NVIDIA GPU is strongly recommended. SDXL wants roughly 8 GB of VRAM or more; without a GPU it technically runs on the CPU, but it is far too slow to be pleasant.",
         "The NVIDIA driver must be installed on the Proxmox host and the GPU passed through to the LXC container. That is a separate topic of its own.",
@@ -50,16 +51,16 @@
         "Download your first checkpoint from a source you trust and check its licence before you use the images commercially."
       ],
       "bg": [
-        "An NVIDIA GPU is strongly recommended. SDXL wants roughly 8 GB of VRAM or more; without a GPU it technically runs on the CPU, but it is far too slow to be pleasant.",
-        "The NVIDIA driver must be installed on the Proxmox host and the GPU passed through to the LXC container. That is a separate topic of its own.",
-        "Give the container at least 4 cores and 12 to 16 GB of RAM, and set a memory limit so a runaway job cannot take the whole host down.",
-        "Download your first checkpoint from a source you trust and check its licence before you use the images commercially."
+        "Силно препоръчваме NVIDIA видеокарта. SDXL иска около 8 GB VRAM или повече; без видеокарта технически работи на процесора, но е твърде бавно, за да е приятно.",
+        "NVIDIA драйверът трябва да е инсталиран на Proxmox хоста, а видеокартата да е прехвърлена към LXC контейнера. Това е отделна тема само по себе си.",
+        "Дай на контейнера поне 4 ядра и 12 до 16 GB RAM и задай ограничение на паметта, за да не може излязла от контрол задача да свали целия хост.",
+        "Изтегли първия си checkpoint от източник, на който имаш доверие, и провери лиценза му, преди да използваш изображенията с търговска цел."
       ]
     },
     {
       "kind": "steps",
       "headingEn": "Setup steps",
-      "headingBg": "Setup steps",
+      "headingBg": "Стъпки за инсталиране",
       "en": [
         "Create a Debian LXC with the GPU passed through and confirm nvidia-smi works inside it.",
         "Install git and a C compiler (gcc and libc6-dev). Some ComfyUI add-ons compile code with Triton and fail without one.",
@@ -71,20 +72,20 @@
         "For access from outside your home use a VPN such as Tailscale. ComfyUI has no login, so never expose port 8188 to the internet."
       ],
       "bg": [
-        "Create a Debian LXC with the GPU passed through and confirm nvidia-smi works inside it.",
-        "Install git and a C compiler (gcc and libc6-dev). Some ComfyUI add-ons compile code with Triton and fail without one.",
-        "Clone ComfyUI from github.com/Comfy-Org/ComfyUI into /opt/ComfyUI and create a Python virtual environment. We used uv, which is much faster than pip.",
-        "Install PyTorch with CUDA support first, then the requirements.txt file from the ComfyUI folder.",
-        "Put a checkpoint file into models/checkpoints.",
-        "Start ComfyUI with python main.py --listen. We run it as a systemd service so it starts at boot and we can set the RAM limit there.",
-        "Open http://your-server-ip:8188, load the default text-to-image workflow, type a prompt and press Run.",
-        "For access from outside your home use a VPN such as Tailscale. ComfyUI has no login, so never expose port 8188 to the internet."
+        "Създай Debian LXC с прехвърлена видеокарта и провери, че nvidia-smi работи вътре в него.",
+        "Инсталирай git и C компилатор (gcc и libc6-dev). Някои добавки за ComfyUI компилират код с Triton и без компилатор се провалят.",
+        "Клонирай ComfyUI от github.com/Comfy-Org/ComfyUI в /opt/ComfyUI и създай виртуална Python среда. Ние използвахме uv, който е много по-бърз от pip.",
+        "Инсталирай първо PyTorch с поддръжка на CUDA, а после файла requirements.txt от папката на ComfyUI.",
+        "Сложи checkpoint файл в models/checkpoints.",
+        "Стартирай ComfyUI с python main.py --listen. Ние го пускаме като systemd услуга, за да тръгва при зареждане и да можем да зададем ограничението на RAM там.",
+        "Отвори http://ip-на-сървъра:8188, зареди стандартния работен процес за текст към изображение, напиши промпт и натисни Run.",
+        "За достъп извън дома използвай VPN като Tailscale. ComfyUI няма вход с парола, така че никога не отваряй порт 8188 към интернет."
       ]
     },
     {
       "kind": "list",
       "headingEn": "Running it day to day",
-      "headingBg": "Running it day to day",
+      "headingBg": "Ежедневна работа",
       "en": [
         "ComfyUI keeps models in VRAM after a run. If the card is shared with other tools such as Ollama, free the VRAM when idle. We call ComfyUI's /free endpoint from a timer after five minutes without activity.",
         "Save the workflow you like. Workflows are plain JSON files, and ComfyUI also embeds them in the PNG images it makes, so you can drag an old picture back in to recover its settings.",
@@ -92,16 +93,16 @@
         "Back up your workflows and any models you cannot download again. Everything else can be fetched later."
       ],
       "bg": [
-        "ComfyUI keeps models in VRAM after a run. If the card is shared with other tools such as Ollama, free the VRAM when idle. We call ComfyUI's /free endpoint from a timer after five minutes without activity.",
-        "Save the workflow you like. Workflows are plain JSON files, and ComfyUI also embeds them in the PNG images it makes, so you can drag an old picture back in to recover its settings.",
-        "Use the built-in Manager to install custom nodes, but add them one at a time: they run arbitrary code and can break each other.",
-        "Back up your workflows and any models you cannot download again. Everything else can be fetched later."
+        "ComfyUI държи моделите във VRAM след генериране. Ако картата се споделя с други инструменти като Ollama, освобождавай VRAM, когато не се ползва. Ние извикваме /free адреса на ComfyUI от таймер след пет минути без активност.",
+        "Запазвай работните процеси, които ти харесват. Те са обикновени JSON файлове, а ComfyUI ги вгражда и в PNG изображенията, които създава, така че можеш да провлачиш стара снимка обратно и да възстановиш настройките ѝ.",
+        "Използвай вградения Manager за инсталиране на допълнителни възли, но ги добавяй един по един: те изпълняват произволен код и могат да си пречат.",
+        "Прави бекъп на работните процеси и на моделите, които не можеш да изтеглиш отново. Всичко останало може да се изтегли по-късно."
       ]
     },
     {
       "kind": "list",
       "headingEn": "Honest caveats",
-      "headingBg": "Honest caveats",
+      "headingBg": "Честни ограничения",
       "en": [
         "ComfyUI has a learning curve. The node graph is powerful but not friendly to a first-time user; start from the example workflows instead of building from scratch.",
         "There is no authentication and no multi-user support. Keep it on a trusted network or behind a VPN.",
@@ -111,12 +112,12 @@
         "Our figures come from one machine and one model. Menu names and defaults change between versions; if something does not match, follow the current official documentation."
       ],
       "bg": [
-        "ComfyUI has a learning curve. The node graph is powerful but not friendly to a first-time user; start from the example workflows instead of building from scratch.",
-        "There is no authentication and no multi-user support. Keep it on a trusted network or behind a VPN.",
-        "Model licences differ a lot. Some forbid commercial use or have regional restrictions, so read the licence of every model and node you install.",
-        "Custom nodes are third-party code. Install only ones you trust, and expect some to break after updates.",
-        "A GPU under load draws a lot of power and makes noise. Image generation is bursty, so it is mostly idle in daily use.",
-        "Our figures come from one machine and one model. Menu names and defaults change between versions; if something does not match, follow the current official documentation."
+        "ComfyUI изисква време за свикване. Графът с възли е мощен, но не е приятелски за начинаещ; започни от примерните работни процеси, вместо да строиш от нулата.",
+        "Няма вход с парола и няма поддръжка на няколко потребители. Дръж го в доверена мрежа или зад VPN.",
+        "Лицензите на моделите се различават много. Някои забраняват търговска употреба или имат регионални ограничения, затова чети лиценза на всеки модел и възел, който инсталираш.",
+        "Допълнителните възли са код от трети страни. Инсталирай само такива, на които имаш доверие, и очаквай някои да спрат да работят след обновления.",
+        "Видеокарта под натоварване консумира много ток и вдига шум. Генерирането на изображения е на пориви, така че в ежедневието картата е предимно в покой.",
+        "Нашите числа са от една машина и един модел. Имената в менютата и настройките по подразбиране се сменят между версиите; ако нещо не съвпада, следвай актуалната официална документация."
       ]
     }
   ]

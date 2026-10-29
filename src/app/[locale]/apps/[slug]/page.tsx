@@ -4,6 +4,8 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllAppSlugs, getAppBySlug } from "@/lib/apps/loader";
+import { getGuidesForApp } from "@/lib/guides";
+import AppCard from "@/components/AppCard";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
@@ -79,6 +81,14 @@ export default async function AppDetailPage({
     : app.category;
   const description = (isBg && app.descriptionBg) || app.descriptionEn;
   const tagline = (isBg && app.taglineBg) || app.taglineEn;
+  // Longer copy has no English fallback on /bg, so BG pages stay one language.
+  const useCases = (isBg ? app.useCasesBg : app.useCasesEn) ?? [];
+  const caveats = (isBg ? app.caveatsBg : app.caveatsEn) ?? [];
+  const guides = getGuidesForApp(slug);
+  const relatedApps = (app.relatedApps ?? []).flatMap((related) => {
+    const entry = getAppBySlug(related);
+    return entry ? [entry] : [];
+  });
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -125,6 +135,32 @@ export default async function AppDetailPage({
           </p>
           <p className="text-zinc-700 dark:text-zinc-300">{description}</p>
         </div>
+
+        {useCases.length > 0 && (
+          <section className="flex flex-col gap-2">
+            <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+              {t("useCases", { name: app.name })}
+            </h2>
+            <ul className="flex list-disc flex-col gap-2 pl-6 text-zinc-700 dark:text-zinc-300">
+              {useCases.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {caveats.length > 0 && (
+          <section className="flex flex-col gap-2">
+            <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+              {t("caveats")}
+            </h2>
+            <ul className="flex list-disc flex-col gap-2 pl-6 text-zinc-700 dark:text-zinc-300">
+              {caveats.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6">
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
@@ -207,7 +243,8 @@ export default async function AppDetailPage({
                 {app.compatibility.resourceFootprint.cpuCores} CPU
               </dd>
               <dd className="text-zinc-600 dark:text-zinc-300">
-                {app.compatibility.resourceFootprint.notes}
+                {(isBg && app.compatibility.resourceFootprint.notesBg) ||
+                  app.compatibility.resourceFootprint.notes}
               </dd>
             </div>
           </div>
@@ -245,6 +282,41 @@ export default async function AppDetailPage({
             {app.alternativeTo.join(", ")}
           </p>
         </section>
+
+        {guides.length > 0 && (
+          <section className="flex flex-col gap-2">
+            <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+              {t("guides", { name: app.name })}
+            </h2>
+            <ul className="flex flex-col gap-2">
+              {guides.map((guide) => (
+                <li key={guide.slug}>
+                  <Link
+                    href={`/guides/${guide.slug}`}
+                    className="font-medium text-black underline transition-colors hover:text-accent dark:text-zinc-50"
+                  >
+                    {isBg ? guide.titleBg : guide.titleEn}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {relatedApps.length > 0 && (
+          <section className="flex flex-col gap-3">
+            <h2 className="text-lg font-medium text-black dark:text-zinc-50">
+              {t("relatedApps")}
+            </h2>
+            <ul className="grid gap-4 sm:grid-cols-3">
+              {relatedApps.map((related) => (
+                <li key={related.slug}>
+                  <AppCard app={related} locale={locale} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
     </div>
   );

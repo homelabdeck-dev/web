@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 1024,
       "cpuCores": 1,
-      "notes": "1 GB RAM / 1 core is a reasonable baseline for a home with 100+ entities across 1000+ available integrations. Footprint grows with the number of active integrations, automations, history retention and add-ons (e.g. running a local voice assistant or Zigbee/Z-Wave stacks in the same host)."
+      "notes": "1 GB RAM / 1 core is a reasonable baseline for a home with 100+ entities across 1000+ available integrations. Footprint grows with the number of active integrations, automations, history retention and add-ons (e.g. running a local voice assistant or Zigbee/Z-Wave stacks in the same host).",
+      "notesBg": "1 GB RAM и 1 ядро са разумна база за дом с над 100 обекта (entities) сред над 1000 налични интеграции. Натоварването расте с броя активни интеграции, автоматизации, срока на пазене на историята и добавките (например локален гласов асистент или Zigbee/Z-Wave на същия хост)."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Home Assistant is a local-first, privacy-focused home automation platform backed by the Open Home Foundation, supporting over 1,000 integrations across virtually every smart-home brand and protocol (Zigbee, Z-Wave, Matter, Thread). It runs entirely on your own hardware, keeps automations working even without internet access, and never requires a cloud subscription.",
   "descriptionBg": "Home Assistant е локална, ориентирана към поверителността платформа за домашна автоматизация, подкрепяна от Open Home Foundation, поддържаща над 1000 интеграции с почти всяка марка и протокол за smart home (Zigbee, Z-Wave, Matter, Thread). Работи изцяло на собствения ти хардуер, поддържа автоматизациите активни дори без интернет и никога не изисква облачен абонамент.",
   "taglineEn": "Local, privacy-first home automation with 1000+ integrations.",
-  "taglineBg": "Локална домашна автоматизация, ориентирана към поверителността, с над 1000 интеграции."
+  "taglineBg": "Локална домашна автоматизация, ориентирана към поверителността, с над 1000 интеграции.",
+  "useCasesEn": [
+    "Controlling lights, plugs, sensors and climate devices from many brands in one app.",
+    "Writing automations that run locally, such as turning on lights at sunset or when motion is detected.",
+    "Using Zigbee, Z-Wave, Thread or Matter devices without vendor clouds, through a USB coordinator.",
+    "Tracking energy use with smart meters and plugs on the built-in energy dashboard."
+  ],
+  "useCasesBg": [
+    "Управление на лампи, контакти, сензори и климатични устройства от много марки в едно приложение.",
+    "Автоматизации, които работят локално, например включване на осветлението при залез или при засечено движение.",
+    "Използване на Zigbee, Z-Wave, Thread или Matter устройства без облака на производителя, чрез USB координатор.",
+    "Следене на консумацията на енергия със smart измерватели и контакти във вграденото енергийно табло."
+  ],
+  "caveatsEn": [
+    "The Docker install does not include add-ons. If you want the add-on store, use Home Assistant OS in a VM instead.",
+    "Zigbee and Z-Wave sticks must be passed through to the container or VM, which takes extra setup in Proxmox and LXC.",
+    "Monthly releases sometimes include breaking changes. Read the release notes and take a backup before updating.",
+    "For remote access use a VPN, a reverse proxy with HTTPS, or the paid Nabu Casa cloud, rather than an open port."
+  ],
+  "caveatsBg": [
+    "Инсталацията с Docker не включва добавки (add-ons). Ако искаш магазина за добавки, използвай Home Assistant OS във виртуална машина.",
+    "Zigbee и Z-Wave стиковете трябва да се прехвърлят към контейнера или VM, което изисква допълнителна настройка в Proxmox и LXC.",
+    "Месечните версии понякога носят несъвместими промени. Чети бележките към версията и прави бекъп преди обновяване.",
+    "За отдалечен достъп използвай VPN, reverse proxy с HTTPS или платения облак Nabu Casa, а не отворен порт."
+  ],
+  "relatedApps": ["n8n", "uptime-kuma", "grafana"]
 }

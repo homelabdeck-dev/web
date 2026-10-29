@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 2048,
       "cpuCores": 2,
-      "notes": "2 GB RAM / 2 cores is comfortable for direct-play streaming to a couple of clients. Transcoding (especially 4K HDR) is the dominant CPU cost; a hardware transcoding-capable iGPU (Intel Quick Sync, NVENC) drastically reduces CPU load and is highly recommended for multi-user households."
+      "notes": "2 GB RAM / 2 cores is comfortable for direct-play streaming to a couple of clients. Transcoding (especially 4K HDR) is the dominant CPU cost; a hardware transcoding-capable iGPU (Intel Quick Sync, NVENC) drastically reduces CPU load and is highly recommended for multi-user households.",
+      "notesBg": "2 GB RAM и 2 ядра са удобни за директно възпроизвеждане към няколко клиента. Транскодирането (особено 4K HDR) е основният разход на процесора; iGPU с хардуерно транскодиране (Intel Quick Sync, NVENC) рязко намалява натоварването и е силно препоръчителен за домакинства с няколко потребители."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Jellyfin is the leading fully free and open-source media server, letting you organize and stream your own movies, TV shows, music and photos to any device without telemetry or paid tiers. It supports hardware-accelerated transcoding, live TV/DVR, and a huge ecosystem of official and community apps.",
   "descriptionBg": "Jellyfin е водещият напълно безплатен и open-source медиен сървър, който позволява организиране и стрийминг на собствени филми, сериали, музика и снимки към всяко устройство без телеметрия или платени нива. Поддържа хардуерно ускорено транскодиране, Live TV/DVR и голяма екосистема от официални и общностни приложения.",
   "taglineEn": "Free, open-source media server for your movies, shows and music.",
-  "taglineBg": "Безплатен, open-source медиен сървър за филмите, сериалите и музиката ти."
+  "taglineBg": "Безплатен, open-source медиен сървър за филмите, сериалите и музиката ти.",
+  "useCasesEn": [
+    "Streaming your own movies, shows and music to TVs, phones and browsers at home or on the road.",
+    "Replacing Plex without accounts, telemetry or a paid pass for features such as hardware transcoding.",
+    "Watching live TV and recording shows with a TV tuner and the built-in DVR.",
+    "Giving family members separate profiles with their own watch progress and parental controls."
+  ],
+  "useCasesBg": [
+    "Стрийминг на собствените ти филми, сериали и музика към телевизори, телефони и браузъри у дома и навън.",
+    "Замяна на Plex без акаунти, телеметрия и платен абонамент за функции като хардуерно транскодиране.",
+    "Гледане на телевизия на живо и записване на предавания с тунер и вградения DVR.",
+    "Отделни профили за членовете на семейството със собствен прогрес на гледане и родителски контрол."
+  ],
+  "caveatsEn": [
+    "Transcoding 4K or HDR on CPU is slow. Pass an Intel iGPU or NVIDIA GPU to the container for hardware transcoding.",
+    "Name files and folders the way Jellyfin expects (Movie Name (Year)), or metadata matching will be poor.",
+    "Some TV apps are less polished than Plex's, so test the clients your household uses before switching fully.",
+    "For remote streaming use a reverse proxy with HTTPS or a VPN, and keep upload bandwidth in mind."
+  ],
+  "caveatsBg": [
+    "Транскодирането на 4K или HDR на процесора е бавно. Прехвърли Intel iGPU или NVIDIA видеокарта към контейнера за хардуерно транскодиране.",
+    "Именувай файловете и папките така, както Jellyfin очаква (Име на филма (Година)), иначе разпознаването на метаданните ще е слабо.",
+    "Някои приложения за телевизори са по-малко изпипани от тези на Plex, затова тествай клиентите, които ползва домакинството, преди да преминеш напълно.",
+    "За стрийминг отвън използвай reverse proxy с HTTPS или VPN и мисли за скоростта на качване на интернета си."
+  ],
+  "relatedApps": ["audiobookshelf", "immich", "nginx-proxy-manager"]
 }

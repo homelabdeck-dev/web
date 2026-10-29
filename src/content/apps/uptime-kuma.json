@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Extremely light for typical home use — a few hundred MB of RAM and a fraction of a CPU core comfortably monitors dozens of endpoints. Footprint grows with the number of monitors and check frequency."
+      "notes": "Extremely light for typical home use — a few hundred MB of RAM and a fraction of a CPU core comfortably monitors dozens of endpoints. Footprint grows with the number of monitors and check frequency.",
+      "notesBg": "Изключително лек при домашна употреба: няколкостотин MB RAM и част от процесорно ядро спокойно наблюдават десетки адреси. Натоварването расте с броя монитори и честотата на проверките."
     }
   },
   "screenshots": [
@@ -44,5 +45,30 @@
   "descriptionEn": "Uptime Kuma is a fancy, self-hosted monitoring tool that watches HTTP(s), TCP, DNS, Docker containers and more, alerting you via 90+ notification services when something goes down. It ships with a clean status-page builder and a lightweight SQLite backend.",
   "descriptionBg": "Uptime Kuma е лек self-hosted инструмент за мониторинг, който следи HTTP(s), TCP, DNS, Docker контейнери и други, и известява чрез над 90 услуги при проблем. Включва вграден конструктор на статус страници и лека SQLite база данни.",
   "taglineEn": "Self-hosted uptime monitoring with instant alerts and status pages.",
-  "taglineBg": "Self-hosted мониторинг на достъпност с мигновени известия и статус страници."
+  "taglineBg": "Self-hosted мониторинг на достъпност с мигновени известия и статус страници.",
+  "useCasesEn": [
+    "Checking that websites and homelab services are up and getting an alert when they go down.",
+    "Monitoring certificates so you hear about expiry before visitors do.",
+    "Publishing a simple public status page for your services.",
+    "Watching Docker containers, ping targets, DNS records and TCP ports from one place."
+  ],
+  "useCasesBg": [
+    "Проверка, че сайтовете и услугите в homelab-а работят, и известие, когато някоя падне.",
+    "Следене на сертификатите, за да разбереш за изтичането им преди посетителите.",
+    "Публикуване на проста публична статус страница за услугите ти.",
+    "Наблюдение на Docker контейнери, ping цели, DNS записи и TCP портове от едно място."
+  ],
+  "caveatsEn": [
+    "A monitor running on the same server as your services cannot alert you when that server goes down. Run it on separate hardware or a small VPS too.",
+    "Very short check intervals on many monitors increase load and database size.",
+    "Store the data folder on local disk. SQLite on network shares such as NFS can get corrupted.",
+    "Set up at least two notification channels, so one failing does not leave you without alerts."
+  ],
+  "caveatsBg": [
+    "Мониторинг, който работи на същия сървър като услугите ти, не може да те предупреди, когато самият сървър падне. Пусни го и на отделен хардуер или малък VPS.",
+    "Много кратки интервали на проверка при много монитори увеличават натоварването и размера на базата.",
+    "Дръж папката с данни на локален диск. SQLite върху мрежови дялове като NFS може да се повреди.",
+    "Настрой поне два канала за известия, за да не останеш без аларми, ако единият спре да работи."
+  ],
+  "relatedApps": ["grafana", "homepage", "nginx-proxy-manager"]
 }

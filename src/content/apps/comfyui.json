@@ -19,24 +19,28 @@
     "resourceFootprint": {
       "ramMb": 8192,
       "cpuCores": 4,
-      "notes": "Measured on 2026-10-22 on ComfyUI 0.38.0 in a Proxmox LXC (4 vCPU, 14 GB RAM) with an RTX 3090 passed through. The service idles at about 1.7 GB of RAM. A 1024x1024 text-to-image run with RealVisXL V5 (SDXL, 25 steps) used about 7 GB of VRAM and about 8 GB of container RAM, including file cache. The first image took about 29 seconds because the model had to load from disk; the following ones took about 8 to 9 seconds. Video models and upscalers need much more: we cap the service at 13 GB of RAM after an uncapped heavy test froze the host. Plan for 100 GB of disk or more, because checkpoints are 6 GB and up."
+      "notes": "Measured on 2026-10-22 on ComfyUI 0.38.0 in a Proxmox LXC (4 vCPU, 14 GB RAM) with an RTX 3090 passed through. The service idles at about 1.7 GB of RAM. A 1024x1024 text-to-image run with RealVisXL V5 (SDXL, 25 steps) used about 7 GB of VRAM and about 8 GB of container RAM, including file cache. The first image took about 29 seconds because the model had to load from disk; the following ones took about 8 to 9 seconds. Video models and upscalers need much more: we cap the service at 13 GB of RAM after an uncapped heavy test froze the host. Plan for 100 GB of disk or more, because checkpoints are 6 GB and up.",
+      "notesBg": "Измерено на 22.10.2026 с ComfyUI 0.38.0 в Proxmox LXC (4 vCPU, 14 GB RAM) с прехвърлена RTX 3090. Услугата в покой използва около 1,7 GB RAM. Генериране от текст към изображение 1024x1024 с RealVisXL V5 (SDXL, 25 стъпки) използваше около 7 GB VRAM и около 8 GB RAM на контейнера, включително файловия кеш. Първото изображение отне около 29 секунди, защото моделът трябваше да се зареди от диска; следващите отнемаха около 8 до 9 секунди. Видео моделите и upscaler-ите искат много повече: ограничаваме услугата до 13 GB RAM, след като тежък тест без ограничение блокира хоста. Планирай 100 GB диск или повече, защото checkpoint файловете са от 6 GB нагоре."
     }
   },
   "screenshots": [
     {
       "label": "Workflow",
       "filename": "workflow.webp",
-      "altEn": "ComfyUI node graph for text-to-image with Load Checkpoint using RealVisXL V5, two CLIP Text Encode prompt nodes, an Empty Latent Image at 1024 by 1024, a KSampler with 25 steps, VAE Decode and Save Image"
+      "altEn": "ComfyUI node graph for text-to-image with Load Checkpoint using RealVisXL V5, two CLIP Text Encode prompt nodes, an Empty Latent Image at 1024 by 1024, a KSampler with 25 steps, VAE Decode and Save Image",
+      "altBg": "Граф с възли в ComfyUI за текст към изображение: Load Checkpoint с RealVisXL V5, два възела CLIP Text Encode за промптове, Empty Latent Image 1024 на 1024, KSampler с 25 стъпки, VAE Decode и Save Image"
     },
     {
       "label": "Result",
       "filename": "result.webp",
-      "altEn": "The same ComfyUI graph after a run, with the Save Image node showing the generated 1024 by 1024 picture of a glowing home server rack"
+      "altEn": "The same ComfyUI graph after a run, with the Save Image node showing the generated 1024 by 1024 picture of a glowing home server rack",
+      "altBg": "Същият граф в ComfyUI след изпълнение, като възелът Save Image показва генерираното изображение 1024 на 1024 със светещ домашен сървърен шкаф"
     },
     {
       "label": "Resource usage",
       "filename": "resource-usage.webp",
-      "altEn": "Terminal showing nvidia-smi with an RTX 3090 using about 7 GB of VRAM for the ComfyUI Python process and systemd reporting about 7.9 GB of memory against a 13 GB limit"
+      "altEn": "Terminal showing nvidia-smi with an RTX 3090 using about 7 GB of VRAM for the ComfyUI Python process and systemd reporting about 7.9 GB of memory against a 13 GB limit",
+      "altBg": "Терминал с nvidia-smi, където RTX 3090 използва около 7 GB VRAM за Python процеса на ComfyUI, а systemd отчита около 7,9 GB памет при ограничение 13 GB"
     }
   ],
   "dockerComposeSnippet": "# ComfyUI has no official Docker image. We run it natively in an LXC as a\n# systemd service from a Python venv in /opt/ComfyUI (this is our real unit).\n# /etc/systemd/system/comfyui.service\n[Unit]\nDescription=ComfyUI\nAfter=network.target\n\n[Service]\nUser=root\nWorkingDirectory=/opt/ComfyUI\nExecStart=/opt/ComfyUI/venv/bin/python /opt/ComfyUI/main.py --listen --port 8188 --disable-pinned-memory\nRestart=on-failure\n# Keep a runaway job from taking the whole host down.\nMemoryMax=13G\nMemorySwapMax=0\n\n[Install]\nWantedBy=multi-user.target\n",
@@ -46,7 +50,36 @@
     "Runway"
   ],
   "descriptionEn": "ComfyUI is a node-based interface for running image and video generation models on your own GPU. You build a workflow by connecting nodes for loading a model, writing prompts, sampling and saving, so every step is visible and reusable. It supports Stable Diffusion and SDXL, newer image models, video models such as Wan, upscalers, ControlNet and a large ecosystem of custom nodes with a built-in manager. Workflows are saved as JSON and everything runs locally, so prompts and images stay on your network. It is a self-hosted alternative to paid image-generation services.",
+  "descriptionBg": "ComfyUI е интерфейс с възли (nodes) за генериране на изображения и видео с модели, които работят на твоята видеокарта. Изграждаш работен процес, като свързваш възли за зареждане на модел, писане на промпт, семплиране и запис, така че всяка стъпка се вижда и може да се използва отново. Поддържа Stable Diffusion и SDXL, по-нови модели за изображения, видео модели като Wan, upscaler-и, ControlNet и голяма екосистема от допълнителни възли с вграден мениджър. Работните процеси се пазят като JSON, а всичко работи локално, така че промптовете и изображенията остават в мрежата ти. Самостоятелно хоствана алтернатива на платените услуги за генериране на изображения.",
   "taglineEn": "Node-based image and video generation that runs on your own GPU.",
+  "taglineBg": "Генериране на изображения и видео с възли, на собствената ти видеокарта.",
   "seoTitleEn": "ComfyUI: self-hosted AI image generation on your own GPU — HomelabDeck",
-  "seoDescriptionEn": "ComfyUI is a node-based Stable Diffusion and video generator for your homelab. Real RTX 3090 numbers (about 8 s per SDXL image, 7 GB VRAM), a systemd unit with a RAM guard and screenshots from our own LXC."
+  "seoTitleBg": "ComfyUI: self-hosted генериране на изображения с ИИ на собствена видеокарта — HomelabDeck",
+  "seoDescriptionEn": "ComfyUI is a node-based Stable Diffusion and video generator for your homelab. Real RTX 3090 numbers (about 8 s per SDXL image, 7 GB VRAM), a systemd unit with a RAM guard and screenshots from our own LXC.",
+  "seoDescriptionBg": "ComfyUI е генератор на изображения и видео с Stable Diffusion и възли за твоя homelab. Реални числа от RTX 3090 (около 8 s за SDXL изображение, 7 GB VRAM), systemd unit с ограничение на RAM и снимки от нашия LXC.",
+  "useCasesEn": [
+    "Generating images from text prompts locally with Stable Diffusion, SDXL or newer open models.",
+    "Building repeatable pipelines, such as generate, upscale and save, and reusing them by loading a JSON workflow.",
+    "Guiding composition with ControlNet, image-to-image or inpainting instead of relying on prompts alone.",
+    "Trying open video generation models on your own GPU without a monthly subscription."
+  ],
+  "useCasesBg": [
+    "Генериране на изображения от текст локално със Stable Diffusion, SDXL или по-нови отворени модели.",
+    "Повторяеми процеси като генериране, увеличаване и запис, които използваш отново, като заредиш JSON работен процес.",
+    "Контрол върху композицията с ControlNet, image-to-image или inpainting, вместо да разчиташ само на промпта.",
+    "Изпробване на отворени модели за генериране на видео на собствената видеокарта, без месечен абонамент."
+  ],
+  "caveatsEn": [
+    "You need a capable GPU. An NVIDIA card with 8 GB of VRAM is a practical minimum for SDXL, and video models want much more.",
+    "Checkpoints are several gigabytes each, so disk usage grows fast. Plan for 100 GB or more.",
+    "Custom nodes run arbitrary Python code. Install only well-known ones and review what the node manager pulls in.",
+    "The node graph has a learning curve. Start from the built-in templates or a shared workflow rather than an empty canvas."
+  ],
+  "caveatsBg": [
+    "Трябва ти сериозна видеокарта. NVIDIA карта с 8 GB VRAM е практичният минимум за SDXL, а видео моделите искат много повече.",
+    "Checkpoint файловете са по няколко гигабайта, така че дискът се пълни бързо. Планирай 100 GB или повече.",
+    "Допълнителните възли изпълняват произволен Python код. Инсталирай само добре познати и преглеждай какво сваля мениджърът.",
+    "Графът с възли изисква време за свикване. Започни от вградените шаблони или от готов работен процес, а не от празно платно."
+  ],
+  "relatedApps": ["ollama", "applio", "tts-webui"]
 }
