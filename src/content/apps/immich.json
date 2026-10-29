@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 8192,
       "cpuCores": 4,
-      "notes": "The official documentation recommends 8 GB RAM and 4 cores (6 GB / 2 cores minimum; 4 GB only with machine learning disabled). The machine-learning container (face recognition, CLIP search) is the biggest RAM/CPU consumer and scales with library size and concurrent uploads; a dedicated GPU is optional but speeds up ML jobs significantly."
+      "notes": "The official documentation recommends 8 GB RAM and 4 cores (6 GB / 2 cores minimum; 4 GB only with machine learning disabled). The machine-learning container (face recognition, CLIP search) is the biggest RAM/CPU consumer and scales with library size and concurrent uploads; a dedicated GPU is optional but speeds up ML jobs significantly.",
+      "notesBg": "Официалната документация препоръчва 8 GB RAM и 4 ядра (минимум 6 GB и 2 ядра; 4 GB само с изключено машинно обучение). Контейнерът за машинно обучение (разпознаване на лица, CLIP търсене) консумира най-много RAM и процесор и натоварването расте с размера на библиотеката и едновременните качвания; отделна видеокарта не е задължителна, но значително ускорява ML задачите."
     }
   },
   "screenshots": [

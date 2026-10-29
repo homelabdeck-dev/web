@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Very light. In our test LXC (1 core, 512 MB) the container used about 140 MB of RAM and idled at 0% CPU while showing 14 services with status checks, system resources and a search box. The image is about 255 MB. Config changes to services.yaml and widgets.yaml apply without a restart."
+      "notes": "Very light. In our test LXC (1 core, 512 MB) the container used about 140 MB of RAM and idled at 0% CPU while showing 14 services with status checks, system resources and a search box. The image is about 255 MB. Config changes to services.yaml and widgets.yaml apply without a restart.",
+      "notesBg": "Много лек. В тестовия ни LXC (1 ядро, 512 MB) контейнерът използваше около 140 MB RAM и 0% процесор в покой, докато показваше 14 услуги с проверки на състоянието, системни ресурси и поле за търсене. Образът е около 255 MB. Промените в services.yaml и widgets.yaml се прилагат без рестарт."
     }
   },
   "screenshots": [

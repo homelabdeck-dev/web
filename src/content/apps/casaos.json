@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Lightweight host-level personal cloud OS layer on top of Docker — the dashboard itself idles around a couple hundred MB of RAM, with total footprint scaling with however many apps you install through its App Store. Note: the official install script assumes systemd and direct access to the host's storage/USB subsystem, so it typically fails inside unprivileged LXC containers — bare metal, a VM, or a privileged LXC is recommended instead."
+      "notes": "Lightweight host-level personal cloud OS layer on top of Docker — the dashboard itself idles around a couple hundred MB of RAM, with total footprint scaling with however many apps you install through its App Store. Note: the official install script assumes systemd and direct access to the host's storage/USB subsystem, so it typically fails inside unprivileged LXC containers — bare metal, a VM, or a privileged LXC is recommended instead.",
+      "notesBg": "Лек слой на ниво хост върху Docker за персонален облак: самото табло в покой използва около двеста MB RAM, а общото натоварване расте с броя приложения, инсталирани през App Store. Важно: официалният инсталационен скрипт очаква systemd и директен достъп до дисковете и USB на хоста, затова обикновено не работи в непривилегирован LXC контейнер. Препоръчваме bare metal, VM или привилегирован LXC."
     }
   },
   "screenshots": [

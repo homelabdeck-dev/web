@@ -18,7 +18,8 @@
     "resourceFootprint": {
       "ramMb": 4096,
       "cpuCores": 4,
-      "notes": "Measured on 2026-10-22 (version v1.5.2 plus a few commits) in a Proxmox LXC (6 vCPU, 12 GB RAM) with an RTX 3090 passed through. The web UI idles at about 0.5 GB of RAM and about 2.2 GB after loading the Kokoro model. Generating an 8-second English sentence with Kokoro-82M took about 1.7 seconds and used about 1.2 GB of VRAM. Larger models (Bark, XTTS, Chatterbox) need more VRAM and RAM. The installation with its extensions is large: about 22 GB for the project folder in our LXC, so plan for 60 GB of disk or more. The first Kokoro run also downloaded a small language package automatically."
+      "notes": "Measured on 2026-10-22 (version v1.5.2 plus a few commits) in a Proxmox LXC (6 vCPU, 12 GB RAM) with an RTX 3090 passed through. The web UI idles at about 0.5 GB of RAM and about 2.2 GB after loading the Kokoro model. Generating an 8-second English sentence with Kokoro-82M took about 1.7 seconds and used about 1.2 GB of VRAM. Larger models (Bark, XTTS, Chatterbox) need more VRAM and RAM. The installation with its extensions is large: about 22 GB for the project folder in our LXC, so plan for 60 GB of disk or more. The first Kokoro run also downloaded a small language package automatically.",
+      "notesBg": "Измерено на 22.10.2026 (версия v1.5.2 плюс няколко комита) в Proxmox LXC (6 vCPU, 12 GB RAM) с прехвърлена RTX 3090. Уеб интерфейсът в покой използва около 0,5 GB RAM и около 2,2 GB след зареждане на модела Kokoro. Генерирането на 8-секундно английско изречение с Kokoro-82M отне около 1,7 секунди и използваше около 1,2 GB VRAM. По-големите модели (Bark, XTTS, Chatterbox) искат повече VRAM и RAM. Инсталацията с разширенията е голяма: около 22 GB за папката на проекта в нашия LXC, така че планирай 60 GB диск или повече. Първото пускане на Kokoro също изтегли автоматично малък езиков пакет."
     }
   },
   "screenshots": [

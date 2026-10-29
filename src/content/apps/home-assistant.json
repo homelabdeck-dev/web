@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 1024,
       "cpuCores": 1,
-      "notes": "1 GB RAM / 1 core is a reasonable baseline for a home with 100+ entities across 1000+ available integrations. Footprint grows with the number of active integrations, automations, history retention and add-ons (e.g. running a local voice assistant or Zigbee/Z-Wave stacks in the same host)."
+      "notes": "1 GB RAM / 1 core is a reasonable baseline for a home with 100+ entities across 1000+ available integrations. Footprint grows with the number of active integrations, automations, history retention and add-ons (e.g. running a local voice assistant or Zigbee/Z-Wave stacks in the same host).",
+      "notesBg": "1 GB RAM и 1 ядро са разумна база за дом с над 100 обекта (entities) сред над 1000 налични интеграции. Натоварването расте с броя активни интеграции, автоматизации, срока на пазене на историята и добавките (например локален гласов асистент или Zigbee/Z-Wave на същия хост)."
     }
   },
   "screenshots": [

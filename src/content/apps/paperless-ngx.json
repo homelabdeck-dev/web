@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 2048,
       "cpuCores": 2,
-      "notes": "2 GB RAM / 2 cores handles typical scan-and-archive workloads. OCR (via Tesseract) is the main CPU cost during document consumption; add Tika + Gotenberg containers if you need Office-document conversion, which increases footprint further."
+      "notes": "2 GB RAM / 2 cores handles typical scan-and-archive workloads. OCR (via Tesseract) is the main CPU cost during document consumption; add Tika + Gotenberg containers if you need Office-document conversion, which increases footprint further.",
+      "notesBg": "2 GB RAM и 2 ядра се справят с типично сканиране и архивиране. OCR (чрез Tesseract) е основният разход на процесора при обработката на документи; добави контейнерите Tika и Gotenberg, ако ти трябва конвертиране на офис документи, което допълнително увеличава натоварването."
     }
   },
   "screenshots": [

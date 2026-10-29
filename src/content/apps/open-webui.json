@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 4096,
       "cpuCores": 4,
-      "notes": "Measured in our LXC (6 vCPU, 6 GB RAM, RTX 3090) with Ollama 0.34.2: the Open WebUI container uses about 0.5 to 0.7 GB of RAM, and the container lives in an LXC that sat at 0.7 GB idle and about 2.9 GB with a 20B model loaded, because the model weights go to the GPU. gpt-oss:20b (13 GB download) took about 16.5 GB of VRAM at the default 32k context and generated around 122 to 125 tokens per second; the first load took about 47 seconds. The Docker image is about 6.5 GB. Without a GPU, expect much slower answers and stick to small models."
+      "notes": "Measured in our LXC (6 vCPU, 6 GB RAM, RTX 3090) with Ollama 0.34.2: the Open WebUI container uses about 0.5 to 0.7 GB of RAM, and the container lives in an LXC that sat at 0.7 GB idle and about 2.9 GB with a 20B model loaded, because the model weights go to the GPU. gpt-oss:20b (13 GB download) took about 16.5 GB of VRAM at the default 32k context and generated around 122 to 125 tokens per second; the first load took about 47 seconds. The Docker image is about 6.5 GB. Without a GPU, expect much slower answers and stick to small models.",
+      "notesBg": "Измерено в нашия LXC (6 vCPU, 6 GB RAM, RTX 3090) с Ollama 0.34.2: контейнерът на Open WebUI използва около 0,5 до 0,7 GB RAM, а LXC-то, в което работи, беше на 0,7 GB в покой и около 2,9 GB със зареден 20B модел, защото теглата на модела отиват във видеокартата. gpt-oss:20b (изтегляне от 13 GB) зае около 16,5 GB VRAM при стандартния контекст от 32k и генерираше около 122 до 125 токена в секунда; първото зареждане отне около 47 секунди. Docker образът е около 6,5 GB. Без видеокарта очаквай много по-бавни отговори и се придържай към малки модели."
     }
   },
   "screenshots": [

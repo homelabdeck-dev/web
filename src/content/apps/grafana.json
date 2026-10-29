@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 0.5,
-      "notes": "512 MB RAM / 0.5 core comfortably renders dozens of dashboards for a homelab. Grafana itself only visualizes data — the real resource cost usually comes from the data sources it queries (Prometheus, Loki, InfluxDB) running alongside it."
+      "notes": "512 MB RAM / 0.5 core comfortably renders dozens of dashboards for a homelab. Grafana itself only visualizes data — the real resource cost usually comes from the data sources it queries (Prometheus, Loki, InfluxDB) running alongside it.",
+      "notesBg": "512 MB RAM и 0,5 ядро спокойно рендират десетки табла за homelab. Самата Grafana само визуализира данни; истинският разход на ресурси обикновено идва от източниците на данни, които пита (Prometheus, Loki, InfluxDB) и които работят до нея."
     }
   },
   "screenshots": [

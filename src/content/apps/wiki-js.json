@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "512 MB RAM / 1 core for the Node.js app plus a small PostgreSQL instance comfortably serves a team or family wiki. Footprint grows mainly with concurrent editors and full-text search index size on very large wikis."
+      "notes": "512 MB RAM / 1 core for the Node.js app plus a small PostgreSQL instance comfortably serves a team or family wiki. Footprint grows mainly with concurrent editors and full-text search index size on very large wikis.",
+      "notesBg": "512 MB RAM и 1 ядро за Node.js приложението плюс малка PostgreSQL инстанция спокойно обслужват wiki за екип или семейство. Натоварването расте основно с броя едновременни редактори и размера на индекса за пълнотекстово търсене при много големи wiki."
     }
   },
   "screenshots": [

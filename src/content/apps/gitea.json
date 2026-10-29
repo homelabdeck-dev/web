@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "512 MB RAM / 1 core is plenty for a small team or personal Git server. Written in Go with a single static binary, Gitea starts fast and stays light even with CI/CD (Gitea Actions) and package registry features enabled."
+      "notes": "512 MB RAM / 1 core is plenty for a small team or personal Git server. Written in Go with a single static binary, Gitea starts fast and stays light even with CI/CD (Gitea Actions) and package registry features enabled.",
+      "notesBg": "512 MB RAM и 1 ядро са напълно достатъчни за малък екип или личен Git сървър. Gitea е написан на Go като един статичен бинарен файл, стартира бързо и остава лек дори с включени CI/CD (Gitea Actions) и package registry."
     }
   },
   "screenshots": [

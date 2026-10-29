@@ -18,7 +18,8 @@
     "resourceFootprint": {
       "ramMb": 6144,
       "cpuCores": 4,
-      "notes": "Needs an NVIDIA GPU for practical training. In our test LXC it idled at about 0.7 GB of RAM, and training a voice model on 7 minutes of audio (200 epochs, 40 kHz) finished in roughly 25 minutes on an RTX 3090 inside a 6 GB memory limit. Converting a 15-second clip takes a few seconds. The Docker image is about 17 GB, so plan for 40 GB or more of disk."
+      "notes": "Needs an NVIDIA GPU for practical training. In our test LXC it idled at about 0.7 GB of RAM, and training a voice model on 7 minutes of audio (200 epochs, 40 kHz) finished in roughly 25 minutes on an RTX 3090 inside a 6 GB memory limit. Converting a 15-second clip takes a few seconds. The Docker image is about 17 GB, so plan for 40 GB or more of disk.",
+      "notesBg": "За практично обучение е нужна NVIDIA видеокарта. В тестовия ни LXC в покой използваше около 0,7 GB RAM, а обучението на гласов модел от 7 минути аудио (200 епохи, 40 kHz) приключи за около 25 минути на RTX 3090 при ограничение на паметта 6 GB. Конвертирането на 15-секунден клип отнема няколко секунди. Docker образът е около 17 GB, така че планирай 40 GB диск или повече."
     }
   },
   "screenshots": [

@@ -37,6 +37,8 @@ export interface ResourceFootprint {
   cpuCores: number;
   /** Free-form notes, e.g. "Scales with library size" or "ML features need more RAM". */
   notes: string;
+  /** Bulgarian notes; falls back to English when absent. */
+  notesBg?: string;
 }
 
 /** Compatibility matrix describing where/how an app can run. */

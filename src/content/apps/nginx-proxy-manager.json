@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Lightweight — a Node.js backend plus Nginx, idling around 150 MB of RAM on a fresh install in our test LXC. Footprint grows mainly with the number of proxy hosts and traffic. Needs ports 80/443 free on the host and port 81 for the admin UI."
+      "notes": "Lightweight — a Node.js backend plus Nginx, idling around 150 MB of RAM on a fresh install in our test LXC. Footprint grows mainly with the number of proxy hosts and traffic. Needs ports 80/443 free on the host and port 81 for the admin UI.",
+      "notesBg": "Лек: Node.js бекенд плюс Nginx, около 150 MB RAM в покой при нова инсталация в тестовия ни LXC. Натоварването расте основно с броя proxy хостове и трафика. Изисква свободни портове 80/443 на хоста и порт 81 за административния интерфейс."
     }
   },
   "screenshots": [

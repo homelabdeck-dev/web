@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 0.5,
-      "notes": "Very light PHP application — a few hundred MB of RAM comfortably handles thousands of feeds and articles. Footprint scales mainly with feed refresh frequency and total article/feed count (FreshRSS is documented to handle 1M+ articles and 50k+ feeds)."
+      "notes": "Very light PHP application — a few hundred MB of RAM comfortably handles thousands of feeds and articles. Footprint scales mainly with feed refresh frequency and total article/feed count (FreshRSS is documented to handle 1M+ articles and 50k+ feeds).",
+      "notesBg": "Много лек PHP проект: няколкостотин MB RAM спокойно стигат за хиляди емисии и статии. Натоварването расте основно с честотата на обновяване и общия брой статии и емисии (според документацията FreshRSS се справя с над 1 милион статии и над 50 000 емисии)."
     }
   },
   "screenshots": [

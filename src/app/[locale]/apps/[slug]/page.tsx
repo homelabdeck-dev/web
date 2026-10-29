@@ -243,7 +243,8 @@ export default async function AppDetailPage({
                 {app.compatibility.resourceFootprint.cpuCores} CPU
               </dd>
               <dd className="text-zinc-600 dark:text-zinc-300">
-                {app.compatibility.resourceFootprint.notes}
+                {(isBg && app.compatibility.resourceFootprint.notesBg) ||
+                  app.compatibility.resourceFootprint.notes}
               </dd>
             </div>
           </div>

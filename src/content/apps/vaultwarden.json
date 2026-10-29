@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 128,
       "cpuCores": 0.5,
-      "notes": "Written in Rust, Vaultwarden is one of the lightest self-hosted apps you can run — well under 100 MB RAM at idle for a family-sized vault. Footprint grows only slightly with more users, organizations and file attachments."
+      "notes": "Written in Rust, Vaultwarden is one of the lightest self-hosted apps you can run — well under 100 MB RAM at idle for a family-sized vault. Footprint grows only slightly with more users, organizations and file attachments.",
+      "notesBg": "Написан на Rust, Vaultwarden е едно от най-леките self-hosted приложения: доста под 100 MB RAM в покой за трезор с размер за семейство. Натоварването расте съвсем малко с повече потребители, организации и прикачени файлове."
     }
   },
   "screenshots": [

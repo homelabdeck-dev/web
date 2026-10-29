@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "512 MB RAM / 1 core for the Go/Vue app plus a small PostgreSQL instance is plenty for personal or small-team task management. Written in Go, the API binary itself is very light; footprint mostly comes from the database and number of concurrent users."
+      "notes": "512 MB RAM / 1 core for the Go/Vue app plus a small PostgreSQL instance is plenty for personal or small-team task management. Written in Go, the API binary itself is very light; footprint mostly comes from the database and number of concurrent users.",
+      "notesBg": "512 MB RAM и 1 ядро за Go/Vue приложението плюс малка PostgreSQL инстанция са напълно достатъчни за лични или екипни задачи. Самият API бинарен файл на Go е много лек; натоварването идва основно от базата и броя едновременни потребители."
     }
   },
   "screenshots": [

@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Extremely lightweight — the classic 'runs on a Raspberry Pi' network-wide ad blocker. Footprint mainly scales with total DNS query volume across your network and how large your blocklists are, not with the number of client devices."
+      "notes": "Extremely lightweight — the classic 'runs on a Raspberry Pi' network-wide ad blocker. Footprint mainly scales with total DNS query volume across your network and how large your blocklists are, not with the number of client devices.",
+      "notesBg": "Изключително лек: класическият блокер на реклами за цялата мрежа, който „върви на Raspberry Pi“. Натоварването зависи основно от общия обем DNS заявки в мрежата и размера на списъците за блокиране, а не от броя устройства."
     }
   },
   "screenshots": [

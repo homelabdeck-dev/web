@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 0.5,
-      "notes": "Very light for managing a single Docker host — a few hundred MB of RAM is plenty. Footprint grows when managing many remote endpoints, Kubernetes clusters or Docker Swarm environments from one Portainer instance."
+      "notes": "Very light for managing a single Docker host — a few hundred MB of RAM is plenty. Footprint grows when managing many remote endpoints, Kubernetes clusters or Docker Swarm environments from one Portainer instance.",
+      "notesBg": "Много лек при управление на един Docker хост: няколкостотин MB RAM са напълно достатъчни. Натоварването расте при управление на много отдалечени хостове, Kubernetes клъстери или Docker Swarm среди от една инстанция на Portainer."
     }
   },
   "screenshots": [

@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 512,
       "cpuCores": 1,
-      "notes": "Light at idle — around 125 MB of RAM with a small library in our test LXC. Scanning large libraries and transcoding for some clients temporarily raise CPU and RAM use; storage needs depend entirely on your audiobook and podcast collection."
+      "notes": "Light at idle — around 125 MB of RAM with a small library in our test LXC. Scanning large libraries and transcoding for some clients temporarily raise CPU and RAM use; storage needs depend entirely on your audiobook and podcast collection.",
+      "notesBg": "Лек в покой: около 125 MB RAM с малка библиотека в тестовия ни LXC. Сканирането на големи библиотеки и транскодирането за някои клиенти временно вдигат натоварването на процесора и RAM; нуждата от диск зависи изцяло от колекцията ти от аудиокниги и подкасти."
     }
   },
   "screenshots": [

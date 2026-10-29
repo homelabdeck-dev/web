@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Extremely light — a single Go binary that used only around 60 MB of RAM in our test LXC. Memory use stays small even with thousands of notes; attachments are the main thing that grows storage."
+      "notes": "Extremely light — a single Go binary that used only around 60 MB of RAM in our test LXC. Memory use stays small even with thousands of notes; attachments are the main thing that grows storage.",
+      "notesBg": "Изключително лек: един Go бинарен файл, който използваше само около 60 MB RAM в тестовия ни LXC. Паметта остава малка дори с хиляди бележки; основно прикачените файлове увеличават нуждата от диск."
     }
   },
   "screenshots": [

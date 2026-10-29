@@ -16,7 +16,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Extremely light for typical home use — a few hundred MB of RAM and a fraction of a CPU core comfortably monitors dozens of endpoints. Footprint grows with the number of monitors and check frequency."
+      "notes": "Extremely light for typical home use — a few hundred MB of RAM and a fraction of a CPU core comfortably monitors dozens of endpoints. Footprint grows with the number of monitors and check frequency.",
+      "notesBg": "Изключително лек при домашна употреба: няколкостотин MB RAM и част от процесорно ядро спокойно наблюдават десетки адреси. Натоварването расте с броя монитори и честотата на проверките."
     }
   },
   "screenshots": [

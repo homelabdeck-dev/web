@@ -19,7 +19,8 @@
     "resourceFootprint": {
       "ramMb": 256,
       "cpuCores": 1,
-      "notes": "Measured on 2026-10-22 on v0.107.79 in a Proxmox LXC (1 vCPU, 512 MB RAM). With the default AdGuard DNS filter loaded (about 190,000 rules) one instance used about 80 to 90 MB of RAM and the whole container sat at about 180 MB. In a fresh test instance, 201 DNS queries from one client were answered in about 3 ms on average and 28% of our mixed list of normal and ad or tracker domains were blocked. The install folder is about 235 MB. It is very light and fine for a Raspberry Pi."
+      "notes": "Measured on 2026-10-22 on v0.107.79 in a Proxmox LXC (1 vCPU, 512 MB RAM). With the default AdGuard DNS filter loaded (about 190,000 rules) one instance used about 80 to 90 MB of RAM and the whole container sat at about 180 MB. In a fresh test instance, 201 DNS queries from one client were answered in about 3 ms on average and 28% of our mixed list of normal and ad or tracker domains were blocked. The install folder is about 235 MB. It is very light and fine for a Raspberry Pi.",
+      "notesBg": "Измерено на 22.10.2026 с v0.107.79 в Proxmox LXC (1 vCPU, 512 MB RAM). Със заредения стандартен AdGuard DNS filter (около 190 000 правила) една инстанция използваше около 80 до 90 MB RAM, а целият контейнер беше на около 180 MB. В нова тестова инстанция 201 DNS заявки от един клиент получиха отговор средно за около 3 ms, а 28% от смесения ни списък с нормални и рекламни или проследяващи домейни бяха блокирани. Папката с инсталацията е около 235 MB. Много е лек и е подходящ за Raspberry Pi."
     }
   },
   "screenshots": [
