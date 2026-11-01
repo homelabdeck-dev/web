@@ -1,0 +1,299 @@
+{
+  "slug": "gpu-passthrough-proxmox-lxc",
+  "date": "2026-11-01",
+  "titleEn": "Share one NVIDIA GPU between Proxmox LXC containers",
+  "titleBg": "Share one NVIDIA GPU between Proxmox LXC containers",
+  "descriptionEn": "How we share one RTX 3090 between Ollama, ComfyUI, Applio and TTS-WebUI in Proxmox LXC containers: host driver, device nodes, the config lines and the reboot trap.",
+  "descriptionBg": "How we share one RTX 3090 between Ollama, ComfyUI, Applio and TTS-WebUI in Proxmox LXC containers: host driver, device nodes, the config lines and the reboot trap.",
+  "image": "/og/gpu-passthrough-proxmox-lxc.jpg",
+  "introEn": [
+    "Running AI at home needs a GPU, and a GPU is expensive. In Proxmox you do not have to give it to a single virtual machine. With LXC containers one NVIDIA card can serve several apps at the same time.",
+    "This is how our homelab does it: one RTX 3090 shared by four containers, on Proxmox VE 9.2.2. The commands and numbers below come from our own setup, checked on 2026-11-01. Your driver, kernel and device numbers will differ, so read the steps as a map, not a script to paste."
+  ],
+  "introBg": [
+    "Running AI at home needs a GPU, and a GPU is expensive. In Proxmox you do not have to give it to a single virtual machine. With LXC containers one NVIDIA card can serve several apps at the same time.",
+    "This is how our homelab does it: one RTX 3090 shared by four containers, on Proxmox VE 9.2.2. The commands and numbers below come from our own setup, checked on 2026-11-01. Your driver, kernel and device numbers will differ, so read the steps as a map, not a script to paste."
+  ],
+  "rows": [],
+  "apps": [
+    "ollama",
+    "comfyui",
+    "applio",
+    "tts-webui"
+  ],
+  "sections": [
+    {
+      "kind": "text",
+      "headingEn": "LXC or VM passthrough?",
+      "headingBg": "LXC or VM passthrough?",
+      "en": [
+        "With VM passthrough the whole GPU is handed to one virtual machine, and nothing else, not even the host, can use it. With an LXC container the GPU stays with the host's NVIDIA driver, and each container is given access to the same device files. That means several containers can use one card at once, which is why we chose it: one RTX 3090 serves Ollama, ComfyUI, Applio and TTS-WebUI.",
+        "The price is that containers share the host kernel and the driver version, and they see the whole GPU with no VRAM isolation. We cover the consequences at the end."
+      ],
+      "bg": [
+        "With VM passthrough the whole GPU is handed to one virtual machine, and nothing else, not even the host, can use it. With an LXC container the GPU stays with the host's NVIDIA driver, and each container is given access to the same device files. That means several containers can use one card at once, which is why we chose it: one RTX 3090 serves Ollama, ComfyUI, Applio and TTS-WebUI.",
+        "The price is that containers share the host kernel and the driver version, and they see the whole GPU with no VRAM isolation. We cover the consequences at the end."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 1: install the driver on the host",
+      "headingBg": "Step 1: install the driver on the host",
+      "en": [
+        "Install the build tools and the kernel headers that match your running kernel, and block the open-source nouveau driver. On Proxmox 9 the headers package is called proxmox-headers-<kernel>.",
+        "Download the official .run installer for your card from NVIDIA and run it on the host with the options below. DKMS rebuilds the kernel module when Proxmox updates the kernel. Do not let apt autoremove dkms later.",
+        "We used the NVIDIA installer because Debian's packaged 550 driver did not build on our 7.0.2-6-pve kernel. Your kernel may be different, so try the packaged driver first if you prefer.",
+        "Check the result with nvidia-smi on the host. It should list your card and the driver version."
+      ],
+      "bg": [
+        "Install the build tools and the kernel headers that match your running kernel, and block the open-source nouveau driver. On Proxmox 9 the headers package is called proxmox-headers-<kernel>.",
+        "Download the official .run installer for your card from NVIDIA and run it on the host with the options below. DKMS rebuilds the kernel module when Proxmox updates the kernel. Do not let apt autoremove dkms later.",
+        "We used the NVIDIA installer because Debian's packaged 550 driver did not build on our 7.0.2-6-pve kernel. Your kernel may be different, so try the packaged driver first if you prefer.",
+        "Check the result with nvidia-smi on the host. It should list your card and the driver version."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Host commands",
+      "headingBg": "Host commands",
+      "en": [
+        "apt install build-essential dkms proxmox-headers-$(uname -r)",
+        "printf 'blacklist nouveau\\noptions nouveau modeset=0\\n' > /etc/modprobe.d/blacklist-nouveau.conf",
+        "update-initramfs -u && reboot",
+        "",
+        "# after the reboot, with the .run file downloaded from nvidia.com:",
+        "sh NVIDIA-Linux-x86_64-<version>.run --silent --dkms --no-x-check --no-nouveau-check --install-libglvnd",
+        "nvidia-smi"
+      ],
+      "bg": [
+        "apt install build-essential dkms proxmox-headers-$(uname -r)",
+        "printf 'blacklist nouveau\\noptions nouveau modeset=0\\n' > /etc/modprobe.d/blacklist-nouveau.conf",
+        "update-initramfs -u && reboot",
+        "",
+        "# after the reboot, with the .run file downloaded from nvidia.com:",
+        "sh NVIDIA-Linux-x86_64-<version>.run --silent --dkms --no-x-check --no-nouveau-check --install-libglvnd",
+        "nvidia-smi"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 2: load the modules and create the device nodes at boot",
+      "headingBg": "Step 2: load the modules and create the device nodes at boot",
+      "en": [
+        "Add the NVIDIA modules to /etc/modules-load.d/nvidia.conf so they load at boot.",
+        "The nvidia-uvm device node, which CUDA needs, is not always created until something asks for it. After a host reboot our containers started with no /dev/nvidia-uvm and CUDA failed inside them.",
+        "The fix is a small oneshot service that runs before the containers start. It calls nvidia-modprobe to create the nodes and nvidia-smi to wake the card. We checked it across real host reboots."
+      ],
+      "bg": [
+        "Add the NVIDIA modules to /etc/modules-load.d/nvidia.conf so they load at boot.",
+        "The nvidia-uvm device node, which CUDA needs, is not always created until something asks for it. After a host reboot our containers started with no /dev/nvidia-uvm and CUDA failed inside them.",
+        "The fix is a small oneshot service that runs before the containers start. It calls nvidia-modprobe to create the nodes and nvidia-smi to wake the card. We checked it across real host reboots."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "/etc/modules-load.d/nvidia.conf",
+      "headingBg": "/etc/modules-load.d/nvidia.conf",
+      "en": [
+        "nvidia",
+        "nvidia_uvm",
+        "nvidia_modeset"
+      ],
+      "bg": [
+        "nvidia",
+        "nvidia_uvm",
+        "nvidia_modeset"
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "/etc/systemd/system/nvidia-devnodes.service",
+      "headingBg": "/etc/systemd/system/nvidia-devnodes.service",
+      "en": [
+        "[Unit]",
+        "Description=Create NVIDIA device nodes for LXC GPU passthrough",
+        "After=systemd-modules-load.service local-fs.target",
+        "Before=pve-guests.service lxc.service",
+        "",
+        "[Service]",
+        "Type=oneshot",
+        "RemainAfterExit=yes",
+        "ExecStart=/usr/bin/nvidia-modprobe -u -c0",
+        "ExecStart=/usr/bin/nvidia-smi -L",
+        "",
+        "[Install]",
+        "WantedBy=multi-user.target",
+        "",
+        "# then: systemctl enable --now nvidia-devnodes.service"
+      ],
+      "bg": [
+        "[Unit]",
+        "Description=Create NVIDIA device nodes for LXC GPU passthrough",
+        "After=systemd-modules-load.service local-fs.target",
+        "Before=pve-guests.service lxc.service",
+        "",
+        "[Service]",
+        "Type=oneshot",
+        "RemainAfterExit=yes",
+        "ExecStart=/usr/bin/nvidia-modprobe -u -c0",
+        "ExecStart=/usr/bin/nvidia-smi -L",
+        "",
+        "[Install]",
+        "WantedBy=multi-user.target",
+        "",
+        "# then: systemctl enable --now nvidia-devnodes.service"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 3: find the device major numbers",
+      "headingBg": "Step 3: find the device major numbers",
+      "en": [
+        "A container may only use a device if its config allows the device's major number. Read them from the host.",
+        "On our machine nvidia and nvidiactl are always 195, but nvidia-uvm (236) and nvidia-caps (239) are assigned dynamically, so yours may differ."
+      ],
+      "bg": [
+        "A container may only use a device if its config allows the device's major number. Read them from the host.",
+        "On our machine nvidia and nvidiactl are always 195, but nvidia-uvm (236) and nvidia-caps (239) are assigned dynamically, so yours may differ."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Read the major numbers",
+      "headingBg": "Read the major numbers",
+      "en": [
+        "grep nvidia /proc/devices",
+        "# 195 nvidia / 195 nvidiactl / 236 nvidia-uvm / 239 nvidia-caps (ours, 2026-11-01)",
+        "ls -l /dev/nvidia*"
+      ],
+      "bg": [
+        "grep nvidia /proc/devices",
+        "# 195 nvidia / 195 nvidiactl / 236 nvidia-uvm / 239 nvidia-caps (ours, 2026-11-01)",
+        "ls -l /dev/nvidia*"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 4: give the container access",
+      "headingBg": "Step 4: give the container access",
+      "en": [
+        "Add the lines below to the container's file in /etc/pve/lxc/<id>.conf, using your own major numbers, then restart the container.",
+        "Our containers are privileged. We have not tested unprivileged containers with ID mapping, so we cannot say how they behave.",
+        "The bind mounts use the optional flag so the container still starts if a device node is missing, but CUDA will then fail inside it. That is the first thing to check if the GPU disappears."
+      ],
+      "bg": [
+        "Add the lines below to the container's file in /etc/pve/lxc/<id>.conf, using your own major numbers, then restart the container.",
+        "Our containers are privileged. We have not tested unprivileged containers with ID mapping, so we cannot say how they behave.",
+        "The bind mounts use the optional flag so the container still starts if a device node is missing, but CUDA will then fail inside it. That is the first thing to check if the GPU disappears."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "/etc/pve/lxc/<id>.conf",
+      "headingBg": "/etc/pve/lxc/<id>.conf",
+      "en": [
+        "lxc.cgroup2.devices.allow: c 195:* rwm",
+        "lxc.cgroup2.devices.allow: c 236:* rwm",
+        "lxc.cgroup2.devices.allow: c 239:* rwm",
+        "lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-caps dev/nvidia-caps none bind,optional,create=dir"
+      ],
+      "bg": [
+        "lxc.cgroup2.devices.allow: c 195:* rwm",
+        "lxc.cgroup2.devices.allow: c 236:* rwm",
+        "lxc.cgroup2.devices.allow: c 239:* rwm",
+        "lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file",
+        "lxc.mount.entry: /dev/nvidia-caps dev/nvidia-caps none bind,optional,create=dir"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 5: install the matching driver inside the container",
+      "headingBg": "Step 5: install the matching driver inside the container",
+      "en": [
+        "The container needs the NVIDIA user-space libraries, and the version must match the host driver exactly. Run the same .run file inside the container, but without the kernel module.",
+        "Check with nvidia-smi inside the container. It should show the same card and the same driver version as the host.",
+        "For Docker inside the container, install the NVIDIA container toolkit. In our containers we also had to set no-cgroups = true in its config, because the container cannot manage device cgroups itself."
+      ],
+      "bg": [
+        "The container needs the NVIDIA user-space libraries, and the version must match the host driver exactly. Run the same .run file inside the container, but without the kernel module.",
+        "Check with nvidia-smi inside the container. It should show the same card and the same driver version as the host.",
+        "For Docker inside the container, install the NVIDIA container toolkit. In our containers we also had to set no-cgroups = true in its config, because the container cannot manage device cgroups itself."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Inside the container",
+      "headingBg": "Inside the container",
+      "en": [
+        "sh NVIDIA-Linux-x86_64-<version>.run --silent --no-kernel-module --no-nouveau-check --no-x-check --install-libglvnd --no-systemd",
+        "nvidia-smi"
+      ],
+      "bg": [
+        "sh NVIDIA-Linux-x86_64-<version>.run --silent --no-kernel-module --no-nouveau-check --no-x-check --install-libglvnd --no-systemd",
+        "nvidia-smi"
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What it looks like in daily use",
+      "headingBg": "What it looks like in daily use",
+      "en": [
+        "Setup: Proxmox VE 9.2.2, kernel 7.0.2-6-pve, one RTX 3090 with 24 GB of VRAM, driver 595.84. Four AI containers share the card.",
+        "Measured VRAM from our own tests: Ollama with gpt-oss:20b about 13.7 GB, ComfyUI with an SDXL image about 7 GB, TTS-WebUI with Kokoro about 1.2 GB.",
+        "Together that is about 22 of the 24 GB, which leaves no headroom for longer prompts, bigger models or video, so we run one heavy job at a time. Light ones such as Kokoro usually fit beside another job.",
+        "ComfyUI keeps its models in VRAM after a job. A one-minute timer on that container frees them after five idle minutes, so the other containers can use the card.",
+        "The host's 15 GB of RAM is shared too. After an uncapped video test froze the whole host, ComfyUI runs with a hard memory limit of 13 GB.",
+        "These are one machine and a few short tests, not a benchmark."
+      ],
+      "bg": [
+        "Setup: Proxmox VE 9.2.2, kernel 7.0.2-6-pve, one RTX 3090 with 24 GB of VRAM, driver 595.84. Four AI containers share the card.",
+        "Measured VRAM from our own tests: Ollama with gpt-oss:20b about 13.7 GB, ComfyUI with an SDXL image about 7 GB, TTS-WebUI with Kokoro about 1.2 GB.",
+        "Together that is about 22 of the 24 GB, which leaves no headroom for longer prompts, bigger models or video, so we run one heavy job at a time. Light ones such as Kokoro usually fit beside another job.",
+        "ComfyUI keeps its models in VRAM after a job. A one-minute timer on that container frees them after five idle minutes, so the other containers can use the card.",
+        "The host's 15 GB of RAM is shared too. After an uncapped video test froze the whole host, ComfyUI runs with a hard memory limit of 13 GB.",
+        "These are one machine and a few short tests, not a benchmark."
+      ]
+    },
+    {
+      "kind": "text",
+      "headingEn": "The reboot trap",
+      "headingBg": "The reboot trap",
+      "en": [
+        "The dynamic major numbers can change after a host reboot. If nvidia-uvm or nvidia-caps gets a new number, the old allow lines in the container config no longer match, and the device files inside the container show up as dead nodes of 0 bytes.",
+        "After every host reboot we compare grep nvidia /proc/devices with the lxc.cgroup2.devices.allow lines of each GPU container. If they differ, edit the config and reboot that container."
+      ],
+      "bg": [
+        "The dynamic major numbers can change after a host reboot. If nvidia-uvm or nvidia-caps gets a new number, the old allow lines in the container config no longer match, and the device files inside the container show up as dead nodes of 0 bytes.",
+        "After every host reboot we compare grep nvidia /proc/devices with the lxc.cgroup2.devices.allow lines of each GPU container. If they differ, edit the config and reboot that container."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Honest caveats",
+      "headingBg": "Honest caveats",
+      "en": [
+        "Privileged containers are less isolated than unprivileged ones. A process that escapes a privileged container is root on the host, so use this only for containers you trust.",
+        "The driver must match everywhere. Upgrading means the host and every GPU container in the same maintenance window.",
+        "A kernel update needs DKMS to rebuild the module. Check dkms status before rebooting into a new kernel, and keep a way to reach the host without a working display.",
+        "There is no VRAM isolation between containers. One job that fills the card can make another fail with out-of-memory errors.",
+        "A GPU under load draws a lot of power, makes noise and gets hot, so keep an eye on its temperature.",
+        "Package names, flags and paths change between Proxmox, kernel and driver versions. If something does not match, follow the current Proxmox and NVIDIA documentation."
+      ],
+      "bg": [
+        "Privileged containers are less isolated than unprivileged ones. A process that escapes a privileged container is root on the host, so use this only for containers you trust.",
+        "The driver must match everywhere. Upgrading means the host and every GPU container in the same maintenance window.",
+        "A kernel update needs DKMS to rebuild the module. Check dkms status before rebooting into a new kernel, and keep a way to reach the host without a working display.",
+        "There is no VRAM isolation between containers. One job that fills the card can make another fail with out-of-memory errors.",
+        "A GPU under load draws a lot of power, makes noise and gets hot, so keep an eye on its temperature.",
+        "Package names, flags and paths change between Proxmox, kernel and driver versions. If something does not match, follow the current Proxmox and NVIDIA documentation."
+      ]
+    }
+  ]
+}

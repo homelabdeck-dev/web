@@ -167,7 +167,11 @@ export default async function GuideDetailPage({
               <h2 className="text-2xl text-black dark:text-zinc-50">
                 {isBg ? section.headingBg : section.headingEn}
               </h2>
-              {section.kind === "text" ? (
+              {section.kind === "code" ? (
+                <pre className="overflow-x-auto rounded-xl border border-black/[.08] bg-zinc-50 p-4 text-sm leading-6 text-zinc-800 dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-200">
+                  <code>{items.join("\n")}</code>
+                </pre>
+              ) : section.kind === "text" ? (
                 items.map((item, i) => (
                   <p key={i} className="text-lg leading-8 text-zinc-600 dark:text-zinc-300">
                     {item}

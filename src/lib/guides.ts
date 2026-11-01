@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 export interface GuideSection {
-  kind: "list" | "steps" | "text";
+  kind: "list" | "steps" | "text" | "code";
   headingEn: string;
   headingBg: string;
   en: string[];
