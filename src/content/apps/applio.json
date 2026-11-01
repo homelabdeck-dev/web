@@ -48,19 +48,20 @@
     "Respeecher",
     "Voicemod"
   ],
-  "descriptionEn": "Applio is a voice conversion tool built on RVC (Retrieval-based Voice Conversion). You can train a voice model from a few minutes of clean speech, then re-voice any recording so it sounds like that model, entirely on your own GPU and without sending audio to a cloud service. The web interface covers training, single and batch conversion, text-to-speech with voice conversion, model blending and real-time conversion. Use it with your own voice or with the clear permission of the person whose voice you are modelling. It is a self-hosted alternative to paid voice-changer and voice-cloning services.",
+  "descriptionEn": "Applio is a voice conversion tool built on RVC (Retrieval-based Voice Conversion). You can train a voice model from a few minutes of clean speech, then re-voice any recording so it sounds like that model, entirely on your own GPU and without sending audio to a cloud service. The web interface covers training, single and batch conversion, text-to-speech with voice conversion, model blending and real-time conversion. Use it with your own voice or with the clear permission of the person whose voice you are modelling. It is a self-hosted alternative to paid voice-changer and voice-cloning services. The project provides installer scripts for Windows, Linux and macOS and publishes Google Colab notebooks for people without a local GPU; this page covers running it on your own hardware with Docker.",
   "descriptionBg": "Applio е инструмент за преобразуване на глас, базиран на RVC (Retrieval-based Voice Conversion). Можеш да обучиш гласов модел от няколко минути чиста реч и после да преозвучиш всеки запис така, че да звучи като този модел, изцяло на твоя видеокарта и без да пращаш аудио в облака. Уеб интерфейсът включва обучение, конвертиране на единичен и пакетен запис, синтез на реч с конверсия на гласа, смесване на модели и конвертиране в реално време. Ползвай го със собствения си глас или с изричното съгласие на човека, чийто глас моделираш. Това е самостоятелно хоствана алтернатива на платените услуги за промяна и клониране на глас.",
   "taglineEn": "Train your own voice model and convert audio on your own GPU.",
   "taglineBg": "Обучи собствен гласов модел и конвертирай аудио на своя видеокарта.",
-  "seoTitleEn": "Applio: self-hosted RVC voice cloning & real-time voice changer — HomelabDeck",
+  "seoTitleEn": "Applio: self-hosted RVC voice cloning with Docker, a Google Colab alternative — HomelabDeck",
   "seoTitleBg": "Applio: self-hosted RVC клониране на глас и voice changer в реално време — HomelabDeck",
-  "seoDescriptionEn": "Run Applio (RVC) on your own GPU: train a voice model in ~25 min on an RTX 3090, convert audio, use real-time conversion. Docker Compose, resource footprint and screenshots from our own test.",
+  "seoDescriptionEn": "Run Applio (RVC) on your own GPU instead of Colab: ~25 min training on an RTX 3090, Docker Compose, Windows/Linux notes, real screenshots.",
   "seoDescriptionBg": "Пусни Applio (RVC) на своя видеокарта: обучение на гласов модел за ~25 мин на RTX 3090, конвертиране на аудио и реално време. Docker Compose, ресурси и скрийншотове от наш тест.",
   "useCasesEn": [
     "Re-voicing narration, podcasts or video voice-overs with a model trained on your own voice.",
     "Experimenting with voice conversion without paying per minute or uploading recordings to a cloud service.",
     "Building a small, clean dataset once and reusing the trained model for batch conversion of many files.",
-    "Combining text-to-speech with voice conversion to produce speech in a voice you have the rights to use."
+    "Combining text-to-speech with voice conversion to produce speech in a voice you have the rights to use.",
+    "Moving from Google Colab to your own GPU: Colab runtimes are temporary and your audio lives in your Google account, while a local install keeps datasets and trained models on your own disk with no session limits."
   ],
   "useCasesBg": [
     "Преозвучаване на разказ, подкаст или глас зад кадър с модел, обучен на собствения ти глас.",
@@ -70,9 +71,11 @@
   ],
   "caveatsEn": [
     "Training is only practical on an NVIDIA GPU. On CPU it is far too slow, and AMD support is limited.",
+    "We tested Applio with Docker on Linux. The upstream README also offers run-install.bat and run-applio.bat for Windows and compiled Windows releases, but we have not measured those, so our numbers do not apply to them.",
     "The Docker image is large and models add up quickly, so reserve plenty of disk before you start.",
     "Results depend mostly on the training audio: a few minutes of clean, dry speech with no music or reverb works far better than a long noisy recording.",
-    "Cloning someone else's voice without consent can be illegal and is against the spirit of the project. Only model voices you have permission to use."
+    "Cloning someone else's voice without consent can be illegal and is against the spirit of the project. Only model voices you have permission to use.",
+    "The maintainers say Applio no longer receives frequent updates and will mostly get security patches, dependency updates and occasional features. Expect a stable tool, not a fast-moving one."
   ],
   "caveatsBg": [
     "Обучението е практично само на NVIDIA видеокарта. На процесор е твърде бавно, а поддръжката за AMD е ограничена.",
@@ -80,5 +83,9 @@
     "Резултатът зависи най-вече от аудиото за обучение: няколко минути чиста реч без музика и ехо дават много по-добър модел от дълъг шумен запис.",
     "Клонирането на чужд глас без съгласие може да е незаконно и противоречи на духа на проекта. Моделирай само гласове, които имаш разрешение да ползваш."
   ],
-  "relatedApps": ["tts-webui", "comfyui", "ollama"]
+  "relatedApps": [
+    "tts-webui",
+    "comfyui",
+    "ollama"
+  ]
 }
