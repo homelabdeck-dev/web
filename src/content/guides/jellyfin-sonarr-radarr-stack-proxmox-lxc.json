@@ -1,0 +1,211 @@
+{
+  "slug": "jellyfin-sonarr-radarr-stack-proxmox-lxc",
+  "date": "2026-11-06",
+  "titleEn": "Jellyfin, Sonarr and Radarr in one Proxmox LXC: a Docker Compose media stack",
+  "titleBg": "Jellyfin, Sonarr and Radarr in one Proxmox LXC: a Docker Compose media stack",
+  "descriptionEn": "A working Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr and qBittorrent stack in a single Proxmox LXC: compose file, folder layout, wiring, real RAM numbers and the mistakes to avoid.",
+  "descriptionBg": "A working Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr and qBittorrent stack in a single Proxmox LXC: compose file, folder layout, wiring, real RAM numbers and the mistakes to avoid.",
+  "introEn": [
+    "A home media server is more than a player. You also want something that finds new episodes, names files correctly, fetches subtitles and keeps the library tidy. The usual answer is the *arr family around Jellyfin.",
+    "This is the stack running on our Proxmox homelab: Jellyfin with Sonarr, Radarr, Prowlarr, Bazarr, qBittorrent and FlareSolverr in one Docker Compose file inside a single LXC container. The compose file, ports and memory numbers are from the live container, checked on 2026-11-06. Replace the timezone and paths with your own."
+  ],
+  "rows": [],
+  "apps": [
+    "jellyfin"
+  ],
+  "sections": [
+    {
+      "kind": "text",
+      "headingEn": "What the stack does",
+      "headingBg": "What the stack does",
+      "en": [
+        "Jellyfin plays your media. The rest of the stack is the plumbing that fills its library without you moving files by hand. Sonarr (TV) and Radarr (movies) keep a wanted list, ask Prowlarr for sources, hand the job to a download client (qBittorrent here), then rename the finished file and move it into the library. Bazarr adds subtitles. FlareSolverr helps Prowlarr talk to sources that sit behind a browser check.",
+        "We run all seven as Docker containers inside one Proxmox LXC. Measured on our host (2 cores, 4 GB RAM, a separate 80 GB disk): the whole stack idles at about 1 GB of RAM, with each container between 50 and 340 MB. Jellyfin is the largest because it holds the library in memory; qBittorrent is the smallest while nothing is downloading."
+      ],
+      "bg": [
+        "Jellyfin plays your media. The rest of the stack is the plumbing that fills its library without you moving files by hand. Sonarr (TV) and Radarr (movies) keep a wanted list, ask Prowlarr for sources, hand the job to a download client (qBittorrent here), then rename the finished file and move it into the library. Bazarr adds subtitles. FlareSolverr helps Prowlarr talk to sources that sit behind a browser check.",
+        "We run all seven as Docker containers inside one Proxmox LXC. Measured on our host (2 cores, 4 GB RAM, a separate 80 GB disk): the whole stack idles at about 1 GB of RAM, with each container between 50 and 340 MB. Jellyfin is the largest because it holds the library in memory; qBittorrent is the smallest while nothing is downloading."
+      ]
+    },
+    {
+      "kind": "text",
+      "headingEn": "Where the media comes from",
+      "headingBg": "Where the media comes from",
+      "en": [
+        "This guide is about the plumbing, not about content. Use it for media you have the right to use: your own disc rips, home videos, public-domain and Creative Commons films, and software or Linux ISOs distributed over BitTorrent. What you download and from where is your responsibility and the law in your country decides what is allowed. We do not name or recommend any source."
+      ],
+      "bg": [
+        "This guide is about the plumbing, not about content. Use it for media you have the right to use: your own disc rips, home videos, public-domain and Creative Commons films, and software or Linux ISOs distributed over BitTorrent. What you download and from where is your responsibility and the law in your country decides what is allowed. We do not name or recommend any source."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 1: create the container and the folders",
+      "headingBg": "Step 1: create the container and the folders",
+      "en": [
+        "Create an LXC (Debian 12 or 13), 2 cores, 3 to 4 GB RAM, and give it a disk big enough for your library. Enable nesting and keyctl in the container options so Docker runs inside it, then install Docker and the compose plugin.",
+        "Create one parent folder for everything, for example /data, with torrents/ and media/tv, media/movies inside. Own it with the user ID you will pass to the containers (we use 1000).",
+        "Keep downloads and the library under the same /data mount. When Sonarr and Radarr see both locations on one filesystem they can hardlink a finished file instead of copying it, so a seeding torrent and its library entry take the space of one file."
+      ],
+      "bg": [
+        "Create an LXC (Debian 12 or 13), 2 cores, 3 to 4 GB RAM, and give it a disk big enough for your library. Enable nesting and keyctl in the container options so Docker runs inside it, then install Docker and the compose plugin.",
+        "Create one parent folder for everything, for example /data, with torrents/ and media/tv, media/movies inside. Own it with the user ID you will pass to the containers (we use 1000).",
+        "Keep downloads and the library under the same /data mount. When Sonarr and Radarr see both locations on one filesystem they can hardlink a finished file instead of copying it, so a seeding torrent and its library entry take the space of one file."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Step 2: the compose file",
+      "headingBg": "Step 2: the compose file",
+      "en": [
+        "x-common: &common",
+        "  restart: unless-stopped",
+        "  environment: &env",
+        "    PUID: \"1000\"",
+        "    PGID: \"1000\"",
+        "    TZ: Europe/Berlin   # your timezone",
+        "services:",
+        "  qbittorrent:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/qbittorrent:latest",
+        "    environment: { <<: *env, WEBUI_PORT: \"8080\" }",
+        "    volumes: [\"./config/qbittorrent:/config\", \"/data:/data\"]",
+        "    ports: [\"8080:8080\", \"6881:6881\", \"6881:6881/udp\"]",
+        "  prowlarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/prowlarr:latest",
+        "    volumes: [\"./config/prowlarr:/config\"]",
+        "    ports: [\"9696:9696\"]",
+        "  sonarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/sonarr:latest",
+        "    volumes: [\"./config/sonarr:/config\", \"/data:/data\"]",
+        "    ports: [\"8989:8989\"]",
+        "  radarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/radarr:latest",
+        "    volumes: [\"./config/radarr:/config\", \"/data:/data\"]",
+        "    ports: [\"7878:7878\"]",
+        "  bazarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/bazarr:latest",
+        "    volumes: [\"./config/bazarr:/config\", \"/data:/data\"]",
+        "    ports: [\"6767:6767\"]",
+        "  flaresolverr:",
+        "    <<: *common",
+        "    image: ghcr.io/flaresolverr/flaresolverr:latest",
+        "    ports: [\"8191:8191\"]",
+        "  jellyfin:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/jellyfin:latest",
+        "    volumes: [\"./config/jellyfin:/config\", \"/data/media:/data/media:ro\"]",
+        "    ports: [\"8096:8096\"]"
+      ],
+      "bg": [
+        "x-common: &common",
+        "  restart: unless-stopped",
+        "  environment: &env",
+        "    PUID: \"1000\"",
+        "    PGID: \"1000\"",
+        "    TZ: Europe/Berlin   # your timezone",
+        "services:",
+        "  qbittorrent:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/qbittorrent:latest",
+        "    environment: { <<: *env, WEBUI_PORT: \"8080\" }",
+        "    volumes: [\"./config/qbittorrent:/config\", \"/data:/data\"]",
+        "    ports: [\"8080:8080\", \"6881:6881\", \"6881:6881/udp\"]",
+        "  prowlarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/prowlarr:latest",
+        "    volumes: [\"./config/prowlarr:/config\"]",
+        "    ports: [\"9696:9696\"]",
+        "  sonarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/sonarr:latest",
+        "    volumes: [\"./config/sonarr:/config\", \"/data:/data\"]",
+        "    ports: [\"8989:8989\"]",
+        "  radarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/radarr:latest",
+        "    volumes: [\"./config/radarr:/config\", \"/data:/data\"]",
+        "    ports: [\"7878:7878\"]",
+        "  bazarr:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/bazarr:latest",
+        "    volumes: [\"./config/bazarr:/config\", \"/data:/data\"]",
+        "    ports: [\"6767:6767\"]",
+        "  flaresolverr:",
+        "    <<: *common",
+        "    image: ghcr.io/flaresolverr/flaresolverr:latest",
+        "    ports: [\"8191:8191\"]",
+        "  jellyfin:",
+        "    <<: *common",
+        "    image: lscr.io/linuxserver/jellyfin:latest",
+        "    volumes: [\"./config/jellyfin:/config\", \"/data/media:/data/media:ro\"]",
+        "    ports: [\"8096:8096\"]"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 3: connect the pieces",
+      "headingBg": "Step 3: connect the pieces",
+      "en": [
+        "Start everything with docker compose up -d. Because all containers share one compose network, they reach each other by service name: use http://qbittorrent:8080, http://sonarr:8989 and so on, not the LAN IP.",
+        "In qBittorrent, set the default save path to /data/torrents and change the generated web UI password (it is printed once in the container log on first start).",
+        "In Sonarr and Radarr, add /data/media/tv and /data/media/movies as root folders, then add qBittorrent under Settings, Download Clients with host qbittorrent. Give it a category per app (tv, movies) so finished downloads are matched to the right one.",
+        "In Prowlarr, add Sonarr and Radarr under Settings, Apps using their URLs and API keys (found in each app under Settings, General). Indexers you add in Prowlarr are then pushed to both apps automatically, so you manage them in one place.",
+        "If an indexer needs a browser check, add FlareSolverr under Settings, Indexers with host http://flaresolverr:8191 and a tag (we use flaresolverr), and put the same tag on the indexers that need it.",
+        "In Jellyfin, add libraries pointing at /data/media/tv and /data/media/movies. Bazarr connects to Sonarr and Radarr the same way and fetches subtitles for what they already have."
+      ],
+      "bg": [
+        "Start everything with docker compose up -d. Because all containers share one compose network, they reach each other by service name: use http://qbittorrent:8080, http://sonarr:8989 and so on, not the LAN IP.",
+        "In qBittorrent, set the default save path to /data/torrents and change the generated web UI password (it is printed once in the container log on first start).",
+        "In Sonarr and Radarr, add /data/media/tv and /data/media/movies as root folders, then add qBittorrent under Settings, Download Clients with host qbittorrent. Give it a category per app (tv, movies) so finished downloads are matched to the right one.",
+        "In Prowlarr, add Sonarr and Radarr under Settings, Apps using their URLs and API keys (found in each app under Settings, General). Indexers you add in Prowlarr are then pushed to both apps automatically, so you manage them in one place.",
+        "If an indexer needs a browser check, add FlareSolverr under Settings, Indexers with host http://flaresolverr:8191 and a tag (we use flaresolverr), and put the same tag on the indexers that need it.",
+        "In Jellyfin, add libraries pointing at /data/media/tv and /data/media/movies. Bazarr connects to Sonarr and Radarr the same way and fetches subtitles for what they already have."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What we got wrong or had to work around",
+      "headingBg": "What we got wrong or had to work around",
+      "en": [
+        "Jellyfin has read-only access to the media on purpose: a bug or a bad plugin there can never delete your library. The other apps are the only writers.",
+        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We have not tested transcoding load: anything that needs it runs on two CPU cores and is likely to struggle, while direct play does not need the GPU. If you need it, pass the iGPU through to the container first.",
+        "Mixing UID/GID is the usual cause of permission errors. Every container uses the same PUID and PGID, and the /data folders belong to that user.",
+        "The config of all seven apps contains API keys and the qBittorrent password hash. Back up /opt/arr/config (we do a tarball on the Proxmox host), but keep it off cloud storage.",
+        "Media is not in that backup. If the disk dies the library is gone, so decide up front what you are willing to re-download."
+      ],
+      "bg": [
+        "Jellyfin has read-only access to the media on purpose: a bug or a bad plugin there can never delete your library. The other apps are the only writers.",
+        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We have not tested transcoding load: anything that needs it runs on two CPU cores and is likely to struggle, while direct play does not need the GPU. If you need it, pass the iGPU through to the container first.",
+        "Mixing UID/GID is the usual cause of permission errors. Every container uses the same PUID and PGID, and the /data folders belong to that user.",
+        "The config of all seven apps contains API keys and the qBittorrent password hash. Back up /opt/arr/config (we do a tarball on the Proxmox host), but keep it off cloud storage.",
+        "Media is not in that backup. If the disk dies the library is gone, so decide up front what you are willing to re-download."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Hardware notes",
+      "headingBg": "Hardware notes",
+      "en": [
+        "RAM: 3 GB is enough for this stack idling, 4 GB leaves room for Jellyfin library scans and several active downloads.",
+        "CPU: 2 cores are fine for direct play. Transcoding is the only thing that needs more.",
+        "Disk: put /data on its own disk. Media grows fast and you do not want it filling the container's root filesystem.",
+        "Network: only expose Jellyfin outside your LAN, and only through a VPN or a reverse proxy with authentication. Do not open the other ports to the internet."
+      ],
+      "bg": [
+        "RAM: 3 GB is enough for this stack idling, 4 GB leaves room for Jellyfin library scans and several active downloads.",
+        "CPU: 2 cores are fine for direct play. Transcoding is the only thing that needs more.",
+        "Disk: put /data on its own disk. Media grows fast and you do not want it filling the container's root filesystem.",
+        "Network: only expose Jellyfin outside your LAN, and only through a VPN or a reverse proxy with authentication. Do not open the other ports to the internet."
+      ]
+    }
+  ],
+  "introBg": [
+    "A home media server is more than a player. You also want something that finds new episodes, names files correctly, fetches subtitles and keeps the library tidy. The usual answer is the *arr family around Jellyfin.",
+    "This is the stack running on our Proxmox homelab: Jellyfin with Sonarr, Radarr, Prowlarr, Bazarr, qBittorrent and FlareSolverr in one Docker Compose file inside a single LXC container. The compose file, ports and memory numbers are from the live container, checked on 2026-11-06. Replace the timezone and paths with your own."
+  ]
+}
