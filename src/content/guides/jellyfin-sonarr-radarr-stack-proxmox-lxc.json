@@ -5,6 +5,7 @@
   "titleBg": "Jellyfin, Sonarr and Radarr in one Proxmox LXC: a Docker Compose media stack",
   "descriptionEn": "A working Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr and qBittorrent stack in a single Proxmox LXC: compose file, folder layout, wiring, real RAM numbers and the mistakes to avoid.",
   "descriptionBg": "A working Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr and qBittorrent stack in a single Proxmox LXC: compose file, folder layout, wiring, real RAM numbers and the mistakes to avoid.",
+  "image": "/og/jellyfin-sonarr-radarr-stack-proxmox-lxc.jpg",
   "introEn": [
     "A home media server is more than a player. You also want something that finds new episodes, names files correctly, fetches subtitles and keeps the library tidy. The usual answer is the *arr family around Jellyfin.",
     "This is the stack running on our Proxmox homelab: Jellyfin with Sonarr, Radarr, Prowlarr, Bazarr, qBittorrent and FlareSolverr in one Docker Compose file inside a single LXC container. The compose file, ports and memory numbers are from the live container, checked on 2026-11-06. Replace the timezone and paths with your own."
