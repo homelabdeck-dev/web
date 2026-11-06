@@ -1,0 +1,177 @@
+{
+  "slug": "vaultwarden-sqlite-to-postgresql",
+  "date": "2026-11-06",
+  "titleEn": "How to migrate Vaultwarden from SQLite to PostgreSQL (tested with pgloader)",
+  "titleBg": "How to migrate Vaultwarden from SQLite to PostgreSQL (tested with pgloader)",
+  "descriptionEn": "Move a Vaultwarden database from SQLite to PostgreSQL with pgloader: let Vaultwarden create the schema, copy the data, verify the login. Tested on Vaultwarden 1.37.5, with honest limits.",
+  "descriptionBg": "Move a Vaultwarden database from SQLite to PostgreSQL with pgloader: let Vaultwarden create the schema, copy the data, verify the login. Tested on Vaultwarden 1.37.5, with honest limits.",
+  "image": "/og/vaultwarden-sqlite-to-postgresql.jpg",
+  "introEn": [
+    "Vaultwarden is the lightweight self-hosted Bitwarden server, and by default it keeps everything in one SQLite file. If you want PostgreSQL instead, there is no built-in export: the data has to be copied from one database to the other.",
+    "This guide is the procedure we ran on a test instance with Vaultwarden 1.37.5 and PostgreSQL 16, using pgloader. The commands, the table count and the result are from that run, on 2026-11-06. Our test data was small, so read the limits section before you trust the method with your real vault."
+  ],
+  "rows": [],
+  "apps": [
+    "vaultwarden"
+  ],
+  "sections": [
+    {
+      "kind": "text",
+      "headingEn": "Do you need PostgreSQL at all?",
+      "headingBg": "Do you need PostgreSQL at all?",
+      "en": [
+        "Probably not. Vaultwarden stores everything in a single SQLite file by default, and for a household that is the simplest and most robust choice: one file to back up, nothing else to run. PostgreSQL makes sense when you already run a database server and want one backup routine for everything, when you use pg_dump for point-in-time copies, or when many users share the instance.",
+        "Moving between databases is a one-way data copy, not a setting. The official Vaultwarden Docker image already contains the PostgreSQL driver, so you do not need a special image: setting DATABASE_URL is enough."
+      ],
+      "bg": [
+        "Probably not. Vaultwarden stores everything in a single SQLite file by default, and for a household that is the simplest and most robust choice: one file to back up, nothing else to run. PostgreSQL makes sense when you already run a database server and want one backup routine for everything, when you use pg_dump for point-in-time copies, or when many users share the instance.",
+        "Moving between databases is a one-way data copy, not a setting. The official Vaultwarden Docker image already contains the PostgreSQL driver, so you do not need a special image: setting DATABASE_URL is enough."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Before you start",
+      "headingBg": "Before you start",
+      "en": [
+        "Stop Vaultwarden and copy the whole data folder (db.sqlite3, rsa_key.pem, attachments, sends, config.json). The database is not the only thing in it: the RSA key signs login tokens and attachments live as files, so they stay in the data volume even after the move.",
+        "Keep the original db.sqlite3 untouched until you have used the new setup for a while. Rolling back is then just removing DATABASE_URL again.",
+        "Note your Vaultwarden version. Ours was 1.37.5. The database schema changes between versions, so run the same image version for the whole procedure."
+      ],
+      "bg": [
+        "Stop Vaultwarden and copy the whole data folder (db.sqlite3, rsa_key.pem, attachments, sends, config.json). The database is not the only thing in it: the RSA key signs login tokens and attachments live as files, so they stay in the data volume even after the move.",
+        "Keep the original db.sqlite3 untouched until you have used the new setup for a while. Rolling back is then just removing DATABASE_URL again.",
+        "Note your Vaultwarden version. Ours was 1.37.5. The database schema changes between versions, so run the same image version for the whole procedure."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Step 1: start PostgreSQL and let Vaultwarden create the empty schema",
+      "headingBg": "Step 1: start PostgreSQL and let Vaultwarden create the empty schema",
+      "en": [
+        "services:",
+        "  db:",
+        "    image: postgres:16",
+        "    environment:",
+        "      POSTGRES_USER: vaultwarden",
+        "      POSTGRES_PASSWORD: change-me",
+        "      POSTGRES_DB: vaultwarden",
+        "    volumes: [\"./pg-data:/var/lib/postgresql/data\"]",
+        "  vaultwarden:",
+        "    image: vaultwarden/server:latest",
+        "    depends_on: [db]",
+        "    environment:",
+        "      DOMAIN: \"https://vault.example.com\"",
+        "      DATABASE_URL: postgresql://vaultwarden:change-me@db:5432/vaultwarden",
+        "    volumes: [\"./vw-data:/data\"]",
+        "    ports: [\"8080:80\"]"
+      ],
+      "bg": [
+        "services:",
+        "  db:",
+        "    image: postgres:16",
+        "    environment:",
+        "      POSTGRES_USER: vaultwarden",
+        "      POSTGRES_PASSWORD: change-me",
+        "      POSTGRES_DB: vaultwarden",
+        "    volumes: [\"./pg-data:/var/lib/postgresql/data\"]",
+        "  vaultwarden:",
+        "    image: vaultwarden/server:latest",
+        "    depends_on: [db]",
+        "    environment:",
+        "      DOMAIN: \"https://vault.example.com\"",
+        "      DATABASE_URL: postgresql://vaultwarden:change-me@db:5432/vaultwarden",
+        "    volumes: [\"./vw-data:/data\"]",
+        "    ports: [\"8080:80\"]"
+      ]
+    },
+    {
+      "kind": "text",
+      "headingEn": "Why the schema comes first",
+      "headingBg": "Why the schema comes first",
+      "en": [
+        "Start the stack once and let Vaultwarden run its own migrations against the empty database. In our test that created 29 tables, including users, ciphers, folders and devices, with all columns and indexes exactly as this Vaultwarden version expects them. Then stop the vaultwarden container (leave db running). pgloader will only copy rows into these tables, so it never has to guess the schema."
+      ],
+      "bg": [
+        "Start the stack once and let Vaultwarden run its own migrations against the empty database. In our test that created 29 tables, including users, ciphers, folders and devices, with all columns and indexes exactly as this Vaultwarden version expects them. Then stop the vaultwarden container (leave db running). pgloader will only copy rows into these tables, so it never has to guess the schema."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Step 2: the pgloader file",
+      "headingBg": "Step 2: the pgloader file",
+      "en": [
+        "LOAD DATABASE",
+        "  FROM sqlite:///data/db.sqlite3",
+        "  INTO postgresql://vaultwarden:change-me@db:5432/vaultwarden",
+        "WITH include no drop, truncate, create no tables, create no indexes,",
+        "     no foreign keys, data only, reset sequences",
+        "CAST type datetime to timestamp drop default drop not null using zero-dates-to-null,",
+        "     type date to date drop default drop not null using zero-dates-to-null",
+        "EXCLUDING TABLE NAMES LIKE '__diesel_schema_migrations';"
+      ],
+      "bg": [
+        "LOAD DATABASE",
+        "  FROM sqlite:///data/db.sqlite3",
+        "  INTO postgresql://vaultwarden:change-me@db:5432/vaultwarden",
+        "WITH include no drop, truncate, create no tables, create no indexes,",
+        "     no foreign keys, data only, reset sequences",
+        "CAST type datetime to timestamp drop default drop not null using zero-dates-to-null,",
+        "     type date to date drop default drop not null using zero-dates-to-null",
+        "EXCLUDING TABLE NAMES LIKE '__diesel_schema_migrations';"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 3: copy the data and check it",
+      "headingBg": "Step 3: copy the data and check it",
+      "en": [
+        "Save the file above as migrate.load. Run pgloader from its official image on the same Docker network as the database, with the old data folder mounted at /data: docker run --rm --network <your-compose-network> -v ./old-data:/data -v ./migrate.load:/migrate.load ghcr.io/dimitri/pgloader:latest pgloader /migrate.load",
+        "Read the summary table. Every table should show 0 errors and the row counts should match your old database. You will see warnings that some columns are cast to text instead of character varying; they did not matter in our run.",
+        "Start Vaultwarden again and log in with a real client. Check that your folders and a few items open and that your devices still appear. Only when that works, retire the SQLite file."
+      ],
+      "bg": [
+        "Save the file above as migrate.load. Run pgloader from its official image on the same Docker network as the database, with the old data folder mounted at /data: docker run --rm --network <your-compose-network> -v ./old-data:/data -v ./migrate.load:/migrate.load ghcr.io/dimitri/pgloader:latest pgloader /migrate.load",
+        "Read the summary table. Every table should show 0 errors and the row counts should match your old database. You will see warnings that some columns are cast to text instead of character varying; they did not matter in our run.",
+        "Start Vaultwarden again and log in with a real client. Check that your folders and a few items open and that your devices still appear. Only when that works, retire the SQLite file."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "What we tested, and what we did not",
+      "headingBg": "What we tested, and what we did not",
+      "en": [
+        "Tested on 2026-11-06 in a throwaway Docker setup: Vaultwarden 1.37.5, PostgreSQL 16, the latest pgloader image. A test account with one folder and one registered device was copied: 3 rows, 0 errors. After the copy the same account could log in against PostgreSQL and the folder was still there.",
+        "Not tested: a vault with many real items, attachments, Sends, organizations or two-factor logins. Our test data was created through the API and we could not add vault items that way. Those tables went through the same procedure with zero rows, so run it on a copy of your own data first and compare the counts.",
+        "Not tested: MySQL or MariaDB, and Vaultwarden versions other than 1.37.5.",
+        "Passwords are never decrypted at any point. The database stores them already encrypted by your clients, and the copy moves those bytes as they are."
+      ],
+      "bg": [
+        "Tested on 2026-11-06 in a throwaway Docker setup: Vaultwarden 1.37.5, PostgreSQL 16, the latest pgloader image. A test account with one folder and one registered device was copied: 3 rows, 0 errors. After the copy the same account could log in against PostgreSQL and the folder was still there.",
+        "Not tested: a vault with many real items, attachments, Sends, organizations or two-factor logins. Our test data was created through the API and we could not add vault items that way. Those tables went through the same procedure with zero rows, so run it on a copy of your own data first and compare the counts.",
+        "Not tested: MySQL or MariaDB, and Vaultwarden versions other than 1.37.5.",
+        "Passwords are never decrypted at any point. The database stores them already encrypted by your clients, and the copy moves those bytes as they are."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Mistakes to avoid",
+      "headingBg": "Mistakes to avoid",
+      "en": [
+        "Do not run Vaultwarden against the old SQLite file and the new PostgreSQL database at the same time: changes made to one are lost in the other.",
+        "Do not point pgloader at a database that has no schema. Without the Vaultwarden migration step the tables do not exist and the load fails or creates the wrong column types.",
+        "Do not forget the data volume. The RSA key and the attachments are not in the database; losing them logs everyone out and breaks attachments.",
+        "Back up PostgreSQL from now on with pg_dump, and test a restore, the same way you tested the SQLite file."
+      ],
+      "bg": [
+        "Do not run Vaultwarden against the old SQLite file and the new PostgreSQL database at the same time: changes made to one are lost in the other.",
+        "Do not point pgloader at a database that has no schema. Without the Vaultwarden migration step the tables do not exist and the load fails or creates the wrong column types.",
+        "Do not forget the data volume. The RSA key and the attachments are not in the database; losing them logs everyone out and breaks attachments.",
+        "Back up PostgreSQL from now on with pg_dump, and test a restore, the same way you tested the SQLite file."
+      ]
+    }
+  ],
+  "introBg": [
+    "Vaultwarden is the lightweight self-hosted Bitwarden server, and by default it keeps everything in one SQLite file. If you want PostgreSQL instead, there is no built-in export: the data has to be copied from one database to the other.",
+    "This guide is the procedure we ran on a test instance with Vaultwarden 1.37.5 and PostgreSQL 16, using pgloader. The commands, the table count and the result are from that run, on 2026-11-06. Our test data was small, so read the limits section before you trust the method with your real vault."
+  ]
+}
