@@ -45,6 +45,8 @@
   "descriptionEn": "CasaOS is an open-source personal cloud operating system that sits on top of Docker, giving homelab users a clean web dashboard for system monitoring, file management and one-click app installs from its built-in App Store. It targets the same \"friendly NAS OS\" niche as Synology DSM or Unraid but stays fully open source and lightweight enough for a spare mini PC or Raspberry Pi. It is a host-level installer rather than a single container, so it needs a bare-metal host, a VM, or a privileged LXC container — unprivileged LXC setups are not supported.",
   "descriptionBg": "CasaOS е open-source персонална cloud операционна система върху Docker, която дава на homelab потребителите чисто уеб табло за системен мониторинг, файлов мениджмънт и инсталиране на приложения с един клик през вградения App Store. Заема нишата на \"приятелска NAS OS\" наравно със Synology DSM или Unraid, но остава напълно отворен код и достатъчно лек за резервно mini PC или Raspberry Pi. Представлява инсталатор на ниво хост, а не единичен контейнер, затова изисква bare-metal хост, VM или привилегирован LXC контейнер — не работи в непривилегирован LXC.",
   "taglineEn": "Open-source personal cloud OS on top of Docker.",
+  "seoTitleEn": "CasaOS: self-hosted personal cloud OS on Docker (LXC caveats) — HomelabDeck",
+  "seoDescriptionEn": "CasaOS puts a friendly dashboard and one-click App Store on top of Docker. Real screenshots, ~512 MB RAM footprint, compose snippet, and why the install script fails in unprivileged LXC.",
   "taglineBg": "Open-source персонална cloud OS върху Docker.",
   "useCasesEn": [
     "Turning a spare mini PC, old laptop or Raspberry Pi into a simple home server without learning Docker first.",

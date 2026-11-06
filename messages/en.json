@@ -74,7 +74,8 @@
     "homeSubtitle": "Longer reads to help you pick and run the right apps.",
     "subscribeTitle": "Get new guides by email",
     "subscribeText": "One short email when we publish a new guide or add apps. No spam, unsubscribe any time.",
-    "appsInGuide": "Apps in this guide"
+    "appsInGuide": "Apps in this guide",
+    "moreGuides": "More guides"
   },
   "newsletter": {
     "confirmedTitle": "Subscription confirmed",

@@ -64,6 +64,7 @@ export default async function GuideDetailPage({
   }
 
   const t = await getTranslations("guides");
+  const otherGuides = getAllGuides().filter((g) => g.slug !== slug);
   const isBg = locale === "bg";
   const title = isBg ? guide.titleBg : guide.titleEn;
   const rows = guide.rows.flatMap((row) => {
@@ -201,6 +202,24 @@ export default async function GuideDetailPage({
               {guideApps.map((app) => (
                 <li key={app.slug}>
                   <AppCard app={app} locale={locale} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {otherGuides.length > 0 && (
+          <section className="flex flex-col gap-3">
+            <h2 className="text-2xl text-black dark:text-zinc-50">{t("moreGuides")}</h2>
+            <ul className="flex flex-col gap-2 text-lg">
+              {otherGuides.map((g) => (
+                <li key={g.slug}>
+                  <Link
+                    href={`/guides/${g.slug}`}
+                    className="text-accent transition-colors hover:text-accent-hover"
+                  >
+                    {isBg ? g.titleBg : g.titleEn}
+                  </Link>
                 </li>
               ))}
             </ul>
