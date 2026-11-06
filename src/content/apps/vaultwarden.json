@@ -11,7 +11,7 @@
     "architectures": ["amd64", "arm64"],
     "database": {
       "kind": "SQLite",
-      "label": "Bundled SQLite by default; MySQL/MariaDB and PostgreSQL backends are available via alternate build tags for larger multi-user deployments"
+      "label": "Bundled SQLite by default. PostgreSQL works with the official Docker image by setting DATABASE_URL, no special build needed (we tested it on 1.37.5); MySQL/MariaDB are also supported upstream. Useful for larger multi-user deployments"
     },
     "resourceFootprint": {
       "ramMb": 128,
