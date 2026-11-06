@@ -173,14 +173,14 @@
       "headingBg": "What we got wrong or had to work around",
       "en": [
         "Jellyfin has read-only access to the media on purpose: a bug or a bad plugin there can never delete your library. The other apps are the only writers.",
-        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We have not tested transcoding load: anything that needs it runs on two CPU cores and is likely to struggle, while direct play does not need the GPU. If you need it, pass the iGPU through to the container first.",
+        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We tested both cases on the same TV. The Jellyfin app on the TV played a movie by direct play and the server's CPU load did not move at all. A TV box plugged into the same TV could not play the same file as it was, so the server transcoded it on two CPU cores and the picture froze constantly, which made it unwatchable. Whether a device direct-plays depends on its codec support, so test every player you own before you rely on it. If you need it, pass the iGPU through to the container first.",
         "Mixing UID/GID is the usual cause of permission errors. Every container uses the same PUID and PGID, and the /data folders belong to that user.",
         "The config of all seven apps contains API keys and the qBittorrent password hash. Back up /opt/arr/config (we do a tarball on the Proxmox host), but keep it off cloud storage.",
         "Media is not in that backup. If the disk dies the library is gone, so decide up front what you are willing to re-download."
       ],
       "bg": [
         "Jellyfin has read-only access to the media on purpose: a bug or a bad plugin there can never delete your library. The other apps are the only writers.",
-        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We have not tested transcoding load: anything that needs it runs on two CPU cores and is likely to struggle, while direct play does not need the GPU. If you need it, pass the iGPU through to the container first.",
+        "Our LXC has no /dev/dri passed in, so Jellyfin cannot use hardware transcoding. We tested both cases on the same TV. The Jellyfin app on the TV played a movie by direct play and the server's CPU load did not move at all. A TV box plugged into the same TV could not play the same file as it was, so the server transcoded it on two CPU cores and the picture froze constantly, which made it unwatchable. Whether a device direct-plays depends on its codec support, so test every player you own before you rely on it. If you need it, pass the iGPU through to the container first.",
         "Mixing UID/GID is the usual cause of permission errors. Every container uses the same PUID and PGID, and the /data folders belong to that user.",
         "The config of all seven apps contains API keys and the qBittorrent password hash. Back up /opt/arr/config (we do a tarball on the Proxmox host), but keep it off cloud storage.",
         "Media is not in that backup. If the disk dies the library is gone, so decide up front what you are willing to re-download."
@@ -192,13 +192,13 @@
       "headingBg": "Hardware notes",
       "en": [
         "RAM: 3 GB is enough for this stack idling, 4 GB leaves room for Jellyfin library scans and several active downloads.",
-        "CPU: 2 cores are fine for direct play. Transcoding is the only thing that needs more.",
+        "CPU: 2 cores are enough for direct play, which costs the server almost nothing. They are not enough for transcoding a movie in real time: plan on a GPU or iGPU passed into the container, or pick players that direct-play your files.",
         "Disk: put /data on its own disk. Media grows fast and you do not want it filling the container's root filesystem.",
         "Network: only expose Jellyfin outside your LAN, and only through a VPN or a reverse proxy with authentication. Do not open the other ports to the internet."
       ],
       "bg": [
         "RAM: 3 GB is enough for this stack idling, 4 GB leaves room for Jellyfin library scans and several active downloads.",
-        "CPU: 2 cores are fine for direct play. Transcoding is the only thing that needs more.",
+        "CPU: 2 cores are enough for direct play, which costs the server almost nothing. They are not enough for transcoding a movie in real time: plan on a GPU or iGPU passed into the container, or pick players that direct-play your files.",
         "Disk: put /data on its own disk. Media grows fast and you do not want it filling the container's root filesystem.",
         "Network: only expose Jellyfin outside your LAN, and only through a VPN or a reverse proxy with authentication. Do not open the other ports to the internet."
       ]
