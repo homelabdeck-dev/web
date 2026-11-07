@@ -118,7 +118,7 @@ hldeck wire      # connect Prowlarr, Sonarr, Radarr and qBittorrent (media stack
             <a className="text-accent underline" href="/hldeck.sh">hldeck.sh</a>. Use{" "}
             <code>bash install.sh media --dry-run</code> to generate the files without installing anything.
             Source and issues:{" "}
-            <a className="text-accent underline" href="https://github.com/Darkboy7766/hldeck">github.com/Darkboy7766/hldeck</a> (MIT).
+            <a className="text-accent underline" href="https://github.com/homelabdeck-dev/hldeck">github.com/homelabdeck-dev/hldeck</a> (MIT).
             Use torrents only for content you have the right to download.
           </p>
         </section>
