@@ -14,6 +14,7 @@ export default async function Footer({ locale }: { locale: string }) {
         <nav className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/apps" className={link}>{t("apps")}</Link>
           <Link href="/guides" className={link}>{t("guides")}</Link>
+          <Link href="/installer" className={link}>Installer</Link>
           <Link href="/updates" className={link}>{t("updates")}</Link>
           <Link href="/#subscribe" className={link}>{t("newsletter")}</Link>
         </nav>

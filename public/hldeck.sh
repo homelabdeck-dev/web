@@ -1,0 +1,215 @@
+#!/usr/bin/env bash
+# hldeck - manage stacks installed by the HomelabDeck installer
+# Usage: hldeck status | update | backup [DEST_DIR] | export [DEST_DIR] | wire | list | help
+set -euo pipefail
+
+say() { printf '\033[1;35m[hldeck]\033[0m %s\n' "$*"; }
+die() { printf '\033[1;31m[hldeck] ERROR:\033[0m %s\n' "$*" >&2; exit 1; }
+command -v docker >/dev/null 2>&1 || die "Docker is not installed."
+
+# every stack = a directory /opt/hldeck* that holds a docker-compose.yml
+stacks() { for d in /opt/hldeck /opt/hldeck-*; do [ -f "$d/docker-compose.yml" ] && echo "$d"; done; return 0; }
+need_stacks() { [ -n "$(stacks)" ] || die "No hldeck stacks found in /opt."; }
+dc() { local d="$1"; shift; docker compose -f "$d/docker-compose.yml" "$@"; }
+IP="$(hostname -I 2>/dev/null | awk '{print $1}')"; IP="${IP:-localhost}"
+
+cmd_list() { need_stacks; stacks; }
+
+cmd_status() {
+  need_stacks
+  local bad=0
+  for d in $(stacks); do
+    say "$(basename "$d")  ($d)"
+    local rows; rows="$(dc "$d" ps -a --format '{{.Name}}|{{.State}}|{{.Health}}|{{.Ports}}')"
+    while IFS='|' read -r name state health ports; do
+      [ -n "$name" ] || continue
+      local mark="OK  "
+      if [ "$state" != running ] || [ "$health" = unhealthy ]; then mark="FAIL"; bad=1; fi
+      local port; port="$(printf '%s' "$ports" | grep -oE '[0-9]+->' | head -1 | tr -d '>-')"
+      local url="${port:+http://$IP:$port}"; [ "$name" = portainer ] && url="https://$IP:9443"
+      printf '  %s %-22s %-10s %s\n' "$mark" "$name" "${health:-$state}" "$url"
+    done <<< "$rows"
+  done
+  df -h /opt | awk 'NR==2{print "\n  Disk /opt: "$3" used, "$4" free ("$5")"}'
+  return "$bad"
+}
+
+cmd_update() {
+  need_stacks
+  for d in $(stacks); do
+    say "Updating $(basename "$d")..."
+    dc "$d" pull --quiet
+    dc "$d" up -d
+  done
+  docker image prune -f >/dev/null
+  say "Done. Image versions are pinned for stability. To move to newer tested versions,"
+  say "re-run the installer (your data and settings are kept): curl -fsSL https://homelabdeck.dev/install.sh | sudo bash -s -- <starter|media>"
+}
+
+# Backup = compose + app configs + named volumes. Media/torrent data is NOT included
+# (too large; back it up with your usual tools). Archive may contain secrets (vpn.env) -> chmod 600.
+cmd_backup() {
+  need_stacks
+  local dest="${1:-/var/backups/hldeck}" ts; ts="$(date +%Y%m%d-%H%M%S)"
+  mkdir -p "$dest"; chmod 700 "$dest"
+  for d in $(stacks); do
+    local name; name="$(basename "$d")"
+    local out="$dest/$name-$ts.tar.gz" tmp; tmp="$(mktemp -d)"
+    say "Backing up $name..."
+    local proj; proj="$(dc "$d" config --format json 2>/dev/null | python3 -c 'import sys,json;print(json.load(sys.stdin)["name"])' 2>/dev/null || echo "$name")"
+    # named volumes of this compose project
+    docker image inspect alpine:3.22 >/dev/null 2>&1 || docker pull -q alpine:3.22 >/dev/null
+    for v in $(docker volume ls -q --filter "label=com.docker.compose.project=$proj"); do
+      docker run --rm -v "$v":/v:ro -v "$tmp":/o alpine:3.22 tar czf "/o/volume-$v.tar.gz" -C /v . >/dev/null
+    done
+    tar czf "$out" -C "$d" --exclude='./data' --exclude='./docker-compose.yml.bak.*' . -C "$tmp" . 
+    rm -rf "$tmp"; chmod 600 "$out"
+    say "  -> $out ($(du -h "$out" | cut -f1))"
+  done
+  # keep the last 7 backups per stack
+  for d in $(stacks); do ls -1t "$dest/$(basename "$d")"-*.tar.gz 2>/dev/null | tail -n +8 | xargs -r rm -f; done
+}
+
+# Export = plain Docker files you can run without hldeck. No secrets are included.
+cmd_export() {
+  need_stacks
+  local dest="${1:-./hldeck-export}"; mkdir -p "$dest"
+  for d in $(stacks); do
+    local name; name="$(basename "$d")"; mkdir -p "$dest/$name"
+    cp "$d/docker-compose.yml" "$dest/$name/docker-compose.yml"
+    [ -f "$d/vpn.env" ] && sed -E 's/^(WIREGUARD_PRIVATE_KEY)=.*/\1=CHANGE_ME/' "$d/vpn.env" > "$dest/$name/vpn.env.example"
+    cat > "$dest/$name/README.txt" <<TXT
+Plain Docker Compose files exported by hldeck. No hldeck needed:
+  docker compose up -d
+Config folders (./config, ./data, ./homepage, ./npm) are not included - copy them from the old host if you want your settings.
+TXT
+    say "Exported $name -> $dest/$name"
+  done
+}
+
+
+# Wire = connect the media stack: Prowlarr -> Sonarr/Radarr, Sonarr/Radarr -> qBittorrent, root folders.
+# Not automated (needs your own accounts): Jellyfin first-run wizard + libraries, Seerr setup, indexers.
+cmd_wire() {
+  local d="${1:-/opt/hldeck-media}"
+  [ -f "$d/docker-compose.yml" ] || die "Media stack not found in $d (install it first: install.sh media)."
+  command -v python3 >/dev/null 2>&1 || die "python3 is required (apt install python3)."
+  HLDECK_DIR="$d" HLDECK_IP="$IP" python3 - <<'PY'
+import json, os, re, secrets, subprocess, sys, time, urllib.request, urllib.parse, http.cookiejar
+
+D = os.environ["HLDECK_DIR"]; IP = os.environ["HLDECK_IP"]
+QB_HOST = os.environ.get("HLDECK_QBIT_HOST", "gluetun")   # qBittorrent shares gluetun's network
+def say(m): print("\033[1;35m[hldeck]\033[0m " + m, flush=True)
+def die(m): print("\033[1;31m[hldeck] ERROR:\033[0m " + m, file=sys.stderr); sys.exit(1)
+
+def apikey(app):
+    p = f"{D}/config/{app}/config.xml"
+    for _ in range(60):
+        try:
+            m = re.search(r"<ApiKey>(.+?)</ApiKey>", open(p).read())
+            if m: return m.group(1)
+        except OSError: pass
+        time.sleep(2)
+    die(f"No API key for {app}: is the stack running? ({p})")
+
+def call(base, key, method, path, body=None):
+    req = urllib.request.Request(base + path, method=method,
+        data=None if body is None else json.dumps(body).encode(),
+        headers={"X-Api-Key": key, "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            t = r.read(); return json.loads(t) if t else None
+    except urllib.error.HTTPError as e:
+        die(f"{method} {base}{path} -> {e.code} {e.read().decode()[:300]}")
+
+def wait_up(url):
+    for _ in range(60):
+        try: urllib.request.urlopen(url, timeout=3); return
+        except urllib.error.HTTPError: return
+        except Exception: time.sleep(2)
+    die(f"{url} does not answer")
+
+def fill(schema, values):
+    for f in schema["fields"]:
+        if f["name"] in values: f["value"] = values[f["name"]]
+    return schema
+
+# ---- qBittorrent: known password + save path under /data (so hardlinks work)
+cred = f"{D}/credentials.txt"
+qb_user, qb_pass = "admin", None
+if os.path.exists(cred):
+    m = re.search(r"^qbittorrent_password=(.+)$", open(cred).read(), re.M)
+    if m: qb_pass = m.group(1)
+qb_base = f"http://127.0.0.1:8080"
+wait_up(qb_base)
+jar = http.cookiejar.CookieJar(); op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+def qb(path, data):
+    r = op.open(urllib.request.Request(qb_base + path, data=urllib.parse.urlencode(data).encode(),
+        headers={"Referer": qb_base}), timeout=15); return r.read().decode()
+def login(pw):
+    try:
+        qb("/api/v2/auth/login", {"username": qb_user, "password": pw})   # 200 "Ok." or 204 depending on version
+        return any("SID" in c.name for c in jar)
+    except Exception: return False
+if not (qb_pass and login(qb_pass)):
+    logs = subprocess.run(["docker", "logs", "qbittorrent"], capture_output=True, text=True)
+    tmp = re.findall(r"temporary password[^:]*:\s*(\S+)", logs.stdout + logs.stderr)
+    if not tmp or not login(tmp[-1]):
+        die("Cannot log in to qBittorrent. Set its password in the web UI, put it in "
+            f"{cred} as qbittorrent_password=..., and run again.")
+    qb_pass = secrets.token_urlsafe(14)
+    qb("/api/v2/app/setPreferences", {"json": json.dumps({
+        "web_ui_password": qb_pass, "save_path": "/data/torrents",
+        "web_ui_domain_list": f"gluetun;qbittorrent;localhost;127.0.0.1;{IP}"})})
+    old = os.umask(0o077)
+    with open(cred, "w") as f: f.write(f"qbittorrent_user={qb_user}\nqbittorrent_password={qb_pass}\n")
+    os.umask(old)
+    say(f"qBittorrent: password set, saved in {cred}")
+else:
+    say("qBittorrent: already configured")
+
+# ---- Sonarr / Radarr: root folder + qBittorrent
+keys = {a: apikey(a) for a in ("sonarr", "radarr", "prowlarr")}
+apps = {"sonarr": (8989, "/data/media/tv", "tvCategory"), "radarr": (7878, "/data/media/movies", "movieCategory")}
+for app, (port, root, cat) in apps.items():
+    base = f"http://127.0.0.1:{port}"; wait_up(base + "/ping")
+    if not any(r["path"].rstrip("/") == root for r in call(base, keys[app], "GET", "/api/v3/rootfolder")):
+        call(base, keys[app], "POST", "/api/v3/rootfolder", {"path": root}); say(f"{app}: root folder {root}")
+    if not any(c["implementation"] == "QBittorrent" for c in call(base, keys[app], "GET", "/api/v3/downloadclient")):
+        sch = next(s for s in call(base, keys[app], "GET", "/api/v3/downloadclient/schema") if s["implementation"] == "QBittorrent")
+        sch["name"] = "qBittorrent"; sch["enable"] = True
+        fill(sch, {"host": QB_HOST, "port": 8080, "username": qb_user, "password": qb_pass, cat: app})
+        call(base, keys[app], "POST", "/api/v3/downloadclient", sch); say(f"{app}: qBittorrent added")
+    else: say(f"{app}: qBittorrent already there")
+
+# ---- Prowlarr -> Sonarr / Radarr
+pb = "http://127.0.0.1:9696"; wait_up(pb + "/ping")
+have = {a["implementation"] for a in call(pb, keys["prowlarr"], "GET", "/api/v1/applications")}
+for app, impl, port in (("sonarr", "Sonarr", 8989), ("radarr", "Radarr", 7878)):
+    if impl in have: say(f"prowlarr: {impl} already there"); continue
+    sch = next(s for s in call(pb, keys["prowlarr"], "GET", "/api/v1/applications/schema") if s["implementation"] == impl)
+    sch["name"] = impl; sch["syncLevel"] = "fullSync"
+    fill(sch, {"prowlarrUrl": "http://prowlarr:9696", "baseUrl": f"http://{app}:{port}", "apiKey": keys[app]})
+    call(pb, keys["prowlarr"], "POST", "/api/v1/applications", sch); say(f"prowlarr: {impl} added")
+
+print(f"""
+  Connected. Still manual (needs your accounts):
+    1. Jellyfin  http://{IP}:8096  - create the admin user, add libraries /data/media/tv and /data/media/movies
+    2. Prowlarr  http://{IP}:9696  - add your indexers (they sync to Sonarr/Radarr automatically)
+    3. Seerr     http://{IP}:5055  - sign in with Jellyfin, then add Sonarr/Radarr (hosts: sonarr, radarr)
+""")
+PY
+}
+
+cmd_help() { sed -n 2,3p "$0"; }
+
+case "${1:-help}" in
+  list) cmd_list ;;
+  status) cmd_status ;;
+  update) cmd_update ;;
+  backup) shift; cmd_backup "$@" ;;
+  export) shift; cmd_export "$@" ;;
+  wire) shift; cmd_wire "$@" ;;
+  help|-h|--help) cmd_help ;;
+  *) cmd_help; exit 2 ;;
+esac
