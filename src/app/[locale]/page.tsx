@@ -4,6 +4,7 @@ import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllWeeklyNotes } from "@/lib/weekly";
 import { getAllGuides } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
+import InstallerCta from "@/components/InstallerCta";
 import SubscribeForm from "@/components/SubscribeForm";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -47,6 +48,10 @@ export default async function Home({
         </p>
 
         <SubscribeForm />
+      </section>
+
+      <section className="mx-auto w-full max-w-5xl px-6 pb-16 sm:px-16">
+        <InstallerCta variant="home" />
       </section>
 
       <section className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-24 sm:px-16">

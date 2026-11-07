@@ -17,7 +17,12 @@ export async function generateMetadata({
     title: TITLE,
     description: DESC,
     alternates: alternatesFor(locale, "/installer"),
-    openGraph: { title: TITLE, description: DESC, url: localeUrl(locale, "/installer") },
+    openGraph: {
+      title: TITLE,
+      description: DESC,
+      url: localeUrl(locale, "/installer"),
+      images: [{ url: "/og/installer.jpg", width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -46,6 +51,30 @@ export default async function InstallerPage({
             Debian or Ubuntu, x86-64 or ARM64, at least 5 GB free.
           </p>
         </div>
+
+        <section className="flex flex-col gap-3">
+          <h2 className={h2}>What you get</h2>
+          <p className={p}>
+            Real output from a clean Debian 13 container after installing both stacks, and the
+            Homepage dashboard that the starter stack sets up with your services already listed.
+          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/screenshots/installer/hldeck-status.webp"
+            alt="Terminal output of hldeck status: nine services running across the starter and media stacks"
+            width={1000}
+            height={470}
+            className="w-full rounded-xl border border-black/[.08] dark:border-white/[.12]"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/screenshots/installer/homepage-dashboard.webp"
+            alt="Homepage dashboard installed by hldeck with Uptime Kuma, Portainer and Nginx Proxy Manager listed"
+            width={1280}
+            height={800}
+            className="w-full rounded-xl border border-black/[.08] dark:border-white/[.12]"
+          />
+        </section>
 
         <section className={card}>
           <h2 className={h2}>Starter stack</h2>

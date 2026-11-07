@@ -116,6 +116,9 @@ export default function SidePanel({
                 <Link href="/updates" className={item} tabIndex={open ? 0 : -1}>
                   {t("updates")}
                 </Link>
+                <Link href="/installer" className={item} tabIndex={open ? 0 : -1}>
+                  Installer
+                </Link>
                 <Link
                   href="/#subscribe"
                   className={item}

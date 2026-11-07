@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { getAllAppSlugs, getAppBySlug } from "@/lib/apps/loader";
 import { getGuidesForApp } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
+import InstallerCta, { INSTALLER_APPS } from "@/components/InstallerCta";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
@@ -302,6 +303,8 @@ export default async function AppDetailPage({
             </ul>
           </section>
         )}
+
+        {INSTALLER_APPS[app.slug] && <InstallerCta variant={INSTALLER_APPS[app.slug]} />}
 
         {relatedApps.length > 0 && (
           <section className="flex flex-col gap-3">

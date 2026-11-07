@@ -7,6 +7,7 @@ import SubscribeForm from "@/components/SubscribeForm";
 import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllGuides, getGuide, guideAppSlugs } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
+import InstallerCta, { INSTALLER_GUIDES } from "@/components/InstallerCta";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -192,6 +193,8 @@ export default async function GuideDetailPage({
             </section>
           );
         })}
+
+        {INSTALLER_GUIDES[guide.slug] && <InstallerCta variant={INSTALLER_GUIDES[guide.slug]} />}
 
         {guideApps.length > 0 && (
           <section className="flex flex-col gap-4">
