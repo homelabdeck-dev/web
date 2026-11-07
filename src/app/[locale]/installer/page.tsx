@@ -1,9 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import HLDeck from "@/components/HLDeck";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 
-const TITLE = "hldeck: one-command homelab installer";
+const TITLE = "HLDeck: one-command homelab installer";
 const DESC =
   "Free, open installer that sets up a starter stack or a Jellyfin + Seerr + Sonarr + Radarr media stack behind a VPN kill switch, as plain Docker Compose.";
 
@@ -45,7 +46,7 @@ export default async function InstallerPage({
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50">hldeck installer</h1>
+          <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50"><HLDeck /> installer</h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-300">
             Free and open. It writes plain Docker Compose files, so you can leave at any time.
             Debian or Ubuntu, x86-64 or ARM64, at least 5 GB free.
@@ -61,7 +62,7 @@ export default async function InstallerPage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/screenshots/installer/hldeck-status.webp"
-            alt="Terminal output of hldeck status: nine services running across the starter and media stacks"
+            alt="Terminal output of the hldeck status command: nine services running across the starter and media stacks"
             width={1000}
             height={470}
             className="w-full rounded-xl border border-black/[.08] dark:border-white/[.12]"
@@ -69,7 +70,7 @@ export default async function InstallerPage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/screenshots/installer/homepage-dashboard.webp"
-            alt="Homepage dashboard installed by hldeck with Uptime Kuma, Portainer and Nginx Proxy Manager listed"
+            alt="Homepage dashboard installed by HLDeck with Uptime Kuma, Portainer and Nginx Proxy Manager listed"
             width={1280}
             height={800}
             className="w-full rounded-xl border border-black/[.08] dark:border-white/[.12]"
@@ -100,7 +101,7 @@ export default async function InstallerPage({
         </section>
 
         <section className={card}>
-          <h2 className={h2}>Manage it: the hldeck command</h2>
+          <h2 className={h2}>Manage it: the <code>hldeck</code> command</h2>
           <pre className={code}><code>{`hldeck status    # health and URLs of every service
 hldeck update    # pull new images and restart
 hldeck backup    # configs and volumes to /var/backups/hldeck (keeps the last 7)

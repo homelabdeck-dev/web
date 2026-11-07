@@ -1,21 +1,23 @@
 import { Link } from "@/i18n/navigation";
+import type { ReactNode } from "react";
+import HLDeck from "@/components/HLDeck";
 
-const COPY = {
+const COPY: Record<string, { title: ReactNode; text: ReactNode }> = {
   home: {
     title: "Skip the setup: one command, whole stack",
-    text: "hldeck is a free installer for a starter stack or a Jellyfin + Seerr + Sonarr + Radarr media stack behind a VPN kill switch. Plain Docker Compose, MIT licensed.",
+    text: (<><HLDeck /> is a free installer for a starter stack or a Jellyfin + Seerr + Sonarr + Radarr media stack behind a VPN kill switch. Plain Docker Compose, MIT licensed.</>),
   },
   starter: {
     title: "Prefer one command?",
-    text: "The free hldeck installer sets this app up together with Homepage, Uptime Kuma, Portainer and Nginx Proxy Manager as plain Docker Compose.",
+    text: (<>The free <HLDeck /> installer sets this app up together with Homepage, Uptime Kuma, Portainer and Nginx Proxy Manager as plain Docker Compose.</>),
   },
   media: {
     title: "Prefer one command?",
-    text: "The free hldeck installer sets up Jellyfin, Seerr, Sonarr, Radarr, Prowlarr and qBittorrent behind a VPN kill switch, and connects them for you.",
+    text: (<>The free <HLDeck /> installer sets up Jellyfin, Seerr, Sonarr, Radarr, Prowlarr and qBittorrent behind a VPN kill switch, and connects them for you.</>),
   },
 } as const;
 
-export type InstallerCtaVariant = keyof typeof COPY;
+export type InstallerCtaVariant = "home" | "starter" | "media";
 
 // slugs of catalog apps / guides that hldeck installs, mapped to the profile
 export const INSTALLER_APPS: Record<string, InstallerCtaVariant> = {
@@ -39,7 +41,7 @@ export default function InstallerCta({ variant }: { variant: InstallerCtaVariant
         href="/installer"
         className="self-start text-sm font-medium text-accent transition-colors hover:text-accent-hover"
       >
-        See the hldeck installer →
+        See the <HLDeck /> installer →
       </Link>
     </aside>
   );
