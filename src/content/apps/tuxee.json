@@ -1,0 +1,84 @@
+{
+  "name": "Tuxee",
+  "slug": "tuxee",
+  "category": "developer-tools",
+  "license": "MIT",
+  "officialRepoUrl": "https://github.com/agent0ai/tuxee",
+  "officialWebsiteUrl": "https://agent-zero.ai",
+  "githubStars": 377,
+  "updatedAt": "2026-11-08T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "Stateless",
+      "label": "No database. State and certificates live in /var/lib/tuxee; it signs in with the machine's own Linux accounts"
+    },
+    "resourceFootprint": {
+      "ramMb": 256,
+      "cpuCores": 1,
+      "notes": "Measured in our Proxmox LXC (2 cores, Debian 13, Tuxee 1.2.1, native install): the Tuxee process used about 21 MB of RAM right after start and about 50 MB with a browser attached, and the whole container showed about 53 MB used when idle. The binary is about 26 MB, and about 7 percent of one core while a browser and a terminal were open. Coding agents installed inside it need much more: we gave the container 3 GB while installing OpenCode, Codex CLI and aider, which added about 2 GB of disk.",
+      "notesBg": "Measured in our Proxmox LXC (2 cores, Debian 13, Tuxee 1.2.1, native install): the Tuxee process used about 21 MB of RAM right after start and about 50 MB with a browser attached, and the whole container showed about 53 MB used when idle. The binary is about 26 MB, and about 7 percent of one core while a browser and a terminal were open. Coding agents installed inside it need much more: we gave the container 3 GB while installing OpenCode, Codex CLI and aider, which added about 2 GB of disk."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Sign in",
+      "filename": "signin.webp",
+      "altEn": "Tuxee sign-in page with the logo, a language selector and username and password fields",
+      "altBg": "Tuxee sign-in page with the logo, a language selector and username and password fields"
+    },
+    {
+      "label": "Workspace",
+      "filename": "workspace.webp",
+      "altEn": "Tuxee desktop with a file manager and an empty terminal side by side, and CPU, RAM, disk and network meters in the top bar",
+      "altBg": "Tuxee desktop with a file manager and an empty terminal side by side, and CPU, RAM, disk and network meters in the top bar"
+    },
+    {
+      "label": "Agent in a terminal",
+      "filename": "agent-terminal.webp",
+      "altEn": "A Tuxee terminal after aider wrote report.py with a local model, then python3 report.py printing East, North and South totals",
+      "altBg": "A Tuxee terminal after aider wrote report.py with a local model, then python3 report.py printing East, North and South totals"
+    }
+  ],
+  "dockerComposeSnippet": "# Official image. Sign in as root with the password you set below.\n# Put it on your LAN or behind a VPN: anyone who signs in gets a shell in the container.\nservices:\n  tuxee:\n    image: agent0ai/tuxee\n    container_name: tuxee\n    restart: unless-stopped\n    ports:\n      - \"80:80\"\n      - \"443:443\"\n    environment:\n      - ROOT_PASSWORD=change-me-to-a-long-password\n    volumes:\n      - tuxee-state:/var/lib/tuxee\n      - tuxee-root:/root\n      - tuxee-init:/init\n\nvolumes:\n  tuxee-state:\n  tuxee-root:\n  tuxee-init:\n",
+  "alternativeTo": [
+    "Termius",
+    "Google Cloud Shell"
+  ],
+  "descriptionEn": "Tuxee is a very small web interface for a Linux machine. It gives you a file manager and terminals in the browser, in tabs and windows you can arrange, and the terminals keep running after you log out. You sign in with a real Linux user. It is made to be a comfortable place to run AI coding agents, and it also works as a light admin console for a server, a tablet or a phone.",
+  "descriptionBg": "Tuxee is a very small web interface for a Linux machine. It gives you a file manager and terminals in the browser, in tabs and windows you can arrange, and the terminals keep running after you log out. You sign in with a real Linux user. It is made to be a comfortable place to run AI coding agents, and it also works as a light admin console for a server, a tablet or a phone.",
+  "taglineEn": "A tiny browser desktop of file managers and terminals that keep running.",
+  "taglineBg": "A tiny browser desktop of file managers and terminals that keep running.",
+  "useCasesEn": [
+    "A comfortable place to run AI coding agents such as aider or OpenCode, with sessions that survive closing the browser.",
+    "Light server administration from a laptop, tablet or phone without an SSH client.",
+    "Moving files in and out of a container by drag and drop.",
+    "A dedicated, disposable workspace container for experiments with local models."
+  ],
+  "useCasesBg": [
+    "A comfortable place to run AI coding agents such as aider or OpenCode, with sessions that survive closing the browser.",
+    "Light server administration from a laptop, tablet or phone without an SSH client.",
+    "Moving files in and out of a container by drag and drop.",
+    "A dedicated, disposable workspace container for experiments with local models."
+  ],
+  "caveatsEn": [
+    "Anyone who signs in gets a real shell, so keep it on your LAN or behind a VPN and never forward it to the internet.",
+    "The project describes itself as a built and locally validated prototype, not a production release.",
+    "It is not an AI model or an agent: you install and run the agents yourself inside its terminals.",
+    "The certificate is self-signed by default, so the browser warns on first visit."
+  ],
+  "caveatsBg": [
+    "Anyone who signs in gets a real shell, so keep it on your LAN or behind a VPN and never forward it to the internet.",
+    "The project describes itself as a built and locally validated prototype, not a production release.",
+    "It is not an AI model or an agent: you install and run the agents yourself inside its terminals.",
+    "The certificate is self-signed by default, so the browser warns on first visit."
+  ],
+  "relatedApps": [
+    "ollama",
+    "open-webui",
+    "portainer"
+  ]
+}

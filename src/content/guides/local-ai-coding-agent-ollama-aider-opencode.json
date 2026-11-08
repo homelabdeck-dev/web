@@ -1,0 +1,236 @@
+{
+  "slug": "local-ai-coding-agent-ollama-aider-opencode",
+  "date": "2026-11-08",
+  "titleEn": "A coding agent on your own GPU: aider, OpenCode and Codex CLI with a local model",
+  "titleBg": "A coding agent on your own GPU: aider, OpenCode and Codex CLI with a local model",
+  "descriptionEn": "We ran aider, OpenCode and Codex CLI against gpt-oss:20b on a home RTX 3090 through Ollama. Four tasks, the exact setup, what passed, what failed and the context-size trap.",
+  "descriptionBg": "We ran aider, OpenCode and Codex CLI against gpt-oss:20b on a home RTX 3090 through Ollama. Four tasks, the exact setup, what passed, what failed and the context-size trap.",
+  "image": "/og/local-ai-coding-agent-ollama-aider-opencode.jpg",
+  "introEn": [
+    "Can a coding agent run on a model you host yourself, with no cloud and no subscription? We tried it. gpt-oss:20b runs on our RTX 3090 in an Ollama container, and three open-source agents ran in a Tuxee terminal in another container and talked to it over the LAN.",
+    "Each agent got the same small tasks and an automatic check. This is a small test, four tasks with one or two runs each, done on 2026-11-08. It is not a benchmark, but it shows what to expect and what breaks."
+  ],
+  "introBg": [
+    "Can a coding agent run on a model you host yourself, with no cloud and no subscription? We tried it. gpt-oss:20b runs on our RTX 3090 in an Ollama container, and three open-source agents ran in a Tuxee terminal in another container and talked to it over the LAN.",
+    "Each agent got the same small tasks and an automatic check. This is a small test, four tasks with one or two runs each, done on 2026-11-08. It is not a benchmark, but it shows what to expect and what breaks."
+  ],
+  "rows": [],
+  "apps": [
+    "ollama",
+    "tuxee"
+  ],
+  "sections": [
+    {
+      "kind": "text",
+      "headingEn": "The setup",
+      "headingBg": "The setup",
+      "en": [
+        "Model: gpt-oss:20b in Ollama 0.34.2, on an RTX 3090 in its own LXC container. About 122 tokens per second in our earlier tests.",
+        "Agents: aider 0.86.2, OpenCode 1.19.5 and Codex CLI 0.167.0, all installed for a normal user in a second LXC with Tuxee (see the Tuxee guide). That container has no GPU and talks to Ollama at http://<ollama-ip>:11434.",
+        "Each run started from the same seed files in a fresh folder, with a 7-minute limit. After the run a script checked the result, so we did not judge it by eye. The agents were never given the check."
+      ],
+      "bg": [
+        "Model: gpt-oss:20b in Ollama 0.34.2, on an RTX 3090 in its own LXC container. About 122 tokens per second in our earlier tests.",
+        "Agents: aider 0.86.2, OpenCode 1.19.5 and Codex CLI 0.167.0, all installed for a normal user in a second LXC with Tuxee (see the Tuxee guide). That container has no GPU and talks to Ollama at http://<ollama-ip>:11434.",
+        "Each run started from the same seed files in a fresh folder, with a 7-minute limit. After the run a script checked the result, so we did not judge it by eye. The agents were never given the check."
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 1: raise the context size in Ollama",
+      "headingBg": "Step 1: raise the context size in Ollama",
+      "en": [
+        "Ollama's default context is small, and a coding agent sends a big prompt with tool descriptions. With the default our first OpenCode run did not finish in 10 minutes. After the change the same agent finished simple tasks in under a minute.",
+        "Through the OpenAI-compatible endpoint you cannot set the context from the client, so create a copy of the model with a bigger one. This is added next to the original, it does not change it.",
+        "32768 tokens of context raises VRAM use a little. gpt-oss:20b fits easily on a 24 GB card, so check your own card first."
+      ],
+      "bg": [
+        "Ollama's default context is small, and a coding agent sends a big prompt with tool descriptions. With the default our first OpenCode run did not finish in 10 minutes. After the change the same agent finished simple tasks in under a minute.",
+        "Through the OpenAI-compatible endpoint you cannot set the context from the client, so create a copy of the model with a bigger one. This is added next to the original, it does not change it.",
+        "32768 tokens of context raises VRAM use a little. gpt-oss:20b fits easily on a 24 GB card, so check your own card first."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "Create a 32k copy of the model (on the Ollama machine)",
+      "headingBg": "Create a 32k copy of the model (on the Ollama machine)",
+      "en": [
+        "printf 'FROM gpt-oss:20b\\nPARAMETER num_ctx 32768\\n' > Modelfile",
+        "ollama create gpt-oss-32k -f Modelfile",
+        "ollama list"
+      ],
+      "bg": [
+        "printf 'FROM gpt-oss:20b\\nPARAMETER num_ctx 32768\\n' > Modelfile",
+        "ollama create gpt-oss-32k -f Modelfile",
+        "ollama list"
+      ]
+    },
+    {
+      "kind": "steps",
+      "headingEn": "Step 2: point each agent at Ollama",
+      "headingBg": "Step 2: point each agent at Ollama",
+      "en": [
+        "aider talks to Ollama directly. Set the base URL in the environment and pick the model with the ollama_chat prefix.",
+        "OpenCode needs a small config file that declares Ollama as an OpenAI-compatible provider and lists the model.",
+        "Codex CLI also needs a custom provider. Do not name it ollama: that name is reserved for its built-in provider and Codex refuses to start. We called it lxc107. Use the Responses wire API.",
+        "aider needs Python 3.12 or older at install time. On Debian 13 (Python 3.13) its numpy dependency failed to build, so we installed it with uv and Python 3.12."
+      ],
+      "bg": [
+        "aider talks to Ollama directly. Set the base URL in the environment and pick the model with the ollama_chat prefix.",
+        "OpenCode needs a small config file that declares Ollama as an OpenAI-compatible provider and lists the model.",
+        "Codex CLI also needs a custom provider. Do not name it ollama: that name is reserved for its built-in provider and Codex refuses to start. We called it lxc107. Use the Responses wire API.",
+        "aider needs Python 3.12 or older at install time. On Debian 13 (Python 3.13) its numpy dependency failed to build, so we installed it with uv and Python 3.12."
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "aider",
+      "headingBg": "aider",
+      "en": [
+        "export OLLAMA_API_BASE=http://<ollama-ip>:11434",
+        "aider --model ollama_chat/gpt-oss-32k --yes-always --message \"your task\" file1.py file2.py"
+      ],
+      "bg": [
+        "export OLLAMA_API_BASE=http://<ollama-ip>:11434",
+        "aider --model ollama_chat/gpt-oss-32k --yes-always --message \"your task\" file1.py file2.py"
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "~/.config/opencode/opencode.json",
+      "headingBg": "~/.config/opencode/opencode.json",
+      "en": [
+        "{",
+        "  \"$schema\": \"https://opencode.ai/config.json\",",
+        "  \"provider\": {",
+        "    \"ollama\": {",
+        "      \"npm\": \"@ai-sdk/openai-compatible\",",
+        "      \"name\": \"Ollama\",",
+        "      \"options\": { \"baseURL\": \"http://<ollama-ip>:11434/v1\" },",
+        "      \"models\": { \"gpt-oss-32k\": { \"name\": \"gpt-oss 20B 32k\" } }",
+        "    }",
+        "  },",
+        "  \"model\": \"ollama/gpt-oss-32k\"",
+        "}"
+      ],
+      "bg": [
+        "{",
+        "  \"$schema\": \"https://opencode.ai/config.json\",",
+        "  \"provider\": {",
+        "    \"ollama\": {",
+        "      \"npm\": \"@ai-sdk/openai-compatible\",",
+        "      \"name\": \"Ollama\",",
+        "      \"options\": { \"baseURL\": \"http://<ollama-ip>:11434/v1\" },",
+        "      \"models\": { \"gpt-oss-32k\": { \"name\": \"gpt-oss 20B 32k\" } }",
+        "    }",
+        "  },",
+        "  \"model\": \"ollama/gpt-oss-32k\"",
+        "}"
+      ]
+    },
+    {
+      "kind": "code",
+      "headingEn": "~/.codex/config.toml",
+      "headingBg": "~/.codex/config.toml",
+      "en": [
+        "model = \"gpt-oss-32k\"",
+        "model_provider = \"lxc107\"",
+        "",
+        "[model_providers.lxc107]",
+        "name = \"Ollama\"",
+        "base_url = \"http://<ollama-ip>:11434/v1\"",
+        "wire_api = \"responses\"",
+        "",
+        "# run: codex exec --skip-git-repo-check -s workspace-write \"your task\""
+      ],
+      "bg": [
+        "model = \"gpt-oss-32k\"",
+        "model_provider = \"lxc107\"",
+        "",
+        "[model_providers.lxc107]",
+        "name = \"Ollama\"",
+        "base_url = \"http://<ollama-ip>:11434/v1\"",
+        "wire_api = \"responses\"",
+        "",
+        "# run: codex exec --skip-git-repo-check -s workspace-write \"your task\""
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "The four tasks",
+      "headingBg": "The four tasks",
+      "en": [
+        "Task 1, from scratch: write wordfreq.py (a word frequency counter with --top N) and unittest tests, and make the tests pass.",
+        "Task 2, bug fix: stats.py has a wrong median and mode, tests are provided and must not be edited.",
+        "Task 3, small script: read a CSV of sales and print the total per region, sorted, two decimals. The output was compared exactly.",
+        "Task 4, add a feature: add a --json flag to the existing wordfreq.py and a test for it. Old tests must still pass and the JSON must parse."
+      ],
+      "bg": [
+        "Task 1, from scratch: write wordfreq.py (a word frequency counter with --top N) and unittest tests, and make the tests pass.",
+        "Task 2, bug fix: stats.py has a wrong median and mode, tests are provided and must not be edited.",
+        "Task 3, small script: read a CSV of sales and print the total per region, sorted, two decimals. The output was compared exactly.",
+        "Task 4, add a feature: add a --json flag to the existing wordfreq.py and a test for it. Old tests must still pass and the JSON must parse."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Results",
+      "headingBg": "Results",
+      "en": [
+        "aider: passed tasks 1, 2 and 3 on the first try, in 42 to 58 seconds each. Task 4: the --json flag worked and printed correct JSON, but the test it wrote failed, so we count it as a fail. Passed 3 of 4.",
+        "OpenCode: passed tasks 2, 3 and 4 (46, 52 and 73 seconds). Task 1 failed on the first run in 15 seconds: it looked at the empty folder, printed the code in the chat and never wrote a file. The second run passed in 57 seconds. Passed 4 of 4, with one retry.",
+        "Codex CLI: passed task 3 in 12 seconds. On task 1 it took 209 seconds and about 50,000 tokens and left several stray test files, with a failing test. On tasks 2 and 4 it lost the connection to Ollama (\"stream disconnected before completion\") both times we ran it. Passed 1 of 4.",
+        "The Codex failures are about this exact combination, Codex CLI and gpt-oss:20b through Ollama's Responses API, not about Codex with a cloud model. We did not try other models or other Ollama versions."
+      ],
+      "bg": [
+        "aider: passed tasks 1, 2 and 3 on the first try, in 42 to 58 seconds each. Task 4: the --json flag worked and printed correct JSON, but the test it wrote failed, so we count it as a fail. Passed 3 of 4.",
+        "OpenCode: passed tasks 2, 3 and 4 (46, 52 and 73 seconds). Task 1 failed on the first run in 15 seconds: it looked at the empty folder, printed the code in the chat and never wrote a file. The second run passed in 57 seconds. Passed 4 of 4, with one retry.",
+        "Codex CLI: passed task 3 in 12 seconds. On task 1 it took 209 seconds and about 50,000 tokens and left several stray test files, with a failing test. On tasks 2 and 4 it lost the connection to Ollama (\"stream disconnected before completion\") both times we ran it. Passed 1 of 4.",
+        "The Codex failures are about this exact combination, Codex CLI and gpt-oss:20b through Ollama's Responses API, not about Codex with a cloud model. We did not try other models or other Ollama versions."
+      ]
+    },
+    {
+      "kind": "text",
+      "headingEn": "What we would do",
+      "headingBg": "What we would do",
+      "en": [
+        "For a local model like this one, aider is the lightest and fastest and does well when you tell it which files to edit. It does not run your tests by itself, so do that yourself.",
+        "OpenCode explores the project and runs commands on its own, which is closer to the cloud agents, and it was the most reliable in our runs. Expect an occasional run where the model talks instead of acting; repeat it.",
+        "We would not pick Codex CLI for this model today. Try it again if you have a model that is known to work well with the Responses API.",
+        "Do not expect cloud-model quality. A 20B model handles small, clear tasks. Give it one file, one goal and a test, not a whole repository."
+      ],
+      "bg": [
+        "For a local model like this one, aider is the lightest and fastest and does well when you tell it which files to edit. It does not run your tests by itself, so do that yourself.",
+        "OpenCode explores the project and runs commands on its own, which is closer to the cloud agents, and it was the most reliable in our runs. Expect an occasional run where the model talks instead of acting; repeat it.",
+        "We would not pick Codex CLI for this model today. Try it again if you have a model that is known to work well with the Responses API.",
+        "Do not expect cloud-model quality. A 20B model handles small, clear tasks. Give it one file, one goal and a test, not a whole repository."
+      ]
+    },
+    {
+      "kind": "list",
+      "headingEn": "Limits of this test",
+      "headingBg": "Limits of this test",
+      "en": [
+        "Four tasks, one or two runs each. Models are not deterministic, so another day could give different results.",
+        "All tasks were small Python tasks. We did not test large projects, other languages or long sessions.",
+        "One model only (gpt-oss:20b) and one machine. Your GPU, Ollama version and context size will change the numbers."
+      ],
+      "bg": [
+        "Four tasks, one or two runs each. Models are not deterministic, so another day could give different results.",
+        "All tasks were small Python tasks. We did not test large projects, other languages or long sessions.",
+        "One model only (gpt-oss:20b) and one machine. Your GPU, Ollama version and context size will change the numbers."
+      ]
+    },
+    {
+      "kind": "text",
+      "headingEn": "Where the agents run",
+      "headingBg": "Where the agents run",
+      "en": [
+        "We ran the agents in a Tuxee terminal, so the sessions kept going when we closed the browser, and we could drag files into the container and read the results in the file manager. The Tuxee guide covers how to set that up and what to keep in mind about security."
+      ],
+      "bg": [
+        "We ran the agents in a Tuxee terminal, so the sessions kept going when we closed the browser, and we could drag files into the container and read the results in the file manager. The Tuxee guide covers how to set that up and what to keep in mind about security."
+      ]
+    }
+  ]
+}
