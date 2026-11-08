@@ -101,6 +101,17 @@ export default async function InstallerPage({
         </section>
 
         <section className={card}>
+          <h2 className={h2}>Media Lite stack (no VPN)</h2>
+          <p className={p}>
+            The same media stack, but qBittorrent connects to the internet directly, with no
+            VPN and no kill switch. Nothing needs a key, so everything starts and{" "}
+            <code>hldeck wire</code> connects the apps automatically. Use it for your own and
+            legally obtained media. If you want the VPN kill switch, choose the media stack above.
+          </p>
+          <pre className={code}><code>curl -fsSL https://homelabdeck.dev/install.sh | sudo bash -s -- media-lite</code></pre>
+        </section>
+
+        <section className={card}>
           <h2 className={h2}>Manage it: the <code>hldeck</code> command</h2>
           <pre className={code}><code>{`hldeck status    # health and URLs of every service
 hldeck update    # pull new images and restart
