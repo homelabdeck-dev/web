@@ -1,0 +1,31 @@
+{
+  "slug": "2026-w46",
+  "date": "2026-11-15",
+  "titleEn": "Week 46: local AI on your own GPU, a browser terminal and a one-line installer",
+  "titleBg": "Week 46: local AI on your own GPU, a browser terminal and a one-line installer",
+  "summaryEn": "A catch-up note: seven apps that joined the directory since week 41 (Ollama, Open WebUI, ComfyUI, TTS-WebUI, Homepage, AdGuard Home and Tuxee), the new guides and the free hldeck installer.",
+  "summaryBg": "A catch-up note: seven apps that joined the directory since week 41 (Ollama, Open WebUI, ComfyUI, TTS-WebUI, Homepage, AdGuard Home and Tuxee), the new guides and the free hldeck installer.",
+  "bodyEn": [
+    "This is a catch-up note. Since week 41 the HomelabDeck directory grew from 19 to 26 apps, and every new entry was run in our own Proxmox homelab, with real screenshots and numbers we measured ourselves.",
+    "Four of the new apps form a local AI stack on one RTX 3090. Ollama runs open language models behind a simple API: gpt-oss:20b used about 13.7 GB of VRAM after a short prompt and answered at about 118 tokens per second. Open WebUI puts a private ChatGPT-style chat in front of it, and its own container needs only about 0.5 to 0.7 GB of RAM. ComfyUI generates images with a node-based workflow: a 1024x1024 SDXL image took about 8 to 9 seconds once the model was loaded. TTS-WebUI brings many text-to-speech models into one interface: Kokoro spoke an 8-second sentence in about 1.7 seconds.",
+    "Two small apps cover the basics of any homelab. Homepage is a YAML-configured start page that used about 140 MB of RAM while showing 14 services. AdGuard Home blocks ads and trackers for the whole network at the DNS level, and one instance used about 80 to 90 MB of RAM with the default filter loaded.",
+    "The newest entry is Tuxee, a tiny browser desktop of file managers and terminals that keep running after you log out. Its process used about 21 MB of RAM right after start. We use it as a home for AI coding agents, and two new guides come from that work: setting up Tuxee in a Proxmox LXC, and a test of aider, OpenCode and Codex CLI against a local model.",
+    "The guides section now has 11 guides, including GPU sharing between Proxmox LXC containers, a Jellyfin, Sonarr and Radarr stack, and moving Vaultwarden from SQLite to PostgreSQL. There is also hldeck, our free MIT installer: one command sets up a starter stack (Homepage, Uptime Kuma, Portainer, Nginx Proxy Manager) or a media stack on a clean Debian or Ubuntu machine. You can find it on the Installer page."
+  ],
+  "bodyBg": [
+    "This is a catch-up note. Since week 41 the HomelabDeck directory grew from 19 to 26 apps, and every new entry was run in our own Proxmox homelab, with real screenshots and numbers we measured ourselves.",
+    "Four of the new apps form a local AI stack on one RTX 3090. Ollama runs open language models behind a simple API: gpt-oss:20b used about 13.7 GB of VRAM after a short prompt and answered at about 118 tokens per second. Open WebUI puts a private ChatGPT-style chat in front of it, and its own container needs only about 0.5 to 0.7 GB of RAM. ComfyUI generates images with a node-based workflow: a 1024x1024 SDXL image took about 8 to 9 seconds once the model was loaded. TTS-WebUI brings many text-to-speech models into one interface: Kokoro spoke an 8-second sentence in about 1.7 seconds.",
+    "Two small apps cover the basics of any homelab. Homepage is a YAML-configured start page that used about 140 MB of RAM while showing 14 services. AdGuard Home blocks ads and trackers for the whole network at the DNS level, and one instance used about 80 to 90 MB of RAM with the default filter loaded.",
+    "The newest entry is Tuxee, a tiny browser desktop of file managers and terminals that keep running after you log out. Its process used about 21 MB of RAM right after start. We use it as a home for AI coding agents, and two new guides come from that work: setting up Tuxee in a Proxmox LXC, and a test of aider, OpenCode and Codex CLI against a local model.",
+    "The guides section now has 11 guides, including GPU sharing between Proxmox LXC containers, a Jellyfin, Sonarr and Radarr stack, and moving Vaultwarden from SQLite to PostgreSQL. There is also hldeck, our free MIT installer: one command sets up a starter stack (Homepage, Uptime Kuma, Portainer, Nginx Proxy Manager) or a media stack on a clean Debian or Ubuntu machine. You can find it on the Installer page."
+  ],
+  "apps": [
+    "ollama",
+    "open-webui",
+    "comfyui",
+    "tts-webui",
+    "homepage",
+    "adguard-home",
+    "tuxee"
+  ]
+}
