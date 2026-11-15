@@ -50,7 +50,11 @@
     "useCases": "What {name} is good for",
     "caveats": "Before you deploy",
     "guides": "Guides featuring {name}",
-    "relatedApps": "Related apps"
+    "relatedApps": "Related apps",
+    "subscribeTitle": "Get new apps and guides by email",
+    "subscribeText": "One short email when we test a new app or publish a guide. No spam, unsubscribe any time.",
+    "installerSubscribeTitle": "Get installer updates by email",
+    "installerSubscribeText": "One short email when HLDeck gets a new profile or we publish a guide. No spam, unsubscribe any time."
   },
   "updates": {
     "listTitle": "Weekly Updates",

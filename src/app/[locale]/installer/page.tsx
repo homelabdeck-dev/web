@@ -1,6 +1,7 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import HLDeck from "@/components/HLDeck";
+import SubscribeForm from "@/components/SubscribeForm";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -41,6 +42,7 @@ export default async function InstallerPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("apps");
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
@@ -132,6 +134,12 @@ hldeck wire      # connect Prowlarr, Sonarr, Radarr and qBittorrent (media stack
             <a className="text-accent underline" href="https://github.com/homelabdeck-dev/hldeck">github.com/homelabdeck-dev/hldeck</a> (MIT).
             Use torrents only for content you have the right to download.
           </p>
+        </section>
+
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6 dark:border-white/[.12] dark:bg-[#20242a]">
+          <h2 className="text-xl font-medium text-black dark:text-zinc-50">{t("installerSubscribeTitle")}</h2>
+          <p className="text-zinc-600 dark:text-zinc-300">{t("installerSubscribeText")}</p>
+          <SubscribeForm />
         </section>
       </main>
     </div>

@@ -9,6 +9,7 @@ import AppCard from "@/components/AppCard";
 import InstallerCta, { INSTALLER_APPS } from "@/components/InstallerCta";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import SubscribeForm from "@/components/SubscribeForm";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -320,6 +321,12 @@ export default async function AppDetailPage({
             </ul>
           </section>
         )}
+
+        <section className="flex flex-col gap-2 rounded-xl border border-black/[.08] bg-white p-6 dark:border-white/[.12] dark:bg-[#20242a]">
+          <h2 className="text-xl font-medium text-black dark:text-zinc-50">{t("subscribeTitle")}</h2>
+          <p className="text-zinc-600 dark:text-zinc-300">{t("subscribeText")}</p>
+          <SubscribeForm />
+        </section>
       </main>
     </div>
   );
