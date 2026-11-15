@@ -90,8 +90,11 @@ export async function sendDueIssues(issues: Issue[], today: string) {
   const log: string[] = [];
   let quota = DAILY_LIMIT;
 
-  for (const issue of [...issues].sort((a, b) => a.sendAt.localeCompare(b.sendAt))) {
-    if (issue.sendAt > today || quota <= 0) continue;
+  const due = issues.filter((i) => i.sendAt <= today).sort((a, b) => a.sendAt.localeCompare(b.sendAt));
+  const newest = due[due.length - 1];
+
+  for (const issue of due) {
+    if (quota <= 0) continue;
     const sentKey = `sent:${issue.id}`;
     const emails = await db.smembers("subscribers");
     if (issue.minSubscribers && emails.length < issue.minSubscribers) {
@@ -103,7 +106,10 @@ export async function sendDueIssues(issues: Issue[], today: string) {
     for (const email of emails) {
       if (await db.sismember(sentKey, email)) continue;
       const sub = await getJson<Subscriber>(db, subKey(email));
-      if (sub?.status === "confirmed") todo.push(sub);
+      if (sub?.status !== "confirmed") continue;
+      // Someone who subscribed after an older issue went out gets only the newest one, not the backlog.
+      if (issue !== newest && sub.createdAt.slice(0, 10) > issue.sendAt) continue;
+      todo.push(sub);
     }
     const batch = todo.slice(0, quota);
     for (let i = 0; i < batch.length; i += 100) {
