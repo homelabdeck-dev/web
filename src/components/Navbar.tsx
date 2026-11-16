@@ -33,19 +33,19 @@ export default async function Navbar({ locale }: { locale: string }) {
         <nav className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent"
+            className="hidden text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent sm:inline"
           >
             {t("home")}
           </Link>
           <Link
             href="/apps"
-            className="text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent"
+            className="hidden text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent sm:inline"
           >
             {t("apps")}
           </Link>
           <Link
             href="/updates"
-            className="text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent"
+            className="hidden text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:text-accent sm:inline"
           >
             {t("updates")}
           </Link>
