@@ -17,6 +17,7 @@ export async function POST(request: Request) {
 
   // Honeypot: real users leave this hidden field empty; bots fill it.
   if (typeof body.website === "string" && body.website.length > 0) {
+    console.log("subscribe: honeypot filled, ignored");
     return Response.json({ ok: true });
   }
 
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
   const existing = await getJson<Subscriber>(db, subKey(email));
   if (existing?.status === "confirmed") {
     if (interest) await db.sadd(waitKey(interest), email);
+    console.log(`subscribe: already confirmed, no mail (interest ${interest ?? "-"})`);
     return Response.json({ ok: true });
   }
   if (interest) await db.sadd(`${waitKey(interest)}:requested`, email);
@@ -56,8 +58,10 @@ export async function POST(request: Request) {
 
   try {
     await sendMail({ to: email, ...confirmMail(locale, token) });
-  } catch {
+  } catch (e) {
+    console.error(`subscribe: confirmation mail failed: ${e instanceof Error ? e.message : e}`);
     return Response.json({ error: "unavailable" }, { status: 502 });
   }
+  console.log(`subscribe: confirmation mail accepted by Resend (${existing ? "repeat" : "new"}, interest ${interest ?? "-"})`);
   return Response.json({ ok: true });
 }
