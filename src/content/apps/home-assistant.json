@@ -1,6 +1,7 @@
 {
   "name": "Home Assistant",
   "slug": "home-assistant",
+  "icon": "home-assistant.svg",
   "category": "home-automation",
   "license": "Apache-2.0",
   "officialRepoUrl": "https://github.com/home-assistant/core",

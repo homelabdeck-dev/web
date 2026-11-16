@@ -1,6 +1,7 @@
 {
   "name": "Jellyfin",
   "slug": "jellyfin",
+  "icon": "jellyfin.svg",
   "category": "media",
   "license": "GPL-2.0",
   "officialRepoUrl": "https://github.com/jellyfin/jellyfin",
@@ -70,5 +71,5 @@
     "Някои приложения за телевизори са по-малко изпипани от тези на Plex, затова тествай клиентите, които ползва домакинството, преди да преминеш напълно.",
     "За стрийминг отвън използвай reverse proxy с HTTPS или VPN и мисли за скоростта на качване на интернета си."
   ],
-  "relatedApps": ["audiobookshelf", "immich", "nginx-proxy-manager"]
+  "relatedApps": ["sonarr", "radarr", "audiobookshelf", "immich", "nginx-proxy-manager"]
 }

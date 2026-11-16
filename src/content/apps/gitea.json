@@ -1,6 +1,7 @@
 {
   "name": "Gitea",
   "slug": "gitea",
+  "icon": "gitea.svg",
   "category": "developer-tools",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/go-gitea/gitea",

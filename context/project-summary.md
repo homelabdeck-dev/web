@@ -39,11 +39,11 @@ Catalog self-hosted applications with real Proof-of-Work evidence (dashboard/set
 ## Current State
 
 - Live in production at `homelabdeck.dev` (Vercel), live as of 2026-10-07.
-- App catalog holds 26 entries: adguard-home, applio, audiobookshelf, casaos, comfyui, freshrss, gitea, grafana, home-assistant, homepage, immich, jellyfin, memos, n8n, nginx-proxy-manager, ollama, open-webui, paperless-ngx, pi-hole, portainer, tts-webui, tuxee, uptime-kuma, vaultwarden, vikunja, wiki-js.
-- All 26 entries have their Proof-of-Work gallery published in `public/screenshots/<slug>/`.
+- App catalog holds 29 entries: adguard-home, applio, audiobookshelf, casaos, comfyui, freshrss, gitea, grafana, home-assistant, homepage, immich, jellyfin, memos, n8n, nginx-proxy-manager, ollama, open-webui, paperless-ngx, pi-hole, portainer, prowlarr, radarr, sonarr, tts-webui, tuxee, uptime-kuma, vaultwarden, vikunja, wiki-js.
+- All 29 entries have their Proof-of-Work gallery published in `public/screenshots/<slug>/` and their own logo in `public/icons/` (`icon` field in the JSON, rendered by `src/components/AppIcon.tsx`).
 - 11 guides (newest `tuxee-browser-terminal-proxmox-lxc` and `local-ai-coding-agent-ollama-aider-opencode`, 2026-11-08, EN-only, own measurements on LXC 128 (Tuxee 1.2.1, native install) against Ollama gpt-oss on LXC 107; tuxee is the 26th catalog app; before them `vaultwarden-sqlite-to-postgresql`, 2026-11-06, EN-only, procedure tested in a throwaway Docker setup; before it `jellyfin-sonarr-radarr-stack-proxmox-lxc`, 2026-11-06, EN-only, live LXC checked, Kodi+JellyCon direct play test; before it `gpu-passthrough-proxmox-lxc`, 2026-11-01, EN-only, own setup checked live; before it `comfyui-ai-images-at-home`, 2026-10-23, EN/BG, own RTX 3090 measurements; before it `ollama-open-webui-private-chatgpt`, EN/BG) in `src/content/guides/`; newsletter backend live (see `decisions.md` 2026-10-18); footer + left side panel.
 - hldeck installer (2026-11-07): `/en/installer`, `public/install.sh`, `public/hldeck.sh` (copies of github.com/homelabdeck-dev/hldeck, MIT; re-copy on each release). Profiles starter/media/media-lite, CLI status/update/backup/export/wire. Announcement FB post scheduled Thu 2026-11-19 18:00 EET.
-- Weekly notes in `src/content/weekly/` (6; newest `2026-w46`, 2026-11-15, a catch-up note, so every catalog app is now covered by a note).
+- Weekly notes in `src/content/weekly/` (7; newest `2026-w47`, 2026-11-16, Sonarr/Radarr/Prowlarr; every catalog app is covered by a note).
 - Light/dark theme toggle in navbar (2026-10-10, replaced the language switcher; site is EN-only since 2026-11-01; /bg redirects to /en) — see `decisions.md`.
 
 ## Important Locations

@@ -1,0 +1,66 @@
+{
+  "name": "Prowlarr",
+  "slug": "prowlarr",
+  "icon": "prowlarr.svg",
+  "category": "media",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/Prowlarr/Prowlarr",
+  "officialWebsiteUrl": "https://prowlarr.com",
+  "githubStars": 7597,
+  "updatedAt": "2026-11-16T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database in the /config folder; PostgreSQL is supported as an option"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Measured in our Proxmox LXC (2 cores, 4 GB RAM, Docker, linuxserver.io image, Prowlarr 2.6.5) on 2026-11-16: the container used about 228 MB of RAM and under 1 percent of one core while idle, with 8 indexers synced to Sonarr and Radarr. The image is about 187 MB and the config folder about 17 MB."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Indexers",
+      "filename": "indexers.webp",
+      "altEn": "Prowlarr Indexers page with eight enabled indexers and their category tags; the indexer names are hidden"
+    },
+    {
+      "label": "Apps",
+      "filename": "apps.webp",
+      "altEn": "Prowlarr Settings, Apps page with Radarr and Sonarr connected in Full Sync mode and a Standard sync profile with RSS, Automatic Search and Interactive Search"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Prowlarr Settings overview listing Indexers, Apps, Download Clients, Notifications, Tags, General and UI"
+    }
+  ],
+  "dockerComposeSnippet": "# The service from our media stack compose file. Set PUID, PGID and TZ to your own.\nservices:\n  prowlarr:\n    image: lscr.io/linuxserver/prowlarr:latest\n    container_name: prowlarr\n    restart: unless-stopped\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=Europe/Berlin\n    volumes:\n      - ./config/prowlarr:/config\n    ports:\n      - \"9696:9696\"\n",
+  "alternativeTo": [
+    "Jackett"
+  ],
+  "descriptionEn": "Prowlarr is a free and open-source indexer manager for the *arr apps. You add your indexers in one place, connect Sonarr, Radarr and the other apps once, and Prowlarr keeps the indexer list in each of them in sync. It also has its own search across all indexers, a history, and per-indexer statistics.",
+  "taglineEn": "One place to manage indexers and sync them to Sonarr and Radarr.",
+  "useCasesEn": [
+    "Adding an indexer once instead of repeating the setup in Sonarr, Radarr and every other *arr app.",
+    "Searching all your indexers from one page.",
+    "Seeing which indexers fail or answer slowly in the statistics.",
+    "Routing selected indexers through a proxy such as FlareSolverr with tags."
+  ],
+  "caveatsEn": [
+    "Prowlarr only manages indexers: it does not download or organise files, so it is useful only next to Sonarr, Radarr or a similar app.",
+    "Inside one compose network, connect the apps by service name (http://sonarr:8989), not by LAN IP.",
+    "Some indexers sit behind a browser check and need a FlareSolverr container attached with a tag.",
+    "You are responsible for the indexers you add and for what you download through them."
+  ],
+  "relatedApps": [
+    "sonarr",
+    "radarr",
+    "jellyfin"
+  ]
+}

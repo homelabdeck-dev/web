@@ -1,6 +1,7 @@
 {
   "name": "Grafana",
   "slug": "grafana",
+  "icon": "grafana.svg",
   "category": "monitoring",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/grafana/grafana",

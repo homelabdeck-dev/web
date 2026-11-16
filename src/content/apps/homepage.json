@@ -1,6 +1,7 @@
 {
   "name": "Homepage",
   "slug": "homepage",
+  "icon": "homepage.webp",
   "category": "monitoring",
   "license": "GPL-3.0",
   "officialRepoUrl": "https://github.com/gethomepage/homepage",

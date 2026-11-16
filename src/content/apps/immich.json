@@ -1,6 +1,7 @@
 {
   "name": "Immich",
   "slug": "immich",
+  "icon": "immich.svg",
   "category": "photos",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/immich-app/immich",

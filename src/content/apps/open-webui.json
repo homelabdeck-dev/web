@@ -1,6 +1,7 @@
 {
   "name": "Open WebUI",
   "slug": "open-webui",
+  "icon": "open-webui.svg",
   "category": "ai-audio",
   "license": "Open WebUI License (BSD-3-Clause based, with a branding clause)",
   "officialRepoUrl": "https://github.com/open-webui/open-webui",

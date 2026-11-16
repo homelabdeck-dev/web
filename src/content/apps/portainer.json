@@ -1,6 +1,7 @@
 {
   "name": "Portainer",
   "slug": "portainer",
+  "icon": "portainer.svg",
   "category": "container-management",
   "license": "Zlib",
   "officialRepoUrl": "https://github.com/portainer/portainer",

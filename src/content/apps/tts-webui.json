@@ -1,6 +1,7 @@
 {
   "name": "TTS-WebUI",
   "slug": "tts-webui",
+  "icon": "tts-webui.webp",
   "category": "ai-audio",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/rsxdalv/TTS-WebUI",

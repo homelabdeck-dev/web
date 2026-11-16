@@ -1,6 +1,7 @@
 {
   "name": "Memos",
   "slug": "memos",
+  "icon": "memos.webp",
   "category": "notes-docs",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/usememos/memos",

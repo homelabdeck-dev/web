@@ -1,0 +1,23 @@
+{
+  "slug": "2026-w47",
+  "date": "2026-11-16",
+  "titleEn": "Week 47: Sonarr, Radarr and Prowlarr join the directory",
+  "titleBg": "Week 47: Sonarr, Radarr and Prowlarr join the directory",
+  "summaryEn": "The three apps behind our Jellyfin media stack now have their own pages, with real screenshots and memory numbers from the running containers. Every app in the directory also shows its own icon.",
+  "summaryBg": "The three apps behind our Jellyfin media stack now have their own pages, with real screenshots and memory numbers from the running containers. Every app in the directory also shows its own icon.",
+  "bodyEn": [
+    "The directory now has 29 apps. This week we added the three that do the quiet work in our media stack: Sonarr, Radarr and Prowlarr. They run as Docker containers in one Proxmox LXC next to Jellyfin, and the numbers below were measured there on 2026-11-16.",
+    "Sonarr manages a TV series library and Radarr does the same for movies. Each keeps a wanted list, passes jobs to a download client, then renames the finished file and moves it into the library. Idle, Sonarr used about 178 MB of RAM and Radarr about 188 MB.",
+    "Prowlarr is the indexer manager. You add indexers once and it syncs them to Sonarr and Radarr. With 8 indexers and both apps connected it used about 228 MB of RAM.",
+    "If you want to build the whole stack, the guide Jellyfin, Sonarr and Radarr in one Proxmox LXC has the compose file, the folder layout and the wiring between the apps.",
+    "One more change: every app card and app page now shows the app's own icon, and the Apps page is wider, with the catalog laid out as a grid."
+  ],
+  "bodyBg": [
+    "The directory now has 29 apps. This week we added the three that do the quiet work in our media stack: Sonarr, Radarr and Prowlarr. They run as Docker containers in one Proxmox LXC next to Jellyfin, and the numbers below were measured there on 2026-11-16.",
+    "Sonarr manages a TV series library and Radarr does the same for movies. Each keeps a wanted list, passes jobs to a download client, then renames the finished file and moves it into the library. Idle, Sonarr used about 178 MB of RAM and Radarr about 188 MB.",
+    "Prowlarr is the indexer manager. You add indexers once and it syncs them to Sonarr and Radarr. With 8 indexers and both apps connected it used about 228 MB of RAM.",
+    "If you want to build the whole stack, the guide Jellyfin, Sonarr and Radarr in one Proxmox LXC has the compose file, the folder layout and the wiring between the apps.",
+    "One more change: every app card and app page now shows the app's own icon, and the Apps page is wider, with the catalog laid out as a grid."
+  ],
+  "apps": ["sonarr", "radarr", "prowlarr"]
+}

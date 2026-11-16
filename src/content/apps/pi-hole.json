@@ -1,6 +1,7 @@
 {
   "name": "Pi-hole",
   "slug": "pi-hole",
+  "icon": "pi-hole.svg",
   "category": "networking",
   "license": "EUPL-1.2",
   "officialRepoUrl": "https://github.com/pi-hole/pi-hole",

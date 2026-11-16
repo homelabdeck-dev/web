@@ -1,0 +1,67 @@
+{
+  "name": "Sonarr",
+  "slug": "sonarr",
+  "icon": "sonarr.svg",
+  "category": "media",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/Sonarr/Sonarr",
+  "officialWebsiteUrl": "https://sonarr.tv",
+  "githubStars": 17734,
+  "updatedAt": "2026-11-16T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database in the /config folder; PostgreSQL is supported as an option"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Measured in our Proxmox LXC (2 cores, 4 GB RAM, Docker, linuxserver.io image, Sonarr 4.0.20) on 2026-11-16: the container used about 178 MB of RAM and under 1 percent of one core while idle. The image is about 205 MB and the config folder about 56 MB. Memory and the database grow with the number of series you track, and RSS syncs and library scans cause short CPU spikes."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Series",
+      "filename": "series.webp",
+      "altEn": "Sonarr Series page with an empty library, showing the Import Existing Series and Add New Series buttons and the left menu with Calendar, Activity, Wanted, Settings and System"
+    },
+    {
+      "label": "Queue",
+      "filename": "queue.webp",
+      "altEn": "Sonarr Activity page on the Queue tab, with the message Queue is empty and the History and Blocklist tabs in the menu"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Sonarr Settings overview listing Connect, Metadata, Metadata Source, Tags, General and UI, with the full settings menu on the left"
+    }
+  ],
+  "dockerComposeSnippet": "# The service from our media stack compose file. Set PUID, PGID and TZ to your own.\nservices:\n  sonarr:\n    image: lscr.io/linuxserver/sonarr:latest\n    container_name: sonarr\n    restart: unless-stopped\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=Europe/Berlin\n    volumes:\n      - ./config/sonarr:/config\n      - /data:/data\n    ports:\n      - \"8989:8989\"\n",
+  "alternativeTo": [
+    "Medusa",
+    "SickChill"
+  ],
+  "descriptionEn": "Sonarr is a free and open-source manager for a TV series library. You add the shows you follow, and it keeps a list of wanted episodes, watches for them, passes each one to your download client, then renames the finished file and moves it into the library that Jellyfin or another media server reads. It works together with Prowlarr for indexers and has a calendar of upcoming episodes.",
+  "taglineEn": "Automatic TV series library manager with a calendar and renaming.",
+  "useCasesEn": [
+    "Keeping a TV library complete and consistently named without moving files by hand.",
+    "Seeing upcoming episodes of the shows you follow in one calendar.",
+    "Upgrading an episode automatically when a better quality version appears.",
+    "Feeding a Jellyfin library together with Radarr, Prowlarr and a download client."
+  ],
+  "caveatsEn": [
+    "Sonarr does not download anything itself: it needs a download client and at least one indexer, normally managed through Prowlarr.",
+    "Mount downloads and the library under one /data path, or finished files are copied instead of hardlinked and use double the disk space.",
+    "Set authentication in Settings, General before you expose the port, and keep it on your LAN or behind a VPN.",
+    "You are responsible for what you add: use it only with content you have the right to download."
+  ],
+  "relatedApps": [
+    "radarr",
+    "prowlarr",
+    "jellyfin"
+  ]
+}

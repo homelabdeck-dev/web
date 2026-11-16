@@ -1,6 +1,7 @@
 {
   "name": "Applio",
   "slug": "applio",
+  "icon": "applio.svg",
   "category": "ai-audio",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/IAHispano/Applio",

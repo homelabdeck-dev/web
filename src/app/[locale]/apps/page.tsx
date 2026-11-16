@@ -41,6 +41,7 @@ export default async function AppsPage({
     return {
       slug: app.slug,
       name: app.name,
+      icon: app.icon,
       tagline: (isBg && app.taglineBg) || app.taglineEn,
       category: app.category,
       categoryLabel: category ? (isBg ? category.labelBg : category.labelEn) : app.category,
@@ -49,7 +50,7 @@ export default async function AppsPage({
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-[#1a1a1a] font-sans">
-      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
+      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-6 py-16 sm:px-16">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50">
             {t("listTitle")}

@@ -1,6 +1,7 @@
 {
   "name": "FreshRSS",
   "slug": "freshrss",
+  "icon": "freshrss.svg",
   "category": "rss-reading",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/FreshRSS/FreshRSS",

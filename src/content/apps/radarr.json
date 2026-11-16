@@ -1,0 +1,67 @@
+{
+  "name": "Radarr",
+  "slug": "radarr",
+  "icon": "radarr.svg",
+  "category": "media",
+  "license": "GPL-3.0",
+  "officialRepoUrl": "https://github.com/Radarr/Radarr",
+  "officialWebsiteUrl": "https://radarr.video",
+  "githubStars": 14794,
+  "updatedAt": "2026-11-16T00:00:00.000Z",
+  "compatibility": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "database": {
+      "kind": "SQLite",
+      "label": "Bundled SQLite database in the /config folder; PostgreSQL is supported as an option"
+    },
+    "resourceFootprint": {
+      "ramMb": 512,
+      "cpuCores": 1,
+      "notes": "Measured in our Proxmox LXC (2 cores, 4 GB RAM, Docker, linuxserver.io image, Radarr 6.4.4) on 2026-11-16: the container used about 188 MB of RAM and under 1 percent of one core while idle, with three items in its queue. The image is about 213 MB and the config folder about 47 MB. Memory and the database grow with the number of movies you track."
+    }
+  },
+  "screenshots": [
+    {
+      "label": "Movies",
+      "filename": "movies.webp",
+      "altEn": "Radarr Movies page with an empty library, showing the Import Existing Movies and Add New Movie buttons and the left menu with Collections, Discover, Calendar, Activity and Settings"
+    },
+    {
+      "label": "Settings",
+      "filename": "settings.webp",
+      "altEn": "Radarr Settings overview listing Media Management, Profiles, Quality, Custom Formats, Indexers, Download Clients and Import Lists"
+    },
+    {
+      "label": "Queue",
+      "filename": "queue.webp",
+      "altEn": "Radarr Activity queue with three finished items and full progress bars; the titles are hidden"
+    }
+  ],
+  "dockerComposeSnippet": "# The service from our media stack compose file. Set PUID, PGID and TZ to your own.\nservices:\n  radarr:\n    image: lscr.io/linuxserver/radarr:latest\n    container_name: radarr\n    restart: unless-stopped\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=Europe/Berlin\n    volumes:\n      - ./config/radarr:/config\n      - /data:/data\n    ports:\n      - \"7878:7878\"\n",
+  "alternativeTo": [
+    "CouchPotato",
+    "Watcher3"
+  ],
+  "descriptionEn": "Radarr is a free and open-source manager for a movie library, built on the same base as Sonarr. You add the movies you want, and it watches for them, passes each one to your download client, then renames the finished file and moves it into the library that Jellyfin or another media server reads. It has quality profiles, custom formats, collections and a Discover page for finding movies to add.",
+  "taglineEn": "Automatic movie library manager with quality profiles and renaming.",
+  "useCasesEn": [
+    "Keeping a movie library complete and consistently named without moving files by hand.",
+    "Setting a quality profile once and letting Radarr upgrade a movie when a better version appears.",
+    "Following whole collections so new parts are added automatically.",
+    "Feeding a Jellyfin library together with Sonarr, Prowlarr and a download client."
+  ],
+  "caveatsEn": [
+    "Radarr does not download anything itself: it needs a download client and at least one indexer, normally managed through Prowlarr.",
+    "Mount downloads and the library under one /data path, or finished files are copied instead of hardlinked and use double the disk space.",
+    "Name the root folder and movie folders the way your media server expects (Movie Name (Year)), or metadata matching will be poor.",
+    "You are responsible for what you add: use it only with content you have the right to download."
+  ],
+  "relatedApps": [
+    "sonarr",
+    "prowlarr",
+    "jellyfin"
+  ]
+}

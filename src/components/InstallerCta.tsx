@@ -26,6 +26,9 @@ export const INSTALLER_APPS: Record<string, InstallerCtaVariant> = {
   portainer: "starter",
   "nginx-proxy-manager": "starter",
   jellyfin: "media",
+  sonarr: "media",
+  radarr: "media",
+  prowlarr: "media",
 };
 export const INSTALLER_GUIDES: Record<string, InstallerCtaVariant> = {
   "jellyfin-sonarr-radarr-stack-proxmox-lxc": "media",

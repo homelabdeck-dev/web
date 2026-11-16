@@ -1,6 +1,7 @@
 {
   "name": "Vikunja",
   "slug": "vikunja",
+  "icon": "vikunja.svg",
   "category": "notes-docs",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/go-vikunja/vikunja",

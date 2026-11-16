@@ -69,6 +69,8 @@ export interface AppEntry {
   // --- Metadata ---
   name: string;
   slug: string;
+  /** Logo filename under `/public/icons` (the app's own icon). */
+  icon?: string;
   category: string;
   license: string;
   officialRepoUrl: string;

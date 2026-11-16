@@ -1,6 +1,7 @@
 {
   "name": "Paperless-ngx",
   "slug": "paperless-ngx",
+  "icon": "paperless-ngx.svg",
   "category": "notes-docs",
   "license": "GPL-3.0",
   "officialRepoUrl": "https://github.com/paperless-ngx/paperless-ngx",

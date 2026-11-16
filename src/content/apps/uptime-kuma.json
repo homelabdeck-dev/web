@@ -1,6 +1,7 @@
 {
   "name": "Uptime Kuma",
   "slug": "uptime-kuma",
+  "icon": "uptime-kuma.svg",
   "category": "monitoring",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/louislam/uptime-kuma",

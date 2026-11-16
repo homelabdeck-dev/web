@@ -1,6 +1,7 @@
 {
   "name": "Wiki.js",
   "slug": "wiki-js",
+  "icon": "wiki-js.svg",
   "category": "notes-docs",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/requarks/wiki",

@@ -1,6 +1,7 @@
 {
   "name": "n8n",
   "slug": "n8n",
+  "icon": "n8n.svg",
   "category": "automation",
   "license": "Sustainable Use License (fair-code, source-available)",
   "officialRepoUrl": "https://github.com/n8n-io/n8n",

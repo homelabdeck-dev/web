@@ -1,6 +1,7 @@
 {
   "name": "Ollama",
   "slug": "ollama",
+  "icon": "ollama.svg",
   "category": "ai-audio",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/ollama/ollama",

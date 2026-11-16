@@ -1,6 +1,7 @@
 {
   "name": "Tuxee",
   "slug": "tuxee",
+  "icon": "tuxee.webp",
   "category": "developer-tools",
   "license": "MIT",
   "officialRepoUrl": "https://github.com/agent0ai/tuxee",

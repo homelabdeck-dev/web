@@ -1,6 +1,7 @@
 {
   "name": "Audiobookshelf",
   "slug": "audiobookshelf",
+  "icon": "audiobookshelf.svg",
   "category": "media",
   "license": "GPL-3.0",
   "officialRepoUrl": "https://github.com/advplyr/audiobookshelf",

@@ -1,6 +1,7 @@
 {
   "name": "Vaultwarden",
   "slug": "vaultwarden",
+  "icon": "vaultwarden.svg",
   "category": "password-management",
   "license": "AGPL-3.0",
   "officialRepoUrl": "https://github.com/dani-garcia/vaultwarden",

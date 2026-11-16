@@ -1,6 +1,7 @@
 {
   "name": "CasaOS",
   "slug": "casaos",
+  "icon": "casaos.svg",
   "category": "container-management",
   "license": "Apache-2.0",
   "officialRepoUrl": "https://github.com/IceWhaleTech/CasaOS",

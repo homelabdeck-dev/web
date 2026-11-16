@@ -1,6 +1,7 @@
 {
   "name": "AdGuard Home",
   "slug": "adguard-home",
+  "icon": "adguard-home.svg",
   "category": "networking",
   "license": "GPL-3.0",
   "officialRepoUrl": "https://github.com/AdguardTeam/AdGuardHome",

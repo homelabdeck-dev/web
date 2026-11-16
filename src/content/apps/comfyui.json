@@ -1,6 +1,7 @@
 {
   "name": "ComfyUI",
   "slug": "comfyui",
+  "icon": "comfyui.svg",
   "category": "ai-image",
   "license": "GPL-3.0",
   "officialRepoUrl": "https://github.com/Comfy-Org/ComfyUI",

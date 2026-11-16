@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllAppSlugs, getAppBySlug } from "@/lib/apps/loader";
 import { getGuidesForApp } from "@/lib/guides";
+import AppIcon from "@/components/AppIcon";
 import AppCard from "@/components/AppCard";
 import InstallerCta, { INSTALLER_APPS } from "@/components/InstallerCta";
 import { getCategoryBySlug } from "@/lib/apps/categories";
@@ -124,7 +125,8 @@ export default async function AppDetailPage({
         </Link>
 
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <AppIcon icon={app.icon} size={48} />
             <h1 className="text-3xl tracking-tight text-black dark:text-zinc-50">
               {app.name}
             </h1>

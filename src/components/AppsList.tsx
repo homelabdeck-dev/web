@@ -2,11 +2,13 @@
 
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import AppIcon from "@/components/AppIcon";
 import { Link } from "@/i18n/navigation";
 
 export type AppRow = {
   slug: string;
   name: string;
+  icon?: string;
   tagline: string;
   category: string;
   categoryLabel: string;
@@ -26,18 +28,21 @@ export default function AppsList({ apps }: { apps: AppRow[] }) {
           <Link href="/apps" className="text-accent hover:text-accent-hover">{t("clear")}</Link>
         </p>
       )}
-      <ul className="flex flex-col gap-4">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((app) => (
           <li key={app.slug}>
             <Link
               href={`/apps/${app.slug}`}
-              className="flex flex-col gap-1 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-6 transition-colors hover:border-accent/40"
+              className="flex h-full flex-col gap-3 rounded-xl border border-black/[.08] dark:border-white/[.12] bg-white dark:bg-[#20242a] p-5 transition-colors hover:border-accent/40"
             >
-              <div className="flex items-center justify-between gap-4">
-                <h2 className="text-xl font-medium text-black dark:text-zinc-50">{app.name}</h2>
-                <span className="rounded-full bg-accent/10 px-3 py-1 text-sm text-accent-hover">{app.categoryLabel}</span>
+              <div className="flex items-center gap-3">
+                <AppIcon icon={app.icon} size={44} />
+                <div className="flex min-w-0 flex-col items-start gap-1">
+                  <h2 className="text-lg font-medium text-black dark:text-zinc-50">{app.name}</h2>
+                  <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-xs text-accent-hover">{app.categoryLabel}</span>
+                </div>
               </div>
-              <p className="text-zinc-600 dark:text-zinc-300">{app.tagline}</p>
+              <p className="text-sm text-zinc-600 dark:text-zinc-300">{app.tagline}</p>
             </Link>
           </li>
         ))}
