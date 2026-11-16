@@ -45,11 +45,11 @@ export default function SidePanel({
         onClick={() => setOpen(true)}
         aria-label={t("open")}
         aria-expanded={open}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-700 transition-colors hover:text-accent dark:text-zinc-300"
+        className="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-700 transition-colors hover:text-accent dark:text-zinc-300"
       >
         <svg
-          width="20"
-          height="20"
+          width="26"
+          height="26"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
