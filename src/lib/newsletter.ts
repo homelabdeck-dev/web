@@ -72,6 +72,16 @@ export function confirmMail(locale: "en" | "bg", token: string) {
   return { subject, html, text };
 }
 
+/** Sent when an already confirmed subscriber joins a product waitlist, so the form's "check your inbox" stays true. */
+export function waitlistMail(token: string) {
+  const subject = "You are on the HLDeck AI Pack list";
+  const intro = "Your address is already confirmed for the HomelabDeck newsletter, so there is nothing to confirm. You are on the HLDeck AI Pack list and will get one email when it is ready.";
+  const unsub = unsubscribeUrl(token);
+  const html = `<div style="font-family:Inter,Arial,sans-serif;max-width:480px;margin:0 auto;padding:24px;color:#111"><h2 style="margin:0 0 16px">HomelabDeck</h2><p>${intro}</p><p style="color:#666;font-size:14px"><a href="${SITE}/en/ai-pack">${SITE}/en/ai-pack</a></p><p style="color:#666;font-size:12px"><a href="${unsub}">Unsubscribe</a></p></div>`;
+  const text = `${intro}\n\n${SITE}/en/ai-pack\n\nUnsubscribe: ${unsub}`;
+  return { subject, html, text, token };
+}
+
 export function pageRedirect(locale: string, status: "confirmed" | "unsubscribed" | "invalid") {
   return Response.redirect(`${SITE}/${locale === "bg" ? "bg" : "en"}/newsletter/${status}`, 303);
 }

@@ -1,4 +1,4 @@
-import { confirmMail, getJson, INTERESTS, newToken, redis, sendMail, subKey, tokKey, waitKey, type Interest, type Subscriber } from "@/lib/newsletter";
+import { confirmMail, getJson, INTERESTS, newToken, redis, sendMail, subKey, tokKey, waitKey, waitlistMail, type Interest, type Subscriber } from "@/lib/newsletter";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,8 +38,10 @@ export async function POST(request: Request) {
   // Same response whether or not the address is already known (no enumeration).
   const existing = await getJson<Subscriber>(db, subKey(email));
   if (existing?.status === "confirmed") {
-    if (interest) await db.sadd(waitKey(interest), email);
-    console.log(`subscribe: already confirmed, no mail (interest ${interest ?? "-"})`);
+    // sadd returns 1 only the first time, so a repeat submit does not mail again
+    const added = interest ? await db.sadd(waitKey(interest), email) : 0;
+    if (added) await sendMail({ to: email, ...waitlistMail(existing.token) }).catch(() => {});
+    console.log(`subscribe: already confirmed (interest ${interest ?? "-"}, waitlist mail ${added ? "sent" : "not sent"})`);
     return Response.json({ ok: true });
   }
   if (interest) await db.sadd(`${waitKey(interest)}:requested`, email);
