@@ -1,4 +1,4 @@
-import { confirmMail, getJson, newToken, redis, sendMail, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
+import { confirmMail, getJson, INTERESTS, newToken, redis, sendMail, subKey, tokKey, waitKey, type Interest, type Subscriber } from "@/lib/newsletter";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "unavailable" }, { status: 503 });
   }
 
-  let body: { email?: unknown; website?: unknown; locale?: unknown };
+  let body: { email?: unknown; website?: unknown; locale?: unknown; interest?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "invalid" }, { status: 400 });
   }
   const locale = body.locale === "bg" ? "bg" : "en";
+  const interest = INTERESTS.find((i) => i === body.interest) as Interest | undefined;
 
   // Rate limit per IP: 5 requests per hour.
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
@@ -35,7 +36,11 @@ export async function POST(request: Request) {
 
   // Same response whether or not the address is already known (no enumeration).
   const existing = await getJson<Subscriber>(db, subKey(email));
-  if (existing?.status === "confirmed") return Response.json({ ok: true });
+  if (existing?.status === "confirmed") {
+    if (interest) await db.sadd(waitKey(interest), email);
+    return Response.json({ ok: true });
+  }
+  if (interest) await db.sadd(`${waitKey(interest)}:requested`, email);
 
   const token = existing?.token ?? newToken();
   const sub: Subscriber = {
@@ -44,6 +49,7 @@ export async function POST(request: Request) {
     status: "pending",
     token,
     createdAt: existing?.createdAt ?? new Date().toISOString(),
+    ...((interest ?? existing?.interest) && { interest: interest ?? existing?.interest }),
   };
   await db.set(subKey(email), JSON.stringify(sub));
   await db.set(tokKey(token), email);

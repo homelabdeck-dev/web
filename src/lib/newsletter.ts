@@ -10,7 +10,13 @@ export type Subscriber = {
   status: "pending" | "confirmed";
   token: string;
   createdAt: string;
+  interest?: Interest; // waitlist the address signed up through, if any
 };
+
+// Product waitlists. A confirmed address is also added to the Redis set `waitlist:<interest>`.
+export const INTERESTS = ["ai-pack"] as const;
+export type Interest = (typeof INTERESTS)[number];
+export const waitKey = (interest: Interest) => `waitlist:${interest}`;
 
 let client: Redis | null = null;
 

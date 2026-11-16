@@ -8,6 +8,7 @@ import { getGuidesForApp } from "@/lib/guides";
 import AppIcon from "@/components/AppIcon";
 import AppCard from "@/components/AppCard";
 import InstallerCta, { INSTALLER_APPS } from "@/components/InstallerCta";
+import AiPackCta, { AI_PACK_APPS } from "@/components/AiPackCta";
 import { getCategoryBySlug } from "@/lib/apps/categories";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -308,6 +309,7 @@ export default async function AppDetailPage({
         )}
 
         {INSTALLER_APPS[app.slug] && <InstallerCta variant={INSTALLER_APPS[app.slug]} />}
+        {AI_PACK_APPS.includes(app.slug) && <AiPackCta />}
 
         {relatedApps.length > 0 && (
           <section className="flex flex-col gap-3">

@@ -5,7 +5,14 @@ import { useLocale, useTranslations } from "next-intl";
 
 type Status = "idle" | "sending" | "success" | "invalid" | "error";
 
-export default function SubscribeForm() {
+type Props = {
+  /** Product waitlist to tag the address with (see INTERESTS in lib/newsletter). */
+  interest?: "ai-pack";
+  buttonLabel?: string;
+  placeholder?: string;
+};
+
+export default function SubscribeForm({ interest, buttonLabel, placeholder }: Props) {
   const t = useTranslations("home");
   const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
@@ -23,6 +30,7 @@ export default function SubscribeForm() {
           email: data.get("email"),
           website: data.get("website"),
           locale,
+          ...(interest && { interest }),
         }),
       });
       if (res.ok) {
@@ -43,8 +51,8 @@ export default function SubscribeForm() {
           type="email"
           name="email"
           required
-          placeholder={t("subscribePlaceholder")}
-          aria-label={t("subscribePlaceholder")}
+          placeholder={placeholder ?? t("subscribePlaceholder")}
+          aria-label={placeholder ?? t("subscribePlaceholder")}
           className="h-12 w-full shrink-0 rounded-full sm:flex-1 border border-black/[.08] bg-white px-5 text-black placeholder:text-zinc-500 focus:border-accent focus:outline-none dark:border-white/[.12] dark:bg-[#20242a] dark:text-zinc-50 dark:placeholder:text-zinc-400"
         />
         <input
@@ -60,7 +68,7 @@ export default function SubscribeForm() {
           disabled={status === "sending"}
           className="h-12 w-full rounded-full bg-accent sm:w-auto px-6 font-medium text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
         >
-          {t("subscribeButton")}
+          {buttonLabel ?? t("subscribeButton")}
         </button>
       </form>
       <p role="status" aria-live="polite" className="min-h-6 text-sm text-zinc-600 dark:text-zinc-300">

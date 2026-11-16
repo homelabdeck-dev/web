@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
     ...entry("/guides", newest),
     ...entry("/installer", new Date("2026-11-07")),
+    ...entry("/ai-pack", new Date("2026-11-16")),
     ...getAllGuides().flatMap((guide) =>
       entry(`/guides/${guide.slug}`, new Date(guide.date)),
     ),

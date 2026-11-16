@@ -8,6 +8,7 @@ import { getAppBySlug } from "@/lib/apps/loader";
 import { getAllGuides, getGuide, guideAppSlugs } from "@/lib/guides";
 import AppCard from "@/components/AppCard";
 import InstallerCta, { INSTALLER_GUIDES } from "@/components/InstallerCta";
+import AiPackCta, { AI_PACK_GUIDES } from "@/components/AiPackCta";
 import { SITE_URL, alternatesFor, localeUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -195,6 +196,7 @@ export default async function GuideDetailPage({
         })}
 
         {INSTALLER_GUIDES[guide.slug] && <InstallerCta variant={INSTALLER_GUIDES[guide.slug]} />}
+        {AI_PACK_GUIDES.includes(guide.slug) && <AiPackCta />}
 
         {guideApps.length > 0 && (
           <section className="flex flex-col gap-4">

@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import HLDeck from "@/components/HLDeck";
 import SubscribeForm from "@/components/SubscribeForm";
+import AiPackCta from "@/components/AiPackCta";
 import { alternatesFor, localeUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -122,6 +123,8 @@ hldeck export    # plain Docker files, no secrets, no hldeck needed
 hldeck wire      # connect Prowlarr, Sonarr, Radarr and qBittorrent (media stack)`}</code></pre>
           <p className={p}>wire sets root folders and the qBittorrent download client, and links Prowlarr to Sonarr and Radarr. You still create the Jellyfin user and libraries, add your indexers and set up Seerr yourself. Backups skip the media and torrent folders (too large). The archive can contain your VPN key, so it is saved readable by root only.</p>
         </section>
+
+        <AiPackCta />
 
         <section className={card}>
           <h2 className={h2}>Read before you run</h2>

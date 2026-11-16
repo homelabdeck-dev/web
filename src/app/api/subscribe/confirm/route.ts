@@ -1,4 +1,4 @@
-import { getJson, pageRedirect, redis, subKey, tokKey, type Subscriber } from "@/lib/newsletter";
+import { getJson, pageRedirect, redis, subKey, tokKey, waitKey, type Subscriber } from "@/lib/newsletter";
 
 export async function GET(request: Request) {
   const token = new URL(request.url).searchParams.get("t") ?? "";
@@ -11,5 +11,6 @@ export async function GET(request: Request) {
     await db.set(subKey(sub.email), JSON.stringify({ ...sub, status: "confirmed" }));
   }
   await db.sadd("subscribers", sub.email);
+  if (sub.interest) await db.sadd(waitKey(sub.interest), sub.email);
   return pageRedirect(sub.locale, "confirmed");
 }
